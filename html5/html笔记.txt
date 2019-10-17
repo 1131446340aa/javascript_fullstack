@@ -1,0 +1,109 @@
+divpic.setAttribute('class','pic');添加一个类名
+li.appendChild(divpic);为li属性添加类名或者标签
+document.createElement('li');添加一个标签
+ overflow: hidden;超出隐藏
+        white-space: nowrap;超出不换行
+        text-overflow: ellipsis;超出打点
+        outline: none;输入框边框设置为无
+        placeholder="🔍搜索"输入框的提示信息
+          var ali=lottery.querySelectorAll('li');得到的是一个数组
+    var prize=document.querySelector('.prize');得到第一个类名为prize的标签
+     timer=setTimeout(run,speed);定时器
+       clearInterval(timer);移除定时器
+         cursor: pointer;鼠标碰到标签鼠标样式改变
+          <label for="rate">Rate:</label>label标签
+          <input type="range" name="rate" min="0" max="3" value="1" step="0.1">等级标签
+           animation: kiss-m 4s ease infinite;运动属性
+            @keyframes调用运动属性
+            var http = require('http'); // node 底层 核心库
+var fs = require('fs');   //引入文件库
+var path = require('path'); //路径
+// console.log(http);、
+// web服务本质是  有n人来访问网站 request 
+// 网站的开发者， 响应用户的请求 res 问答  
+http.createServer(function(req, res) {
+  console.log(req.url);
+  if (req.url == '/images/sloth.png') {
+    console.log('图片');
+    // 将图片资源返回给用户
+    res.writeHead(200, {'Content-Type': 'image/png'});
+    let imgStream = fs.createReadStream(
+      path.join(__dirname, 'sloth.png')
+    );
+    imgStream.pipe(res);
+    return;
+  }
+  
+  // res.writeHead(200, {"Content-Type": "text/html;charset=utf-8"})
+  // res.write("旅梦，祝蜗牛先生成功, 先发糖");
+  let fileStream = fs.createReadStream(path.join(__dirname, 'index.html'))
+  fileStream.pipe(res);
+}) //创建web服务
+.listen(1314)
+10.4号
+nth-of-type（n）
+nth-child（2n）
+：empth//伪类选择器，选择器空元素。
+：not()  伪类否定
+[type="submit"]{}// 元素选择器，
+disabled 表示不可被选中 enable相反。
+mark标签文字高亮
+text-shadow :-1 -1 white,1 1 #333 文字立体效果
+数值相反则为凹体字
+text-shadow -1 0 block ，0 1 ，1 0，0 -1；定义描边字体
+initial恢复默认字体
+opacity 透明·属性
+其实每一天都希望和你多说几句话。想你。真的很想的那种，如果有一天，我和你表白我一定会告诉你我很爱你，很爱很爱的那种，其实我别无所求，至求能和你一生一世
+呵呵，我又在瞎想什么哦
+反正你应该是不喜欢我的吧，真后悔，以前没和你告白.爱恨两茫茫空有一身爱意，却无处宣泄。问世间情为何物，直叫我只想听你一人语
+没权没钱，却不知如何爱你，每日看你照片，却不能止住半分思念你的感情，可怜天下有心人。
+transition 属性名，动画时间。动画效果，延迟时间
+transition-property (执行变换的属性 )
+
+transition-duration (变换延续时间)
+
+transition-timing-function  (延续时间内，变换速率的变化)
+
+transition-delay  (变换延迟时间)
+ transform-style: preserve-3d;3d效果，没有此效果一些z轴效果无效
+  perspective: 800px;为一些3d视图做视角视角效果
+  页面支持的css html js开发标准
+  但是最近5年来前端出现了很多新的做法，工作流发生了变化
+  比如css stylus 更快，更加程序化
+  但是由 node 的火热带来的
+  stylus：css
+  typescri js
+    组件：html
+    获得一个三角形
+       width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #000;
+    new的过程，
+    创建空对象
+    new Function a(){}
+    动态决定
+    函数运行时，会产生几个必有的对象
+        this{}<=this.name
+        Function a 不是以mew的方式来运行时，则是一个普通函数，this会指向windows
+          启动严格模式 use strict， this 是undefind
+       arguments
+        两口子 constructor protype
+        js中，没有类，Person对象（函数）
+        woniu.__proto__===Person.protype
+        this 当作为对象的方法执行时，this指向对象
+        面向对象的做法 3种
+        Function +protype 原型
+        class关键字
+        object.create(原型对象)
+        手写代码是js考试的方式
+        object.create()
+        function create(obj){
+          function F(){}//空函数
+          F.protype=obj;
+          return new F();
+        }
+
+
+     

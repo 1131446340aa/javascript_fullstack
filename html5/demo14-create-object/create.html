@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<div>1</div>
+<body>
+   <script>
+    var Person={//提供一个对象的模板
+        name:"noname",
+        age:0,
+        greet:function(){
+            console.log(`Hello,${this.name}`)
+        }
+
+    }
+    //es6 create方法
+    var tom =Object.create(Person)
+    console.log(tom);
+    tom.name='tom',
+    tom.age=24;
+    tom.greet();
+    </script> 
+</body>
+</html>

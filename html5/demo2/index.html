@@ -1,0 +1,124 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>打击乐</title>
+
+    <style>
+        html {
+            /*css聚成它下面的所有子元素字体大小都是10px；*/
+            font-size: 10px;
+            background-size: cover;
+        }
+
+        body,
+        html {
+            /* css reset样式重置*/
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            font-family: sans-serif;
+        }
+
+        .keys {
+            display: flex;
+            min-height: 100vh;
+
+            align-items: center;
+            /*垂直*/
+            justify-content: center;
+            /*水平*/
+        }
+
+        .key {
+            border: 4px solid #000;
+            border-radius: 5px;
+            margin: 10px;
+            font-size: 15px;
+            padding: 10px 5px;
+            width: 100px;
+            text-align: center;
+            color: white;
+            background: rgba(0, 0, 0, 0.4);
+            text-shadow: 0 0 5px black;
+        }
+
+        .key div {
+            display: block;
+            font-size: 12px;
+        }
+
+        .sound {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #ffc600;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="keys">
+        <div class="key">
+            <div>A</div>
+            <span class="sound">clap</span>
+        </div>
+        <div class="key">
+            <div>S</div>
+            <span class="sound">hihat</span>
+        </div>
+        <div class="key">
+            <div>D</div>
+            <span class="sound">kick</span>
+        </div>
+        <div class="key">
+            <div>F</div>
+            <span class="sound">openhat</span>
+        </div>
+        <div class="key">
+            <div>G</div>
+            <span class="sound">boom</span>
+        </div>
+        <div class="key">
+            <div>H</div>
+            <span class="sound">ride</span>
+        </div>
+        <div class="key">
+            <div>J</div>
+            <span class="sound">snare</span>
+        </div>
+        <div class="key">
+            <div>K</div>
+            <span class="sound">tom</span>
+        </div>
+        <div class="key">
+            <div>L</div>
+            <span class="sound">tink</span>
+        </div>
+    </div>
+    <audio src=./sounds/clap.wav data-key="65"></audio>
+    <audio src=./sounds/hihat.wav data-key="83"></audio>
+    <audio src=./sounds/tink.wav data-key="76"></audio>
+    <audio src=./sounds/tom.wav data-key="75"></audio>
+    <audio src=./sounds/snare.wav data-key="74"></audio>
+    <audio src=./sounds/ride.wav data-key="72"></audio>
+    <audio src=./sounds/kick.wav data-key="68"></audio>
+    <audio src=./sounds/boom.wav data-key="71"></audio>
+    <audio src=./sounds/openhat.wav data-key="70"></audio>
+    <script>  
+        window.addEventListener('mouseover', function (event) {//console.log('keydown')
+            let key = event.keyCode;
+            const audio = document.querySelector(`audio[data-key="${key}"]`)
+            if (audio) {
+                audio.play()
+            }
+
+        }
+        )
+   
+    </script>
+
+</body>
+</html>

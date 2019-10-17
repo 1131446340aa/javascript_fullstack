@@ -1,0 +1,69 @@
+parsent 将字符串转化成int类型
+使用+可以把其他类型的数据转化成字符串类型
+\u0022 "
+\u0027 '
+parsent (Math.random()*3)得到0-3之内的math.random（）方法是获取·0-1之间的数
+三目运算符  布尔值？值1：值2 如果布尔值为真则把值1传入。为假则传入值2
+数组去重
+法1
+function uniq(arr){
+    return[...new Set(arr)]
+
+
+}
+    let result =[]
+    for(
+        let i=0;i<arr.length;i++
+    )
+    {
+if(result.indexOf(arr[i])==-1){
+    result.push(arr[i])
+}
+    }
+    return result;
+    a.includes()判断这个数组是否包含这个数据
+    a.indexof()判读这个数组的数据的下标
+    let abc{
+        name:"fef",
+        price:"def"
+    }对象
+    typeof 返回数据类型
+
+    只要有两只腿并且走起来能嘎嘎嘎叫的，这就是js
+    js是一种弱对象的语言，不需要声明类型的，只要对象中具有某种属性或方法，就可以判定为某种对象，比较轻松的实现面向对象接口的编程，
+    talk in js
+    编程的目标？组织语句，完成一个需求.业务需求
+    选择了合适都1数据结构，choir[]
+    加入乐队就是一件事，但是这一件事里面有多个步骤，封装成一个方法？
+    joinchoir=（ani）=>{}
+    判断对象需求 就是一个开发需求跟语言相关 
+    然后引入typeof ani.ducksingsing==’function‘//判断一个变量的数据类型是否是一个函数
+    函数首字母大写则默认为类
+     instanceof 判断是否为对象的实例
+     new Lrucache 可以被实例化
+     生成了一个对象{}
+     内存中先生成空的对象{}
+     加上属性
+     加上属性，构造函数 this
+     this 是一个指针 只有指向要生成的对象
+     (`nihao,${this.title},ggg`)//``连接符。${}变量
+     面向对象 类 构造函数 方法 属性 
+     class function A
+     constructor   函数本身 prototype this.
+     函数具有prototype属性
+     es5 构造函数好比火车头，拉着一堆构造函数， prototype对象
+     居于原型的面向对象
+     任何函数都有prototype属性，她的值是对象，
+     key=>func（）{
+
+     }
+     任何对象都有———proto————、指向，构造函数的prototype属性。
+     js的面向对象，实和实例的关系，不是父子关系，没有血缘
+     基于原型的
+     new的过程是构造函数被执行，他内部会创造一个this，指向对象
+     this.sth就是为这个对象添加属性 this.———proto————属性，找到原型琏的方法
+      chche instanceof' Lrucache t他是它的一个实例
+      js中没有类的概念，Lrucache也是一个对象
+      js'中函数就是一个对象
+      push 最后一个元素是最重要的，下标为0的元素可以删除 条件 空间还有吗？
+      get 在哪？放到最后面来。在原位置删除，放到最后

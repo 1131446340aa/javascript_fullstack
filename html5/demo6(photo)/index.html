@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>3d旋转相册</title>
+  <style>
+    .my-container{
+      width: 800px;
+      height: 500px;
+      margin: 20px auto;
+    }
+    .photo-wrap{
+      width: 800px;
+      perspective: 800px;
+    }
+    .container{
+      width: 800px;
+      height: 500px;
+      margin: 0 auto;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: rotateY360 15s ease-in-out infinite;
+    }
+    .img{
+      width: 200px;
+      height: 118px;
+      line-height: 118px;
+      text-align: center;
+      position: absolute;
+      top: 160px;
+      left: 300px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.9) inset;
+    }
+    .img img{
+      width: 100%;
+      height: 100%;
+    }
+    .img01{
+      transform: rotateY(0deg) translateZ(300px);
+    }
+    .img02{
+      transform: rotateY(40deg) translateZ(300px);
+    }
+    .img03{
+      transform: rotateY(80deg) translateZ(300px);
+    }
+    .img04{
+      transform: rotateY(120deg) translateZ(300px);
+    }
+    .img05{
+      transform: rotateY(160deg) translateZ(300px);
+    }
+    .img06{
+      transform: rotateY(200deg) translateZ(300px);
+    }
+    .img07{
+      transform: rotateY(240deg) translateZ(300px);
+    }
+    .img08{
+      transform: rotateY(280deg) translateZ(300px);
+    }
+    .img09{
+      transform: rotateY(320deg) translateZ(300px);
+    }
+    @keyframes rotateY360 {
+      from {
+        transform: rotateY(0deg);
+      }
+      to {
+        transform: rotateY(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 最外层容器 -->
+  <div class="my-container"> 
+    <div class="photo-wrap">
+      <div class="container">
+        <div class="img img01">
+          <img src="https://abc.2008php.com/2015_Website_appreciate/2015-10-13/201510132150493npTB3npTB.jpg" alt="">
+        </div>
+        <div class="img img02">
+          <img src="http://abc.2008php.com/2012_Website_appreciate/2012-11-18/20121118203111.jpg" alt="">
+        </div>
+        <div class="img img03">
+          <img src="https://abc.2008php.com/2019_Website_appreciate/2019-10-05/20191005184019.jpg" alt="">
+        </div>
+        <div class="img img04">
+          <img src="http://image.52bji.com/image/infoImage/201805/24/C1527058703171.jpg" alt="">
+        </div>
+        <div class="img img05">
+          <img src="https://abc.2008php.com/2019_Website_appreciate/2019-10-04/20191004231739.jpg" alt="">
+        </div>
+        <div class="img img06">
+          <img src="https://abc.2008php.com/2019_Website_appreciate/2019-10-04/20191004231804QqD1c.jpg" alt="">
+        </div>
+        <div class="img img07">
+          <img src="http://img.aiimg.com/uploads/allimg/140315/263915-140315194H9.jpg" alt="">
+        </div>
+        <div class="img img08">
+          <img src="https://abc.2008php.com/2019_Website_appreciate/2019-10-05/20191005183112.jpg" alt="">
+        </div>
+        <div class="img img09">
+          <img src="http://img.article.pchome.net/00/44/11/18/pic_lib/wm/1.jpg" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
