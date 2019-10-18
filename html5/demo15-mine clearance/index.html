@@ -1,112 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-    *{
-        padding: 0;
-        margin: 0;
-    }
-    .content{
-        position: relative;
-        margin: 0 auto;
-        background-color: #d5e0eb;
-        width: 1000px;
-        height: 660px;
-    }
-    .min-content{
-        position: absolute;
-        width: 900px;
-        height: 480px;
-        top: 90px;
-        left: 50px;
-        border: 2px solid #253e79;
-        background-color: #fff;
+        * {
+            padding: 0;
+            margin: 0;
+        }
 
-    }
-    .min-content img{
-        width: 27px;
-        height: 27px;
-        border: 1.5px solid #000;
-        border-radius: 0.5px;
-        margin: 0;
-        padding: 0;
-        vertical-align: middle;
-    }
+        .content {
+            position: relative;
+            margin: 0 auto;
+            background-color: #d5e0eb;
+            width: 1000px;
+            height: 660px;
+        }
+
+        .min-content {
+            position: absolute;
+            width: 900px;
+            height: 480px;
+            top: 90px;
+            left: 50px;
+            border: 2px solid #253e79;
+            background-color: #fff;
+
+        }
+
+        .min-content img {
+            width: 27px;
+            height: 27px;
+            border: 1.5px solid #000;
+            border-radius: 0.5px;
+            margin: 0;
+            padding: 0;
+            vertical-align: middle;
+        }
+
+        .foot-content {
+            display: flex;
+            width: 300px;
+            height: 50px;
+            position: absolute;
+            right: 0;
+            bottom: 20px;
+
+            line-height: 50px;
+        }
+
+        .left-item {
+            width: 80px;
+            height: 30px;
+            border: 1px solid #000;
+            margin-top: 10px;
+            margin-left: 30px;
+            background-color: #253e79;
+            text-align: center;
+            font-size: 24px;
+            line-height: 30px;
+            color: #fff;
+        }
+
+        .right-item {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #000;
+            margin-top: 10px;
+            margin-left: 20px;
+            text-align: center;
+
+        }
+
+        .right-item img {
+            width: 30px;
+            height: 30px;
+
+        }
     </style>
 </head>
+
 <body>
     <div class="content">
         <div class="min-content">
-            
-        
+        </div>
+        <div class="foot-content">
+            <div class="left-item">99</div>
+            <div class="right-item">
+                <img src="./images/mine2.png" alt="">
+            </div>
         </div>
     </div>
     <script>
-        let a=document.querySelectorAll('img')
-         let arr_block=[];
-         let muban=['./images/bkock2.png','./images/mine1.png']
-         for(let j=0;j<381;j++)
-         {
-             arr_block.push('./images/bkock2.png')
-         }
-         for(let i=0;i<99;i++)
-         {arr_block.push('./images/mine1.png')}
-         
-         arr_block.sort((a, b) => 0.5 - Math.random());
-      
+        let mine_sum = 99;
+        let a = document.querySelectorAll('img')
+        let arr_block = [];//给一个空数组，用来存放地雷坑
+        let muban = ['./images/bkock2.png', './images/mine1.png', './images/flag.png', './images/blue-block1.png']//定义一个数组来记录图片地址
+        let image = ['./images/bkock2.png'
+            , './images/bg1.png'
+            , './images/bg2.png'
+            , './images/bg3.png'
+            , './images/bg4.png'
+            , './images/bg5.png'
+            , './images/bg6.png'
+            , './images/bg7.png'
+            , './images/bg8.png']//通过数组形式存放8张图片
+        for (let j = 0; j < 381; j++) {//放381个空坑
+            arr_block.push('./images/bkock2.png')
+        }
+        for (let i = 0; i < 99; i++) { arr_block.push('./images/mine1.png') }//放99个地雷
+
+        arr_block.sort((a, b) => 0.5 - Math.random());//随机放地雷与空坑
+
+        let count = 0;
+        let click_sum = 0
+
+        let min_content = document.querySelector('.min-content');
+
+        blue_Block();
+        function blue_Block(event) {
+            let mine = document.querySelector('.left-item')
+            for (let i = 0; i < 480; i++) {
+                let img = document.createElement('img');
+                img.src = './images/blue-block1.png';
+                img.oncontextmenu = function (e) {
+                    //右击标记地雷，右击两次去除标记
+                    e.preventDefault();//清除右击默认效果
+                    if (img.classList.contains('flag')
+                    ) {
+                        img.classList.remove('flag')
+                        img.src = muban[3]
+                        img.onclick = function () {//解除右击一次禁止左击状态
+
+                            changeImage(img, i);
+
+                        }
+                        count--
+                    }
+                    else {
+                        img.classList.add('flag')
+                        img.onclick = null//已经标志为地雷的禁止左击
+                        img.src = muban[2]
+                        count++
+                    }
+                    mine.innerHTML = mine_sum - count
+                }
+                img.onclick = function () {
+                    //左击翻转图片
+
+                    changeImage(img, i);
 
 
-        let min_content=document.querySelector('.min-content');
-  blue_Block();
-        function blue_Block(){
-            for(let i=0;i<480;i++){
-let img= document.createElement('img');
-img.src='./images/blue-block1.png';
+                }
+                min_content.appendChild(img);
+            }
+        }
+        function changeImage(imgnode, blue_Block_sum) {
+            imgnode.onclick = null
+            imgnode.oncontextmenu = function (e)//如果已经左击，禁止右击
+            { e.preventDefault() }
+            let x = 0;
+            imgnode.src = arr_block[blue_Block_sum]//翻转图片
+            if (arr_block[blue_Block_sum] == muban[1]) {//翻到的图片为地雷
+                alert('您挖到地雷了，游戏结束,重新开始')
+                location.reload(true)
+            }
+            if (arr_block[blue_Block_sum] == muban[0]) {//翻到一个空坑
 
-img.onclick = function () {
-            changeImage(img, i);
-    
+                click_sum++;
+                console.log(click_sum)
+
+                if (click_sum == 381) {
+                    alert('恭喜你，通过游戏,重新开始')
+                    location.reload(true)
+                }
+                menthod()
+                function menthod() {//算法
+                    if (blue_Block_sum == 0) {
+                        if (arr_block[blue_Block_sum + 1] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum + 30] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum + 31] == muban[1]) { x++ }
+                    }
+                    else if (blue_Block_sum == 479) {
+                        if (arr_block[blue_Block_sum - 1] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum - 30] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum - 31] == muban[1]) { x++ }
+                    }
+                    else if (blue_Block_sum == 29) {
+                        if (arr_block[blue_Block_sum - 1] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum + 30] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum + 29] == muban[1]) { x++ }
+                    }
+                    else if (blue_Block_sum == 450) {
+                        if (arr_block[blue_Block_sum + 1] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum - 30] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum - 29] == muban[1]) { x++ }
+                    }
+                    else if (blue_Block_sum > 0 && blue_Block_sum < 450 && blue_Block_sum % 30 == 0) {
+
+                        if (arr_block[blue_Block_sum + 1] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum + 30] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum - 30] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum + 31] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum - 29] == muban[1]) { x++ }
+                    }
+
+                    else if (blue_Block_sum > 29 && blue_Block_sum < 479 && blue_Block_sum % 30 == 29) {
+                        if (arr_block[blue_Block_sum - 1] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum + 30] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum - 30] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum - 31] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum + 29] == muban[1]) { x++ }
+                    }
+                    else if (blue_Block_sum < 29 && blue_Block_sum > 0) {
+                        if (arr_block[blue_Block_sum - 1] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum + 29] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum + 30] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum + 31] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum + 1] == muban[1]) { x++ }
+                    }
+                    else if (blue_Block_sum < 479 && blue_Block_sum > 450) {
+                        if (arr_block[blue_Block_sum - 1] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum - 29] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum - 30] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum - 31] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum + 1] == muban[1]) { x++ }
+                    }
+                    else {
+                        if (arr_block[blue_Block_sum - 1] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum - 29] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum - 30] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum - 31] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum + 1] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum + 29] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum + 30] == muban[1]) { x++ }
+                        if (arr_block[blue_Block_sum + 31] == muban[1]) { x++ }
+
+                    }
+                    imgnode.src = image[x] //显示空坑周围有几个地雷
+
+                }
+
+            }
+
+
 
         }
-min_content.appendChild(img);
-}
 
-        }
-        function changeImage(imgnode,blue_Block_sum)
-        {
-            let x=0;
-            imgnode.src=arr_block[blue_Block_sum]
-
-           if(arr_block[blue_Block_sum]==muban[1])
-           {
-             
-           }
-           if(arr_block[blue_Block_sum]==muban[0])
-           {
-              if(blue_Block_sum==1) 
-              {if(arr_block[blue_Block_sum+1]==muban[1])
-                {x++}
-
-              }
-              if(blue_Block_sum==1) 
-              {if(arr_block[blue_Block_sum+1]==muban[1])
-                {x++}
-
-              }
-           }
-            
-            
-        }
-    
-       
- 
-  
- 
-    
     </script>
 </body>
+
 </html>
