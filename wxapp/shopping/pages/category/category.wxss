@@ -1,0 +1,21 @@
+/* pages/category/category.wxss */
+.main{
+    width: 100%;
+}
+.category-left{
+    float: left;
+    width: 150rpx;
+    height: 100%;
+    border: 1px solid #DDD;
+    box-sizing: border-box;
+}
+.cate-list{
+    height: 90rpx;
+    line-height: 90rpx;
+    text-align: center;
+    border-left: 3px solid #000;
+}
+.cate-list.on{
+    border-color: #ab956d;
+    color: #ab956d;
+}
