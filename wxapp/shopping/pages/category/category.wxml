@@ -12,11 +12,28 @@
       {{item.name}}
     </view>
   </view>
-  <scroll-view class="category-right"  scroll-y="true" upper-threshold="50" lower-threshold="50" 
-    scroll-top="0" scroll-left="0" scroll-into-view="{{toView}}" scroll-with-animation="true" enable-back-to-top="false" 
-    bindscrolltoupper="" bindscrolltolower="" bindscroll="">
-    
+  <scroll-view class="category-right" scroll-y scroll-with-animation="true" scroll-into-view="{{toView}}">
+    <block wx:for="{{detail}}" wx:key="{{item.id}}">
+      <view class="cate-box" id="{{item.id}}">
+      <view class="cate-banner">
+        <image class="" src="{{item.banner}}"/>
+      </view>
+      <view class="cate-title">
+        <text>{{item.cate}}</text>
+      </view>
+      <view class="product">
+        <view class="product-list" wx:for="{{item.detail}}" wx:key="{{index}}" wx:for-item="product">
+          <navigator class="" target="" url="#">
+            <image class="" src="{{product.thumb}}"/>
+            <view class="classname">
+              <text>{{product.name}}</text>
+            </view>
+          </navigator>
+        </view>
+      </view>
+      </view>
+    </block>
   </scroll-view>
-    
 </view>
+
 
