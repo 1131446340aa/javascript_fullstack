@@ -1,0 +1,16 @@
+/* pages/carDetail/index.wxss */
+.cover .content {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-shadow: 0 5px 19px rgba(0, 0, 0, .5);
+}
+.cover {
+  position: relative;
+}
+.cover image {
+  width: 100%;
+  height: 38.2vh;
+}
