@@ -1,8 +1,10 @@
 {
   "pages": [
+    "pages/user/user",
     "pages/category/category",
     "pages/index/index",
-    "pages/cart/cart"
+    "pages/cart/cart",
+    "pages/address/address"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -38,10 +40,10 @@
         "selectedIconPath": "image/31.png"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/user/user",
         "text": "我的",
-        "iconPath": "",
-        "selectedIconPath": ""
+        "iconPath": "image/42.png",
+        "selectedIconPath": "image/41.png"
       }
     ]
   },

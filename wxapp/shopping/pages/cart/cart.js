@@ -10,6 +10,56 @@ Page({
     selectAllStatus: true,
     totalPrice: ''
   },
+  deleteList(e){
+    let index=e.currentTarget.dataset.index
+    let carts=this.data.carts
+    carts.splice(index,1)
+    this.setData({
+      carts:carts
+    })
+    if(!carts.length)
+    {this.setData({
+      hasList:false
+    })}
+    else{
+      this.getTotalPrice
+    }
+  },
+  selectList(e){
+      let index=e.currentTarget.dataset.index
+    let carts=this.data.carts
+    let selected=carts[index].selected
+   selected=!selected
+    carts[index].selected=selected
+    this.setData({
+      carts:carts
+    })
+    this.getTotalPrice()
+  },
+  addCount(e){
+    let index=e.currentTarget.dataset.index
+    let carts=this.data.carts
+    let num=carts[index].num
+    num=num+1
+    carts[index].num=num
+    this.setData({
+      carts:carts
+    })
+    this.getTotalPrice()
+  },
+  minusCount(e){
+    let index=e.currentTarget.dataset.index
+    let carts=this.data.carts
+    let num=carts[index].num
+    num=num-1
+    if(num<0)
+    {return}
+    carts[index].num=num
+    this.setData({
+      carts:carts
+    })
+    this.getTotalPrice()
+  },
 
   getTotalPrice() {
     let carts = this.data.carts
