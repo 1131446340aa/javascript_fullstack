@@ -1,0 +1,12 @@
+{
+  "name": "pic_list",
+  "version": "1.0.0",
+  "description": "restful web\r 一切皆资源\r DOM +CSS+JS\r URL Universal Resource Location\r http://www,taobao.com//shop/1/good/2\r 明确的表达他的资源是什么意思？",
+  "main": "index.js",
+  "scripts": {
+    "dev":"json-server --watch db.json --port 1314"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,4 +1,4 @@
-divpic.setAttribute('class','pic');添加一个类名
+﻿divpic.setAttribute('class','pic');添加一个类名
 li.appendChild(divpic);为li属性添加类名或者标签
 document.createElement('li');添加一个标签
  overflow: hidden;超出隐藏
@@ -104,6 +104,9 @@ transition-delay  (变换延迟时间)
           F.protype=obj;
           return new F();
         }
+vertical-align:middle上下居中对齐
+
+
 
 
      

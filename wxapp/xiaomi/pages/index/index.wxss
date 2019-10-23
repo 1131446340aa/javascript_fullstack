@@ -1,0 +1,47 @@
+.title-bar{
+    width: 100%;
+    height: 150rpx;
+    background-color: #ff6801;
+    
+
+}
+.title-bar-image{
+
+    width: 50rpx;
+    height: 50rpx;
+    margin-left: 10rpx;
+    position: absolute;
+    top: 90rpx;
+   
+}
+.title-bar-image image{
+    display: block;
+     
+    width: 50rpx;
+    height: 50rpx;
+}
+.name{
+    color: #fff;
+    font-size: 40rpx;
+    position: absolute;
+    top: 90rpx;
+   left: 70rpx;
+
+}
+.title-bar-input input{
+    width: 310rpx;
+height: 50rpx;
+position: absolute;
+left: 160rpx;
+top: 90rpx;
+background-color: #fff;
+border-radius: 25px;
+text-align: center;
+}
+.images-item{
+
+}
+.images-item image{
+    width: 100%;
+height: 100%;
+}

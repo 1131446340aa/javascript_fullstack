@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css
+    ">
+    <title>Document</title>
+    <style>
+        .card img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="display-1 my-5">posts</h1>
+        <div class="row justify-content-center" id="cards">
+            <div class="col-md-6">
+                <div class="card my-3">
+                    <a href="/detail.html">
+                        <img src="https://resources.ninghao.net/images/candy-shop.jpg" alt="">
+                        <div class="card-body">
+                            <h5 class="card-title">Candy Shop</h5>
+                            <div class="card-subtitle mb-2 text-black-50">Mohamed Chahin</div>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+            <div class="col-md-6">13124324</div>
+        </div>
+    </div>
+    <script>
+        //请求资源
+
+        fetch('http://localhost:1314/posts')
+            //http文件传输实际上是一个二进制流
+            .then(data => data.json())
+            .then(data => {
+                // 数据数组
+                console.log(data)
+                const htmlArr = data.map((item) => {
+                    return `
+          <div class="col-md-6">
+            <div class="card my-3">
+              <a href="/detail.html">
+                <img src="${item.imageUrl}" alt="">
+                <div class="card-body">
+                  <h5 class="card-title">${item.title}</h5>
+                  <div class="card-subtitle mb-2 text-black-50">${item.author}</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        `
+                })
+                document.getElementById('cards')
+                    .innerHTML = htmlArr.join('');
+            })
+    </script>
+</body>
+
+</html>

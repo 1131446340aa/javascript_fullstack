@@ -47,6 +47,28 @@ Page({
     })
     this.getTotalPrice()
   },
+  selectAll(e){
+     var x=0;
+    let carts=this.data.carts
+    for(let j=0;j<carts.length;j++){
+      if(carts[j].selected==true){
+        x++
+        
+      }}
+    for(let i=0;i<carts.length;i++){
+      
+       let selected=carts[i].selected
+       if(x<carts.length&&x>0)
+       {carts[i].selected=true}
+       else{selected=!selected
+    carts[i].selected=selected}
+   }
+   
+    this.setData({
+      carts:carts
+    })
+    this.getTotalPrice()
+  },
   minusCount(e){
     let index=e.currentTarget.dataset.index
     let carts=this.data.carts

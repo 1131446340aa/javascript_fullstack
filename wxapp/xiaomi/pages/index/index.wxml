@@ -1,0 +1,23 @@
+<view class="title-bar">
+    <view class="title-bar-image">
+        <image class="" src="/image/mi.png" />
+    </view>
+    <view class="name">
+        小米
+    </view>
+    <view class="title-bar-input">
+        <input type="text" placeholder="搜索商品"/>
+    </view>
+</view>
+<swiper indicator-dots="true" indicator-active-color="#ff6801" indicator-color="#fff" autoplay="{{true}}" circular="{{true}}">
+    <block wx:for="{{images}}" wx:key="{{index}}">
+        
+        <swiper-item class="images-item" item-id="">
+           <image class="" src="{{item}}"  />
+             
+        </swiper-item>
+          
+    </block>
+      
+</swiper>
+  
