@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        // function mul(n){
+        //     var num=1   //实例未完全创建出来执行 
+        //         for(let i=1;i<=n;i++)
+        //         {
+        //             num=num*i
+        //         }
+        //         return num
+        //     
+        // }
+        // mul(5)
+        // function mul(n) {
+        //     if(n==1||n==0)
+        // {return 1}
+        //     return n = mul(n - 1)*n
+        // }
+        // console.log(mul(10))
+        function fb(n) {
+            //   if(n==1||n==2)
+            //   {return 1}
+            //   return fb(n-1)+fb(n-2)
+            // let sum = 1;
+            // let sum1 = 1
+            // for (i = 1; i < n; i++) {
+            //     if (i == 1) {
+            //         sum = 1
+
+            //     }
+            //     if (i == 2) {
+            //         sum1 = 1
+
+            //     }
+            //     if (i % 2 == 1) { sum = sum + sum1 }
+            //     if (i % 2 == 0) { sum1 = sum + sum1 }
+
+
+            // }
+            // if (i % 2 == 1) { return sum }
+            // if (i % 2 == 0) { return sum1 }
+            let a=[1,1]
+            
+            for( let i=2;i<=n;i++)
+        {
+a[i]=a[i-1]+a[i-2]
+        }
+        return a[i]
+            }
+            console.log(fb(7))
+
+    </script>
+</body>
+
+</html>

@@ -32,6 +32,7 @@ class Grid {
   // 从一堆空格子中随机拿一个
   selectCell() {
     let unUsed = this.useFulCell() // 3
+    
     let index = Math.floor(Math.random() * unUsed.length)
     return unUsed[index];
   }

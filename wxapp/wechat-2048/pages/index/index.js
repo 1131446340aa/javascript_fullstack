@@ -58,6 +58,7 @@ Page({
     console.log('数字靠边', res)
   },
   slideNumber (arr) {
+    
     // 输入：['', 2, '', 2] -> 输出：[2, 2, '', '']
     let current = 0
     for (let i = 0; i < arr.length; i ++) {
