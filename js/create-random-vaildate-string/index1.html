@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">123456</div>
+    <script>
+
+        //普通函数 this调用的时候决定，定义的时候不算
+        // 箭头函数，定义的时候就决定了她的外面一层，并且不能被修改
+//     const box=document.getElementById('box')
+// box.addEventListener('click',function(){
+//     console.log(this===box)
+// })
+const box=document.getElementById('box')
+box.addEventListener('click',()=>{
+    console.log(this===window)
+})
+
+    </script>
+</body>
+</html>
