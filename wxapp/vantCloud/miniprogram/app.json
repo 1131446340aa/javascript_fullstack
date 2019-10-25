@@ -1,0 +1,48 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/group/group",
+    "pages/personal/personal"
+   
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "云开发 QuickStart",
+    "navigationBarTextStyle": "black"
+  },
+ "cloud":true,
+  "tabBar": {
+    "selectedColor": "#3585f9",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "新建",
+        "iconPath": "/pages/images/plus-dark.png",
+        "selectedIconPath": "/pages/images/plus-light.png"
+      },
+      {
+        "pagePath": "pages/group/group",
+        "text": "群组",
+        "iconPath": "/pages/images/group-dark.png",
+        "selectedIconPath": "/pages/images/group-light.png"
+      },
+      {
+        "pagePath": "pages/personal/personal",
+        "text": "个人",
+        "iconPath": "/pages/images//user-dark.png",
+        "selectedIconPath": "/pages/images/user-light.png"
+      }
+    ]
+  },
+  "usingComponents":{
+    "van-button":"./pages/dist/button/index",
+"van-icon":"./pages/dist/icon/index",
+"van-dialog":"./pages/dist/dialog/index",
+"van-field":"./pages/dist/field/index",
+"van-notify":"./pages/dist//notify/index"
+
+  },
+  "sitemapLocation": "sitemap.json"
+}
