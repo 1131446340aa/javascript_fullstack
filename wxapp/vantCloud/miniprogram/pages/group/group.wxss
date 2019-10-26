@@ -1,1 +1,17 @@
 /* miniprogram/pages/group/group.wxss */
+page{
+    height: 100%;
+}
+.group-body{
+    width: 100%;
+    height: 100%;
+    padding: 40rpx 0;
+    background-color: #f2f2f2;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.create{
+    width: 40rpx;
+    height: 40rpx;
+    border-radius: 50%;
+}
