@@ -23,29 +23,48 @@ button{
     width: 30px;
     height: 30px;
     position: absolute;
-  left: 200px;
-    top: 375px;
-    z-index: 1;
+   top: 50%;
+   left: 0;
+   transform: translate(0,-50%);
     display: none;
-
+    z-index: 1;
 }
 input.arrow-l{
     width: 30px;
     height: 30px;
 }
 .arrow-r{
+  z-index: 1;
     width: 30px;
     height: 30px;
     position: absolute;
-  left: 570px;
-    top: 375px;
-    z-index: 1;
+  right: 0;
+    top: 50%;
+    transform: translate(0,-50%);
   display: none;
-
 }
 input.arrow-r{
     width: 30px;
     height: 30px;
+}
+ul li{
+  width: 8px;
+  height: 8px;
+  background-color: #fff;
+   display: inline-block;
+   border-radius: 50%;
+ border: 1px solid #000;
+  margin-left: 5px;
+}
+.current{
+  background-color: red;
+}
+ul{
+  position: absolute;
+ top: 90%;
+ left: 50%;
+ z-index: 1;
+ transform: translate(-50%,0);
 }
 
 
