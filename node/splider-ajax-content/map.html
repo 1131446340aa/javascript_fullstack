@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn"></button>
+    <script>
+        const btn = document.querySelector('#btn')
+        //map
+        //key value
+        var map = {
+      name: 'lihua',
+      [btn]: 'dom node'
+    }
+    map['0'] = 'b val';
+    map['3'] = 'a val';
+    map['2'] = 'c val';
+    map['1'] = 'd val';
+    var nameMap={
+        lihua:'sing',
+        lilei:'dance',
+        lizhi:'rap'
+    }
+    function dosomething(name){
+        //根据 name==lihua输出唱歌
+        //根据 name==lilei输出跳舞
+        //根据 name==lizhi 输出rap
+        console.log(nameMap[name]);
+        
+    }
+    dosomething('lihua')
+
+        let map1 = new Map([["key", 'value']])
+        console.log(btn);
+        
+        console.log(Object.keys(map));
+
+        console.log(map1);
+        map1.set('key1','value1')
+        map1.get('key')
+        map1.set(()=>{},'function')
+        //遍历map
+        for(let enety of map1 ){
+console.log(enety);
+
+        }//map1.entries()[key,value]
+        //map1.keys()
+        //map1.values()
+
+
+        //有什么用
+        //为什么es6要增加一个Map
+        // 1,以前的key只支持字符串
+        //以前的key无序的
+        //... 扩展运算符
+        console.log(...[1,2,3]);
+        let arr2=[...[1,2,3],...[4,5,6]]
+        console.log([...'wstr']);
+        
+        console.log(arr2);
+        
+        
+        
+
+    </script>
+</body>
+
+</html>
