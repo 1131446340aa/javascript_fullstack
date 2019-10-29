@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 数组 存储起来连续的一段空间
+    // 数组删除一个元素，后面的内容都需要往前移动
+    // 链表删除一个元素，只需要修改一下指向
+    function Node (element) {
+      this.element = element
+      this.next = null
+    }
+    function LinkList() {
+      this.head = null
+      this.length = null
+    }
+    LinkList.prototype.append = function(element) {
+      let block = new Node(element)
+      if (!this.head) {
+        this.head = block
+      }
+      else {
+        let current = this.head
+        while(current.next) {
+          current = current.next
+        }
+        current.next = block
+      }
+    }
+    LinkList.prototype.showAll = function() {
+      if (this.head) {
+        let current = this.head
+        while(current) {
+          console.log(current.element)
+          current = current.next
+        }
+      }
+    }
+    var list = new LinkList()
+    list.append(1)
+    list.append(2)
+    list.append(3)
+    list.showAll()
+    console.log(list)
+  </script>
+</body>
+</html>
