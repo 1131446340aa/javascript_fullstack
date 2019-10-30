@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div></div>
+    <script>
+        var a=[]
+    console.log(a.constructor===Array);
+    var b=null
+    var c=undefined
+    function Foo(){
+
+    }
+    var a=new Foo()
+    a.constructor=Foo
+    console.log(a.constructor===Array);
+    //不推荐，null undefined 不能使用，容易被改掉
+
+    </script>
+</body>
+</html>
