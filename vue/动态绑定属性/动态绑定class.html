@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .red{
+        color: red;
+    }
+    .a{
+        font-size: 23px;
+    }</style>
+</head>
+<body>
+    <div class="app">
+        <h2>{{message}}</h2>
+        <p :class="red1">hello</p>
+        <p :class="{red :r,a:b}">hello</p>
+    
+    </div>
+        <script src="../vue.js"></script>
+        <script> 
+      let app=new Vue({
+            el:'.app',
+            data:{
+                message:'fdewfew',
+                red1:'red',
+                r:true,
+                b:true
+            
+            }
+        })
+        </script> 
+</body>
+</html>

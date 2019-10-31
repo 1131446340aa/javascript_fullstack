@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        html {
+            font-size: 62.5%;
+        }
+
+        body {
+            min-height: 100%;
+            font-size: 1.4rem;
+            margin: 0;
+
+        }
+
+        .button {
+
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            padding: 0.5em 1em;
+            transform: translate(-50%, -50%);
+            background-color: #42B983;
+            border-radius: 5px;
+            color: #fff;
+            border: 0;
+            font-size: 1.8rem;
+            outline: none;
+            cursor: pointer;
+        }
+        .button1{
+          top: 85%;
+        }
+        .modal{
+           position: relative;
+        text-align: center;
+        /* width: fit-content;
+        height: fit-content; */
+        width: 22rem;
+        height: 15rem;
+        background-color: #fff;
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+     
+        /* position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); */
+        /* transform: none; */
+        margin: auto;
+        z-index: 999;
+
+        }
+        .modal h1,p{
+            margin: 0 0 1rem;
+        }
+        .pop-enter-active,
+        .pop-leave-active{
+            transition: transform .4s cubic-bezier(.5,0,0.5,1),opacity .4s linear;
+        }
+        .pop-enter,.pop-leave-to{
+transform: scale(0.3) translateY(-50%);
+opacity: 0;
+        }
+        .modal-overlay{
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 998;
+            background-color: #2c3e50;
+            opacity: 0.6;
+        }
+        .fate-enter-active,
+        .fate-leave-active{
+            transition: opacity .4s linear;
+        }
+        .fate-enter,.fate-leave-to{
+            opacity: 0;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <button class="button" @click="showModal = true">Show model</button>
+        <transition name="fate"  v-if="showModal">
+            <div class="modal-overlay"></div>
+        </transition>
+        <transition name="pop">
+            <div class="modal" v-if="showModal">
+                <h1>Vue Transitions</h1>
+                <p>The <code>&lt;transition&gt;</code> component in Vue can create wonderful animated entrances and exits.
+                </p>
+                <button class="button button1"  @click="showModal = false">Hide Model</button>
+            </div>
+        </transition>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+new Vue({
+    el:'#app',
+    data(){
+        return {
+            showModal:false
+        }
+    }
+})
+    </script>
+</body>
+
+</html>

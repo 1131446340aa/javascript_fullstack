@@ -1,7 +1,7 @@
 <template>
     <div class="login">
-<!-- <button v-on:click="btn">跳转</button> -->
-<router-link :to="{name:'Login',params:{id:123}}" ><button>登录</button></router-link>
+<button v-on:click="btn">跳转</button>
+<!-- <router-link :to="{name:'Login',params:{id:123}}" ><button>登录</button></router-link> -->
 <router-view></router-view>
  <div class="login-wrap"></div>
     </div>
@@ -12,9 +12,9 @@ export default {
         return{}
     },
     methods:{
-      // btn(){
-      //   // this.$router.push({path:'/login'})//编程跳转
-      // }
+      btn(){
+        this.$router.push({name:'Login',params:{id:123333333222222223}})//编程跳转
+      }
     }
 }
 </script>
