@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+      
+        <div class="app">
+                <h2 >{{message}}</h2>
+                <input type="checkbox" value=1 v-model="hoppes">a
+                <input type="checkbox" value="2"  v-model="hoppes">2
+                <input type="checkbox" value="3"  v-model="hoppes">3
+                <input type="checkbox" value="4"  v-model="hoppes">4
+                <div>你的选择是{{hoppes}}</div>
+               
+            </div>
+                <script src="../vue.js"></script>
+             <script>  let app=new Vue({
+                    el:'.app',
+                    data:{
+                        message:'fdewfew',
+                        hoppes:[]
+                     
+                    }
+                })</script>
+        
+            
+            </script> 
+</body>
+</html>
