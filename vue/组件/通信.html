@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="app">
+        <test :q="message"></test>
+    </div>
+    <template id="q">
+       <div> <h1>{{a}}</h1>
+        <h2>{{q}}</h2></div>
+    </template>
+    <script src="../vue.js"></script>
+    
+    <script>
+        const test={
+            template:'#q',
+            props:['q'],
+            data(){
+                return{
+                    a:'aaaaa'
+                }
+               
+            }
+        }
+        let app = new Vue({
+            el: '.app',
+            data: {
+                message: 'fdewfew',
+            },
+            components:{
+                test
+            }
+        })
+    </script>
+    </script>
+</body>
+
+</html>

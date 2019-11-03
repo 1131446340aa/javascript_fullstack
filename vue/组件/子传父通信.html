@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <cpn @itemclick="itemclick"></cpn>
+    </div>
+    <template id="test">
+        <div>
+          <ul v-for="item in movies"  @click="btn(item)">
+              <li>{{item}}</li>
+          </ul>
+        </div>
+    </template>
+    <script src="../vue.js"></script>
+    <script>
+        const cpn={
+            template:'#test',
+        //    props:{
+        //        cmovie:{
+        //            type:Array,
+        //            default(){
+        //                return{}
+        //            }
+        //        }
+        //    },
+           data(){
+               return{
+                   movies:['海王','海贼王']
+               }
+           },
+           methods: {
+               btn(item){
+                   console.log(item)
+                   this.$emit('itemclick',item)
+               }
+           },
+        }
+    const app=new Vue({
+        el:'#app',
+        data:{
+           
+        },
+        methods: {
+            itemclick(item){
+                console.log(item)
+            }
+        },
+        components:{
+            cpn
+        }
+    })
+    
+    </script>
+</body>
+</html>
