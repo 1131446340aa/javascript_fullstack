@@ -15,8 +15,12 @@
         <li></li>
     </ul>
 <script>
- fetch('http://localhost:3000')
- .then(res=>res.json())
+ fetch('http://localhost:3001')
+ .then(res=>{
+    res.json()
+    console.log(res);
+    
+ })
  .then(data=>{
      const ulNode=document.querySelector('ul')
      let html=data.map(movies=>{

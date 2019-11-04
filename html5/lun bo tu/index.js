@@ -2,7 +2,7 @@
 var arrow_l = document.querySelector('.arrow-l')
 var arrow_r = document.querySelector('.arrow-r')
 var main = document.querySelector('.main')
-let images = ['./image/1.png', './image/2.png', './image/3.png','./image/1.png', './image/2.png', './image/3.png','./image/1.png', './image/2.png', './image/3.png']
+let images = ['./image/1.png', './image/2.png', './image/3.png','./image/1.png']
 let ul = document.querySelector('ul')
 for (let n = 0; n < images.length; n++) {
     //动态生成小圆圈，让其与图片数量相等

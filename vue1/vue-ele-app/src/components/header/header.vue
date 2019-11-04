@@ -34,6 +34,7 @@
           <div class="detail-main">
             <h1 class="name">{{ seller.name }}</h1>
             <div class="star-wrapper"></div>
+           au69
             <div class="title">
               <div class="line"></div>
               <div class="text">优惠信息</div>
@@ -68,7 +69,8 @@ export default {
   props: {
     seller: {
       type: Object
-    }
+    },
+    url: String
   },
   data () {
     return {

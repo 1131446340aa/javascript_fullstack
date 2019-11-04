@@ -10,7 +10,7 @@ function db(url,cb){
         res.on('end',()=>{
             const $=cheerio.load(html)
             let movies=[]
-            $(li .item).each(
+            $(li.item).each(
                 function(){
                     const picUrl = $('.pic img',  ).attr('src')
                     const title = $('.info .title', this).text();
@@ -37,6 +37,6 @@ http.createServer((req,res)=>{
 
 })
 .listen(3001,()=>{
-    console.log(running);
+    console.log("running");
     
 })

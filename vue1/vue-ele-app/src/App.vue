@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- 头部 -->
-    <v-header :seller="seller"></v-header>
+    <v-header :seller="seller" :url="url"></v-header>
     <div class="tab border-1px">
       <div class="tab-item">
         <router-link to="/goods">商品</router-link>
@@ -23,7 +23,8 @@ export default {
   name: 'App',
   data () {
     return {
-      seller: {}
+      seller: {},
+      url: '<img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=990087231,1878185023&fm=26&gp=0.jpg" alt="" width="16" height="16">'
     }
   },
   components: {

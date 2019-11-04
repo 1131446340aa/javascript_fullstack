@@ -1,13 +1,23 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+<test :c="a"></test>
     <router-view/>
   </div>
 </template>
-
 <script>
+import header from './test'
 export default {
-  name: 'App'
+  name: 'App',
+  components:{
+    'test':header
+  },
+ data(){
+   return{
+     a:{
+       b:1111
+     }
+   }
+ }
 }
 </script>
 

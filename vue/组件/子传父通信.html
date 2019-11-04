@@ -8,10 +8,11 @@
 </head>
 <body>
     <div id="app">
-        <cpn @itemclick="itemclick"></cpn>
+        <cpn @itemclick="itemclick" :cnum="c"></cpn>
     </div>
     <template id="test">
         <div>
+            <h2>{{cnum}}</h2>
           <ul v-for="item in movies"  @click="btn(item)">
               <li>{{item}}</li>
           </ul>
@@ -21,6 +22,7 @@
     <script>
         const cpn={
             template:'#test',
+            props:['cnum'],
         //    props:{
         //        cmovie:{
         //            type:Array,
@@ -43,8 +45,8 @@
         }
     const app=new Vue({
         el:'#app',
-        data:{
-           
+        data:{     
+            c:333
         },
         methods: {
             itemclick(item){
