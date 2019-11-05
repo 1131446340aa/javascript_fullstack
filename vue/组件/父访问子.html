@@ -11,11 +11,13 @@
 <body>
     <div id="app">
         <test :q="b"></test>
+        <button @click="btnclick">按钮</button>
     </div>
     <template id="temp">
         <div>
             <h2>{{a}}</h2>
             <h1>{{q}}</h1>
+           
         </div>
     </template>
     <script src="../vue.js"></script>
@@ -33,7 +35,13 @@
             el: '#app',
             data: {
                 b: '2222',
-            }
+            },
+            methods: {
+                btnclick(){
+                   console.log( this.$children[0].a);
+                   
+                }
+            },
         })
     </script>
 </body>

@@ -10,12 +10,21 @@
 
 <body>
     <div id="app">
-        <test :q="b"></test>
+        <test :q="b">
+           <template v-slot="slot">
+               <span v-for="item in slot.data">{{item}}--</span>
+           </template>
+        </test>
     </div>
     <template id="temp">
         <div>
             <h2>{{a}}</h2>
             <h1>{{q}}</h1>
+            <slot :data="plauange">
+                <ul v-for="item in plauange">
+                    <li>{{item}}</li>
+                </ul>
+            </slot>
         </div>
     </template>
     <script src="../vue.js"></script>
@@ -25,7 +34,8 @@
             props: ['q'],
             data() {
                 return {
-                    a: 3333
+                    a: 3333,
+                    plauange:['c++','php','java','js']
                 }
             }
         })

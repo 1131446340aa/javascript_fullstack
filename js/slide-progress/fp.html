@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 函数式编程  过程抽象  
+
+    // 无参化
+    function add(a, b, c) {
+      console.log(a, b, c)
+    }
+    add(1, 2, 3)
+    let arr = [1, 2, 3]
+    arr.forEach(add)
+    // ===
+    arr.forEach((item, i, arr) => {
+      add(item, i, arr)
+    })
+    // 函数是一等公民
+    // 函数 和其他变量一样  有同等的地位
+    arr.forEach((item, i, arr) => {
+      console.log(item, i, arr)
+    })
+    // (item, i, arr)
+    console.log([1, 2, 3].map(parseInt))
+    parseInt(1, 0, [1, 2, 3]) // 0 -> 10
+    parseInt(2, 1, [1, 2, 3]) // NaN
+    parseInt(3, 2, [1, 2, 3]) // 2  010101
+    // parseInt的第二个参数为进制 2 ~ 36    把 多少 进制的 转化为 十进制的
+    console.log(parseInt('10', 2))
+  </script>
+</body>
+</html>

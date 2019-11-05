@@ -16,6 +16,7 @@
         <div>
             <h2>{{a}}</h2>
             <h1>{{q}}</h1>
+            <button @click="btn">button</button>
         </div>
     </template>
     <script src="../vue.js"></script>
@@ -26,8 +27,15 @@
             data() {
                 return {
                     a: 3333
+           
                 }
+            },
+            methods: {
+                btn(){
+                console.log(this.$parent.b);
+                
             }
+            },
         })
         const app = new Vue({
             el: '#app',

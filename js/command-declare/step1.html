@@ -10,16 +10,17 @@
     <ul class="container"></ul>
     <script>
         let start=Date.now()
-    const total=100000
+    const total=10000
     let arr=[]
     const ul =document.querySelector('ul')
     for(let i=0;i<total;i++)
     {
         const liNode=document.createElement('li')
         liNode.innerHTML=Math.random()*total;
-        arr.push(liNode)
+        arr.push(liNode.innerHTML)
     }
-    const html=innerHTML
+  
+    ul.innerHTML=arr.join(" <br/>")
     let end=Date.now()
     console.log(end-start);
     
