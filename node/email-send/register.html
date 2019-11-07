@@ -1,19 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
-    <form action="/register" method="POST" enctype="text/plain"></form>
-    <input type="email" placeholder="输入你的邮箱">
-    <input type="text" placeholder="请输入验证码">
-    <span>发送验证码</span>
+    <form action="/register1" method="POST" enctype="text/plain" name="registerForm">
+    <input type="email" placeholder="输入你的邮箱" name="email" class="email">
+    <input type="text" placeholder="请输入验证码" name="code">
+    <span id="sendEmail">发送验证码</span>
     <input type="submit" value="提交">
+</form>
     <script>
+        const sendEmail = document.querySelector('#sendEmail')
+        sendEmail.addEventListener('click', () => {
+            console.log('111');
+
+            const email = document.forms['registerForm']['email'].value
+            //以get的形式提交email
+            fetch('/sendEmail' + '?email=' + email)
+                .then(res => res.json())
+                .then(data => {
+                    console.log('data', data);
+
+                })
+        })
 
     </script>
 </body>
+
 </html>
