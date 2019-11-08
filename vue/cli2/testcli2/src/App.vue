@@ -11,6 +11,9 @@ export default {
   name: 'App',
   components: {
     cpm: box
+  },
+  created () {
+    console.log(1)
   }
 }
 </script>

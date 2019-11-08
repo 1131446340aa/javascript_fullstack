@@ -10,7 +10,7 @@
 export default {
   methods: {
     btn () {
-      this.$router.push('test')
+      this.$router.push('/test')
     }
   }
 

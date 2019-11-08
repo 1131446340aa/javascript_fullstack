@@ -2,6 +2,8 @@
   <div>
       <h2>11232134S</h2>
       <div id="test">111</div>
+      <router-link to="/test/test1">children</router-link>
+      <router-view></router-view>
   </div>
 </template>
 

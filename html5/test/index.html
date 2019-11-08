@@ -1,22 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .aaa {
+    vertical-align: middle;
+    overflow: hidden;
+    }
+
+    .test {
+      display: inline-block;
+      width: 300px;
+      position: absolute;
+      height: 200px;
+      left: 50%;
+      top: 50%;
+      background-color: pink;
+      transform: translate(-50%, -50%);
+      line-height: 200px;
+      vertical-align: middle;
+
+
+    }
+
+    .test:before {
+      content: 'aaa';
+      display: inline-block;
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      z-index: 1;
+      text-align: center;
+      line-height: 100px;
+      vertical-align: middle;
+
+    }
+
+    .test:after {
+      content: 'aaaaa';
+      display: inline-block;
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      z-index: 1;
+      text-align: center;
+      line-height: 100px;
+      vertical-align: middle;
+
+    }
+  </style>
 </head>
+
 <body>
-    <button>btn1</button>
-    <button>btn2</button><script>
-        var btn=document.querySelectorAll('button')
-        btn[0].addEventListener('click',a)
-        function a(){
-            console.log(1);
-            
-        }
-        btn[1].addEventListener('click', b)
-</script>
+
+  <div class="aaa">
+    <div class="test">2qeqwreqw</div>
+  </div>
 </body>
 
 </html>

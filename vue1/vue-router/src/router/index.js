@@ -17,4 +17,5 @@ export default new Router({
       component: Login
     }
   ]
+
 })
