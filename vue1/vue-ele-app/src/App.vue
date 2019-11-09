@@ -1,19 +1,19 @@
 <template>
   <div id="app">
     <!-- 头部 -->
-    <v-header :seller="seller" :url="url"></v-header>
+    <v-header :seller="seller"></v-header>
     <div class="tab border-1px">
       <div class="tab-item">
         <router-link to="/goods">商品</router-link>
       </div>
-        <div class="tab-item">
-        <router-link to="/ratings">详情</router-link>
+      <div class="tab-item">
+        <router-link to="/ratings">评价</router-link>
       </div>
-        <div class="tab-item">
+      <div class="tab-item">
         <router-link to="/seller">商家</router-link>
       </div>
     </div>
-    <router-view/>
+    <router-view :seller="seller"/>
   </div>
 </template>
 
@@ -23,15 +23,14 @@ export default {
   name: 'App',
   data () {
     return {
-      seller: {},
-      url: '<img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=990087231,1878185023&fm=26&gp=0.jpg" alt="" width="16" height="16">'
+      seller: {}
     }
   },
   components: {
     'v-header': header
   },
   created () {
-    this.$http.get('http://localhost:8080/static/seller.json')
+    this.$http.get('http://localhost:8080/static/seller.json', {})
       .then((res) => {
         console.log(res)
         if (res.data.errno === 0) {
@@ -44,7 +43,7 @@ export default {
 </script>
 
 <style lang="stylus">
-@import './common/stylus/mixin'
+@import './common/stylus/mixin.styl'
 .tab
   display flex
   height 40px
@@ -57,8 +56,9 @@ export default {
     a
       text-decoration none
       display block
-      color rgb(77,85,93)
+      font-size 14px
+      color rgb(77, 85, 93)
+      -webkit-tap-highlight-color rgba(0, 0, 0, 0)
       &.router-link-active
-        color rgb(240,20,20)
-
+        color rgb(240, 20, 20)
 </style>
