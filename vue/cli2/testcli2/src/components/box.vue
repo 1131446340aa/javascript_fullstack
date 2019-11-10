@@ -10,7 +10,10 @@
 export default {
   methods: {
     btn () {
-      this.$router.push('/test')
+      this.$router.push({
+        path: '/test/test1',
+        query: {id: 333}
+      })
     }
   }
 

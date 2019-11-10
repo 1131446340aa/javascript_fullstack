@@ -1,5 +1,5 @@
-const Vue = () => import('vue-router')
-const Router = () => import('vue-router')
+import Vue from 'vue'
+import Router from 'vue-router'
 const box = () => import('../components/box')
 const test = () => import('../components/test')
 const test1 = () => import('../components/test1')

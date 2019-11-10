@@ -2,7 +2,11 @@
   <div>
       <h2>11232134S</h2>
       <div id="test">111</div>
-      <router-link to="/test/test1">children</router-link>
+      <h3>{{$route.query.id}}</h3>
+      <router-link :to="{
+          path:'/test/test1',
+          query:{id:333}
+      }">children</router-link>
       <router-view></router-view>
   </div>
 </template>
