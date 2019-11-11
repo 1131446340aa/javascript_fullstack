@@ -38,13 +38,14 @@ export default {
   flex: 1;
   text-align: center;
   font-size: 14px;
-  vertical-align: middle;
-  margin-top: 3px;
-  margin-bottom: 2px;
+ height: 49px;
 }
 .tabBar-item img {
   width: 24px;
   height: 24px;
+   vertical-align: middle;
+  margin-top: 3px;
+  margin-bottom: 2px;
 }
 .active{
   color: red;

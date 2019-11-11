@@ -1,6 +1,6 @@
 <template>
 <div>
-     <tabBar>
+     <tabBar class="zindex">
       <tabBarItem path='/home'>
         <img slot="item-icon" src="../../assets/img/tabbar/home.svg"  />
         <img slot="item-active-icon" src="../../assets/img/tabbar/home_active.svg"  />
@@ -39,5 +39,8 @@ export default {
 </script>
 
 <style>
+.zindex{
+  z-index:66;
 
+}
 </style>
