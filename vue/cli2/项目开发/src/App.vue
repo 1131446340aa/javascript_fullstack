@@ -4,7 +4,7 @@
   <MainTabBar></MainTabBar>
 </div>
 
-    <router-view/>
+   <keep-alive exclude="detail"> <router-view/></keep-alive>
   </div>
 </template>
 

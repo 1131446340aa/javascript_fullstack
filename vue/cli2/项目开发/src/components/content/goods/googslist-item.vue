@@ -1,11 +1,13 @@
 <template>
-<div class="goods-item">
-    <img :src="goodsItem.show.img">
+<div class="goods-item" @click="detail">
+
+      <img :src="goodsItem.show.img" @load="imageLoad">
     <div class="goods-info">
         <p>{{goodsItem.title}}</p>
         <span class="price">{{goodsItem.price}}</span>
         <span class="collect">{{goodsItem.cfav}}</span>
     </div>
+
 </div>
 
 </template>
@@ -19,6 +21,17 @@ export default {
         return {}
       }
     }
+  },
+  methods: {
+    imageLoad () {
+      // console.log(1)
+      this.$bus.$emit('imageLoad')
+    },
+    detail () {
+      console.log(1)
+
+      this.$router.push('/detail/' + this.goodsItem.iid)
+    }
   }
 }
 </script>
@@ -27,7 +40,7 @@ export default {
   .goods-item {
     padding-bottom: 40px;
     position: relative;
-
+/* z-index: 1; */
     width: 46%;
   }
 

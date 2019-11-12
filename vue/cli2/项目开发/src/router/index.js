@@ -6,6 +6,7 @@ const home = () => import('../views/home/home')
 const profile = () => import('../views/profile/profile')
 const catagory = () => import('../views/catagory/catagory')
 const cart = () => import('../views/cart/cart')
+const detail = () => import('../views/detail/detail')
 const router = new Router({
 
   routes: [
@@ -18,7 +19,9 @@ const router = new Router({
     {path: '/catagory',
       component: catagory},
     {path: '/cart',
-      component: cart}
+      component: cart},
+    {path: '/detail/:iid',
+      component: detail}
   ]
 })
 
