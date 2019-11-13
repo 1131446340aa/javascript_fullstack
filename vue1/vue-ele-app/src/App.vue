@@ -13,12 +13,14 @@
         <router-link to="/seller">商家</router-link>
       </div>
     </div>
+
     <router-view :seller="seller"/>
   </div>
 </template>
 
 <script>
 import header from '@/components/header/header.vue'
+
 export default {
   name: 'App',
   data () {
