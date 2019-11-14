@@ -1,25 +1,25 @@
 <template>
 <div class="commentRating">
     <div class="commentRatingLeft">
-        <div class="score" v-show="seller.score" >{{seller.score}}</div>
-        <div class="avg_score">综合评分</div>
-        <div class="higher">高于周边商家{{seller.rankRate}}%</div>
+        <div class="score" v-if="seller" >{{seller.score}}</div>
+        <div class="avg_score" v-if="seller">综合评分</div>
+        <div class="higher" v-if="seller">高于周边商家{{seller.rankRate}}%</div>
     </div>
     <div class="commentRatingRight">
         <div class="manner">
-            <div class="manner-left">服务态度</div>
-            <div class="manner-center"  v-for="(item, index) in server_score" :key="index"><img :src="item" ></div>
-            <div class="manner-right">{{seller.serviceScore}}</div>
+            <div class="manner-left" >服务态度</div>
+            <div class="manner-center"  v-if="seller"><Star :star_score="seller.foodScore"></Star></div>
+            <div class="manner-right " v-if="seller">{{seller.serviceScore}}</div>
         </div>
         <div class="goods-score">
-            <div class="goods-score-left">商品评分</div>
-            <div class="goods-score-center" v-for="(item, index) in goods_score" :key="index"><img :src="item" ></div>
+            <div class="goods-score-left" >商品评分</div>
+            <div class="goods-score-center" v-if="seller"><Star :star_score="seller.serviceScore"></Star></div>
 
-            <div class="goods-score-right v-for">{{seller.foodScore}}</div>
+            <div class="goods-score-right v-for" v-if="seller">{{seller.foodScore}}</div>
         </div>
         <div class="arr_tiem">
             <div class="arr_time-left">送达时间</div>
-            <div class="arr_time-center">{{seller.deliveryTime}}分钟</div>
+            <div class="arr_time-center" v-if="seller">{{seller.deliveryTime}}分钟</div>
 
         </div>
     </div>
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-
+import Star from './star'
 export default {
   props: {
 
@@ -38,6 +38,10 @@ export default {
       }
     }
   },
+  created () {
+    console.log(this.seller)
+  },
+  components: {Star},
 
   data () {
     return {
@@ -140,12 +144,7 @@ padding: 15px 0;
   .goods-score-center{
      display: inline-block;
  }
-  .goods-score-center img{
-      width: 16px;
-      height: 16px;
-      position: relative;
-      bottom: -4px;
-  }
+
   .goods-score-right{
      display: inline-block;
      color: orange;

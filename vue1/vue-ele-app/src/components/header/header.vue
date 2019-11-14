@@ -33,11 +33,11 @@
         <div class="detail-wrapper">
           <div class="detail-main">
             <h1 class="name">{{ seller.name }}</h1>
-            <div class="star-wrapper">
+
               <!-- 星星 -->
-              <v-star :seller="seller" v-if="seller.foodScore"></v-star>
-            </div>
-            <div class="title">
+         <!-- <div> 1111<Star :star_score="seller.score"></Star></div> -->
+ <Star :star_score="seller.foodScore" class="star">/l</Star>
+            <div class="title"l>
               <div class="line"></div>
               <div class="text">优惠信息</div>
               <div class="line"></div>
@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import star from '../star/star'
+import Star from '../../components/star/star'
 export default {
   props: {
     seller: {
@@ -84,7 +84,7 @@ export default {
     }
   },
   components: {
-    'v-star': star
+    Star
   },
   methods: {
     detailShow () {
