@@ -13,6 +13,7 @@ import detailNavBar from './childComps/detailNavBar'
 import {getDetail} from '../../network/detail'
 import detailSwapper from './detailSwapper'
 export default {
+  name: 'detail',
   data () {
     return {
       iid: null,

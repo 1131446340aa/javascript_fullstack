@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>节流</title>
+    <style>
+        #container ,#container1{
+            width: 100%;
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+            color: #fff;
+            background-color: #444;
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- mouseover resize -->
+    <div id="container">
+        <div id="container"></div>
+    </div>
+    <script src="https://cdn.bootcss.com/lodash.js/4.17.15/lodash.min.js"> 
+        const container = document.querySelector('#container')
+        let init = 9990;
+        let poerious=0
+        function buy() {
+            let now=new Date().getTime()
+            if (now-poerious>=1000){
+                container.innerHTML = init++
+                poerious=now
+            }
+           
+            if(init>=10000)
+            {
+                init=10000
+            }
+        }
+        const container = document.querySelector('#container1')
+        function add(){
+            container.innerHTML = init++
+        }
+        //函数式编程是过程抽象
+        //高阶函数 输入是函数，输出也是函数
+        //这里为什么要用丐姐函数
+
+        container.onmousemove = buy
+        container1.onmousemove = _.throttle(add,1000)
+        function myThrottle(func,wait){
+            poerious=0
+            return function(){
+                let now=new Date().getTime()
+            if (now-poerious>=wait){
+                func()
+                poerious=now
+            }
+            }
+        }
+        </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    .scrollContainer{
+        width: 200px;height: 600px;
+        border: 1px solid #000;
+    }
+    .tatgetBox{
+        width: 100px;
+        height: 100px;
+        background-color: aqua;
+        overflow-y: scroll;
+        margin-top: 900px;;
+    }</style>
+</head>
+<body>
+    <div class="scrollContainer">
+        <div class="tatgetBox"></div>
+    </div>
+    <script>
+        const insection=new IntersectionObserver(
+            (entries)=>{
+                entries.forEach(
+                   (entry)=>{
+                       console.log(entry);
+                       if(entry.isIntersecting){}
+                       
+                   }
+                    
+                )
+            },
+           {threshold:[0.3,0.5,1],
+            rootMargin:'0px 0px 30px 0px'}
+         
+        )
+        insection.observe(document.querySelector('.tatgetBox'))
+    </script>
+</body>
+</html>

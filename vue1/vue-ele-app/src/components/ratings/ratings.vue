@@ -1,5 +1,7 @@
 <template>
-  <div>
+<div class="scroll" ref="bbbb">
+<div>
+
     <comment :seller="seller"></comment>
     <div class="box"></div>
     <div class="select">
@@ -45,12 +47,15 @@
         </div>
       </div>
     </div>
+</div>
   </div>
+
 </template>
 
 <script>
 import comment from '../comment/comment'
 import Star from '../../components/comment/childcomps/star'
+import BScroll from 'better-scroll'
 export default {
   components: {
     comment,
@@ -93,8 +98,24 @@ export default {
       result: [],
       result1: [],
       satisfied_num: 0,
-      dissatisfied_num: 0
+      dissatisfied_num: 0,
+      scroll: null
     }
+  },
+  mounted () {
+    this.scroll = new BScroll(this.$refs.bbbb, {
+      probeType: 3
+      // pullUpLoad: true
+    })
+
+    this.scroll.on('scroll', (position) => {
+      console.log(position)
+    })
+
+    // this.scroll.on('pullingUp', () => {
+    //   console.log('上啦加载更多');
+    // })
+    // },
   },
   methods: {
     all (index) {
@@ -249,5 +270,13 @@ export default {
 }
 .buytime {
   font-size: 10px;
+}
+.scroll{
+  overflow: hidden;
+   position: absolute;
+    top: 175px;
+    bottom: 1px;
+    left: 0;
+    right: 0;
 }
 </style>

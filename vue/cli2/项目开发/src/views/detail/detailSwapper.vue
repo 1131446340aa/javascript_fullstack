@@ -1,14 +1,17 @@
 <template>
-<Swiper class="swapper">
-<Swiperitem v-for="(item,index) in topimages" :key="index">
-   <div>4444</div>
-</Swiperitem>
+<div>
+  <Swiper class="swapper">
+<aaaaa v-for="(item,index) in topimages" :key="index">
+   <img :src="item" alt="">
+</aaaaa>
 </Swiper>
+</div>
 </template>
 
 <script>
+
+import aaaaa from '../../components/common/swiper/SwiperItem'
 import Swiper from '../../components/common/swiper/Swiper'
-import Swiperitem from '../../components/common/swiper/SwiperItem'
 export default {
 
   props: {
@@ -21,7 +24,9 @@ export default {
   },
 
   components: {
-    Swiper, Swiperitem
+    // Swiper, Swiperitem
+    aaaaa,
+    Swiper
   }
 }
 </script>

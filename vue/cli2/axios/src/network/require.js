@@ -6,7 +6,19 @@ export function request (config) {
       timeout: 5000
     }
   )
-  instance(config).then(res => {
-    console.log(res)
-  })
+  instance.interceptors.use(config => {
+    return config
+  }, err => { return err })
+  instance.interceptors.responce.use(res => {
+    return res.data
+  }, err => { return err })
+  return instance(config)
+  // instance(config).then(res => {
+  //   success(res)
+  // })
+  //   .catch(res => {
+  //     failing(res)
+  //   })
 }
+request({url: ''}).then()
+  .catch()
