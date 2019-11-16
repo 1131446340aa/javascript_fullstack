@@ -104,12 +104,14 @@ export default {
   },
   mounted () {
     this.scroll = new BScroll(this.$refs.bbbb, {
-      probeType: 3
+      probeType: 3,
+       click:true
       // pullUpLoad: true
     })
 
     this.scroll.on('scroll', (position) => {
       console.log(position)
+     
     })
 
     // this.scroll.on('pullingUp', () => {

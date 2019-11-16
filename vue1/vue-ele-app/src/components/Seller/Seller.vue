@@ -49,22 +49,26 @@
       </div>
       <div class="box"></div>
 
-      <div class="business-reality pic1" ref="b">
-        <!-- <h1 class="title">商家实景</h1> -->
-        <!-- <div ref="pics" class="pic1"> -->
-
-            <div class="pics">
-            <div class="pic" v-for="(item,index) in seller.pics" :key="index">
-              <img :src="item" />
-            </div>
-          </div>
-
-        <!-- </div> -->
+      <div class="pics">
+        <h1 class="title">商家实景</h1>
+        <!--因为图片要横向滚动，那么父级就要设定一个固定宽度-->
+        <!--当子元素的宽度超过父元素的宽度的时候，就可以滚动了-->
+        <div class="pic-wrapper" ref="picWrapper">
+          <ul class="pic-list" ref="picList">
+            <li class="pic-item" v-for="(item,index) in seller.pics" :key="index">
+              <img :src="item" width="120" height="90" />
+            </li>
+            <li></li>
+          </ul>
+        </div>
       </div>
+
       <div class="box"></div>
-      <div class="message">
-        <h1 class="title">商家信息</h1>
-        <div class="message-item" v-for="(item,index) in seller.infos" :key="index">{{item}}</div>
+      <div>
+        <div class="message">
+          <h1 class="title">商家信息</h1>
+          <div class="message-item" v-for="(item,index) in seller.infos" :key="index">{{item}}</div>
+        </div>
       </div>
     </div>
   </div>
@@ -76,6 +80,15 @@ import BScroll from 'better-scroll'
 export default {
   components: {
     Star
+  },
+  watch: {
+    // 监听seller变量的值的变化在初始化
+    // 防止滚动不生效
+    seller () {
+      this.$nextTick(() => {
+        this._initPics()
+      })
+    }
   },
   methods: {
     collection () {
@@ -90,6 +103,23 @@ export default {
         this.$refs.color.style.color = '#d4d6d9'
         this.$refs.collection.innerHTML = '收藏'
         this.$refs.collection.style.color = '#000000'
+      }
+    },
+    // 用于初始化“商家实景”的横向滚动效果
+    _initPics () {
+      // 先判断是否有这个属性
+      if (this.seller.pics) {
+
+        this.$nextTick(() => {
+          if (!this.picScroll) {
+            this.picScroll = new BScroll(this.$refs.picWrapper, {
+              scrollX: true,
+              eventPassthrough: 'vertical' // 忽略竖直方向的滚动
+            })
+          } else {
+            this.picScroll.refresh()
+          }
+        })
       }
     }
   },
@@ -109,22 +139,12 @@ export default {
     })
     this.scroll.on('scroll', position => {
       // console.log(position)
+    })
+    this.$refs.color.style.color = '#d4d6d9'
+        this.$refs.collection.style.color = '#000000'
 
-    })
-    // this.scroll.on('pullingUp', () => {
-    //   console.log('上啦加载更多')
-    // })
-    this.scroll1 = new BScroll(this.$refs.b, {
-      probeType: 3,
-      //   pullUpLoad: true
-      scrollX: true,
-      scrollY: false,
-      eventPassthrough: 'vertical',
-      startX: 0,
-      click: true
-    })
-    this.scroll1.on('scroll', position => {
-      console.log(position)
+    this.$nextTick(() => {
+      this._initPics() // 商家实景的横向滚动
     })
   },
   data () {
@@ -143,7 +163,7 @@ export default {
         '../../../static/images/guarantee_2@3x.png'
       ],
       scroll: null,
-      scroll1: null
+      picScroll: null
     }
   }
 }
@@ -254,32 +274,30 @@ h1.title {
 .support-item {
   display: flex;
 }
-.business-reality {
-  margin: 0 15px;
-  padding-bottom: 15px;
+.pics{
+  padding: 18px;
 }
-.pic {
-
+.pics .title{
+  margin-bottom: 12px;
+  line-height: 14px;
+  color: rgb(7,17,27);
+  font-size: 14px;
+}
+.pic-wrapper{
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.pic-list{
+  font-size: 0;
   display: inline-block;
-
 }
-.pic1{
-
-}
-.pic img {
+.pic-item{
+  display: inline-block;
+  margin-right: 6px;
   width: 120px;
   height: 90px;
-  margin-right: 10px;
 }
-.pics{
- /* position: absolute;
- left: 10px;
- right: 10px; */
- /* overflow: scroll; */
-overflow-x: hidden;
-overflow-y: hidden;
- white-space: nowrap;
- }
 .message-item {
   font-size: 10px;
   line-height: 30px;
