@@ -84,7 +84,7 @@ export default {
   created () {
     this.$http.get('http://localhost:8080/static/goods.json').then(res => {
       console.log(res)
-      if (res.data.errno == 0) {
+      if (res.data.errno === 0) {
         this.goods = res.data.data
         this.$nextTick(() => {
           this._initScroll()

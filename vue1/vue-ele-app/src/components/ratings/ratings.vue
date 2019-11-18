@@ -64,6 +64,10 @@ export default {
   created () {
     this.$http.get('http://localhost:8080/static/seller.json', {}).then(res => {
       this.seller = res.data.data
+      console.log(res)
+    })
+    this.$http.get('http://musicapi.leanapp.cn/comment/music?id=186016', {}).then(res => {
+      console.log(res)
     })
     this.$http
       .get('http://localhost:8080/static/ratings.json', {})
@@ -105,13 +109,12 @@ export default {
   mounted () {
     this.scroll = new BScroll(this.$refs.bbbb, {
       probeType: 3,
-       click:true
+      click: true
       // pullUpLoad: true
     })
 
     this.scroll.on('scroll', (position) => {
       console.log(position)
-     
     })
 
     // this.scroll.on('pullingUp', () => {

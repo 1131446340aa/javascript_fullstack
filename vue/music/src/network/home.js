@@ -24,3 +24,19 @@ export function  albumNewest() {
     }
   })
 }
+export function  first(limit) {
+  return request({
+    url: '/mv/first',
+    params: {
+      limit
+    }
+  })
+}
+export function  mvUrl(id) {
+  return request({
+    url: '/mv/url',
+    params: {
+      id
+    }
+  })
+}

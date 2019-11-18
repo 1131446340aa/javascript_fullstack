@@ -4,7 +4,7 @@ import father from '@/components/view/demo1/father'
 import father2 from '@/components/view/demo2/father'
 import father3 from '@/components/view/demo3/father'
 import father4 from '@/components/view/demo4/father'
-import father5 from '@/components/view/demo5/demo'
+import father5 from '@/components/view/demo6/demo6'
 Vue.use(Router)
 
 export default new Router({

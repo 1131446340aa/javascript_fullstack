@@ -1,91 +1,70 @@
 <template>
-<div ref="aaaa">
-    <div class="wrapper">
-
-      <!--1.无论是否设置click:false, button都可以点击-->
-      <!-- <button @click="btnClick">按钮</button>
-
-      <!--2.必须设置click:true, 那么div才能监听点击-->
-      <!-- <div @click="divClick">呵呵呵呵</div> --> -->
-
-<div class="box">
-    <div class="box1">
-    <img src="../../../../static/logo.png" alt="">
-     
-  </div>
-    <div class="box1">
-    <img src="../../../../static/logo.png" alt="">
-     
-</div>
-</div>
-  </div>
+  
+<div class="wrap" ref="wrapper">
+ <ul>
+  <li><img src="../../../../src/assets/logo.png" alt=""></li>
+  <li><img src="../../../../src/assets/logo.png" alt=""></li>
+  <li><img src="../../../../src/assets/logo.png" alt=""></li>
+  <li><img src="../../../../src/assets/logo.png" alt=""></li>
+  <li><img src="../../../../src/assets/logo.png" alt=""></li>
+  <li><img src="../../../../src/assets/logo.png" alt=""></li>
+  <li><img src="../../../../src/assets/logo.png" alt=""></li>
+ </ul>
 </div>
 </template>
 
 <script>
-  import BScroll from 'better-scroll'
-
-  export default {
-    name: "Category",
-    data() {
-      return {
-        scroll: null
-      }
-    },
-    // 组件创建完后调用
-    mounted() {
-      this.scroll = new BScroll(this.$refs.aaaa, {
-        probeType: 3,
-        scrollX:true,
-        click:true,
-        startX:0,
-        eventPassthrough:'vertical',
-        scrollY:false
-        // pullUpLoad: true
-      })
-
-      this.scroll.on('scroll', (position) => {
-        console.log(position);
-      })
-
-      this.scroll.on('pullingUp', () => {
-        console.log('上啦加载更多');
-      })
-    },
-    methods: {
-      btnClick() {
-        console.log('btnClick');
-      },
-      divClick() {
-        console.log('divClick');
-      }
-    }
+import BScroll from 'better-scroll'
+export default {
+data(){
+  return{
+    scroll:null
   }
+},
+mounted(){
+  this.scroll=new BScroll(this.$refs.wrapper,{
+    click:true,
+    scrollX:true,
+    scrollY:false
+  })
+}
+}
 </script>
 
-<style scoped>
-  .wrapper {
-    height: 150px;
-   
-/* 
-    overflow-x: hidden; */
-    
-    white-space: nowrap;
-    /*overflow-y: scroll;*/
+<style>
+
+  * {
+   margin: 0;
+   padding: 0;
   }
-  .box{
-display: inline-block;
+  .wrap {
+   width:500px;
+   overflow: hidden;
+   margin: 0 auto;
+   border: 1px black solid;
   }
-  .box1{
-   
-    
-    overflow: hidden;
-    width: 159px;
-    background-color: red;
-    
+  ul {
+   height: 100px;
+   background-color: lightseagreen;
+   /*由子元素自动撑开宽度*/
+   /* display: inline-block; */
+   /* width: 700px; */
+   /*子元素不换行, 直到遇到<br/>*/
+   /* white-space: nowrap; */
+  
+   /*overflow-x: scroll;*/
+   /*overflow-y: hidden;*/
   }
-  .box1 img{
+  /*隐藏滚动条*/
+  li {
+   display: inline-block;
+   /* width: 100px;
+   height: 80px; */
+   margin-left: 10px;
+   background-color: lightcoral;
+  }
+  img{
     width: 100px;
-    height: 100px;
+    height: 80px;
   }
 </style>
