@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="kolor-kolor"></div>
+  <script>
+    var observer = new MutationObserver((muationList) => {
+      console.log(muationList)
+      if (muationList[0].type == "attributes") {
+        console.log('attributes change')
+        let color = document.getElementById('kolor-kolor').style.backgroundColor
+        document.querySelectorAll('#kolor-options a').forEach((e) => {
+          if (e.style.backgroundColor == color) {
+            e.click() // 手动触发点击事件
+          }
+        })
+      }
+    })
+    const targetNode = document.getElementById('kolor-kolor')
+    observer.observe(targetNode, {
+      attributes: true
+    })
+    setTimeout(() => {
+      targetNode.style.backgroundColor = 'rgba(0, 0, 0, 0)'
+    }, 1000)
+  </script>
+</body>
+</html>
