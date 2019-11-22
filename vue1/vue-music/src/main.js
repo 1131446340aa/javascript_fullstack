@@ -6,11 +6,11 @@ import router from './router'
 import store from './vuex/store'
 import '../static/css/reset.styl'
 import fastclick from 'fastclick'
+import { prototype } from 'events'
 
 fastclick.attach(document.body)
-
 Vue.config.productionTip = false
-
+// Vue.prototype.$store=store
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

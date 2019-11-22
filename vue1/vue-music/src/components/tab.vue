@@ -21,8 +21,8 @@ export default {
 }
 </script>
 
-<style lang='stylus' scoped>
-@import '../assets/css/function.styl'
+<style lang="stylus" scoped>
+@import "../assets/css/function";
 .tab
   display flex
   height px2rem(88px)
@@ -33,7 +33,7 @@ export default {
     text-align center
     .tab-link
       padding-bottom 5px
-      color hsla(0, 0%, 100%, 0.5)
+      color hsla(0, 0%, 100%, .5)
     &.router-link-active
       .tab-link
         color #ea2448

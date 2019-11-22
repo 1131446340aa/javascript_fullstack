@@ -1,16 +1,15 @@
-<template></template>
+<template>
+  <div ref="wrapper">
+    <slot></slot>
+  </div>
+</template>
 
 <script>
 import BScroll from "better-scroll";
 const DIRECTION_H = "horizontal";
 const DIRECTION_V = "vertical";
-
 export default {
-  data() {
-    return {
-      scroll
-    };
-  },
+  name: "scroll",
   props: {
     /**
      * 1 滚动的时候会派发scroll事件，会节流。
@@ -73,7 +72,11 @@ export default {
       default: DIRECTION_V
     }
   },
-
+  mounted() {
+    setTimeout(() => {
+      this._initScroll;
+    }, 20);
+  },
   methods: {
     _initScroll() {
       if (!this.$refs.wrapper) {
@@ -85,27 +88,26 @@ export default {
         eventPassthrough:
           this.direction === DIRECTION_V ? DIRECTION_H : DIRECTION_V
       });
-      if(this.listenScroll){
-        this.scroll.on('scroll',(pos)=>{
-          this.$emit('scroll',pos)
-        })
+      if (this.listenScroll) {
+        this.scroll.on("scroll", pos => {
+          this.$emit("scroll", pos);
+        });
       }
     },
-    refresh(){
-      this.scroll && this.scroll.refresh()
-    }
-
-  },
-  watch:{
-    data(){
-      //监听数据变化，延时xx时间后剩余better-scroll的效果，保证滚动效果正常
-      setTimeout(()=>{this.refresh()},this.refreshDelay)
+    refresh() {
+      this.scroll && this.scroll.refresh();
+      // if (this.scroll) {
+      //   this.scroll.refresh()
+      // }
     }
   },
-  mounted() {
-    setTimeout(() => {
-      this._initScroll(), 20;
-    });
+  watch: {
+    data() {
+      // 监听数据变化, 延时xx时间后刷新better-scroll的效果，保证滚动效果正常
+      setTimeout(() => {
+        this.refresh();
+      }, this.refreshDelay);
+    }
   }
 };
 </script>

@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import axios from 'axios'
-const vue = new Vue()
+const vue = new Vue
 
-// axios配置
-axios.defaults.timeout = 10000
-axios.defaults.baseURL = 'http://localhost:3000'
+
+// axios 配置
+axios.defaults.timeout = 10000  // 限制最长请求时间
+axios.defaults.baseURL = 'http://localhost:3000'  // 基础API地址
 
 // 判断返回状态,响应拦截
 axios.interceptors.response.use((res) => {
@@ -28,26 +29,30 @@ export function fetchGet(url, param) {
     }, err => {
       reject(err)
     })
-    .catch((error) => {
+    .catch((error => {
       reject(error)
-    })
+    }))
   })
 }
 
 export default {
   // 用户登录
-  Login (params) {
+  Login(params) {
     return fetchGet('/login', params)
   },
   // banners
-  BannerList () {
+  BannersList () {
     return fetchGet('/banner')
   },
   // 歌单
-  DiscLists (params) {
-    return fetchGet('/top/playlist', params)
+  DiscLists (parmas) {
+    return fetchGet('/top/playlist', parmas)
   },
-  HotSearchKey(){
+  HotSearchKey () {
     return fetchGet('/search/hot')
+  },
+  //歌曲搜索
+  MusicSearch(params){
+    return fetchGet('/search',params)
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="search">
     <div class="search-box-wrapper">
-      <v-search-box @query="onQueryChange"></v-search-box>
+      <v-search-box ref="searchBox" @query="onQueryChange"></v-search-box>
     </div>
     <!-- 热门搜索和搜索历史 -->
     <div class="shortcut-wrapper">
@@ -20,55 +20,69 @@
           <div class="search-history">
             <h1 class="title">
               <span class="text">搜索历史</span>
-              <span class="clear">
+              <span class="clear" @click="Alldelete">
                 <i class="icon">&#xe612;</i>
               </span>
             </h1>
             <!-- 搜索历史列表 -->
+            <v-search-List
+              :searches="searchHistory"
+              @select="saveSearch"
+              @delete="deleteSearchHistory"
+            ></v-search-List>
           </div>
         </div>
       </v-scroll>
+    </div>
+    <div class="search-result">
+      <v-suggest :query="query"></v-suggest>
     </div>
   </div>
 </template>
 
 <script>
-import searchBox from '@/components/searchBox'
-import scroll from '@/components/scroll'
-import api from '@/api/index.js'
+import searchBox from "@/components/searchBox";
+import scroll from "@/components/scroll";
+import api from "@/api/index.js";
+import searchList from "@/components/searchList";
+import { mapGetters } from "vuex";
+import { searchMixin } from "@/common/mixin";
+import suggest from "@/components/suggest"
 export default {
-  data () {
+  data() {
     return {
       shortcut: [],
-      hotKey:[1, 6451654, 546, 45132],
-      
-    }
+      hotKey: []
+    };
   },
   components: {
-    'v-search-box': searchBox,
-    'v-scroll': scroll
+    "v-search-box": searchBox,
+    "v-scroll": scroll,
+    "v-search-List": searchList,
+    'v-suggest':suggest
   },
   methods: {
-    onQueryChange (e) {
-      console.log(e)
-    },
-    _getHotKey () {
-      api.HotSearchKey().then((res) => {
+    _getHotKey() {
+      api.HotSearchKey().then(res => {
         if (res.code == 200) {
-          this.hotKey = res.result.hots.slice(0, 10)
+          this.hotKey = res.result.hots.slice(0, 10);
         }
-         console.log(res)
-      })
+        console.log(res);
+      });
     }
   },
-  created () {
-    this._getHotKey ()
-  }
-}
+  created() {
+    this._getHotKey();
+  },
+  computed: {
+    ...mapGetters(["searchHistory"])
+  },
+  mixins: [searchMixin]
+};
 </script>
 
 <style lang="stylus" scoped>
-@import "../../assets/css/function"
+@import '../../assets/css/function'
 .search
   overflow hidden
   &-box-wrapper
@@ -110,7 +124,10 @@ export default {
             .icon
               font-size 18px
               color hsla(0, 0%, 100%, 0.3)
+  .search-result
+    position fixed
+    width 100%
+    top px2rem(360px)
+    bottom 0
 
 </style>
-
-

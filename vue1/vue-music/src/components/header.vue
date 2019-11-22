@@ -14,22 +14,20 @@
 
 <script>
 export default {
-  name: 'hd',
-  data () {
-    return {
-
-    }
+  name: "hd",
+  data() {
+    return {};
   },
   methods: {
-    leftEvent () {
-      this.$store.dispatch('setShowSidebar', true)
+    leftEvent() {
+      this.$store.dispatch("setShowSidebar", true); // 直接调用actions里的方法
     }
   }
-}
+};
 </script>
 
 <style lang="stylus">
-@import "../assets/css/function"
+@import '../assets/css/function'
 .header
   height px2rem(88px)
   line-height px2rem(88px)
@@ -38,8 +36,9 @@ export default {
   align-items center
   justify-content space-between
   color #746ca8
+  padding 0 8px
   font-size px2rem(30px)
-  &-icon
+  &icon
     flex 0 0 px2rem(88px)
     margin-top px2rem(6px)
     cursor pointer

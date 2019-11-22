@@ -8,10 +8,10 @@
         <i class="icon">&#xe63c;</i>
       </router-link>
     </v-header>
+    <v-sidebar></v-sidebar>
     <!-- tab -->
     <v-tab></v-tab>
     <router-view/>
-    <v-sidebar></v-sidebar>
   </div>
 </template>
 
