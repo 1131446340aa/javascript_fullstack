@@ -1,25 +1,44 @@
 <template>
-  <v-scroll class="suggest">
+  <v-scroll
+    class="suggest"
+    ref="suggest"
+    :pullup="pullup"
+    :data="result"
+    :beforeScroll="beforeScroll"
+    @scrollToEnd="searchMore"
+    @beforeScroll="listScroll"
+  >
     <ul class="suggest-list">
-      <li class="suggest-item">
+      <li
+        class="suggest-item"
+        v-for="(item, index) in result"
+        :key="index"
+        @click="selectItem(item)"
+      >
         <div class="icon">
           <i class="icon">&#xe641;</i>
         </div>
         <div class="name">
-          <p class="text">aaaa</p>
+          <p class="text" v-html="getDisplayName(item)"></p>
         </div>
       </li>
+      <loading class="loading-wraper" v-show="!hasMore||!result.length"></loading>
     </ul>
+    <div class="no-result-wrapper" v-show="!result.length">
+      <span>暂无搜素结果</span>
+    </div>
   </v-scroll>
 </template>
 
 <script>
 import scroll from "@/components/scroll";
+import load from "@/components/load";
 import api from "@/api";
 const limit = 20;
 export default {
   components: {
-    "v-scroll": scroll
+    "v-scroll": scroll,
+    loading: load
   },
   methods: {
     fetchResult() {
@@ -30,7 +49,33 @@ export default {
       };
       api.MusicSearch(parmas).then(res => {
         console.log(res);
+        if (res.code === 200) {
+          this.result = [...res.result.songs, ...this.result];
+          this._checkMore(res.result);
+        }
       });
+    },
+    search() {
+      (this.page = 1), (this.hasMore = true), this.$refs.suggest.scrollTo(0, 0);
+      (this.result = []), this.fetchResult();
+    },
+    _checkMore(data) {
+      if (data.songs.length < 12 || (this.page - 1) * limit >= data.songs) {
+        this.hasMore = false;
+      }
+    },
+    getDisplayName(item) {
+      return `${item.name}-${item.artists[0]}&& ${item.artists[0].name}`;
+    },
+    searchMore() {
+      this.page++;
+      this.fetchResult();
+    },
+    listScroll() {
+      this.$emit("listScroll");
+    },
+    selectItem(item) {
+      this.$emit("select", item);
     }
   },
   name: "suggest",
@@ -42,8 +87,11 @@ export default {
   },
   data() {
     return {
-      resulte: [],
-      page: 1
+      result: [],
+      page: 1,
+      hasMore: true,
+      pullup: true,
+      beforeScroll: true
     };
   },
   watch: {
@@ -51,9 +99,7 @@ export default {
       if (!newQuery) {
         return;
       }
-      console.log(1);
-      
-      this.fetchResult();
+      this.search();
     }
   }
 };
@@ -88,6 +134,7 @@ export default {
       height px2rem(80px)
   .no-result-wrapper
     position absolute
+    text-align center
     width 100%
     top 50%
     transform translateY(-50%)

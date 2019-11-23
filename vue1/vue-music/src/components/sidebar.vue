@@ -8,7 +8,7 @@
             alt
           />
         </div>
-        <div class="name">蜗牛</div>
+        <div class="name">黄力豪是小天才啊</div>
       </div>
       <div class="menu">
         <ul>

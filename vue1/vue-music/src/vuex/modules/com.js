@@ -1,7 +1,7 @@
 import * as types from '../types'
 const state = {
   showSidebar: false,
-  searchHistory: ['123', '456']
+  searchHistory: ['许嵩', '封茗囧菌']
 }
 //方法
 const mutations = {
@@ -11,12 +11,12 @@ const mutations = {
   [types.COM_SAVE_SEARCH_HISTORY](state, status) {
     state.searchHistory = status
   },
-  [types.COM_DELETE_SEARCH_HISTORY](state,index){
-    state.searchHistory.splice(index,1)
+  [types.COM_DELETE_SEARCH_HISTORY](state, index) {
+    state.searchHistory.splice(index, 1)
   },
-[types.COM_CLEER_SEARCH_HISTORY](state){
-  state.searchHistory=[]
-}
+  [types.COM_CLEER_SEARCH_HISTORY](state) {
+    state.searchHistory = []
+  }
 }
 //异步
 const actions = {
@@ -28,10 +28,10 @@ const actions = {
     searchHistory = [...new Set(searchHistory)]
     commit(types.COM_SAVE_SEARCH_HISTORY, searchHistory)
   },
-  deleteSearchHistory({ commit }, index){
-    commit(types.COM_DELETE_SEARCH_HISTORY,index)
+  deleteSearchHistory({ commit }, index) {
+    commit(types.COM_DELETE_SEARCH_HISTORY, index)
   },
-  Alldelete({ commit }){
+  Alldelete({ commit }) {
     commit(types.COM_CLEER_SEARCH_HISTORY)
   }
 }

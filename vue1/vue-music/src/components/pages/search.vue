@@ -4,7 +4,7 @@
       <v-search-box ref="searchBox" @query="onQueryChange"></v-search-box>
     </div>
     <!-- 热门搜索和搜索历史 -->
-    <div class="shortcut-wrapper">
+    <div class="shortcut-wrapper" v-show="!query">
       <v-scroll class="shortcut" :data="shortcut" ref="shortcut">
         <div>
           <!-- 热门搜索 -->
@@ -34,8 +34,8 @@
         </div>
       </v-scroll>
     </div>
-    <div class="search-result">
-      <v-suggest :query="query"></v-suggest>
+    <div class="search-result" v-show="query">
+      <v-suggest :query="query" @select="saveSearch" @listScroll="blurInput" ref="suggest"></v-suggest>
     </div>
   </div>
 </template>
@@ -47,7 +47,7 @@ import api from "@/api/index.js";
 import searchList from "@/components/searchList";
 import { mapGetters } from "vuex";
 import { searchMixin } from "@/common/mixin";
-import suggest from "@/components/suggest"
+import suggest from "@/components/suggest";
 export default {
   data() {
     return {
@@ -59,7 +59,7 @@ export default {
     "v-search-box": searchBox,
     "v-scroll": scroll,
     "v-search-List": searchList,
-    'v-suggest':suggest
+    "v-suggest": suggest
   },
   methods: {
     _getHotKey() {
@@ -129,5 +129,4 @@ export default {
     width 100%
     top px2rem(360px)
     bottom 0
-
 </style>

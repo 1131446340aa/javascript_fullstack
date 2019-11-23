@@ -74,7 +74,7 @@ export default {
   },
   mounted() {
     setTimeout(() => {
-      this._initScroll;
+      this._initScroll();
     }, 20);
   },
   methods: {
@@ -93,12 +93,54 @@ export default {
           this.$emit("scroll", pos);
         });
       }
+      //上拉加载更多
+      if (this.pullup) {
+        this.scroll.on("scrollEnd", () => {
+          if (this.scroll.y <= this.scroll.maxScrollY + 50) {
+            this.$emit("scrollToEnd");
+          }
+        });
+      }
+      //下拉更新
+      if (this.pulldown) {
+        this.scroll.on("touchend", pos => {
+          if (pos.y > 50) {
+            this.$emit("pulldown");
+          }
+        });
+      }
+      //是否派发列表滚动开始事件
+      if (this.beforeScroll) {
+        this.scroll.on("beforeScrollStart", () => {
+          this.$emit("beforeScroll");
+        });
+      }
     },
     refresh() {
       this.scroll && this.scroll.refresh();
       // if (this.scroll) {
       //   this.scroll.refresh()
       // }
+    },
+    disable() {
+      // 代理better-scroll的disable方法
+      this.scroll && this.scroll.disable();
+    },
+    enable() {
+      // 代理better-scroll的enable方法
+      this.scroll && this.scroll.enable();
+    },
+    refresh() {
+      // 代理better-scroll的refresh方法
+      this.scroll && this.scroll.refresh();
+    },
+    scrollTo() {
+      // 代理better-scroll的scrollTo方法
+      this.scroll && this.scroll.scrollTo.apply(this.scroll, arguments);
+    },
+    scrollToElement() {
+      // 代理better-scroll的scrollToElement方法
+      this.scroll && this.scroll.scrollToElement.apply(this.scroll, arguments);
     }
   },
   watch: {

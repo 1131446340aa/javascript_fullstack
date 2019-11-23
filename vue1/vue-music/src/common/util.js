@@ -1,4 +1,4 @@
-export function debounce (func, delay) {
+export function debounce(func, delay) {
   let timer
   return function (...args) {
     if (timer) {
@@ -8,4 +8,9 @@ export function debounce (func, delay) {
       func.apply(this, args)
     }, delay)
   }
+}
+export function findIndex(list, song) {
+  return list.findIndex(() => {
+    return item.id === song.id
+  })
 }
