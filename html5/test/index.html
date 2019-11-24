@@ -1,3 +1,48 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+<script>
+/**
+ * @param {string} s
+ * @return {number}
+ */
+ var lengthOfLongestSubstring = function (s) {
+    let arr = [...s]
+    let obj = {}
+    let x = 0
+    if(arr.length===1){
+        x=1
+    }
+    for (let j = 0; j < arr.length; j++) {
+        for (let i = j; i < arr.length; i++) {
+            if (!obj[arr[i]]) {
+                obj[[arr[i]]] = arr[i]
+            }
+            else {
+                if (x < Object.keys(obj).length) {
+                    x = Object.keys(obj).length
+                }
+                obj = {}
+                break
+            }
+        }
+
+    }
+    return x
+};
+console.log(lengthOfLongestSubstring('ac'));
+
+</script>
+
+</body>
+</html> -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,65 +51,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  <style>
-    * {
-      padding: 0;
-      margin: 0;
-    }
-
-    .aaa {
-    vertical-align: middle;
-    overflow: hidden;
-    }
-
-    .test {
-      display: inline-block;
-      width: 300px;
-      position: absolute;
-      height: 200px;
-      left: 50%;
-      top: 50%;
-      background-color: pink;
-      transform: translate(-50%, -50%);
-      line-height: 200px;
-      vertical-align: middle;
-
-
-    }
-
-    .test:before {
-      content: 'aaa';
-      display: inline-block;
-      width: 100px;
-      height: 100px;
-      background-color: red;
-      z-index: 1;
-      text-align: center;
-      line-height: 100px;
-      vertical-align: middle;
-
-    }
-
-    .test:after {
-      content: 'aaaaa';
-      display: inline-block;
-      width: 100px;
-      height: 100px;
-      background-color: red;
-      z-index: 1;
-      text-align: center;
-      line-height: 100px;
-      vertical-align: middle;
-
-    }
-  </style>
 </head>
 
 <body>
+  <script>
+    /**
+ * @param {string} s
+ * @return {string}
+ */
+   /**
+ * @param {string} s
+ * @return {string}
+ */
+var longestPalindrome = function(s) {
+    let child=""
+    let len=0
+if(s.length<2){
+    child=s
+}
+else{
+        for(let i=0;i<s.length;i++){
+        for(let j=s.length-1;j>i;j--){
+            if(s[i]===s[j]){
+                let child1=s.slice(i,Math.floor((i+j)/2+1)).split("")
+                let child2=s.slice((i+j)-Math.floor((i+j)/2),j+1).split("")
+                if(child1.reverse().join("")===child2.join("")){
+                    if(j-i+1>len){
+                        len=j-i+1
+                        child=s.slice(i,j+1)
+                    }
 
-  <div class="aaa">
-    <div class="test">2qeqwreqw</div>
-  </div>
+                }
+             
+            }
+        }
+    }
+    if(len===0){
+        child=s[0]
+    }
+}
+    return child
+};
+  </script>
 </body>
 
 </html>

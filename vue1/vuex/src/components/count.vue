@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <div class="count">
-        {{$store.state.count}}
+       <!-- <div> {{count}}</div> -->
+        <div>{{count1}}</div>
     </div>
     <!-- <button @click="$store.commit('add')">+</button> -->
      <button @click="add">+</button>
@@ -21,7 +22,8 @@ export default {
   // }
   computed: {
     ...mapState(['count']),
-    ...mapGetters(['count'])
+    ...mapGetters(['count1'])
+
   },
   methods: {
     ...mapMutations(['add']),

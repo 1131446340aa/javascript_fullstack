@@ -23,6 +23,7 @@
         </div>
       </li>
       <loading class="loading-wraper" v-show="!hasMore||!result.length"></loading>
+      <!-- //不明白加载完了所搜索的所有歌曲或者没有搜到要给一张菊花图？菊花图不应该是等待加载的意思吗？ -->
     </ul>
     <div class="no-result-wrapper" v-show="!result.length">
       <span>暂无搜素结果</span>
@@ -50,14 +51,17 @@ export default {
       api.MusicSearch(parmas).then(res => {
         console.log(res);
         if (res.code === 200) {
-          this.result = [...res.result.songs, ...this.result];
+          this.result = [...this.result, ...res.result.songs];
           this._checkMore(res.result);
         }
       });
     },
     search() {
-      (this.page = 1), (this.hasMore = true), this.$refs.suggest.scrollTo(0, 0);
-      (this.result = []), this.fetchResult();
+      this.page = 1;
+      this.hasMore = true;
+      this.$refs.suggest.scrollTo(0, 0);
+      this.result = [];
+      this.fetchResult();
     },
     _checkMore(data) {
       if (data.songs.length < 12 || (this.page - 1) * limit >= data.songs) {
@@ -65,13 +69,14 @@ export default {
       }
     },
     getDisplayName(item) {
-      return `${item.name}-${item.artists[0]}&& ${item.artists[0].name}`;
+      return `${item.name}-${item.artists[0].name}`;
     },
     searchMore() {
       this.page++;
       this.fetchResult();
     },
     listScroll() {
+      //干什么的？输入框失去焦点之后好像什么都没干？
       this.$emit("listScroll");
     },
     selectItem(item) {

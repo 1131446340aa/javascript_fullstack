@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import store from './vuex/store'
 Vue.config.productionTip = false
-// Vue.prototype.$store = Store
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -10,8 +10,9 @@ const mutations = {
   }
 }
 const getters = {
-  count: (state) => {
-    state.count += 100
+  count1: (state) => {
+    let n = state.count + 13
+    return n
   }
 }
 const actions = {

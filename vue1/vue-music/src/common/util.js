@@ -10,7 +10,7 @@ export function debounce(func, delay) {
   }
 }
 export function findIndex(list, song) {
-  return list.findIndex(() => {
+  return list.findIndex((item) => {
     return item.id === song.id
   })
 }

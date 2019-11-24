@@ -6,6 +6,7 @@
     <!-- 热门搜索和搜索历史 -->
     <div class="shortcut-wrapper" v-show="!query">
       <v-scroll class="shortcut" :data="shortcut" ref="shortcut">
+        <!-- //:data="shortcut"干什么的？ -->
         <div>
           <!-- 热门搜索 -->
           <div class="hot-key">

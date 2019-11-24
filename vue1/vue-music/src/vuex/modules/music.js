@@ -29,6 +29,7 @@ const actions = {
     // 如果已经包含这首歌
     if (fpIndex > -1) {
       currentIndex = fpIndex
+      // playlist=new Set([song, ...playlist])
     } else {
       playlist = [song, ...playlist]
       currentIndex = 0

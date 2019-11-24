@@ -146,10 +146,9 @@
         // console.log(evt)
         var angle = clamp((centerPoint - evt.pageX + pageSize) / pageSize * -90, -180, 0), i, j;
         for (i = 0; i < prefixes.length; i++) {
-          page.style[prefixes[i] + 'Transform'] = 'rotateY('+ angle +'deg)';
+          page.style[prefixes[i] + 'Transform'] = 'rotateY('+ angle +'deg)';    
         }
       }
-
     })(window, document)
   </script>
 
