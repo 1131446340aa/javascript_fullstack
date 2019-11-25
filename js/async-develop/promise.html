@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .light {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #000;
+            background-color: black;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="light">
+
+    </div>
+</body>
+<script>
+    let step1 = () => new Promise((resolve, reject) => {
+        setTimeout(() => {
+            document.querySelector('.light').style.backgroundColor = 'red'
+            resolve()
+        }, 1000)
+    })
+    let step2 = () => new Promise((resolve, reject) => {
+        setTimeout(() => {
+            document.querySelector('.light').style.backgroundColor = 'green'
+            console.log(3);
+
+            resolve()
+        }, 2000)
+    })
+    // step1().then(res => {
+    //     //then里面可以有返回值
+    //     return step2()
+    // }).then(() => {
+    //     console.log(123);
+
+    // })
+    //promise风格
+        async function run() {
+            await step1()
+            await step2()
+        }
+        run()
+</script>
+
+</html>
