@@ -1,0 +1,28 @@
+.wrapper{
+    margin-left: 12rpx;
+    margin-right: 12rpx;
+}
+.navBar{
+    display: flex;
+    margin-bottom: 16rpx;
+}
+.navBar-item{
+    flex: 1;
+    text-align: center;
+    height: 70rpx;
+    line-height: 70rpx;
+    font-size: 32rpx;
+    color: #D8D8D8;
+}
+.banner-item image{
+    width: 100%;  
+    border-radius: 10rpx; 
+}
+.swiper{
+    height: 100vh;
+}
+.banner-item{
+    overflow: hidden;
+    border-radius: 10rpx;
+    width: 100%;
+}

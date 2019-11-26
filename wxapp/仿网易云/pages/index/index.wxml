@@ -1,0 +1,22 @@
+<view class="wrapper">
+    <view class="navBar">
+        <view class="navBar-item">榜单</view>
+        <view class="navBar-item">首页</view>
+        <view class="navBar-item">搜索</view>
+        <view class="navBar-item">电台</view>
+    </view>
+    <swiper class="swiper" current="{{current}}" bindchange="currentchange" circular="true">
+        <swiper-item class="" item-id="">榜单</swiper-item>
+        <swiper-item class="" item-id="">
+            <swiper class="banner" circular="true" autoplay="{{true}}" indicator-dots="{{true}}" indicator-active-color="rgb(255,0,0)">
+                <block wx:for="{{banner}}" wx:key="index">
+                    <swiper-item class="banner-item" item-id="">
+                        <image class="" src="{{item.imageUrl}}" />
+                    </swiper-item>
+                </block>
+            </swiper>
+        </swiper-item>
+        <swiper-item class="" item-id="">搜索</swiper-item>
+        <swiper-item class="" item-id="">电台</swiper-item>
+    </swiper>
+</view>
