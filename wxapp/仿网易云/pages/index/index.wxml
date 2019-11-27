@@ -1,22 +1,161 @@
 <view class="wrapper">
     <view class="navBar">
-        <view class="navBar-item">榜单</view>
-        <view class="navBar-item">首页</view>
-        <view class="navBar-item">搜索</view>
-        <view class="navBar-item">电台</view>
+        <view class="icon1">
+            <image src="./images/more.png" />
+        </view>
+        <view class="navBar-item {{current===0 ? 'color-black' : ' ' }}" data-id="0" bindtap="navBarClick">
+            我的
+        </view>
+        <view class="navBar-item {{current===1 ? 'color-black' : ' ' }}" bindtap="navBarClick" data-id="1">
+            首页
+        </view>
+        <view class="navBar-item {{current===2 ? 'color-black' : ' ' }}" bindtap="navBarClick" data-id="2">
+            歌手
+        </view>
+        <view class="navBar-item {{current===3 ? 'color-black' : ' ' }}" bindtap="navBarClick" data-id="3">
+            视频
+        </view>
+        <view class="icon2" bindtap="search">
+            <image src="./images/search.png" />
+        </view>
     </view>
-    <swiper class="swiper" current="{{current}}" bindchange="currentchange" circular="true">
-        <swiper-item class="" item-id="">榜单</swiper-item>
-        <swiper-item class="" item-id="">
-            <swiper class="banner" circular="true" autoplay="{{true}}" indicator-dots="{{true}}" indicator-active-color="rgb(255,0,0)">
-                <block wx:for="{{banner}}" wx:key="index">
-                    <swiper-item class="banner-item" item-id="">
-                        <image class="" src="{{item.imageUrl}}" />
-                    </swiper-item>
-                </block>
-            </swiper>
+    <swiper class="swiper" current="{{current}}" bindchange="currentchange" circular="true" duration="200" autoplay="{{false}}">
+        <swiper-item class="">
+            <scroll-view class="scroll" scroll-x="false" scroll-y="true">
+                <view class="mywrapper">
+                    <view class="mywrapper-item">
+                        <view class="icon">
+                            <image class="" src="./images/zuijinbofang-xuanting.png" />
+                        </view>
+                        <view class="text">最近播放</view>
+                    </view>
+                    <view class="mywrapper-item">
+                        <view class="icon">
+                            <image class="" src="./images/wodediantai.png" />
+                        </view>
+                        <view class="text">我的电台</view>
+                    </view>
+                    <view class="mywrapper-item">
+                        <view class="icon">
+                            <image class="" src="./images/wodeshoucang.png" />
+                        </view>
+                        <view class="text">我的收藏</view>
+                    </view>
+                    <view class="recommend-songs">
+                        <text class="title">推荐歌单</text>
+                        <view class="recommend-songs-item" wx:for="{{recommendSongs}}" wx:key="index">
+                            <view class="image-wrap">
+                                <image class="" src="{{item.picUrl}}"></image>
+                            </view>
+                            <text class="text">{{item.name}}</text>
+                        </view>
+                    </view>
+                </view>
+            </scroll-view>
         </swiper-item>
-        <swiper-item class="" item-id="">搜索</swiper-item>
-        <swiper-item class="" item-id="">电台</swiper-item>
+        <swiper-item class="">
+            <scroll-view class="scroll" scroll-x="false" scroll-y="true">
+                <swiper class="banner" circular="true" autoplay="{{true}}" indicator-dots="{{true}}" indicator-active-color="rgb(255,0,0)">
+                    <block wx:for="{{banner}}" wx:key="index">
+                        <swiper-item class="banner-item" item-id="">
+                            <image class="" src="{{item.imageUrl}}" />
+                        </swiper-item>
+                    </block>
+                </swiper>
+                <div class="middle-bar">
+                    <div class="middle-bar-item">
+                        <view class="icon">
+                            <image src="./images/Recommend.png" />
+                        </view>
+                        <text>每日推荐</text>
+                    </div>
+                    <div class="middle-bar-item">
+                        <div class="middle-bar-item">
+                            <view class="icon">
+                                <image src="./images/sing.png" />
+                            </view>
+                            <text>歌单</text>
+                        </div>
+                    </div>
+                    <div class="middle-bar-item">
+                        <div class="middle-bar-item">
+                            <view class="icon">
+                                <image src="./images/Ranking.png" />
+                            </view>
+                            <text>排行榜</text>
+                        </div>
+                    </div>
+                    <div class="middle-bar-item">
+                        <div class="middle-bar-item">
+                            <view class="icon">
+                                <image src="./images/Live-broadcast.png" />
+                            </view>
+                            <text>直播</text>
+                        </div>
+                    </div>
+                    <div class="middle-bar-item">
+                        <div class="middle-bar-item">
+                            <view class="icon">
+                                <image src="./images/radio-station.png" />
+                            </view>
+                            <text>电台</text>
+                        </div>
+                    </div>
+                </div>
+                <view class="line"></view>
+                <view class="recommend-songs">
+                    <text class="title">推荐歌单</text>
+                    <view class="recommend-songs-item" wx:for="{{recommendSongs}}" wx:key="index">
+                        <view class="image-wrap">
+                            <image class="" src="{{item.picUrl}}"></image>
+                        </view>
+                        <text class="text">{{item.name}}</text>
+                    </view>
+                </view>
+                <view class="new-songs">
+                    <text class="title">新碟</text>
+                    <view class="new-songs-item" wx:for="{{album}}" wx:key="index">
+                        <view class="image-wrap">
+                            <image class="" src="{{item.picUrl}}"></image>
+                        </view>
+                        <text class="text">{{item.name}}</text>
+                    </view>
+                </view>
+            </scroll-view>
+        </swiper-item>
+        <swiper-item class="">
+            <scroll-view class="scroll" scroll-x="false" scroll-y="true">
+                <div class="artrist-wrapper">
+                    <view class="new-frist">
+                        <image class="" src="./images/geshou.png" />
+                        <view class="text">热门歌手</view>
+                    </view>
+                    <view class="artrist-wrapper-item" wx:for="{{artists}}" wx:key="index">
+                        <view class="artrist-wrapper-img">
+                            <image class="" src="{{item.picUrl}}" />
+                        </view>
+                        <view class="name">{{item.name}}</view>
+                    </view>
+                </div>
+            </scroll-view>
+        </swiper-item>
+        <swiper-item class="">
+            <scroll-view class="scroll" scroll-x="false" scroll-y="true" bindscrolltolower="bindscrolltolower">
+                <view class="video-wrapper">
+                    <view class="video-wrapper-title">
+                        <view class="text">精选mv</view>
+                        <view class="icon">
+                            <image class="" src="./images/refresh.png" />
+                        </view>
+                    </view>
+                    <view class="video-item" wx:for="{{video}}" wx:key="index">
+                        <view class="video-mv">
+                            <video src="{{item.data.url}}" enable-progress-gesture="{{true}}" poster="{{videoDetail[index].cover}}" data-id="{{index}}" autoplay="{{false}}" ></video>
+                        </view>
+                        <view class="video-name">{{videoDetail[index].name}}</view>
+                    </view>
+                </view>
+            </scroll-view>
+        </swiper-item>
     </swiper>
 </view>
