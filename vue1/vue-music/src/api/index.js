@@ -49,7 +49,7 @@ export default {
     return fetchGet('/top/playlist', parmas)
   },
   HotSearchKey () {
-    return fetchGet('/search/hot')
+    return fetchGet('/search/hot/detail')
   },
   //歌曲搜索
   MusicSearch(params){

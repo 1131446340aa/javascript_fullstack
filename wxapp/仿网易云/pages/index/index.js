@@ -21,6 +21,7 @@ Page({
       current: e.detail.current
     })
   },
+ 
   api(url, func) {
     console.log(1);
 
