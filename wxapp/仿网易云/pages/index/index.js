@@ -5,29 +5,28 @@ Page({
    * 页面的初始数据
    */
   data: {
-    current: 2,
+    current: 1,
     banner: [],
     recommendSongs: [],
     album: [],
     videoDetail: [],
     offset: -1,
     video: [],
-    artists: []
+    artists: [],
+    offset1: 0
   },
 
   currentchange(e) {
-    //console.log(e.detail.current)
     this.setData({
       current: e.detail.current
     })
   },
- 
-  api(url, func) {
-    console.log(1);
+  api(url, func, param) {
 
     let host = 'http://www.china-4s.com/'
     wx.request({
       url: host + url,
+      data: param,
       success: func
     })
   },
@@ -35,45 +34,19 @@ Page({
     this.setData(
       { current: e.currentTarget.dataset.id }
     )
-
-
   },
   mv() {
-
-
     let that = this
     that.setData({
-      offset: that.data.offset+1
+      offset: that.data.offset + 1
     })
-    console.log(that.data.offset);
     wx.request({
-
-      url: "http://china-4s.com/top/mv/all?limit=10" + "&offset=" + that.data.offset * 10,
+      url: "http://china-4s.com/top/mv/all?limit=6" + "&offset=" + that.data.offset * 6,
       success: res => {
-        // console.log(that.data.offset);
-
-        // console.log(res.data.data);
         let middle = res.data.data
         that.setData({
           videoDetail: [...that.data.videoDetail, ...middle]
         })
-        let self = that
-        // console.log(self.data.videoDetail);
-
-        for (let i = 0; i < middle.length; i++) {
-          // console.log(self.data.videoDetail[i].name);
-          // console.log(self.data.videoDetail[i].id);
-          wx.request({
-            url: 'http://china-4s.com/mv/url' + "?id=" + middle[i].id,
-            success: res => {
-              self.setData({
-                video: [...self.data.video, res.data]
-              })
-              // console.log(self.data.videoDetail[i].id);
-              
-            }
-          })
-        }
       }
     })
   },
@@ -81,16 +54,28 @@ Page({
     this.mv()
   },
   play(e) {
-
-    // console.log(e.currentTarget.dataset.id);
     this.setData({ currentplay: e.currentTarget.dataset.id })
-
   },
-  search(e){
-    console.log(e);
-    
+  search() {
     wx.navigateTo({
       url: './search/search'
+    })
+  },
+  bindscrolltolower1() {
+    this.api('top/artists', (res) => {
+
+      this.setData({
+        artists: [...this.data.artists, ...res.data.artists],
+        offset1: this.data.offset1 + 10
+      })
+    }, {
+      offset: this.data.offset1,
+      limit: 10
+    })
+  },
+  mvClick(e) {
+    wx.navigateTo({
+      url: './movie/movie?id=' + e.currentTarget.dataset.id
     })
   },
   /**
@@ -99,30 +84,29 @@ Page({
   onLoad: function (options) {
     let that = this
     that.api('banner', res => {
-      // console.log(res.data);
       that.setData({
         banner: res.data.banners
       })
     })
     this.api('personalized', res => {
-      // console.log(res.data);
       that.setData({
         recommendSongs: res.data.result.sort(() => { return Math.random() - 0.5 }).slice(0, 6)
       })
     })
     this.api('album/newest', res => {
-      // console.log(res.data);
       that.setData({
         album: res.data.albums.sort(() => { return Math.random() - 0.5 }).slice(0, 3)
       })
     })
-    
     this.mv()
-    this.api('top/artists', res => {
-      console.log(res.data.artists);
-      that.setData({
-        artists:res.data.artists
+    this.api('top/artists', (res) => {
+      this.setData({
+        artists: res.data.artists,
+        offset1: this.data.offset1 + 10
       })
+    }, {
+      offset: this.data.offset1,
+      limit: 10
     })
   },
 

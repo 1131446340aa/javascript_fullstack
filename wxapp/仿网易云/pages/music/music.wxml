@@ -1,0 +1,76 @@
+<view class="music" >
+    <view class="title">
+        <audio src="{{singUrl}}" bindended="bindended" id="myAudio" loop="{{playRules%3===0}}" bindtimeupdate="bindtimeupdate"></audio>
+    </view>
+    <view class="title">
+        <view class="music-name">
+            {{playsongs[(current+playsongs.length)%playsongs.length].name}}
+        </view>
+        <view class="music-author">
+            {{playsongs[(current+playsongs.length)%playsongs.length].artists[0].name}}
+        </view>
+    </view>
+    <view class="cicrle">
+        <view class="big-circle"></view>
+        <view class="small-circle">
+            <image class="" src="./images/bg.png" />
+        </view>
+    </view >
+    <view class="progress">
+        <view class="start-time">{{CurrentTime}}</view>
+        <view class="progress-bar"  bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="touchend">
+            <view class="progress-bar-end">
+            
+            </view>
+            <view class="progress-bar-globle" style="left:{{progress}}%"> </view>
+            <view class="progress-bar-current" style="width:{{progress}}%">
+            </view>
+              <!-- <slider block-size="12" background-color="#65676D" selected-color="#e9e9e9" /> -->
+        </view>
+        <view class="end-time">{{endTime}}</view>
+    </view>
+    <view class="contral">
+        <view class="contral-left" catchtap="playRules">
+            <image class="" hidden="{{(playRules%3)!==1}}" src="./images/shunxubofang.png" />
+            <image class="" hidden="{{(playRules%3)!==2}}" src="./images/bofangye-caozuolan-suijibofang.png" />
+            <image class="" hidden="{{(playRules%3)!==0}}" src="./images/danquxunhuan.png" />
+        </view>
+        <view class="last-music" catchtap="last">
+            <image class="" src="./images/shangyishou.png" />
+        </view>
+        <view class="play-music" catchtap="isPlay">
+            <image class="" hidden="{{isPlay}}" src="./images/bofang.png" />
+            <image class="" hidden="{{!isPlay}}" src="./images/zanting.png" />
+        </view>
+        <view class="next-one" catchtap="bindended">
+            <image class="" src="./images/xiayishou.png" />
+        </view>
+        <view class="playlist" catchtap="playList">
+            <image class="" src="./images/more_active.png" />
+
+        </view>
+    </view>
+    
+</view>
+<view class="bg" hidden="{{!isShow}}" bindtap="HiddenList">
+      
+            <view class="wrapper">
+                <view class="scrollHeight">
+                    <scroll-view class="scrollHeight" scroll-x="false" scroll-y="true">
+                        <view class="height">
+                            <view class="song-title">播放列表</view>
+                            <view class="songList" wx:for="{{playsongs}}" wx:key="{{index}}">
+                                <view class="songList-item"  catchtap="playCurrentSong" data-id="{{index}}"  bindtap="HiddenList">
+                                    {{item.name}}-{{item.artists[0].name}}
+                                    
+                                </view>
+                            </view>
+                        
+                        </view>
+                    </scroll-view>
+                </view>
+                  
+            </view>
+        
+          
+</view>

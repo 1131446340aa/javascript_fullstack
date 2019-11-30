@@ -124,7 +124,7 @@
             </scroll-view>
         </swiper-item>
         <swiper-item class="">
-            <scroll-view class="scroll" scroll-x="false" scroll-y="true">
+            <scroll-view class="scroll" scroll-x="false" scroll-y="true" bindscrolltolower="bindscrolltolower1">
                 <div class="artrist-wrapper">
                     <view class="new-frist">
                         <image class="" src="./images/geshou.png" />
@@ -148,9 +148,12 @@
                             <image class="" src="./images/refresh.png" />
                         </view>
                     </view>
-                    <view class="video-item" wx:for="{{video}}" wx:key="index">
+                    <view class="video-item" wx:for="{{videoDetail}}" wx:key="index" data-id="{{item.id}}" bindtap="mvClick">
                         <view class="video-mv">
-                            <video src="{{item.data.url}}" enable-progress-gesture="{{true}}" poster="{{videoDetail[index].cover}}" data-id="{{index}}" autoplay="{{false}}" ></video>
+                            <image class="" src="{{item.cover}}" />
+                            <view class="play-icon">
+                                <van-icon name="play-circle-o" />
+                            </view>
                         </view>
                         <view class="video-name">{{videoDetail[index].name}}</view>
                     </view>

@@ -1,16 +1,16 @@
 <view class="search">
     <view class="input">
-        <van-search value="" shape="round" show-action="true" placeholder="请输入搜索关键词" bind:change="debounce" autofocus="autofocus" />
+        <van-search value="{{query}}" shape="round" show-action="true" placeholder="请输入搜索关键词" bind:change="debounce" autofocus="autofocus" />
     </view>
     <div class="search-wrapper" wx:if="{{query}}">
         <view class="title">搜索 "{{query}}"</view>
-          <view class="search-item" >
+        <view class="search-item" bindtap="itemClick" data-query="{{query}}">
             <view class="left-icon">
                 <van-icon name="search" />
             </view>
             <view class="item-name">{{query}}</view>
         </view>
-        <view class="search-item" wx:for="{{songItem}}" wx:key="index">
+        <view class="search-item" wx:for="{{songItem}}" wx:key="index" bindtap="itemClick" data-query="{{item.name}}-{{item.artists[0].name}}">
             <view class="left-icon">
                 <van-icon name="search" />
             </view>
@@ -18,16 +18,20 @@
         </view>
     </div>
     <view class="detail" wx:if="{{!query}}">
+        <view class="hotsearch">
+            <view class="text">热搜榜</view>
+            <view class="hotsearch-item" wx:for="{{hotkeys}}" wx:key="index" bindtap="hotsearch" data-query="{{item.first}}">
+                {{item.first}}
+            </view>
+        </view>
         <view class="history">
             <view class="history-title">
                 <view class="text">历史记录</view>
                 <view class="delete"></view>
             </view>
-            <view class="history-item"></view>
-        </view>
-        <view class="hotsearch">
-            <view class="text">热搜榜</view>
-            <view class="hotsearch-item"></view>
+            <view class="history-item" wx:for="{{histiryItem}}" wx:key="index" bindtap="historyItem" data-query="{{item}}">
+                {{item}}
+            </view>
         </view>
     </view>
 </view>

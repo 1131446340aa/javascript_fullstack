@@ -28,3 +28,23 @@
 .search-wrapper {
     border-color: rgb(250, 250, 250);
 }
+.history-title .text,.hotsearch .text{
+    margin: 20rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    font-weight: bold;
+}
+.hotsearch-item,.history-item{
+    display: inline-block;
+    background-color: #fff;
+    font-size: 24rpx;
+    border-radius: 40rpx;
+    margin: 14rpx 20rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    border: 1px solid #6e6e6e;
+    padding: 10rpx;
+}
+.hotsearch-item :nth-child(5){
+    color: #58DDB4;
+}
