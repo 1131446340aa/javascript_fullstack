@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- 内容 -> url -->
+  <div id="app">
+    <el-button type="primary" @click="handleUpload">上传图片</el-button>
+    <!-- 本地预览 img -->
+    <div 
+    v-loading="loading"
+    element-loading-text="拼命上传中"
+    element-loading-spinner="el-icon-loading"
+    element-loading-background="rgba(0, 0, 0, 0.8)"
+    >
+      <img :src="imgSrc" alt="" width="500">
+    </div>
+    <!-- <form action="/upload" method="post" name="upload" enctype="multipart/form-data"> -->
+    <input type="file" name="avatar" id="avatar" class="hidden" @change="preview">
+    <input type="submit" value="提交" @click="submit" />
+    <!-- </form> -->
+  </div>
+  
+  <script>
+    // const uploadFrom = document.forms['upload']
+    // uploadFrom.addEventListener('submit', (event) => {
+    //   event.preventDefault()
+    //   const formData = new FormData()
+    //   const avatarFile = uploadFrom['avatar'].files[0]
+    //   if (!avatarFile) alert('请选择图片')
+    //   formData.append('avatar', avatarFile)
+    // })
+  </script>
+  <script>
+    new Vue({
+      el: '#app',
+      data () {
+        return {
+          imgSrc: '',
+          loading: false
+        }
+      },
+      methods: {
+        handleUpload() {
+          document.querySelector('.hidden').click()
+        },
+        preview(event) {
+          const file = event.target.files[0]
+          const fileReader = new FileReader()
+          fileReader.onload = () => {
+            this.imgSrc = fileReader.result
+          }
+          // base64
+          fileReader.readAsDataURL(file)
+        },
+        submit () {
+          // 提交
+          this.loading = true
+          const formData = new FormData()
+          const avatarFile = document.querySelector('.hidden').files[0]
+          formData.append('avatar', avatarFile)
+          fetch('http://localhost:3000/upload', {
+            method: 'POST',
+            body: formData
+          })
+          .then(res => res.json())
+          .then(data => {
+            console.log('upload', data)
+            this.loading = false
+          })
+        }
+      }
+    })
+  </script>
+</body>
+</html>
