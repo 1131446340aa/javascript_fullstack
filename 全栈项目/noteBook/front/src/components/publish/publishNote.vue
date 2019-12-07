@@ -33,7 +33,7 @@
           @cancel="cancel"
         />
       </div>
-      <div class="publish-btn">发布笔记</div>
+      <div class="publish-btn" @click="publish">发布笔记</div>
     </div>
   </div>
 </template>
@@ -103,14 +103,42 @@ export default {
     onEditorBlur() {},
     onEditorFocus() {},
     onEditorChange() {},
-    onRead() {},
-    onSelect(item) {
-        this.selectCon=item.subname
-        this.show=false
+    onRead(file) {
+      console.log(file);
+      this.preImg = file.content;
     },
-    cancel(){},
-    selectType(){
-        this.show=true
+    onSelect(item) {
+      this.selectCon = item.subname;
+      this.show = false;
+    },
+    cancel() {},
+    selectType() {
+      this.show = true;
+    },
+    publish() {
+      
+      let note_content = this.content;
+      let head_img = this.preImg;
+      let title = this.value;
+      let note_type = this.selectCon;
+      let userId = JSON.parse(sessionStorage.getItem("userInfo")).id;
+      let nickname = JSON.parse(sessionStorage.getItem("userInfo")).nickname;
+console.log(userId);
+      this.$http({
+        url: "http://localhost:3000/users/insertNote",
+        method: "post",
+        data: {
+          note_content: note_content,
+          head_img: head_img,
+          title: title,
+          note_type: note_type,
+          userId: userId,
+          nickname: nickname
+        }
+      }).then(res => {
+        console.log(res);
+        
+      });
     }
   }
 };

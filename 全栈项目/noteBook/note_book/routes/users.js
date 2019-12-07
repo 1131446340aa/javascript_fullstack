@@ -1,5 +1,6 @@
 const router = require('koa-router')()
 const userServies = require('../controllers/mySqlConfig.js')
+const utils = require('../controllers/utils.js')
 router.prefix('/users') // 路由前缀
 
 router.get('/', function (ctx, next) {
@@ -148,32 +149,62 @@ router.post('/userRegister', async (ctx, next) => {
   })
 })
 //根据id查找笔记详情的接口
-router.post('/findNoteDetailByid',async(ctx,next)=>{
-  let id=ctx.request.body.id
+router.post('/findNoteDetailByid', async (ctx, next) => {
+  let id = ctx.request.body.id
   await userServies.findNoteDetailByid(id).then(
-    async(res)=>{
-      let r=''
-      if(res.length){
-        r='ok'
-        ctx.body={
-          code:'200',
-          data:res[0],
-          mess:"查找成功"
+    async (res) => {
+      let r = ''
+      if (res.length) {
+        r = 'ok'
+        ctx.body = {
+          code: '200',
+          data: res[0],
+          mess: "查找成功"
         }
       }
-      else{
-        r='error'
-        ctx.body={
-          code:'404',
-          data:r,
-          mess:"查找失败"
+      else {
+        r = 'error'
+        ctx.body = {
+          code: '404',
+          data: r,
+          mess: "查找失败"
         }
       }
     }
-  ).catch(error=>{
-    ctx.body={
-      code:'80000',
-      data:error
+  ).catch(error => {
+    ctx.body = {
+      code: '80000',
+      data: error
+    }
+  })
+})
+//发表笔记
+router.post('/insertNote', async (ctx, next) => {
+  let c_time = utils.getNowFormatData()
+  let m_time = utils.getNowFormatData()
+  let note_content = ctx.request.body.note_content
+  let head_img = ctx.request.body.head_img
+  let title = ctx.request.body.title
+  let note_type = ctx.request.body.note_type
+  let userId = ctx.request.body.userId
+  let nickname = ctx.request.body.nickname
+  await userServies.publishNotes([c_time, m_time, note_content, head_img,title, note_type, userId, nickname]).then(res => {
+    let r = ''
+    if (res.affectedRows!==0) {
+      r = 'ok'
+      ctx.body = {
+        code: '200',
+        data: r,
+        mess: '发表成功'
+      }
+    }
+    else {
+      r = 'failure'
+      ctx.body = {
+        code: '500',
+        data: r,
+        mess: '发表失败'
+      }
     }
   })
 })

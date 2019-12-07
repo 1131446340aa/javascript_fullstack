@@ -65,6 +65,11 @@ let findNoteDetailByid = function (id) {
   let _sql=`select * from note where id="${id}";`
   return allServies.query(_sql)
 }
+//增加笔记
+let publishNotes=function(options){
+  let _sql=`insert into note set c_time=?,m_time=?,note_content=?,head_img=?,title=?,note_type=?,useId=?,nickname=?;`
+  return allServies.query(_sql,options)
+}
 module.exports = {
-  getAllusers, userLogin, findNoteListByType, findUser, insertUser,findNoteDetailByid
+  getAllusers, userLogin, findNoteListByType, findUser, insertUser,findNoteDetailByid,publishNotes
 }
