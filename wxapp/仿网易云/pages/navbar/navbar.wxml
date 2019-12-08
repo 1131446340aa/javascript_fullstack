@@ -1,0 +1,9 @@
+<view class="singSheet">
+    <view class="singSheet-catory">
+        <view class="singSheet-catory-item">推荐</view>
+        <view class="singSheet-catory-item">欧美</view>
+        <view class="singSheet-catory-item">精品</view>
+        <view class="singSheet-catory-item">华语</view>
+        <view class="singSheet-catory-item">流行</view>
+    </view>
+</view>

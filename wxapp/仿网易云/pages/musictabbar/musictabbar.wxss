@@ -1,0 +1,55 @@
+.music-wrapper{
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+}
+.music-play image,.music-singsheet image{
+    display: block;
+    width: 50rpx;
+    height: 50rpx;
+    margin-top: 20rpx;
+}
+.music-avtur{
+    width: 90rpx;
+    height: 90rpx;
+   
+}
+.music-detail,.music-icon{
+    display: flex;
+}
+.music-play{
+    margin-right: 70rpx;
+}
+.music-singsheet{
+    margin-right: 20rpx;
+}
+.music-singname{
+    font-size: 28rpx;
+    line-height: 40rpx;
+    margin-top: 10rpx;
+    max-width: 40vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.music-authorname{
+    font-size: 24rpx;
+    line-height: 40rpx;
+    color: #C7C7C7;
+    max-width: 40vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.music-avtur image{
+    margin: 0 auto;
+    margin-top: 10rpx;
+    width: 70rpx;
+    height: 70rpx;
+    display: block;
+    border-radius: 50%;
+}

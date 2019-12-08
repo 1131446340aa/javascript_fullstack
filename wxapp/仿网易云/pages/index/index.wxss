@@ -96,6 +96,9 @@
     display: flex;
     flex-wrap: wrap;
 }
+.recommend-songs{
+    margin-top: 50rpx;
+}
 .new-songs{
     margin-top: 30rpx;
 }
@@ -120,6 +123,9 @@
     -webkit-box-orient: vertical;
     
 }
+.a{width: 50rpx;
+height: 50rpx;
+background-color: red;}
 .image-wrap{
     width: 30vw;
     height: 30vw;
@@ -133,7 +139,7 @@
 .scroll{
     position: absolute;
     top: 86rpx;
-    bottom: 0;
+    bottom: 90rpx;
 }
 .video-mv{
     width: 100%;
@@ -229,4 +235,31 @@ margin-right: 16rpx;
     height: 86rpx;
     line-height: 86rpx;
     display: inline-block;
+}
+.singSheet-catory{
+   
+    display: flex;
+    border-bottom: 1rpx solid #C8C7C0;
+}
+.singSheet-catory-item{
+    flex: 1;
+    font-size: 28rpx;   
+    text-align: center;
+    line-height: 60rpx;
+    height: 60rpx;
+}
+.singSheet-scroll{
+    position: absolute;
+    /* top: 60rpx; */
+    top: 0;
+    bottom: 0;
+}
+.singSheet-swiper
+{height: 100vh;}
+.playlistCatory{
+    margin-top: 10rpx;
+}
+.loading{
+    margin: 0 auto;
+    width: 60rpx;
 }

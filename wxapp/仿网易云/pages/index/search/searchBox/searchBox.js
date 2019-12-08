@@ -1,4 +1,5 @@
 // pages/index/search/searchBox/searchBox.js
+var app = getApp();
 Page({
 
   /**
@@ -9,13 +10,15 @@ Page({
     offset: -15,
     songItem: [],
     playList: [],
-    loading:false
+    loading: false
   },
   search(query, offset) {
     offset = offset + 15
     this.setData({
       offset: offset,
+      loading:false
     })
+    
 
     wx.request({
       url: 'http://localhost:3000/search',
@@ -26,21 +29,32 @@ Page({
         limit: 15
       },
       success: res => {
-       
-        this.setData({ songItem: [...this.data.songItem, ...res.data.result.songs], 
-        loading:false})
+        getApp().globalData.playsongs=[...this.data.songItem, ...res.data.result.songs]
+        console.log(app.globalData.playsongs);
+        this.setData({
+          songItem:app.globalData.playsongs,
+          loading:true
+        })
+        console.log(this.data.loading); 
       }
     })
   },
   bindscrolltolower() {
+    console.log(1);
+    
+    this.setData({
+      loading:false
+    })
+    console.log(this.data.loading);
+    
     this.search(this.data.query, this.data.offset)
   },
   playmusic(e) {
     let id = e.currentTarget.dataset.id
-    let model = encodeURIComponent(JSON.stringify(this.data.songItem))
-    let music = encodeURIComponent(JSON.stringify(this.data.songItem[id]))
+    // let model = encodeURIComponent(JSON.stringify(this.data.songItem))
+    // let music = encodeURIComponent(JSON.stringify(this.data.songItem[id]))
     wx.navigateTo({
-      url: '../../../music/music?model=' + model + '&music=' + music + '&id=' + id
+      url: '../../../music/music?id=' + id
     })
   },
   /**

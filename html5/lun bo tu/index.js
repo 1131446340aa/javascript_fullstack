@@ -11,7 +11,7 @@ for (let n = 0; n < images.length; n++) {
 }
 var sel_li = document.querySelectorAll('li')
 sel_li[0].classList.add('current')
-main.addEventListener('mouseenter', function () {
+main.addEventListener('mouseenter', function () { 
     //当鼠标经过图片，移除定时器，同时显示上一张和下一张按钮
     arrow_l.style.display = "block"
     arrow_r.style.display = "block"

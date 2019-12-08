@@ -1,15 +1,20 @@
 {
   "pages": [
+    "pages/index/index",
+    "pages/musictabbar/musictabbar",
+    "pages/singsheet/singsheet",
     "pages/index/search/search",
     "pages/music/music",
-    "pages/index/index",
     "pages/index/search/searchBox/searchBox",
-    "pages/index/movie/movie"
+    "pages/index/movie/movie",
+    "pages/index/navbar",
+    "pages/navbar/navbar",
+    "pages/type_pop_playlist/type_pop_playlist"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "网易云音乐",
+    "navigationBarTitleText": "小天才小可爱音乐",
     "navigationBarTextStyle": "black"
   },
   "usingComponents": {
@@ -20,6 +25,7 @@
     "Toast": "./miniprogram_npm/vant-weapp/toast/index",
     "van-slider": "./miniprogram_npm//vant-weapp//slider/index"
   },
+  "requiredBackgroundModes":["audio"],
   "style": "v2",
   "sitemapLocation": "sitemap.json"
 }

@@ -1,11 +1,12 @@
 // pages/index/index.js
+var app=getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    current: 1,
+    current: "1",
     banner: [],
     recommendSongs: [],
     album: [],
@@ -13,7 +14,12 @@ Page({
     offset: -1,
     video: [],
     artists: [],
-    offset1: 0
+    offset1: 0,
+    singSheet_offset: 0,
+    singSheet_playlist: [],
+    indexloading:false,
+    mvloading:false,
+    singlistloading:false,
   },
 
   currentchange(e) {
@@ -31,9 +37,11 @@ Page({
     })
   },
   navBarClick(e) {
+
     this.setData(
-      { current: e.currentTarget.dataset.id }
-    )
+      { current: e.currentTarget.dataset.id })
+    console.log(this.data.current == "2");
+
   },
   mv() {
     let that = this
@@ -45,12 +53,16 @@ Page({
       success: res => {
         let middle = res.data.data
         that.setData({
-          videoDetail: [...that.data.videoDetail, ...middle]
+          videoDetail: [...that.data.videoDetail, ...middle],
+          mvloading:true
         })
       }
     })
   },
   bindscrolltolower() {
+    this.setData({
+      mvloading:false
+    })
     this.mv()
   },
   play(e) {
@@ -62,20 +74,30 @@ Page({
     })
   },
   bindscrolltolower1() {
-    this.api('top/artists', (res) => {
+    this.setData({singlistloading:true})
+    this.api('top/playlist', res => {
+
 
       this.setData({
-        artists: [...this.data.artists, ...res.data.artists],
-        offset1: this.data.offset1 + 10
+        singSheet_playlist: [...this.data.singSheet_playlist, ...res.data.playlists],
+        singSheet_offset: this.data.singSheet_offset + 15,
+        singlistloading:false
+
       })
+      console.log(res.data.playlists);
     }, {
-      offset: this.data.offset1,
-      limit: 10
+      limit: 15,
+      offset: this.data.singSheet_offset
     })
   },
   mvClick(e) {
     wx.navigateTo({
       url: './movie/movie?id=' + e.currentTarget.dataset.id
+    })
+  },
+  recommendSongs(e) {
+    wx.navigateTo({
+      url: '../singsheet/singsheet?id=' + e.currentTarget.dataset.id
     })
   },
   /**
@@ -85,13 +107,17 @@ Page({
     let that = this
     that.api('banner', res => {
       that.setData({
-        banner: res.data.banners
+        banner: res.data.banners,
+        indexloading:true
+      
       })
     })
     this.api('personalized', res => {
       that.setData({
         recommendSongs: res.data.result.sort(() => { return Math.random() - 0.5 }).slice(0, 6)
       })
+      console.log(res.data.result);
+
     })
     this.api('album/newest', res => {
       that.setData({
@@ -108,6 +134,26 @@ Page({
       offset: this.data.offset1,
       limit: 10
     })
+    this.api('top/playlist', res => {
+
+
+      this.setData({
+        singSheet_playlist: res.data.playlists,
+        singlistloading:true
+
+      })
+      console.log(res.data.playlists);
+    }, {
+      limit: 15,
+      offset: this.data.singSheet_offset
+    })
+  
+  },
+  
+  watchBack: function (name){
+    console.log(22222);
+    console.log('this.name==' + name)
+    this.selectComponent("#music").onLoad()
   },
 
   /**
@@ -121,7 +167,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.selectComponent("#music").onLoad()
+    getApp().watch(this.watchBack)
+    console.log(getApp().globalData.playsongs);
   },
 
   /**

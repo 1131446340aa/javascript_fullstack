@@ -1,33 +1,34 @@
 <view class="music" >
-    <view class="title">
-        <audio src="{{singUrl}}" bindended="bindended" id="myAudio" loop="{{playRules%3===0}}" bindtimeupdate="bindtimeupdate"></audio>
-    </view>
+    
     <view class="title">
         <view class="music-name">
             {{playsongs[(current+playsongs.length)%playsongs.length].name}}
         </view>
         <view class="music-author">
-            {{playsongs[(current+playsongs.length)%playsongs.length].artists[0].name}}
+            {{playsongs[(current+playsongs.length)%playsongs.length].artists[0].name||playsongs[(current+playsongs.length)%playsongs.length].ar[0].name}}
         </view>
     </view>
     <view class="cicrle">
         <view class="big-circle"></view>
         <view class="small-circle">
-            <image class="" src="./images/bg.png" />
+            <image class="" src="{{playsongs[(current+playsongs.length)%playsongs.length].artists[0].img1v1Url||playsongs[(current+playsongs.length)%playsongs.length].al.picUrl}}" />
         </view>
     </view >
     <view class="progress">
-        <view class="start-time">{{CurrentTime}}</view>
+        <view class="start-time">{{currentTime}}</view>
         <view class="progress-bar"  bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="touchend">
             <view class="progress-bar-end">
             
             </view>
-            <view class="progress-bar-globle" style="left:{{progress}}%"> </view>
-            <view class="progress-bar-current" style="width:{{progress}}%">
+            <view class="active">
+                
+                <view class="progress-bar-current" style="width:{{progress}}%">
+                </view>
+                <view class="progress-bar-globle"> </view>
             </view>
-              <!-- <slider block-size="12" background-color="#65676D" selected-color="#e9e9e9" /> -->
+              
         </view>
-        <view class="end-time">{{endTime}}</view>
+        <view class="end-time">{{duration}}</view>
     </view>
     <view class="contral">
         <view class="contral-left" catchtap="playRules">
@@ -61,7 +62,7 @@
                             <view class="song-title">播放列表</view>
                             <view class="songList" wx:for="{{playsongs}}" wx:key="{{index}}">
                                 <view class="songList-item"  catchtap="playCurrentSong" data-id="{{index}}"  bindtap="HiddenList">
-                                    {{item.name}}-{{item.artists[0].name}}
+                                    {{item.name}}-{{item.artists[0].name||item.ar[0].name}}
                                     
                                 </view>
                             </view>

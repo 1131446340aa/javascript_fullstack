@@ -2,7 +2,7 @@
     <view class="input">
         <van-search value="{{query}}" shape="round" show-action="true" placeholder="请输入搜索关键词" bind:change="debounce" autofocus="autofocus" />
     </view>
-    <div class="search-wrapper" wx:if="{{query}}">
+    <view class="search-wrapper" wx:if="{{query}}">
         <view class="title">搜索 "{{query}}"</view>
         <view class="search-item" bindtap="itemClick" data-query="{{query}}">
             <view class="left-icon">
@@ -14,9 +14,15 @@
             <view class="left-icon">
                 <van-icon name="search" />
             </view>
-            <view class="item-name">{{item.name}}-{{item.artists[0].name}}</view>
+            <view class="name">
+                <view class="item-name">{{item.name}}</view>
+                <view class="artist-name">-{{item.artists[0].name}}</view>
+            </view>
         </view>
-    </div>
+        <view class="loading" hidden="{{loading}}">
+            <van-loading size="24px" type="spinner" color="#1989fa" vertical>加载中...</van-loading>
+        </view>
+    </view>
     <view class="detail" wx:if="{{!query}}">
         <view class="hotsearch">
             <view class="text">热搜榜</view>
@@ -34,4 +40,7 @@
             </view>
         </view>
     </view>
+   <view hidden="{{query}}">
+        <musicplay id="music"></musicplay>
+   </view>
 </view>

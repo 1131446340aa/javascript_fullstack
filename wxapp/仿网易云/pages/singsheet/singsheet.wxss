@@ -1,0 +1,107 @@
+/* pages/singsheet/singsheet.wxss */
+
+.header{
+    background-color: #565989;
+}
+.title{
+    height: 70rpx;
+    line-height: 70rpx;
+    text-align: center;
+    color: #fff;
+    font-size: 28rpx;
+}
+.container{
+    display: flex;
+    justify-content: space-between;
+ 
+}
+.img{
+    margin: 40rpx 30rpx;
+}
+.img image{
+    width: 220rpx;
+    height: 220rpx;
+    border-radius: 10rpx;
+}
+.big-title,.introduce{
+    font-size: 32rpx;
+    color: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    height: 80rpx;
+    line-height: 40rpx;
+    margin-bottom: 10rpx;
+}
+.avatar image{
+    width: 50rpx;
+    height: 50rpx;
+    border-radius: 50%;
+}
+.nickname{
+    line-height: 50rpx;
+    height: 50rpx;
+    font-size: 28rpx;
+    color: #fff;
+    margin-left: 20rpx;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.text{
+    margin: 40rpx 30rpx;
+}
+.user{height: 50rpx;
+margin-bottom: 20rpx;
+display: flex;}
+.introduce{font-size: 24rpx;
+height: 60rpx;
+line-height: 30rpx;}
+.search-box{
+    margin: 0 20rpx;
+    border-color: rgb(250, 250, 250);
+}
+.song-name{
+    font-size: 32rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.author{
+    font-size: 24rpx;
+    margin-bottom: 50rpx;
+    color: #9B9B9B;
+    margin-top: 10rpx;
+}
+.scroll{
+    position: absolute;
+    top: 380rpx;
+    bottom: 0;
+}
+.song-item{
+    margin-top: 40rpx;
+    display: flex;
+    justify-content: space-between;
+}
+.icon image{
+    height: 50rpx;
+    width: 50rpx;
+}
+.icon{
+    width: 100rpx;
+    height: 100rpx;
+}
+.song-list{
+    width: 70vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.loading{
+    width: 60rpx;
+    margin: 0 auto;
+}

@@ -10,7 +10,8 @@ Page({
         query: "",
         offset: -1,
         songItem: [],
-        histiryItem:[]
+        histiryItem:[],
+        loading:false
     },
     debounce(e) {
         console.log(1);
@@ -69,10 +70,15 @@ Page({
             },
             success: res => {
                 console.log(res.data.result.songs);
-                this.setData({ songItem: [...res.data.result.songs] })
+                this.setData({ songItem: [...res.data.result.songs],
+                    loading:true })
             }
         })
     },
+    watchBack1: function (){
+    
+        this.selectComponent("#music").onLoad()
+      },
     /**
      * 生命周期函数--监听页面加载
      */
@@ -83,6 +89,7 @@ Page({
                 hotkeys: res.data.result.hots
             })
         })
+        
     },
 
     /**
@@ -96,7 +103,8 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function() {
-
+        getApp().watch(this.watchBack1)
+        this.selectComponent("#music").onLoad()
     },
 
     /**

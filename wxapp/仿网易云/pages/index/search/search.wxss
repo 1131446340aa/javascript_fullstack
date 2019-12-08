@@ -1,9 +1,12 @@
+
 .search-item {
     display: flex;
+    
 }
 
 .search {
     margin: 0 20rpx;
+  
 }
 
 .left-icon {
@@ -17,6 +20,23 @@
     font-size: 32rpx;
     margin: auto 0;
     color: #58DDB4;
+   flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 65vw;
+}
+.artist-name{ font-size: 32rpx;
+    margin: auto 0;
+    color: #58DDB4;
+padding-right: 40rpx;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;}
+    
+    
+.name{
+    display: flex;
 }
 
 .search-wrapper .title {
@@ -27,6 +47,9 @@
 
 .search-wrapper {
     border-color: rgb(250, 250, 250);
+    width: 100vw;
+    margin-right: 40rpx;
+   
 }
 .history-title .text,.hotsearch .text{
     margin: 20rpx;
@@ -47,4 +70,8 @@
 }
 .hotsearch-item :nth-child(5){
     color: #58DDB4;
+}
+.loading{
+    width: 60rpx;
+    margin: 0 auto;
 }

@@ -3,16 +3,16 @@
         <view class="icon1">
             <image src="./images/more.png" />
         </view>
-        <view class="navBar-item {{current===0 ? 'color-black' : ' ' }}" data-id="0" bindtap="navBarClick">
+        <view class="navBar-item {{current=='0' ? 'color-black' : ' ' }}" data-id="0" bindtap="navBarClick">
             我的
         </view>
-        <view class="navBar-item {{current===1 ? 'color-black' : ' ' }}" bindtap="navBarClick" data-id="1">
+        <view class="navBar-item  {{current=='1' ? 'color-black' : ' ' }}" bindtap="navBarClick" data-id="1">
             首页
         </view>
-        <view class="navBar-item {{current===2 ? 'color-black' : ' ' }}" bindtap="navBarClick" data-id="2">
-            歌手
+        <view class="navBar-item {{current=='2' ? 'color-black' : ' ' }}" bindtap="navBarClick" data-id="2">
+            歌单
         </view>
-        <view class="navBar-item {{current===3 ? 'color-black' : ' ' }}" bindtap="navBarClick" data-id="3">
+        <view class="navBar-item {{current=='3' ? 'color-black' : ' ' }}" bindtap="navBarClick" data-id="3">
             视频
         </view>
         <view class="icon2" bindtap="search">
@@ -43,7 +43,7 @@
                     </view>
                     <view class="recommend-songs">
                         <text class="title">推荐歌单</text>
-                        <view class="recommend-songs-item" wx:for="{{recommendSongs}}" wx:key="index">
+                        <view class="recommend-songs-item" wx:for="{{recommendSongs}}" wx:key="index" bindtap="recommendSongs" data-id="{{item.id}}">
                             <view class="image-wrap">
                                 <image class="" src="{{item.picUrl}}"></image>
                             </view>
@@ -62,50 +62,10 @@
                         </swiper-item>
                     </block>
                 </swiper>
-                <div class="middle-bar">
-                    <div class="middle-bar-item">
-                        <view class="icon">
-                            <image src="./images/Recommend.png" />
-                        </view>
-                        <text>每日推荐</text>
-                    </div>
-                    <div class="middle-bar-item">
-                        <div class="middle-bar-item">
-                            <view class="icon">
-                                <image src="./images/sing.png" />
-                            </view>
-                            <text>歌单</text>
-                        </div>
-                    </div>
-                    <div class="middle-bar-item">
-                        <div class="middle-bar-item">
-                            <view class="icon">
-                                <image src="./images/Ranking.png" />
-                            </view>
-                            <text>排行榜</text>
-                        </div>
-                    </div>
-                    <div class="middle-bar-item">
-                        <div class="middle-bar-item">
-                            <view class="icon">
-                                <image src="./images/Live-broadcast.png" />
-                            </view>
-                            <text>直播</text>
-                        </div>
-                    </div>
-                    <div class="middle-bar-item">
-                        <div class="middle-bar-item">
-                            <view class="icon">
-                                <image src="./images/radio-station.png" />
-                            </view>
-                            <text>电台</text>
-                        </div>
-                    </div>
-                </div>
                 <view class="line"></view>
                 <view class="recommend-songs">
                     <text class="title">推荐歌单</text>
-                    <view class="recommend-songs-item" wx:for="{{recommendSongs}}" wx:key="index">
+                    <view class="recommend-songs-item" wx:for="{{recommendSongs}}" wx:key="index" bindtap="recommendSongs" data-id="{{item.id}}">
                         <view class="image-wrap">
                             <image class="" src="{{item.picUrl}}"></image>
                         </view>
@@ -114,7 +74,7 @@
                 </view>
                 <view class="new-songs">
                     <text class="title">新碟</text>
-                    <view class="new-songs-item" wx:for="{{album}}" wx:key="index">
+                    <view class="new-songs-item" wx:for="{{album}}" wx:key="index" bindtap="recommendSongs" data-id="{{item.id}}">
                         <view class="image-wrap">
                             <image class="" src="{{item.picUrl}}"></image>
                         </view>
@@ -125,18 +85,21 @@
         </swiper-item>
         <swiper-item class="">
             <scroll-view class="scroll" scroll-x="false" scroll-y="true" bindscrolltolower="bindscrolltolower1">
-                <div class="artrist-wrapper">
-                    <view class="new-frist">
-                        <image class="" src="./images/geshou.png" />
-                        <view class="text">热门歌手</view>
-                    </view>
-                    <view class="artrist-wrapper-item" wx:for="{{artists}}" wx:key="index">
-                        <view class="artrist-wrapper-img">
-                            <image class="" src="{{item.picUrl}}" />
+                <view class="singSheet">
+                    <view class="playlistCatory recommend-songs">
+                        <view class=" recommend-songs-item" wx:for="{{singSheet_playlist}}" wx:key="index" bindtap="recommendSongs" data-id="{{item.id}}">
+                            <view class="image-wrap">
+                                <image class="" src="{{item.coverImgUrl}}"></image>
+                            </view>
+                            <text class="text">{{item.name}}</text>
                         </view>
-                        <view class="name">{{item.name}}</view>
                     </view>
-                </div>
+                    <view class="loading" hidden="{{singlistloading}}">
+                        <van-loading size="24px" type="spinner" color="#1989fa" vertical>
+                            加载中...
+                        </van-loading>
+                    </view>
+                </view>
             </scroll-view>
         </swiper-item>
         <swiper-item class="">
@@ -157,8 +120,14 @@
                         </view>
                         <view class="video-name">{{videoDetail[index].name}}</view>
                     </view>
+                    <view class="loading" hidden="{{mvloading}}">
+                        <van-loading size="24px" type="spinner" color="#1989fa" vertical>
+                            加载中...
+                        </van-loading>
+                    </view>
                 </view>
             </scroll-view>
         </swiper-item>
     </swiper>
+    <musicplay id="music" bind:callFather="onShow"></musicplay>
 </view>

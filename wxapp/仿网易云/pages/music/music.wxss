@@ -111,7 +111,10 @@
 .progress-bar {
     flex: 1;
 }
-
+.active{
+    width: 100%;
+    display: flex;
+}
 .progress-bar-end {
     width: 100%;
     height: 2rpx;
@@ -127,7 +130,7 @@
     background-color: #e9e9e9;
     z-index: 5;
     position: relative;  
-    top: -10rpx;
+    top: -3rpx;
     max-width: 100%;
     
 }
@@ -139,7 +142,7 @@
     background-color: #e9e9e9;
     z-index: 5;
     position: relative;  
-    top: -4rpx;
+    top: -7rpx;
     
     
 }

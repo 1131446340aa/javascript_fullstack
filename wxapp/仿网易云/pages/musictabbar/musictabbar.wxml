@@ -1,0 +1,25 @@
+<view class="music-wrapper" catchtap="playmusic">
+    <view class="music-detail">
+        <view class="music-avtur">
+            <image class="" src="{{pic}}" />
+        </view>
+        <view class="music-name">
+            <view class="music-singname">{{singname}}</view>
+            <view class="music-authorname">{{authorname}}</view>
+        </view>
+    </view>
+    <view class="music-icon">
+        <view class="music-play" hidden="{{isplay}}">
+            <image class="" src="./images/bofang.png" catchtap="musicPlay" />
+              
+        </view>
+        <view class="music-play" hidden="{{!isplay}}">
+            <image class="" src="./images/zanting.png" catchtap="musicPlay" />
+              
+        </view>
+        <!-- <view class="music-singsheet">
+            <image class="" src="./images/gengduo.png"/>
+              
+        </view> -->
+    </view>
+</view>

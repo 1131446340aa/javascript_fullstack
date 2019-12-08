@@ -43,3 +43,13 @@
     width: 100rpx;
     height: 100rpx;
 }
+.song-list{
+    width: 70vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.loading{
+    width: 60rpx;
+    margin: 0 auto;
+}
