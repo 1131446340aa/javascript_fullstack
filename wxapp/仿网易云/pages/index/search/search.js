@@ -1,56 +1,99 @@
 // pages/index/search/search.js
 let timer
+const util = require('../../../utils/api')
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        hotkeys: [],
-        query: "",
-        offset: -1,
-        songItem: [],
-        histiryItem:[],
-        loading:false
+        hotkeys: [], //热门搜索项
+        query: "", //关键字
+        offset: -1, //页码
+        songItem: [], //根据关键字搜索到的歌
+        histiryItem: [], //历史记录
+        loading: false
     },
+    //防抖函数
     debounce(e) {
-        console.log(1);
-        
+        // console.log(1);
+
         if (timer) {
             clearTimeout(timer)
         }
         timer = setTimeout(() => { this.searchbox(e) }, 300)
     },
-    itemClick(e){
+    //搜索内容点击顺便去搜索音乐结果页面
+    itemClick(e) {
         this.setData({
-            query:e.currentTarget.dataset.query,
-            histiryItem:[...new Set([e.currentTarget.dataset.query,...this.data.histiryItem])]
+            query: e.currentTarget.dataset.query,
         })
         wx.navigateTo({
-            url: './searchBox/searchBox?query='+this.data.query
-          })
-        console.log(this.data.histiryItem);
-        
-    },
-    hotsearch(e){
-        this.setData({
-            query:e.currentTarget.dataset.query
-        })
-        this.search(e.currentTarget.dataset.query,0)
-    //    this.searchbox(e.currentTarget.dataset.query)
-    },
-    historyItem(e){ this.setData({
-        query:e.currentTarget.dataset.query
-    })
-    this.search(e.currentTarget.dataset.query,0)},
-    api(url, func) {
+            url: './searchBox/searchBox?query=' + this.data.query,
+            success: (result) => {
+                wx.request({
+                    url: 'http://localhost:3001/users/inserthistiryItem',
+                    data: {
+                        query: this.data.query
+                    },
+                    header: { 'content-type': 'application/json' },
+                    method: 'POST',
+                    dataType: 'json',
+                    responseType: 'text',
+                    success: (result) => {},
+                    fail: () => {},
+                    complete: () => {}
+                });
+            },
+            fail: () => {},
+            complete: () => {}
+        });
 
-        let host = 'http://www.china-4s.com/'
-        wx.request({
-            url: host + url,
-            success: func
-        })
+        // console.log(this.data.histiryItem);
     },
+    delete() {
+        wx.request({
+            url: 'http://localhost:3001/users/delete',
+            data: {},
+            header: { 'content-type': 'application/json' },
+            method: 'POST',
+            dataType: 'json',
+            responseType: 'text',
+            success: (result) => {
+                if (result.data.code === "200") {
+                    wx.showToast({
+                        title: '删除成功',
+                        icon: 'none',
+                        image: '',
+                        duration: 1000,
+                        mask: false,
+                        success: (result) => {
+                            this.historyAll()
+                        },
+                        fail: () => {},
+                        complete: () => {}
+                    });
+                }
+
+            },
+            fail: () => {},
+            complete: () => {}
+        });
+    },
+    hotsearch(e) {
+        this.setData({
+            query: e.currentTarget.dataset.query
+        })
+        this.search(e.currentTarget.dataset.query, 0)
+            //    this.searchbox(e.currentTarget.dataset.query)
+    },
+    historyItem(e) {
+        this.setData({
+            query: e.currentTarget.dataset.query
+        })
+        this.search(e.currentTarget.dataset.query, 0)
+    },
+
     searchbox(e) {
         this.setData({
             query: e.detail,
@@ -60,6 +103,26 @@ Page({
         if (this.data.query) { this.search(this.data.query, this.data.offset * 30) }
 
     },
+    historyAll() {
+        wx.request({
+
+            url: 'http://localhost:3001/users/history',
+            data: {},
+            header: { 'content-type': 'application/json' },
+            method: 'POST',
+            dataType: 'json',
+            responseType: 'text',
+            success: (result) => {
+                console.log(result.data);
+                this.setData({
+                    histiryItem: result.data.history.reverse()
+                })
+            },
+            fail: () => {},
+            complete: () => {}
+        });
+    },
+    //搜索函数
     search(query, offset) {
         wx.request({
             url: 'http://localhost:3000/search',
@@ -70,26 +133,28 @@ Page({
             },
             success: res => {
                 console.log(res.data.result.songs);
-                this.setData({ songItem: [...res.data.result.songs],
-                    loading:true })
+                this.setData({
+                    songItem: [...res.data.result.songs],
+                    loading: true
+                })
             }
         })
     },
-    watchBack1: function (){
-    
+    watchBack1: function() {
+
         this.selectComponent("#music").onLoad()
-      },
+    },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        this.api('search/hot/detail', res => {
+        util.api('search/hot/detail', res => {
             console.log(res.data.result);
             this.setData({
                 hotkeys: res.data.result.hots
             })
         })
-        
+
     },
 
     /**
@@ -105,6 +170,7 @@ Page({
     onShow: function() {
         getApp().watch(this.watchBack1)
         this.selectComponent("#music").onLoad()
+        this.historyAll()
     },
 
     /**

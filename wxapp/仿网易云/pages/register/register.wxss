@@ -1,0 +1,137 @@
+.wrapper {
+    padding-right: 30rpx;
+    padding-left: 30rpx;
+    padding-top: 100rpx;
+}
+
+.login_text {
+    font-family: 'Microsoft Yahei';
+    font-size: 78rpx;
+    line-height: 78rpx;
+    text-align: center;
+    margin-bottom: 78rpx;
+}
+
+.text {
+    font-size: 28rpx;
+    line-height: 1.5;
+    padding-left: 14rpx;
+    font-family: 'Microsoft Yahei';
+    color: #333333;
+    margin-top: 52rpx;
+}
+
+.pwd {
+    margin-top: 0;
+}
+
+.wran-wrap {
+    position: relative;
+    height: 52rpx;
+}
+
+.user-warn,
+.pwd-warn {
+    height: 52rpx;
+    line-height: 52rpx;
+    color: red;
+    font-size: 28rpx;
+    opacity: 0;
+    position: absolute;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.input {
+    height: 110rpx;
+    line-height: 1.2;
+    background-color: transparent;
+    padding-right: 14rpx;
+    outline: none;
+    /* border-bottom: 4rpx solid #E1E1E1; */
+    font-family: 'Microsoft Yahei';
+    color: #333333;
+}
+
+.warning-text {
+    color: red;
+    font-size: 24rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    padding: 0 12rpx;
+    border: 2rpx solid red;
+}
+
+.line2,
+.line,
+.line4 {
+    background-color: #E1E1E1;
+    height: 6rpx;
+}
+
+.line1,
+.line3,
+.line5 {
+    width: 0;
+    background-color: rgb(127, 127, 127);
+    height: 6rpx;
+    position: relative;
+    top: -6rpx;
+}
+
+.text-right {
+    font-family: 'Microsoft Yahei';
+    font-size: 28rpx;
+    color: #666666;
+    line-height: 40rpx;
+    height: 40rpx;
+    right: 0;
+    position: absolute;
+}
+
+.right {
+    margin-top: 22rpx;
+    position: relative;
+    height: 40rpx;
+    margin-bottom: 62rpx;
+}
+
+.login {
+    font-size: 32rpx;
+    padding: 0 40rpx;
+    text-align: center;
+    height: 100rpx;
+    border-radius: 50rpx;
+    color: #fff;
+    line-height: 100rpx;
+    background-image: linear-gradient(to right, #01D9DE 0%, #FA02FF 100%);
+}
+
+.login-in-text {
+    position: fixed;
+    bottom: 24rpx;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: #333333;
+    font-size: 28rpx;
+    font-family: 'Microsoft Yahei';
+}
+
+.input {
+    display: flex;
+    padding-top: 30rpx;
+    box-sizing: border-box;
+}
+
+.input-icon {
+    height: 110rpx;
+    width: 86rpx;
+}
+
+.image {
+    display: block;
+    width: 40rpx;
+    height: 40rpx;
+    margin-left: 10rpx;
+}

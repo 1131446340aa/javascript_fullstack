@@ -1,12 +1,9 @@
-
 .search-item {
     display: flex;
-    
 }
 
 .search {
     margin: 0 20rpx;
-  
 }
 
 .left-icon {
@@ -20,22 +17,24 @@
     font-size: 32rpx;
     margin: auto 0;
     color: #58DDB4;
-   flex: 1;
+    flex: 1;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     max-width: 65vw;
 }
-.artist-name{ font-size: 32rpx;
+
+.artist-name {
+    font-size: 32rpx;
     margin: auto 0;
     color: #58DDB4;
-padding-right: 40rpx;
-overflow: hidden;
-text-overflow: ellipsis;
-white-space: nowrap;}
-    
-    
-.name{
+    padding-right: 40rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.name {
     display: flex;
 }
 
@@ -49,15 +48,43 @@ white-space: nowrap;}
     border-color: rgb(250, 250, 250);
     width: 100vw;
     margin-right: 40rpx;
-   
 }
-.history-title .text,.hotsearch .text{
+
+.history-title .text,
+.hotsearch .text {
     margin: 20rpx;
     height: 60rpx;
     line-height: 60rpx;
     font-weight: bold;
 }
-.hotsearch-item,.history-item{
+
+.history-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.delete {
+    width: 100rpx;
+    height: 100rpx;
+}
+
+.delete image {
+    width: 40rpx;
+    height: 40rpx;
+    margin-top: 30rpx;
+    margin-left: 20rpx;
+}
+
+.history-scroll {
+    position: absolute;
+    top: 690rpx;
+    bottom: 100rpx;
+    left: 0;
+    right: 0;
+}
+
+.hotsearch-item,
+.history-item {
     display: inline-block;
     background-color: #fff;
     font-size: 24rpx;
@@ -68,10 +95,12 @@ white-space: nowrap;}
     border: 1px solid #6e6e6e;
     padding: 10rpx;
 }
-.hotsearch-item :nth-child(5){
+
+.hotsearch-item :nth-child(5) {
     color: #58DDB4;
 }
-.loading{
+
+.loading {
     width: 60rpx;
     margin: 0 auto;
 }

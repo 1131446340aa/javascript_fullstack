@@ -1,4 +1,8 @@
 <view class="singList">
+    <view class="background">
+    <image class="" src="{{playlistDetail.coverImgUrl}}" mode="scaleToFill" />
+    <view class="mask"></view>
+  </view>
     <view class="header">
         <view class="title">歌单</view>
         <view class="container">

@@ -1,5 +1,30 @@
+.background {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+.mask {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    background-color: #000;
+    opacity: .4;
+}
+
+.background image {
+    width: 100vw;
+    height: 100%;
+    filter: blur(30px);
+}
+
 .music {
-    background-color: #292A40;
+    /* background-color: #292A40; */
     width: 100vw;
     height: 100vh;
 }
@@ -17,15 +42,18 @@
 }
 
 .big-circle {
-    width: 70vw;
-    height: 70vw;
-    border-radius: 35vw;
+    width: 540rpx;
+    height: 540rpx;
+    border-radius: 270rpx;
     background-color: #1E1E20;
     border: 8rpx solid #34394C;
     position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 200rpx;
+    left: 14%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* transform: translate(-50%, -50%); */
 }
 
 .contral {
@@ -37,7 +65,10 @@
     margin: 40rpx 30rpx;
 }
 
-.contral-left image, .last-music image, .next-one image, .playlist image {
+.contral-left image,
+.last-music image,
+.next-one image,
+.playlist image {
     width: 50rpx;
     height: 50rpx;
 }
@@ -47,7 +78,10 @@
     height: 70rpx;
 }
 
-.contral-left, .last-music, .next-one, .playlist {
+.contral-left,
+.last-music,
+.next-one,
+.playlist {
     flex: 1;
     width: 70rpx;
     height: 70rpx;
@@ -68,19 +102,40 @@
 }
 
 .small-circle image {
-    width: 50vw;
-    height: 50vw;
+    width: 375rpx;
+    height: 375rpx;
 }
 
 .small-circle {
-    width: 50vw;
-    height: 50vw;
-    border-radius: 25vw;
+    width: 375rpx;
+    height: 375rpx;
+    border-radius: 50%;
     position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 293rpx;
+    left: 26%;
+    /* transform: translate(-50%, -50%); */
     overflow: hidden;
+}
+
+.rotate {
+    animation: rotate 27s linear infinite;
+    /* animation-fill-mode: forwards; */
+}
+
+.circle {
+    /* position: relative; */
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .loading {
@@ -98,7 +153,8 @@
     /* margin: 40rpx 30rpx; */
 }
 
-.start-time, .end-time {
+.start-time,
+.end-time {
     width: 80rpx;
     margin: 0 20rpx;
     height: 30rpx;
@@ -109,12 +165,22 @@
 }
 
 .progress-bar {
+    width: 100%;
+}
+
+.movable-area {
     flex: 1;
 }
-.active{
+
+.movable-view {
+    width: 100%;
+}
+
+.active {
     width: 100%;
     display: flex;
 }
+
 .progress-bar-end {
     width: 100%;
     height: 2rpx;
@@ -123,42 +189,42 @@
     margin-top: 15rpx;
     z-index: 4;
 }
+
 .progress-bar-current {
-   
     height: 4rpx;
     border-radius: 2rpx;
     background-color: #e9e9e9;
     z-index: 5;
-    position: relative;  
+    position: relative;
     top: -3rpx;
     max-width: 100%;
-    
 }
-.progress-bar-globle{
-    
-   width: 12rpx;
+
+.progress-bar-globle {
+    width: 12rpx;
     height: 12rpx;
     border-radius: 6rpx;
     background-color: #e9e9e9;
     z-index: 5;
-    position: relative;  
+    position: relative;
     top: -7rpx;
-    
-    
 }
-.slider{
+
+.slider {
     width: 100%;
     position: relative;
     bottom: 15px;
 }
-.bg{
+
+.bg {
     width: 100vw;
     height: 100vh;
     position: absolute;
     top: 0;
-    background-color: rgba(101,103,109,0.2);
+    background-color: rgba(101, 103, 109, 0.2);
 }
-.wrapper{
+
+.wrapper {
     height: 40vh;
     width: 100%;
     background-color: #fff;
@@ -167,12 +233,13 @@
     margin-top: 60vh;
     position: fixed;
 }
-.scrollHeight{
+
+.scrollHeight {
     height: 40vh;
 }
-.songList-item{
+
+.songList-item {
     font-size: 28rpx;
-    color: #8AE5C7;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -180,7 +247,8 @@
     line-height: 70rpx;
     margin: 0 50rpx;
 }
-.song-title{
+
+.song-title {
     margin-top: 30rpx;
     margin: 50rpx;
     font-size: 40rpx;

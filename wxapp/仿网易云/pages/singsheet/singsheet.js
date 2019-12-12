@@ -1,4 +1,5 @@
-// pages/singsheet/singsheet.js
+// pages/singsheet/singsheet.j
+let util =require('../../utils/api')
 var app = getApp()
 Page({
 
@@ -11,17 +12,10 @@ Page({
     songItem:[],
     isloading:false
   },
-  api(url, func, param) {
-
-    let host = 'http://www.china-4s.com'
-    wx.request({
-      url: host + url,
-      data: param,
-      success: func
-    })
-  },
+  //去播放界面同时更新歌单
   playmusic(e) {
     let id = e.currentTarget.dataset.id
+    getApp().globalData.playsongs=this.data.songItem
     wx.navigateTo({
       url: '../music/music?id=' + id
     })
@@ -36,12 +30,12 @@ Page({
     })
     console.log(this.data.id);
     
-    this.api('/playlist/detail', res => {
+    util.api('playlist/detail', res => {
       console.log(res.data.playlist.subscribers);
-      getApp().globalData.playsongs=[...res.data.playlist.tracks]
+      
       this.setData({
         playlistDetail:res.data.playlist,
-        songItem: app.globalData.playsongs,
+        songItem: [...res.data.playlist.tracks],
         isloading:true
       })
     }, { id: options.id })

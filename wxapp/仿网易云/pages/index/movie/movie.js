@@ -1,4 +1,5 @@
 // pages/index/movie/movie.js
+const util=require('../../../utils/api')
 Page({
 
   /**
@@ -7,20 +8,13 @@ Page({
   data: {
     movie:[]
   },
-  api(url, func, param) {
-    let host = 'http://www.china-4s.com/'
-    wx.request({
-      url: host + url,
-      data: param,
-      success: func
-    })
-  },
+ 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     console.log(options.id);
-    this.api('mv/url', (res) => {
+    util.api('mv/url', (res) => {
       console.log(res.data.data.url);
       this.setData({
         movie: res.data.data.url,

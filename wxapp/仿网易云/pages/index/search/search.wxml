@@ -33,11 +33,15 @@
         <view class="history">
             <view class="history-title">
                 <view class="text">历史记录</view>
-                <view class="delete"></view>
+                <view class="delete" bindtap="delete"><image class="" src="../images/delete.png"  />
+                  </view>
             </view>
-            <view class="history-item" wx:for="{{histiryItem}}" wx:key="index" bindtap="historyItem" data-query="{{item}}">
-                {{item}}
+            <scroll-view class="history-scroll" scroll-x="false" scroll-y="true" >
+                <view class="history-item" wx:for="{{histiryItem}}" wx:key="index" bindtap="historyItem" data-query="{{item.historySearch}}">
+                {{item.historySearch}}
             </view>
+            </scroll-view>
+              
         </view>
     </view>
    <view hidden="{{query}}">

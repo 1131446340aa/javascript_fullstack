@@ -1,6 +1,6 @@
 <view class="wrapper">
     <view class="navBar">
-        <view class="icon1">
+        <view class="icon1" bindtap="toloading">
             <image src="./images/more.png" />
         </view>
         <view class="navBar-item {{current=='0' ? 'color-black' : ' ' }}" data-id="0" bindtap="navBarClick">
