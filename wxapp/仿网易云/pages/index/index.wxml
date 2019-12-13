@@ -27,7 +27,7 @@
                         <view class="icon">
                             <image class="" src="./images/zuijinbofang-xuanting.png" />
                         </view>
-                        <view class="text">最近播放</view>
+                        <view class="text" bindtap="history">最近播放</view>
                     </view>
                     <view class="mywrapper-item">
                         <view class="icon">

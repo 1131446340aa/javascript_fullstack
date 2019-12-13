@@ -5,17 +5,17 @@
   </view>
     <view class="title">
         <view class="music-name">
-            {{playsongs[(current+playsongs.length)%playsongs.length].name}}
+            {{playsongs[current].name||playsongs[current].songname}}
         </view>
         <view class="music-author">
-            {{playsongs[(current+playsongs.length)%playsongs.length].ar[0].name}}
+            {{playsongs[current].ar[0].name||playsongs[current].authorname}}
         </view>
     </view>
    <view class="circle-wrapper">
         <view class="cicrle" >
         <view class="big-circle"></view>
         <view class="small-circle rotate" style="animation-play-state: {{isPlay ? 'running' : 'paused'}}"  >
-            <image class="" src="{{playsongs[(current+playsongs.length)%playsongs.length].al.picUrl}}" />
+            <image class="" src="{{playsongs[current].al.picUrl||playsongs[current].picUrl}}" />
         </view>
     </view >
    </view>
@@ -80,7 +80,7 @@
                     <scroll-view class="scrollHeight" scroll-x="false" scroll-y="true">
                             <view class="songList" wx:for="{{playsongs}}" wx:key="{{index}}">
                                 <view class="songList-item"  catchtap="playCurrentSong" data-id="{{index}}"  bindtap="HiddenList">
-                                    {{item.name}}-{{item.artists[0].name||item.ar[0].name}}            
+                                    {{item.name||item.songname}}-{{item.authorname||item.ar[0].name}}            
                                 </view>
                             </view>  
                     </scroll-view>

@@ -150,3 +150,20 @@
     width: 60rpx;
     margin: 0 auto;
 }
+
+.collect image {
+    width: 40rpx;
+    height: 40rpx;
+}
+
+.collect {
+    margin-top: 15rpx;
+}
+
+.header-title {
+    display: flex;
+    /* margin-left: 300rpx; */
+    margin-right: 5%;
+    margin-left: 45%;
+    justify-content: space-between;
+}

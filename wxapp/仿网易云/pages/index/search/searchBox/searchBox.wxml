@@ -4,7 +4,7 @@
         <view class="song-item" wx:for="{{songItem}}" wx:key="index" bindtap="playmusic" data-id="{{index}}">
             <view class="song-list">
                 <view class="song-name">{{item.name}}</view>
-                <view class="author">{{item.artists[0].name}}</view>
+                <view class="author">{{item.ar[0].name}}</view>
             </view>
             <view class="icon">
                 <image class="" src="../../images/icon-test.png" />
@@ -15,4 +15,4 @@
         </view>
     </scroll-view>
    
-</view>
+</view> 

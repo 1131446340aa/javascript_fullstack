@@ -1,10 +1,16 @@
 <view class="singList">
     <view class="background">
-    <image class="" src="{{playlistDetail.coverImgUrl}}" mode="scaleToFill" />
-    <view class="mask"></view>
-  </view>
+        <image class="" src="{{playlistDetail.coverImgUrl}}" mode="scaleToFill" />
+        <view class="mask"></view>
+    </view>
     <view class="header">
-        <view class="title">歌单</view>
+        <view class="header-title">
+            <view class="title">歌单</view>
+            <view class="collect" bindtap="collectsheet"> 
+                <image class="" src="../index/images/shoucang4.png"></image>
+                 <image hidden="true" class="" src="../index/images/favor-active.png"></image>
+            </view>
+        </view>
         <view class="container">
             <view class="img">
                 <image class="" src="{{playlistDetail.coverImgUrl}}" />

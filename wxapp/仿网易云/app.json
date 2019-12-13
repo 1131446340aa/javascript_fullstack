@@ -1,35 +1,36 @@
 {
-    "pages": [
-        "pages/index/index",
-        "pages/login/login",
-        "pages/index/search/search",
-        "pages/register/register",
-        "pages/music/music",
-        "pages/musictabbar/musictabbar",
-        "pages/singsheet/singsheet",
-        "pages/index/search/searchBox/searchBox",
-        "pages/index/movie/movie",
-        "pages/index/navbar",
-        "pages/navbar/navbar",
-        "pages/type_pop_playlist/type_pop_playlist"
-    ],
-    "window": {
-        "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#fff",
-        "navigationBarTitleText": "小天才小可爱音乐",
-        "navigationBarTextStyle": "black"
-    },
-    "usingComponents": {
-        "van-search": "./miniprogram_npm/vant-weapp/search/index",
-        "van-icon": "./miniprogram_npm/vant-weapp/icon/index",
-        "van-action-sheet": "./miniprogram_npm/vant-weapp/action-sheet/index",
-        "van-loading": "./miniprogram_npm/vant-weapp/loading/index",
-        "Toast": "./miniprogram_npm/vant-weapp/toast/index",
-        "van-slider": "./miniprogram_npm//vant-weapp//slider/index"
-    },
-    "requiredBackgroundModes": [
-        "audio"
-    ],
-    "style": "v2",
-    "sitemapLocation": "sitemap.json"
+  "pages": [
+    "pages/index/index",
+    "pages/login/login",
+    "pages/index/search/search",
+    "pages/register/register",
+    "pages/music/music",
+    "pages/musictabbar/musictabbar",
+    "pages/singsheet/singsheet",
+    "pages/index/search/searchBox/searchBox",
+    "pages/index/movie/movie",
+    "pages/index/navbar",
+    "pages/navbar/navbar",
+    "pages/type_pop_playlist/type_pop_playlist",
+    "pages/playhistory/playhistory"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "小天才小可爱音乐",
+    "navigationBarTextStyle": "black"
+  },
+  "usingComponents": {
+    "van-search": "./miniprogram_npm/vant-weapp/search/index",
+    "van-icon": "./miniprogram_npm/vant-weapp/icon/index",
+    "van-action-sheet": "./miniprogram_npm/vant-weapp/action-sheet/index",
+    "van-loading": "./miniprogram_npm/vant-weapp/loading/index",
+    "Toast": "./miniprogram_npm/vant-weapp/toast/index",
+    "van-slider": "./miniprogram_npm//vant-weapp//slider/index"
+  },
+  "requiredBackgroundModes": [
+    "audio"
+  ],
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
 }

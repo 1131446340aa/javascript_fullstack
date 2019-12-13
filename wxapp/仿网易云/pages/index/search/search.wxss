@@ -77,7 +77,7 @@
 
 .history-scroll {
     position: absolute;
-    top: 690rpx;
+    top: 590rpx;
     bottom: 100rpx;
     left: 0;
     right: 0;

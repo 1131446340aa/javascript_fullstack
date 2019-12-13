@@ -96,10 +96,10 @@ Page({
 
     searchbox(e) {
         this.setData({
-            query: e.detail,
-            offset: 0
-        })
-        console.log(this.data.query);
+                query: e.detail,
+                offset: 0
+            })
+            // console.log(this.data.query);
         if (this.data.query) { this.search(this.data.query, this.data.offset * 30) }
 
     },
@@ -113,7 +113,7 @@ Page({
             dataType: 'json',
             responseType: 'text',
             success: (result) => {
-                console.log(result.data);
+                // console.log(result.data);
                 this.setData({
                     histiryItem: result.data.history.reverse()
                 })
@@ -132,7 +132,7 @@ Page({
                 offset: offset
             },
             success: res => {
-                console.log(res.data.result.songs);
+                // console.log(res.data.result.songs);
                 this.setData({
                     songItem: [...res.data.result.songs],
                     loading: true
@@ -149,7 +149,7 @@ Page({
      */
     onLoad: function(options) {
         util.api('search/hot/detail', res => {
-            console.log(res.data.result);
+            // console.log(res.data.result);
             this.setData({
                 hotkeys: res.data.result.hots
             })

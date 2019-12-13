@@ -172,6 +172,30 @@ Page({
                 current: 0
             })
         }
+        console.log(this.data.playsongs[this.data.current]);
+
+        if (!this.data.playsongs[this.data.current].authorname) {
+            wx.request({
+                url: 'http://localhost:3001/users/historyplay',
+                data: {
+                    song_name: this.data.playsongs[this.data.current].name,
+                    author_name: this.data.playsongs[this.data.current].ar[0].name,
+                    id: this.data.playsongs[this.data.current].id,
+                    picUrl: this.data.playsongs[this.data.current].al.picUrl
+                },
+                header: { 'content-type': 'application/json' },
+                method: 'POST',
+                dataType: 'json',
+                responseType: 'text',
+                success: (result) => {
+                    console.log(result.data);
+
+                },
+                fail: () => {},
+                complete: () => {}
+            });
+        }
+
         getApp().globalData.current = that.data.current
         util.api('song/url', res => {
             this.paramStore()
@@ -195,6 +219,8 @@ Page({
                 });
             }
             this.playmusic()
+            console.log(that.data.playsongs);
+
         }, { id: that.data.playsongs[that.data.current].id })
     },
     last() {
@@ -240,6 +266,7 @@ Page({
 
         var backgroundAudioManager = wx.getBackgroundAudioManager()
 
+        console.log(this.data.singUrl);
 
         // backgroundAudioManager.src !== this.data.singUrl
         backgroundAudioManager.src = this.data.singUrl
@@ -275,7 +302,7 @@ Page({
                 if (this.data.isTouch === false) {
                     this.setData({ progress: Math.floor(backgroundAudioManager.currentTime / backgroundAudioManager.duration * 100), })
                 }
-                console.log(1);
+                // console.log(1);
             }
         })
         backgroundAudioManager.onEnded(() => {
@@ -298,11 +325,11 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
+
         this.setData({
             playRules: getApp().globalData.playRules
         })
-        if (getApp().globalData.id !== 1) {
-            console.log(app.globalData.playsongs)
+        if (getApp().globalData.id === 0) {
             var list = app.globalData.playsongs
             var music = list[options.id]
             let arr = [music, ...list]
@@ -317,7 +344,8 @@ Page({
             this.paramStore()
             getApp().globalData.playsongs = arr
             this.play_music()
-        } else {
+        }
+        if (getApp().globalData.id === 1) {
 
             getApp().globalData.id = 0
             this.setData({

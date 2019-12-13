@@ -40,6 +40,17 @@ Page({
 
         this.setData({ current: e.currentTarget.dataset.id })
     },
+    history() {
+        wx.navigateTo({
+            url: '../playhistory/playhistory',
+            success: (result) => {
+
+            },
+            fail: () => {},
+            complete: () => {}
+        });
+
+    },
     //执行播放mv
     mv() {
         let that = this
@@ -107,6 +118,9 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
+        if (options.uservalue) {
+            getApp().globalData.user = options.uservalue
+        }
 
         let that = this
             //轮播图

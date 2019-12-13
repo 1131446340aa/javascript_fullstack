@@ -84,7 +84,7 @@ Page({
                     console.log(res);
                     if (res.data.code === 200) {
                         wx.navigateTo({
-                            url: '../index/index',
+                            url: '../index/index?uservalue=' + this.data.uservalue,
                             success: (result) => {
 
                             },
