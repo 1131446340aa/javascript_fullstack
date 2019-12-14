@@ -1,5 +1,6 @@
 // pages/music/music.js
 const util = require('../../utils/api')
+const lrc = require('../../utils/splitlrc')
 var app = getApp()
 Page({
 
@@ -23,7 +24,31 @@ Page({
         isShow: false, //歌单是否显示
         width: '',
         isclick: false,
-        animation: ''
+        animation: '',
+        lrctext: [],
+        lrctime: [],
+        time_id: 0,
+        list_id: 0
+    },
+    lrc() {
+        var reqTask = wx.request({
+            url: 'http://localhost:3000/lyric?id=' + this.data.playsongs[this.data.current].id,
+            success: (result) => {
+                if (result.data.lrc.lyric) {
+                    getApp().globalData.lrctext = lrc.toLrc(result.data.lrc.lyric).arrtext
+                    getApp().globalData.lrctime = lrc.toLrc(result.data.lrc.lyric).arrdatatime
+                }
+                this.setData({
+                    lrctext: getApp().globalData.lrctext,
+                    lrctime: getApp().globalData.lrctime
+                })
+                console.log(getApp().globalData.lrctime);
+
+
+            },
+            fail: () => {},
+            complete: () => {}
+        });
     },
     move(e) {
 
@@ -58,7 +83,7 @@ Page({
 
     },
     touchmove(e) {
-        console.log();
+
 
         this.move(e)
 
@@ -172,7 +197,8 @@ Page({
                 current: 0
             })
         }
-        console.log(this.data.playsongs[this.data.current]);
+
+
 
         if (!this.data.playsongs[this.data.current].authorname) {
             wx.request({
@@ -188,13 +214,15 @@ Page({
                 dataType: 'json',
                 responseType: 'text',
                 success: (result) => {
-                    console.log(result.data);
+
 
                 },
                 fail: () => {},
                 complete: () => {}
             });
         }
+        console.log(this.data.id);
+
 
         getApp().globalData.current = that.data.current
         util.api('song/url', res => {
@@ -219,8 +247,8 @@ Page({
                 });
             }
             this.playmusic()
-            console.log(that.data.playsongs);
 
+            this.lrc()
         }, { id: that.data.playsongs[that.data.current].id })
     },
     last() {
@@ -266,7 +294,7 @@ Page({
 
         var backgroundAudioManager = wx.getBackgroundAudioManager()
 
-        console.log(this.data.singUrl);
+
 
         // backgroundAudioManager.src !== this.data.singUrl
         backgroundAudioManager.src = this.data.singUrl
@@ -279,10 +307,48 @@ Page({
     },
     musiccontrol(backgroundAudioManager) {
         let last_time = 0;
+        let that = this
         backgroundAudioManager.onTimeUpdate(() => {
 
             let now_time = new Date().getTime()
             if ((now_time - last_time) > 1000 || this.data.isclick === true || this.data.isTouch === true) {
+                console.log(getApp().globalData.lrctext);
+
+
+                for (let i = 0; i < getApp().globalData.lrctime.length; i++) {
+
+                    if (getApp().globalData.lrctime[i] == Math.floor(backgroundAudioManager.currentTime)) {
+
+                        const query = wx.createSelectorQuery()
+                        query.select(".line")
+                            .boundingClientRect(function(rect) {
+                                that.setData({
+                                    time_id: i,
+                                    list_id: i
+
+                                })
+                                if (that.data.list_id <= 6) {
+                                    that.setData({
+
+                                        list_id: 0
+
+                                    })
+                                } else {
+                                    that.setData({
+
+                                        list_id: that.data.list_id - 6
+
+                                    })
+                                }
+
+                                // wx.pageScrollTo({
+                                //     scrollTop: height,
+                                //     duration: 300
+                                // });
+                            })
+                            .exec();
+                    }
+                }
                 last_time = now_time
                 let CurrentTimeMIn = (Array(2).join('0') + Math.floor(backgroundAudioManager.currentTime / 60)).slice(-2)
                 let CurrentTimeSco = (Array(2).join('0') + Math.floor(backgroundAudioManager.currentTime - Math.floor(backgroundAudioManager.currentTime / 60) * 60)).slice(-2)
@@ -344,6 +410,11 @@ Page({
             this.paramStore()
             getApp().globalData.playsongs = arr
             this.play_music()
+                // this.lrc()
+                // console.log(this.data.lrctext);
+            console.log(this.data.playsongs[this.data.current].id);
+
+
         }
         if (getApp().globalData.id === 1) {
 
@@ -358,7 +429,7 @@ Page({
             getApp().globalData.isplay = this.data.isPlay
             this.paramStore()
 
-            console.log(getApp().globalData.playsongs);
+
             if (getApp().globalData.isplay === false) {
                 this.setData({
                     duration: getApp().globalData.endtimer,
@@ -373,6 +444,10 @@ Page({
                 var backgroundAudioManager = wx.getBackgroundAudioManager();
                 this.musiccontrol(backgroundAudioManager)
             }
+            this.setData({
+                lrctext: getApp().globalData.lrctext,
+                lrctime: getApp().globalData.lrctime
+            })
 
         }
     },

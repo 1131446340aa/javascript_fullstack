@@ -114,6 +114,67 @@ Page({
             url: '../singsheet/singsheet?id=' + e.currentTarget.dataset.id
         })
     },
+    collectionsheet() {
+        if (!getApp().globalData.user) {
+            wx.showToast({
+                title: '亲爱的小可爱，您还未登录',
+                icon: 'none',
+                image: '',
+                duration: 1500,
+                mask: false,
+                success: (result) => {
+
+                },
+                fail: () => {},
+                complete: () => {}
+            });
+        } else {
+            if (getApp().globalData.collectionsheet.length === 0) {
+                wx.showToast({
+                    title: '您还没有收藏歌单，快去收藏吧',
+                    icon: 'none',
+                    image: '',
+                    duration: 1500,
+                    mask: false,
+                    success: (result) => {
+
+                    },
+                    fail: () => {},
+                    complete: () => {}
+                });
+            } else {
+                wx.navigateTo({
+                    url: '../collectionsheet/collectionsheet',
+                    success: (result) => {
+
+                    },
+                    fail: () => {},
+                    complete: () => {}
+                });
+            }
+        }
+    },
+    collectionsheetdetail() {
+        if (getApp().globalData.user) {
+            wx.request({
+                url: 'http://localhost:3001/users/collectionsheetdetail',
+                data: {
+                    username: getApp().globalData.user
+                },
+                header: { 'content-type': 'application/json' },
+                method: 'POSt',
+                dataType: 'json',
+                responseType: 'text',
+                success: (result) => {
+                    console.log(result);
+                    getApp().globalData.collectionsheet = result.data.data
+
+                },
+                fail: () => {},
+                complete: () => {}
+            });
+        }
+    },
     /**
      * 生命周期函数--监听页面加载
      */
@@ -121,7 +182,7 @@ Page({
         if (options.uservalue) {
             getApp().globalData.user = options.uservalue
         }
-
+        this.collectionsheetdetail()
         let that = this
             //轮播图
         util.api('banner', res => {

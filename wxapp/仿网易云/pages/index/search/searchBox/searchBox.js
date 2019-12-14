@@ -57,9 +57,14 @@ Page({
     playmusic(e) {
         let id = e.currentTarget.dataset.id
         getApp().globalData.playsongs = this.data.songItem
-        wx.navigateTo({
-            url: '../../../music/music?id=' + id
-        })
+        wx.redirectTo({
+            url: '../../../music/music?id=' + id,
+            success: (result) => {
+
+            },
+            fail: () => {},
+            complete: () => {}
+        });
     },
     /**
      * 生命周期函数--监听页面加载
@@ -82,9 +87,7 @@ Page({
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function() {
-
-    },
+    onShow: function() {},
 
     /**
      * 生命周期函数--监听页面隐藏

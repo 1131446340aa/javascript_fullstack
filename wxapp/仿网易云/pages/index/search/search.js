@@ -171,6 +171,9 @@ Page({
         getApp().watch(this.watchBack1)
         this.selectComponent("#music").onLoad()
         this.historyAll()
+        this.setData({
+            query: ''
+        })
     },
 
     /**

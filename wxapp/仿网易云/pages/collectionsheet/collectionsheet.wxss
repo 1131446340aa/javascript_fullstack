@@ -1,0 +1,37 @@
+.collection {
+    display: flex;
+}
+
+.image {
+    width: 160rpx;
+    height: 160rpx;
+    margin: 20rpx;
+}
+
+.image image {
+    width: 160rpx;
+    height: 160rpx;
+}
+
+.text {
+    flex: 1;
+}
+
+.songsheet-name {
+    font-size: 32rpx;
+    height: 100rpx;
+    line-height: 100rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.nickname {
+    font-size: 24rpx;
+    color: #BBBBBB;
+    height: 50rpx;
+    line-height: 50rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

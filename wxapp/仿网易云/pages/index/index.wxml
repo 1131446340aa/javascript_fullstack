@@ -21,7 +21,7 @@
     </view>
     <swiper class="swiper" current="{{current}}" bindchange="currentchange" circular="true" duration="200" autoplay="{{false}}">
         <swiper-item class="">
-            <scroll-view class="scroll" scroll-x="false" scroll-y="true">
+            <scroll-view class="scroll" scroll-x="false" scroll-y="true" scroll-with-animation="{{true}}">
                 <view class="mywrapper">
                     <view class="mywrapper-item">
                         <view class="icon">
@@ -29,17 +29,17 @@
                         </view>
                         <view class="text" bindtap="history">最近播放</view>
                     </view>
-                    <view class="mywrapper-item">
+                    <!-- <view class="mywrapper-item">
                         <view class="icon">
                             <image class="" src="./images/wodediantai.png" />
                         </view>
                         <view class="text">我的电台</view>
-                    </view>
+                    </view> -->
                     <view class="mywrapper-item">
                         <view class="icon">
                             <image class="" src="./images/wodeshoucang.png" />
                         </view>
-                        <view class="text">我的收藏</view>
+                        <view class="text" bindtap="collectionsheet">我的收藏</view>
                     </view>
                     <view class="recommend-songs">
                         <text class="title">推荐歌单</text>

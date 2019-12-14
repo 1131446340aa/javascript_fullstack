@@ -38,7 +38,10 @@ App({
         progress: 0,
         duration: 0,
         playRules: 1,
-        user: ""
+        user: "",
+        collectionsheet: [],
+        lrctext: [],
+        lrctime: [],
 
 
     }

@@ -1,0 +1,11 @@
+<view class="collection" wx:for="{{collectionsheet}}" wx:key="{{index}}" bindtap="collectionsheet" data-id="{{item.id}}">
+    <view class="image">
+        <image class="" src="{{item.pic}}">
+            
+        </image>
+    </view>
+    <view class="text">
+        <view class="songsheet-name">{{item.name}}</view>
+        <view class="nickname">by  {{item.nickname}}</view>
+    </view>
+</view>

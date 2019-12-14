@@ -1,9 +1,9 @@
 <view class="music" >
-    <view class="background">
-    <image class="" src="{{playsongs[(current+playsongs.length)%playsongs.length].al.picUrl}}" mode="scaleToFill" />
-    <view class="mask"></view>
-  </view>
-    <view class="title">
+   
+    <swiper class="music-scroll">
+        
+        <swiper-item class="" item-id="">
+            <view class="title">
         <view class="music-name">
             {{playsongs[current].name||playsongs[current].songname}}
         </view>
@@ -19,16 +19,28 @@
         </view>
     </view >
    </view>
+        </swiper-item>
+          <swiper-item class="" item-id="">
+               <view class="music-name">
+            {{playsongs[current].name||playsongs[current].songname}}
+        </view>
+      <scroll-view class="lrc-scroll" scroll-x="false" scroll-y="true" scroll-into-view="list-{{list_id}}">
+              <view class="lrc">
+        <view class="line {{index === time_id ? 'line-active' : ''}} " wx:for="{{lrctext}}" wx:key="{{index}}" id="list-{{index}}">{{item}}</view>
+    </view>
+      </scroll-view>
+        
+        </swiper-item>
+      
+          
+    </swiper>
     
     <view class="progress">
          <view class="start-time">{{currentTime}}</view>
         <movable-area class="movable-area" scale-area="false">
             <movable-view class="movable-view" direction="none" inertia="false" out-of-bounds="false" x="" y="" damping="20"
                 friction="2" disabled="false" scale="false" scale-min="0.5" scale-max="10" scale-value="1"
-                animation="true" bindchange="" bindscale="">
-               
-        
-          
+                animation="true" bindchange="" bindscale="">        
         <view class="progress-bar"  bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="touchend">
             <view class="progress-bar-end">
             
@@ -90,3 +102,13 @@
         
           
 </view>
+ <view class="background">
+    <image class="" src="{{playsongs[current].al.picUrl||playsongs[current].picUrl}}" mode="scaleToFill" />
+    <view class="mask"></view>
+</view>
+    
+
+  
+
+
+   

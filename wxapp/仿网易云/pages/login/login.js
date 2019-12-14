@@ -83,7 +83,7 @@ Page({
                 success: (res) => {
                     console.log(res);
                     if (res.data.code === 200) {
-                        wx.navigateTo({
+                        wx.reLaunch({
                             url: '../index/index?uservalue=' + this.data.uservalue,
                             success: (result) => {
 

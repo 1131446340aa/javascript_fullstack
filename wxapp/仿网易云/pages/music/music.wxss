@@ -7,6 +7,11 @@
     z-index: -1;
 }
 
+.music-index {
+    width: 100vw;
+    height: 100vh;
+}
+
 .mask {
     position: absolute;
     left: 0;
@@ -33,6 +38,8 @@
     text-align: center;
     color: #fff;
     font-size: 32rpx;
+    height: 60rpx;
+    line-height: 60rpx;
 }
 
 .music-author {
@@ -47,7 +54,7 @@
     border-radius: 270rpx;
     background-color: #1E1E20;
     border: 8rpx solid #34394C;
-    position: absolute;
+    position: fixed;
     top: 200rpx;
     left: 14%;
     display: flex;
@@ -110,7 +117,7 @@
     width: 375rpx;
     height: 375rpx;
     border-radius: 50%;
-    position: absolute;
+    position: fixed;
     top: 293rpx;
     left: 26%;
     /* transform: translate(-50%, -50%); */
@@ -253,4 +260,40 @@
     margin: 50rpx;
     font-size: 40rpx;
     font-weight: bold;
+}
+
+.line {
+    color: whitesmoke;
+    font-size: 28rpx;
+    text-align: center;
+    line-height: 60rpx;
+    height: 60rpx;
+}
+
+.line-active {
+    color: #a5faa5;
+}
+
+.lrc {
+    position: absolute;
+    top: 60rpx;
+    bottom: 200rpx;
+    left: 0;
+    right: 0;
+    /* overflow: scroll; */
+    /* background-color: red; */
+}
+
+.music-scroll {
+    /* position: absolute; */
+    height: 900rpx;
+    /* background-color: red; */
+    /* margin-top: 60rpx; */
+}
+
+.lrc-scroll {
+    /* margin-top: 60rpx; */
+    margin-top: 60rpx;
+    height: 960rpx;
+    width: 100vw;
 }

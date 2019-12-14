@@ -36,7 +36,7 @@ Page({
     },
 
     playmusic() {
-        if (app.globalData.singdetail.name) {
+        if (app.globalData.singdetail.name || app.globalData.singdetail.songname) {
             getApp().globalData.id = 1
             console.log(1);
 
@@ -73,7 +73,7 @@ Page({
 
         console.log(app.globalData.singdetail.name);
 
-        if (!app.globalData.singdetail.al && !app.globalData.singdetail.artists) {
+        if (!app.globalData.singdetail.al && !app.globalData.singdetail.songname) {
             console.log(1);
             this.setData({
                 singname: '暂无播放歌曲',
@@ -82,11 +82,11 @@ Page({
                 isplay: app.globalData.isplay
             })
         }
-        if (app.globalData.singdetail.artists) {
+        if (app.globalData.singdetail.songname) {
             this.setData({
-                singname: app.globalData.singdetail.name,
-                authorname: app.globalData.singdetail.artists[0].name,
-                pic: app.globalData.singdetail.artists[0].img1v1Url,
+                singname: app.globalData.singdetail.songname,
+                authorname: app.globalData.singdetail.authorname,
+                pic: app.globalData.singdetail.picUrl,
                 isplay: app.globalData.isplay
             })
         }

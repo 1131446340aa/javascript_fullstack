@@ -7,8 +7,8 @@
         <view class="header-title">
             <view class="title">歌单</view>
             <view class="collect" bindtap="collectsheet"> 
-                <image class="" src="../index/images/shoucang4.png"></image>
-                 <image hidden="true" class="" src="../index/images/favor-active.png"></image>
+                <image hidden="{{iscollection}}" class="" src="../index/images/shoucang4.png"></image>
+                 <image hidden="{{!iscollection}}" class="" src="../index/images/favor-active.png"></image>
             </view>
         </view>
         <view class="container">
