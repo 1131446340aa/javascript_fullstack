@@ -42,6 +42,11 @@
     line-height: 60rpx;
 }
 
+slider {
+    position: relative;
+    top: -18rpx;
+}
+
 .music-author {
     font-size: 26rpx;
     color: rgb(15, 163, 221);
@@ -156,6 +161,7 @@
     right: 0;
     top: 86%;
     display: flex;
+    height: 30rpx;
     /* bottom: 130rpx; */
     /* margin: 40rpx 30rpx; */
 }
@@ -171,56 +177,17 @@
     font-size: 24rpx;
 }
 
+.block {
+    height: 360rpx;
+    width: 100%;
+}
+
 .progress-bar {
     width: 100%;
-}
-
-.movable-area {
     flex: 1;
-}
-
-.movable-view {
-    width: 100%;
-}
-
-.active {
-    width: 100%;
-    display: flex;
-}
-
-.progress-bar-end {
-    width: 100%;
-    height: 2rpx;
-    border-radius: 1rpx;
-    background-color: #65676D;
-    margin-top: 15rpx;
-    z-index: 4;
-}
-
-.progress-bar-current {
-    height: 4rpx;
-    border-radius: 2rpx;
-    background-color: #e9e9e9;
-    z-index: 5;
-    position: relative;
-    top: -3rpx;
-    max-width: 100%;
-}
-
-.progress-bar-globle {
-    width: 12rpx;
-    height: 12rpx;
-    border-radius: 6rpx;
-    background-color: #e9e9e9;
-    z-index: 5;
-    position: relative;
-    top: -7rpx;
-}
-
-.slider {
-    width: 100%;
-    position: relative;
-    bottom: 15px;
+    /* padding-top: 12rpx;
+    box-sizing: border-box; */
+    width: 30rpx;
 }
 
 .bg {
@@ -268,6 +235,9 @@
     text-align: center;
     line-height: 60rpx;
     height: 60rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .line-active {
@@ -285,15 +255,24 @@
 }
 
 .music-scroll {
-    /* position: absolute; */
-    height: 900rpx;
-    /* background-color: red; */
-    /* margin-top: 60rpx; */
+    height: 960rpx;
 }
 
 .lrc-scroll {
     /* margin-top: 60rpx; */
-    margin-top: 60rpx;
-    height: 960rpx;
+    /* margin-top: 60rpx; */
+    height: 840rpx;
     width: 100vw;
+}
+
+.music-name1 {
+    margin-bottom: 60rpx;
+}
+
+.bigline {
+    height: 840rpx;
+    width: 100vw;
+    line-height: 840rpx;
+    text-align: center;
+    color: #a5faa5;
 }

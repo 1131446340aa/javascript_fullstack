@@ -1,6 +1,7 @@
 // pages/music/music.js
 const util = require('../../utils/api')
 const lrc = require('../../utils/splitlrc')
+let i = 0
 var app = getApp()
 Page({
 
@@ -37,12 +38,15 @@ Page({
                 if (result.data.lrc.lyric) {
                     getApp().globalData.lrctext = lrc.toLrc(result.data.lrc.lyric).arrtext
                     getApp().globalData.lrctime = lrc.toLrc(result.data.lrc.lyric).arrdatatime
+                } else {
+                    getApp().globalData.lrctext = ""
+                    getApp().globalData.lrctime = ""
                 }
                 this.setData({
                     lrctext: getApp().globalData.lrctext,
                     lrctime: getApp().globalData.lrctime
                 })
-                console.log(getApp().globalData.lrctime);
+
 
 
             },
@@ -50,70 +54,31 @@ Page({
             complete: () => {}
         });
     },
-    move(e) {
 
-        let selQuery = wx.createSelectorQuery();
-        selQuery.select('.progress-bar').boundingClientRect()
-        selQuery.exec(res => {
-            let left = res[0].left
-            let Width = res[0].width
-            this.setData({
-                progress: ((e.touches[0].clientX - left) / Width) * 100,
-                Width: Width,
-                isTouch: true
-            })
-            if (this.data.progress < 0) {
-                this.setData({
-                    progress: 0
-
-                })
-            }
-            if (this.data.progress > 100) {
-                this.setData({
-                    progress: 100
-                })
-            }
-        })
-    },
     touchstart(e) {
-        this.move(e)
+        // console.log(e);
+
         this.setData({
-            isTouch: false
+            isTouch: true,
+
         })
-
-    },
-    touchmove(e) {
-
-
-        this.move(e)
-
     },
     touchend(e) {
-        let selQuery = wx.createSelectorQuery();
-        selQuery.select('.progress-bar').boundingClientRect()
-        selQuery.exec(res => {
-            let offset = res[0].left
-            let Width = res[0].width
-            this.setData({
-                progress: ((e.changedTouches[0].clientX - offset) / Width) * 100,
-                isTouch: false,
+        // console.log(e.detail);
+        // console.log(this.data.endTimer);
 
-            })
 
-            if (this.data.progress < 0) {
-                this.setData({
-                    progress: 0
-                })
-            }
-            if (this.data.progress > 100) {
-                this.setData({
-                    progress: 100
-                })
-            }
-            const backgroundAudioManager = wx.getBackgroundAudioManager()
-            backgroundAudioManager.seek(Math.floor(this.data.progress * this.data.endTimer / 100))
+        const backgroundAudioManager = wx.getBackgroundAudioManager()
+        backgroundAudioManager.seek(Math.floor(e.detail.value * this.data.endTimer / 100))
+            // this.setData({
+
+        //     progress: e.detail.value
+        // })
+        this.setData({
+            isTouch: false,
+            progress: e.detail.value
+
         })
-
     },
     //歌单是否显示
     HiddenList() {
@@ -145,29 +110,6 @@ Page({
 
     },
     //是否播放
-    rotate() {
-        // this.animate('circle', [{ opacity: 1.0, rotate: 0, backgroundColor: '#FF0000' },
-        //         { opacity: 0.5, rotate: 45, backgroundColor: '#00FF00' },
-        //         { opacity: 1.0, rotate: 90, backgroundColor: '#FF0000' }
-        //     ], 400)
-        // let animation = wx.createAnimation({
-        //     duration: 2700,
-        //     timingFunction: 'linear',
-        //     delay: 0,
-        //     transformOrigin: '50% 50% 0'
-
-        // })
-        // this.animation = animation
-        // setInterval(function() {
-        //     console.log(1);
-
-        //     this.animation.rotate(0).step()
-        //     this.animation.rotate(360).step()
-        //     this.setData({
-        //         animation: animation.export()
-        //     })
-        // }.bind(this), 2700)
-    },
     isPlay() {
         // this.rotate()
         this.setData({
@@ -221,7 +163,7 @@ Page({
                 complete: () => {}
             });
         }
-        console.log(this.data.id);
+
 
 
         getApp().globalData.current = that.data.current
@@ -308,52 +250,57 @@ Page({
     musiccontrol(backgroundAudioManager) {
         let last_time = 0;
         let that = this
+
+        that.setData({
+            time_id: 0,
+            list_id: 0
+
+
+        })
+
         backgroundAudioManager.onTimeUpdate(() => {
+            let now_time = Date.parse(new Date())
+            if ((now_time - last_time) >= 800 || this.data.isclick === true || this.data.isTouch === true) {
 
-            let now_time = new Date().getTime()
-            if ((now_time - last_time) > 1000 || this.data.isclick === true || this.data.isTouch === true) {
-                console.log(getApp().globalData.lrctext);
-
-
+                // console.log(Math.floor(backgroundAudioManager.currentTime));
                 for (let i = 0; i < getApp().globalData.lrctime.length; i++) {
-
                     if (getApp().globalData.lrctime[i] == Math.floor(backgroundAudioManager.currentTime)) {
+                        {
+                            const query = wx.createSelectorQuery()
+                            query.select(".line")
+                                .boundingClientRect(function(rect) {
+                                    that.setData({
+                                        time_id: i,
+                                        list_id: i
 
-                        const query = wx.createSelectorQuery()
-                        query.select(".line")
-                            .boundingClientRect(function(rect) {
-                                that.setData({
-                                    time_id: i,
-                                    list_id: i
+                                    })
+                                    if (that.data.list_id <= 6) {
+                                        that.setData({
 
+                                            list_id: 0
+
+                                        })
+
+                                    } else {
+                                        that.setData({
+
+                                            list_id: that.data.list_id - 6
+
+                                        })
+
+                                    }
                                 })
-                                if (that.data.list_id <= 6) {
-                                    that.setData({
-
-                                        list_id: 0
-
-                                    })
-                                } else {
-                                    that.setData({
-
-                                        list_id: that.data.list_id - 6
-
-                                    })
-                                }
-
-                                // wx.pageScrollTo({
-                                //     scrollTop: height,
-                                //     duration: 300
-                                // });
-                            })
-                            .exec();
+                                .exec();
+                        }
                     }
                 }
                 last_time = now_time
                 let CurrentTimeMIn = (Array(2).join('0') + Math.floor(backgroundAudioManager.currentTime / 60)).slice(-2)
                 let CurrentTimeSco = (Array(2).join('0') + Math.floor(backgroundAudioManager.currentTime - Math.floor(backgroundAudioManager.currentTime / 60) * 60)).slice(-2)
-                let endTimeMIn = (Array(2).join('0') + Math.floor(backgroundAudioManager.duration / 60)).slice(-2)
-                let endTimeSco = (Array(2).join('0') + Math.floor(backgroundAudioManager.duration - Math.floor(backgroundAudioManager.duration / 60) * 60)).slice(-2)
+                if (!endTimeMIn) {
+                    var endTimeMIn = (Array(2).join('0') + Math.floor(backgroundAudioManager.duration / 60)).slice(-2)
+                    var endTimeSco = (Array(2).join('0') + Math.floor(backgroundAudioManager.duration - Math.floor(backgroundAudioManager.duration / 60) * 60)).slice(-2)
+                }
                 this.setData({
                     duration: endTimeMIn + " : " + endTimeSco,
                     currentTime: CurrentTimeMIn + " : " + CurrentTimeSco,
@@ -368,6 +315,8 @@ Page({
                 if (this.data.isTouch === false) {
                     this.setData({ progress: Math.floor(backgroundAudioManager.currentTime / backgroundAudioManager.duration * 100), })
                 }
+                // console.log(this.data.progress);
+
                 // console.log(1);
             }
         })
@@ -397,22 +346,19 @@ Page({
         })
         if (getApp().globalData.id === 0) {
             var list = app.globalData.playsongs
-            var music = list[options.id]
-            let arr = [music, ...list]
-            let id = Math.floor(options.id) + 1
-            arr.splice(id, 1)
             this.setData({
-                playsongs: arr,
-                playSongsRules: arr,
-                isPlay: true
+                playsongs: list,
+                playSongsRules: list,
+                isPlay: true,
+                current: Math.floor(options.id)
             })
             getApp().globalData.isplay = this.data.isPlay
             this.paramStore()
-            getApp().globalData.playsongs = arr
+            getApp().globalData.playsongs = list
             this.play_music()
                 // this.lrc()
                 // console.log(this.data.lrctext);
-            console.log(this.data.playsongs[this.data.current].id);
+
 
 
         }

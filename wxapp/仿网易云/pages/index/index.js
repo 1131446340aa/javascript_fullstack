@@ -166,7 +166,7 @@ Page({
                 dataType: 'json',
                 responseType: 'text',
                 success: (result) => {
-                    console.log(result);
+                    // console.log(result);
                     getApp().globalData.collectionsheet = result.data.data
 
                 },

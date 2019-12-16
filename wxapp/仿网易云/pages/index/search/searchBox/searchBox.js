@@ -32,9 +32,9 @@ Page({
                 for (let i = 0; i < res.data.result.songs.length; i++) {
                     util.api('song/detail', res => {
                         this.setData({
-                            songItem: [...this.data.songItem, ...res.data.songs]
-                        })
-                        console.log(this.data.songItem);
+                                songItem: [...this.data.songItem, ...res.data.songs]
+                            })
+                            // console.log(this.data.songItem);
 
                     }, { ids: res.data.result.songs[i].id })
                 }

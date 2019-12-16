@@ -7,12 +7,13 @@ function toLrc(Str) {
     var reg = /^\[+[0-2][0-4]:[0-5][0-9]\.[0-9]{2,}\]/
         // console.log(lrc);
     for (let i = 0; i < lrc.length - 1; i++) {
-        if (lrc[i].split(reg)) {
+        // if (item.match(reg)[0]) { arrtime.push(item.match(reg)[0]) }
+        if (lrc[i].match(reg) && lrc[i].split(reg)) {
+            arrtime.push(lrc[i].match(reg)[0])
             arrtext.push(lrc[i].split(reg).join("").trim())
         }
-        // if (item.match(reg)[0]) { arrtime.push(item.match(reg)[0]) }
-        if (lrc[i].match(reg)) { arrtime.push(lrc[i].match(reg)[0]) }
         // console.log(item.match(reg));
+
     }
     for (var item of arrtime) {
         arrdatatime.push(parseInt(item.slice(1, item.length - 1).split(':')[0] * 60) + parseInt(item.slice(1, item.length - 1).split(':')[1]))

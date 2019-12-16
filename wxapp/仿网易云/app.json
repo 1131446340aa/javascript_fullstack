@@ -1,9 +1,9 @@
 {
     "pages": [
         "pages/index/index",
+        "pages/index/search/search",
         "pages/music/music",
         "pages/login/login",
-        "pages/index/search/search",
         "pages/register/register",
         "pages/musictabbar/musictabbar",
         "pages/singsheet/singsheet",

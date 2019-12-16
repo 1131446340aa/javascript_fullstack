@@ -21,42 +21,25 @@
    </view>
         </swiper-item>
           <swiper-item class="" item-id="">
-               <view class="music-name">
+               <view class="music-name music-name1">
             {{playsongs[current].name||playsongs[current].songname}}
         </view>
       <scroll-view class="lrc-scroll" scroll-x="false" scroll-y="true" scroll-into-view="list-{{list_id}}">
-              <view class="lrc">
-        <view class="line {{index === time_id ? 'line-active' : ''}} " wx:for="{{lrctext}}" wx:key="{{index}}" id="list-{{index}}">{{item}}</view>
-    </view>
-      </scroll-view>
-        
-        </swiper-item>
-      
-          
+        <view class="lrc">
+            <!-- <view class="block"></view> -->
+            <view hidden="{{!lrctext}}" class="line {{index === time_id ? 'line-active' : ''}} " wx:for="{{lrctext}}" wx:key="{{index}}" id="list-{{index}}">{{item}}</view>
+            <!-- <view class="block"></view> -->
+             <view hidden="{{lrctext}}" class="bigline" >暂无歌词</view>
+        </view>
+      </scroll-view>  
+        </swiper-item>      
     </swiper>
     
     <view class="progress">
          <view class="start-time">{{currentTime}}</view>
-        <movable-area class="movable-area" scale-area="false">
-            <movable-view class="movable-view" direction="none" inertia="false" out-of-bounds="false" x="" y="" damping="20"
-                friction="2" disabled="false" scale="false" scale-min="0.5" scale-max="10" scale-value="1"
-                animation="true" bindchange="" bindscale="">        
-        <view class="progress-bar"  bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="touchend">
-            <view class="progress-bar-end">
-            
+            <view class="progress-bar">
+                <slider  block-size="12" active-color="#e9e9e9" block-color="#e9e9e9" background-color="#65676D" value="{{progress}}" bindchanging="touchstart" bindchange="touchend"></slider>    
             </view>
-            <view class="active">
-                
-                <view class="progress-bar-current" style="width:{{progress}}%">
-                </view>
-                <view class="progress-bar-globle"> </view>
-            </view>
-              
-        </view>
-        
-            </movable-view>
-              
-        </movable-area>
         <view class="end-time">{{duration}}</view>
     </view>
     <view class="contral">
