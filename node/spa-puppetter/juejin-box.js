@@ -17,7 +17,6 @@ async function run() {
     books.each(function() {
         const book = $(this)
         console.log($(book.find('.price-text')).text());
-
         const price = $(book.find('.price-text')).text().replace('￥', '')
         const count = $(book.find('.message')).last().find('span').text().replace('人已购买', '');
         totalSale += Number(price) * Number(count);
