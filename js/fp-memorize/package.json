@@ -1,0 +1,17 @@
+{
+  "name": "fp-memorize",
+  "version": "1.0.0",
+  "description": "相同的输入会有相同的输出/并不会产生副作用\r f(x)=x^2//和数学里面的函数一样=>代码里面的函数\r 不纯：\r io操作\r Math.random()\r appendChild\r 纯函数\r 易测试\r 易于缓存\r ## 状态码 \r 200：成功的状态\r 304：缓存相关，服务器不返回任何内容，浏览器从缓存里面取到内容\r 缓存的流程：\r 响应头\r 第一次请求 ：浏览器是会向服务器请求资源，服务器响应内容的时候，会设置当前的资源缓存的一些字段\r 1.exprise(1.0)/ cache-control(1.1)时间\r 2 etag ：abcd last-modified: 文件最后修改时",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.11.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0"
+  }
+}
