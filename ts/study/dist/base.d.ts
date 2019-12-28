@@ -1,0 +1,11 @@
+declare const loading: boolean;
+declare const decliteral: number;
+declare const hexl: number;
+declare const book: string;
+declare function User(): void;
+declare const a: void;
+declare const b: null;
+declare let u: undefined;
+declare let n: null;
+declare const syml: unique symbol;
+declare const syml2: unique symbol;
