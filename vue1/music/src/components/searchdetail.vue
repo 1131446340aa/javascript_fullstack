@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="search">
-      <div class="left">
+      <div class="left" @click="goback">
         <i class="iconfont icon-left-arrow"></i>
       </div>
       <div class="middle">
@@ -23,7 +23,7 @@
         <div class="right"></div>
       </div>
     </BScroll>
-     <controlbar></controlbar>
+    <controlbar></controlbar>
   </div>
 </template>
 
@@ -32,10 +32,11 @@ import { fetchGet } from "../../network/index";
 import BScroll from "./scroll";
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import bus from "../../config/bus";
-import controlbar from './controlbar'
+import controlbar from "./controlbar";
 export default {
   components: {
-    BScroll,controlbar
+    BScroll,
+    controlbar
   },
   computed: {
     // ...mapGetters(["x"])
@@ -68,7 +69,12 @@ export default {
         }, wait);
       };
     },
+    goback() {
+      this.$router.go(-1);
+    },
     api() {
+      console.log(this.value);
+      
       if (this.value) {
         fetchGet("/search", {
           keywords: this.value,

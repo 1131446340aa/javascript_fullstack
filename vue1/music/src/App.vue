@@ -1,9 +1,10 @@
 <template>
   <div id="app">
+    <audio v-show="Songurl&&isplay" :src="Songurl" autoplay="true"></audio>
     <keep-alive>
-      <audio v-show="Songurl&&isplay" :src="Songurl" autoplay="true"></audio>
+      <router-view v-if="$route.meta.keepAlive" />
     </keep-alive>
-    <router-view />
+    <router-view v-if="!$route.meta.keepAlive" />
   </div>
 </template>
 
@@ -14,18 +15,10 @@ export default {
   name: "App",
   mixins: [mixin],
   computed: {
-    ...mapGetters([
-      "seek"
-    ])
+    ...mapGetters(["seek"])
   },
   methods: {
-    ...mapActions([
-      "Duration",
-      "CurrentTime",
-      "Ended",
-      "started",
-      "ISSeek"
-    ])
+    ...mapActions(["Duration", "CurrentTime", "Ended", "started", "ISSeek"])
     // playing(){
     //   console.log(12);
     // }
@@ -42,7 +35,7 @@ export default {
     },
     ended: function() {
       if (this.ended) {
-        this.nextone()
+        this.nextone();
       }
     }
   },

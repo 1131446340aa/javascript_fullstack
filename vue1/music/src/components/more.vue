@@ -21,8 +21,9 @@
       </i>
       <BScroll :bottom="0">
         <div class="song-item" v-for="(item,key) in singsheet" :key="item.index" @click="send(key)">
-          <div class="text">{{item.name}}</div>
+          <div class="text">{{item.name||item.songs[0].name}}</div>
           <div v-if="item.artists" class="smalltext">-{{item.artists[0].name}}</div>
+          <div v-if="item.songs" class="smalltext">-{{item.songs[0].ar[0].name}}</div>
         </div>
       </BScroll>
     </div>
@@ -53,6 +54,10 @@ export default {
   },
   components: {
     BScroll
+  },
+  mounted(){
+  
+    
   }
 };
 </script>

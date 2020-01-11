@@ -1,23 +1,37 @@
 <template>
   <div class="main">
-    <div class="top">
-      <div class="icon">
-        <i class="iconfont icon-left-arrow"></i>
-      </div>
-      <div class="text">
-        <div class="song">{{songitem.name}}</div>
-        <div class="singer" v-if="songitem.ar">{{songitem.ar[0].name}}</div>
-      </div>
-    </div>
-    <div class="big-circle">
-      <div
-        class="small-circle"
-        :style="{ animationPlayState :isplay?'running':'paused'}"
-        v-if="songitem.al"
-      >
-        <img :src="songitem.al.picUrl" alt />
-      </div>
-    </div>
+    <van-swipe indicator-color="white">
+      <van-swipe-item>
+        <div class="swipe-music">
+          <musictop></musictop>
+          <div class="big-circle">
+            <div
+              class="small-circle"
+              :style="{ animationPlayState :isplay?'running':'paused'}"
+              v-if="songitem.al"
+            >
+              <img :src="songitem.al.picUrl" alt />
+            </div>
+          </div>
+        </div>
+      </van-swipe-item>
+      <van-swipe-item>
+        <div class="swipe-lrc">
+          <musictop></musictop>
+          <BScroll :listenScroll="true" ref="scroll_lrc">
+            <div class="item_lrc" v-for="(item,index) in 5"></div>
+            <div class="item_lrc" :class="{activelrc:currentlrc===index}"  v-for="(item,index) in songlrc.arrtext" :key="index">
+              <div class="bglrc">{{item}}</div>
+              <!-- <div :class="{activelrc:currentlrc===index}">
+                <div class="actived">{{item}}</div>
+              </div> -->
+            </div>
+            <div class="item_lrc" v-for="(item,index) in 5"></div>
+          </BScroll>
+        </div>
+      </van-swipe-item>
+    </van-swipe>
+
     <div class="control">
       <div class="progress">
         <div class="left">{{currentTime}}</div>
@@ -72,6 +86,7 @@ import { mapGetters, mapActions } from "vuex";
 import BScroll from "./scroll";
 import { mixin } from "../mixin/mixins";
 import more from "./more";
+import musictop from "./music_top";
 export default {
   mixins: [mixin],
   watch: {
@@ -79,14 +94,42 @@ export default {
       if (!this.touching) {
         this.values = this.value;
       }
+    },
+    currentTime: function() {
+      // let bglrc=document.querySelectorAll('.bglrc')
+      let timer =
+        this.currentTime.slice(0, 2) * 60 + this.currentTime.slice(3, 5) * 1;
+
+      if (Array.from(this.songlrc.arrdatatime).indexOf(timer) !== -1) {
+        this.currentlrc = Array.from(this.songlrc.arrdatatime).indexOf(timer);
+        this.$refs.scroll_lrc.scrollTo(
+          0,
+          Array.from(this.songlrc.arrdatatime).indexOf(timer) * -40
+        );
+        if (
+          this.currentlrc === this.songlrc.arrdatatime.length ||
+          timer === 0
+        ) {
+          this.currentlrc = 0;
+        }
+        // console.log(bglrc[this.currentlrc].style);
+      }
     }
   },
   computed: {},
+  data() {
+    return {
+      currentlrc: 0
+    };
+  },
   methods: {
     moving(value) {
       console.log(this.values);
       this.Value(this.values);
       this.Seek();
+    },
+    scroll(e) {
+      console.log(e);
     },
     movestart() {
       this.touching = true;
@@ -120,12 +163,13 @@ export default {
       console.log(this.playrules);
     }
   },
-  mounted() {
+  mounted() {   
     this.api();
   },
   components: {
     BScroll,
-    more
+    more,
+    musictop
   }
 };
 </script>
@@ -138,6 +182,41 @@ export default {
     transform rotate(180deg)
   100%
     transform rotate(360deg)
+@keyframes lrcactiveed
+  0%
+    width 0
+  100%
+    width 500px
+.item_lrc
+  text-align center
+  color #ffffff
+  font-size 14px
+  height 40px
+  line-height 40px
+  overflow hidden
+  text-overflow ellipsis
+  white-space nowrap
+.activelrc
+  color #a5faa5
+  text-align center
+  font-size 14px
+  height 40px
+  line-height 40px
+  overflow hidden
+  white-space nowrap
+    // position relative
+    // bottom 40px
+    // .actived
+    //   display inline-block
+      // width 0px
+      // // overflow hidden
+      // animation lrcactiveed 3s linear 
+.swipe-music
+  position relative
+  height 80vh
+.swipe-lrc
+  height 80vh
+  position relative
 .wrapper
   display flex
   height 30px
@@ -149,12 +228,11 @@ export default {
     align-items center
     .iconfont
       font-size 25px
+      color #ffffff
     .small
       font-size 15px
     .big
       font-size 30px
-.iconfont
-  color #ffffff
 .background
   position fixed
   top 0
@@ -185,7 +263,8 @@ export default {
   position fixed
   left 0
   right 0
-  bottom 30px
+  height 15vh
+  bottom 2vh
   .progress
     display flex
     height 20px
@@ -227,18 +306,4 @@ export default {
   position relative
   height 100vh
   box-sizing border-box
-  .top
-    height 49px
-    display flex
-    .icon
-      line-height 49px
-      margin-right 10px
-    .text
-      line-height 25px
-.song
-  font-size 14px
-  color #ffffff
-.singer
-  font-size 10px
-  color #9e9e9e
 </style>

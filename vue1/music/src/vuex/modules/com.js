@@ -2,7 +2,7 @@ import * as types from '../types'
 const state = {
   singsheet: [],
   playrules: 0,
-  isplay: true,
+  isplay: false,
   songurl: "",
   index: "",
   currentTime: '00:00',
@@ -10,7 +10,9 @@ const state = {
   value:0,
   ended:"false",
   seek:false,//进度条点击
-  songitem:""
+  songitem:"",
+  songlrc:"",
+  playlist:""//虚化背景图
 }
 //方法
 const mutations = {
@@ -48,7 +50,12 @@ const mutations = {
   songitem(state, songitem) {
     state.songitem = songitem
   },
-  
+  songlrc(state, songlrc) {
+    state.songlrc = songlrc
+  },
+  playlist(state, playlist) {
+    state.playlist = playlist
+  }, 
 }
 //异步
 const actions = {
@@ -79,6 +86,12 @@ const actions = {
   songurl({ commit, state }, songurl) {
     let songUrl = songurl
     commit('songurl', songUrl)
+  },
+  SongLrc({ commit, state }, SongLrc) {
+    commit('songlrc', SongLrc)
+  },
+  playList({ commit, state }, playList) {
+    commit('playlist', playList)
   },
   Index({ commit, state }, index) {
     let Index = index
@@ -117,7 +130,9 @@ const getters = {
   value:state=>state.value,
   ended:state=>state.ended,
   seek:state=>state.seek,
-  songitem:state=>state.songitem
+  songitem:state=>state.songitem,
+  songlrc:state=>state.songlrc,
+  playlist:state=>state.playlist
 
 }
 

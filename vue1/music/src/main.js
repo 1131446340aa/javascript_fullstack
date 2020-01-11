@@ -9,7 +9,9 @@ import { Search } from 'vant';
 import { Slider } from 'vant';
 import store from '../src/vuex/store'
 import { Area } from 'vant';
+import { Notify } from 'vant';
 
+Vue.use(Notify);
 Vue.use(Area);
 Vue.use(Slider);
 Vue.use(Search)

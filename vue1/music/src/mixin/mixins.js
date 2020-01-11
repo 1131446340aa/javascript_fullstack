@@ -1,5 +1,6 @@
 import { fetchGet } from "../../network/index";
 import { mapGetters, mapActions } from "vuex";
+import split_lrc from '../../config/split_lrc'
 export const mixin = {
     data() {
         return {
@@ -19,7 +20,8 @@ export const mixin = {
             "Playing",
             "Seek",
             "Value",
-            'Songitem'
+            'Songitem',
+            "SongLrc"
         ]),
         nextone() {
             if (this.playrules === 0) {
@@ -53,18 +55,40 @@ export const mixin = {
         },
 
         api() {
+            let id
+            if( this.singsheet[this.index].songs){
+                id=this.singsheet[this.index].songs[0].id
+            }
+            else{
+                id=this.singsheet[this.index].id
+            }
             fetchGet("/song/detail", {
-                ids: this.singsheet[this.index].id
+                ids: id
             }).then(res => {
                 console.log(res);
                 this.songs = res.songs[0];
                 this.Songitem(res.songs[0])
                 fetchGet("/song/url", {
-                    id: this.singsheet[this.index].id
+                    id: id
                 }).then(res => {
+                    if(!res.data[0].url){
+                        this.$notify({ type: "danger", message: "付费音乐，播放下一首", duration: 1000 });
+                        setTimeout(this.nextone,1500)
+                    }
+                   else{
                     this.Playing();
                     //   this.sonngurl = res.data[0].url;
                     this.songurl(res.data[0].url);
+                    fetchGet('/lyric',{
+                        id:id
+                    }).then(res=>{
+                       
+                    //    console.log( split_lrc(res.lrc.lyric));
+                       this.SongLrc(split_lrc(res.lrc.lyric))
+                       console.log( this.songlrc);
+                       
+                    })
+                   }
                    
                 });
             });
@@ -81,7 +105,8 @@ export const mixin = {
             "duration",
             "value",
             "ended",
-            "songitem"
+            "songitem",
+            "songlrc"
         ])
     }
 }

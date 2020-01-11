@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <BScroll>
+    <BScroll :bottom="49">
       <div class="swiper">
         <van-swipe :autoplay="3000" indicator-color="white">
           <van-swipe-item v-for="item in banners" :key="item.index">
@@ -41,9 +41,7 @@
             <div class="text">直播</div>
           </div>
         </div>
-        <div class="fz-18">
-          推荐歌单
-        </div>
+        <div class="fz-18">推荐歌单</div>
         <singsheet></singsheet>
       </div>
     </BScroll>
@@ -52,12 +50,13 @@
 </template>
 
 <script>
+import { mapGetters, mapActions, mapMutations } from "vuex";
 import BScroll from "./scroll";
 import { fetchGet } from "../../network/index";
-import singsheet from './singsheet'
-import controlbar from './controlbar'
+import singsheet from "./singsheet";
+import controlbar from "./controlbar";
 export default {
-  components: { BScroll,singsheet,   controlbar },
+  components: { BScroll, singsheet, controlbar },
   created() {
     fetchGet("/banner").then(res => {
       this.banners = res.banners;
@@ -65,8 +64,12 @@ export default {
   },
   data() {
     return {
-      banners: []
+      banners: [],
+     
     };
+  },
+  computed: {
+    ...mapGetters(["songitem"])
   }
 };
 </script>

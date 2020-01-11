@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-   <div class="item" v-for="item in personalized" :key="item.index">
+   <div class="item" v-for="(item,index) in personalized" :key="index" @click="todetail(index)">
        <div class="image"><img :src="item.picUrl" alt=""></div>
        <div class="text">{{item.name}}</div>
    </div>
@@ -21,6 +21,13 @@ export default {
     return {
       personalized: []
     };
+  },
+  methods:{
+    todetail(index){
+      console.log(this.personalized[index].id);
+      
+      this.$router.push({path:"/singsheetdetail",query:{id:this.personalized[index].id}})
+    }
   }
 };
 </script>

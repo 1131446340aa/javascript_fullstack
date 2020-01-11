@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="search">
-      <div class="left">
+      <div class="left" @click="goback">
         <i class="iconfont icon-left-arrow"></i>
       </div>
       <div class="middle">
@@ -71,6 +71,9 @@ export default {
     }, 400);
   },
   methods: {
+    goback(){
+      this.$router.go(-1)
+    },
     debounce(func, wait) {
       let timeout = null;
       return function() {
@@ -88,6 +91,7 @@ export default {
       if (e.target) {
         this.value = e.target.innerText;
       }
+      
       this.$router.push({
         path: "./searchdetail",
         query: { value: this.value }
