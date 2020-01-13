@@ -1,6 +1,9 @@
 <template>
   <div class="singsheetdetail">
-    <daohang name="歌单"></daohang>
+    <daohang name="歌单">
+      <i  class="iconfont icon-shoucang"></i>
+      <!-- <i v-if="collect" class="iconfont icon-favor-active"></i> -->
+    </daohang>
     <BScroll>
       <div>
         <playlistintroduce></playlistintroduce>
@@ -20,7 +23,7 @@ import daohang from "./daohang";
 import BScroll from "./scroll";
 import playlistintroduce from "./playlist_introduce";
 import scrollplaylist from "./scrollplaylist";
-import controlbar from './controlbar'
+import controlbar from "./controlbar";
 export default {
   components: {
     daohang,

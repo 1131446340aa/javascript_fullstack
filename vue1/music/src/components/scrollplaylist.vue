@@ -58,13 +58,15 @@ export default {
       });
       this.Index(index);
       this.saveSingsheet(this.allsong);
-      console.log(this.singsheet[this.index].songs[0].id);
+      // console.log(this.singsheet[this.index].songs[0].id);
     }
   }
 };
 </script>
 
 <style lang="stylus" scoped>
+.main
+  background-color #F2F6FC
 .item
   display flex
   height 60px
@@ -96,6 +98,9 @@ export default {
   line-height 49px
   display flex
   margin-left 10px
+  border-top-left-radius 20px
+  border-top-right-radius 20px
+  // overflow hidden
   .text
     font-size 16px
   .icon

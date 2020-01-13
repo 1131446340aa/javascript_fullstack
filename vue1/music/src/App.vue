@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <audio v-show="Songurl&&isplay" :src="Songurl" autoplay="true"></audio>
+    <audio v-show="Songurl&&isplay" :src="Songurl" autoplay="true" :loop="playrules===2"></audio>
     <keep-alive>
       <router-view v-if="$route.meta.keepAlive" />
     </keep-alive>
@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import { fetchGet } from "../network/index";
 import { mapGetters, mapActions } from "vuex";
 import { mixin } from "./mixin/mixins";
 export default {
@@ -18,7 +19,7 @@ export default {
     ...mapGetters(["seek"])
   },
   methods: {
-    ...mapActions(["Duration", "CurrentTime", "Ended", "started", "ISSeek"])
+    ...mapActions(["Duration", "CurrentTime", "Ended", "started", "ISSeek","ID"])
     // playing(){
     //   console.log(12);
     // }
@@ -35,8 +36,10 @@ export default {
     },
     ended: function() {
       if (this.ended) {
-        this.nextone();
+        this.nextone();        
       }
+      console.log(this.ended);
+      
     }
   },
   mounted() {
@@ -45,9 +48,13 @@ export default {
 
     audio.onended = function() {
       that.Ended();
-      console.log(that.ended);
     };
     audio.ontimeupdate = function(e) {
+      // if(e.target.duration<e.target.currentTime+.3){
+      //   that.nextone()
+      //   console.log(123);
+        
+      // }
       let Duration_m = Math.floor(e.target.duration / 60) + "";
       let Duration_s = Math.floor(e.target.duration % 60) + "";
       let endtimer =
@@ -72,6 +79,9 @@ export default {
       // that.Value(e.target.currentTime/e.target.duration*100)
       // console.log(that.value);
     };
+  },
+  created(){
+    
   }
 };
 </script>

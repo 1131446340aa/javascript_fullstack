@@ -5,14 +5,10 @@
         <i class="iconfont icon-left-arrow"></i>
       </div>
       <div class="text">{{name}}</div>
-      <div class="slot">
-        <slot></slot>
-      </div>
     </div>
-    <div class="bg">
-      <img v-if="playlist.coverImgUrl" :src="playlist.coverImgUrl" />
-      <img v-if="playlist.creator" :src="playlist.creator.backgroundUrl" />
-    </div>
+    <!-- <div class="bg">
+      <img :src="playlist.coverImgUrl" />
+    </div>-->
   </div>
 </template>
 
@@ -26,11 +22,7 @@ export default {
     },
     color: {
       type: String,
-      default: "#ffffff"
-    },
-    collect: {
-      type: Boolean,
-      default: false
+      default: ""
     }
   },
   methods: {
@@ -38,16 +30,16 @@ export default {
       this.$router.go(-1);
     }
   },
+  mounted() {
+    this.$nextTick(function() {
+      let icon = document.querySelector(".iconfont");
+      icon.style.color = this.color;
+      let text = document.querySelector(".text");
+      text.style.color = this.color;
+    });
+  },
   computed: {
     ...mapGetters(["playlist"])
-  },
-  mounted() {
-    console.log(this.color);
-
-    let icon = document.querySelector(".iconfont");
-    icon.style.color = this.color;
-    let text = document.querySelector(".text");
-    text.style.color = this.color;
   }
 };
 </script>
@@ -69,18 +61,14 @@ export default {
 .top
   height 49px
   display flex
-  .icon, .slot
+  .icon
     line-height 49px
     margin-right 10px
     margin-left 10px
   .text
     line-height 49px
     font-size 14px
-    color #ffffff
-    flex 1
+    color #000000
 .iconfont
-  color #ffffff
-.slot
-  .iconfont
-    color red
+  color #000000
 </style>

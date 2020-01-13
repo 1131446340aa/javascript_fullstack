@@ -10,7 +10,18 @@ import { Slider } from 'vant';
 import store from '../src/vuex/store'
 import { Area } from 'vant';
 import { Notify } from 'vant';
+import { Lazyload } from 'vant';
+import { Button } from 'vant';
+import { Field } from 'vant';
+import { Toast } from 'vant';
+import { Collapse, CollapseItem } from 'vant';
 
+Vue.use(Collapse).use(CollapseItem);
+Vue.use(Toast);
+Vue.use(Field);
+Vue.use(Button);
+// options 为可选参数，无则不传
+Vue.use(Lazyload);
 Vue.use(Notify);
 Vue.use(Area);
 Vue.use(Slider);

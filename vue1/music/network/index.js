@@ -11,13 +11,14 @@ export function fetchGet(url, param) {
     axios.get(url, {
       params: param
     })
-    .then(response => {
-      resolve(response.data)
-    }, err => {
-      reject(err)
-    })
-    .catch((error => {
-      reject(error)
-    }))
+      .then(response => {
+        resolve(response.data)
+      }, err => {
+        reject(err)
+      })
+      .catch((error => {
+        reject(error)
+      }))
   })
 }
+

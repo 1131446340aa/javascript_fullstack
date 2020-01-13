@@ -12,7 +12,8 @@ const state = {
   seek:false,//进度条点击
   songitem:"",
   songlrc:"",
-  playlist:""//虚化背景图
+  playlist:"",//虚化背景图
+  id:""
 }
 //方法
 const mutations = {
@@ -56,6 +57,9 @@ const mutations = {
   playlist(state, playlist) {
     state.playlist = playlist
   }, 
+  id(state, id) {
+    state.id = id
+  }, 
 }
 //异步
 const actions = {
@@ -75,6 +79,9 @@ const actions = {
     
     commit('isplay', true)
   },
+  pause({ commit, state }){
+    commit('isplay', false)
+  },
   Seek({ commit, state }) {
     
     commit('seek', true)
@@ -86,6 +93,9 @@ const actions = {
   songurl({ commit, state }, songurl) {
     let songUrl = songurl
     commit('songurl', songUrl)
+  },
+  ID({ commit, state }, ID) {
+    commit('id', ID)
   },
   SongLrc({ commit, state }, SongLrc) {
     commit('songlrc', SongLrc)
@@ -132,7 +142,8 @@ const getters = {
   seek:state=>state.seek,
   songitem:state=>state.songitem,
   songlrc:state=>state.songlrc,
-  playlist:state=>state.playlist
+  playlist:state=>state.playlist,
+  id:state=>state.id
 
 }
 

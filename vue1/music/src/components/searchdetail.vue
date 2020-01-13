@@ -93,7 +93,9 @@ export default {
 
             this.api();
           }
-        });
+        }).catch(res=>{
+        this.$notify('网络出错或链接过期');
+    })
       }
     }
   },

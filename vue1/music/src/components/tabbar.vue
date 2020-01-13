@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="main">
-      <div class="left">
+      <div class="left" @click="tologin">
         <van-icon name="wap-nav" size="25" />
       </div>
       <div class="middle">
@@ -14,25 +14,26 @@
         <van-icon name="search" size="25" />
       </div>
     </div>
-   
   </div>
 </template>
 
 <script>
-
 export default {
-  data() {
-    return {
-      index: 1
-    };
+  props: {
+    index: {
+      type: Number,
+      default: 1
+    }
   },
   methods: {
     selected(index) {
-      this.index = index;
-      this.$emit('send',this.index)
+      this.$emit("send", index);
     },
-    tosearch(){
-      this.$router.push({path:'/search'})
+    tosearch() {
+      this.$router.push({ path: "/search" });
+    },
+    tologin() {
+      this.$router.push({ path: "/login" });
     }
   }
 };

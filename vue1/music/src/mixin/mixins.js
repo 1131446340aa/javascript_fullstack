@@ -49,15 +49,28 @@ export const mixin = {
                 this.run();
             }
             if (this.playrules === 2) {
+                // console.log(12);
+                // this.currentIndex = this.index;
                 this.currentIndex = this.index;
+                this.currentIndex++;
                 this.run();
+                this.Playing();
+                // console.log(this.seek);
+                // this.run();
+                // console.log(1);
+                
             }
         },
 
         api() {
             let id
+           
+            console.log( this.singsheet);
+            console.log(this.index);
+            
             if( this.singsheet[this.index].songs){
                 id=this.singsheet[this.index].songs[0].id
+                console.log(this.singsheet[this.index].songs[0].id);
             }
             else{
                 id=this.singsheet[this.index].id
@@ -106,7 +119,8 @@ export const mixin = {
             "value",
             "ended",
             "songitem",
-            "songlrc"
+            "songlrc",
+            "seek"
         ])
     }
 }

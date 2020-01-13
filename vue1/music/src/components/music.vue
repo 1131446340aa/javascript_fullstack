@@ -19,14 +19,21 @@
         <div class="swipe-lrc">
           <musictop></musictop>
           <BScroll :listenScroll="true" ref="scroll_lrc">
-            <div class="item_lrc" v-for="(item,index) in 5"></div>
-            <div class="item_lrc" :class="{activelrc:currentlrc===index}"  v-for="(item,index) in songlrc.arrtext" :key="index">
-              <div class="bglrc">{{item}}</div>
-              <!-- <div :class="{activelrc:currentlrc===index}">
+            <div>
+              <div class="item_lrc" v-for="(item,index) in 5"></div>
+              <div
+                class="item_lrc"
+                :class="{activelrc:currentlrc===index}"
+                v-for="(item,index) in songlrc.arrtext"
+                :key="index"
+              >
+                <div class="bglrc">{{item}}</div>
+                <!-- <div :class="{activelrc:currentlrc===index}">
                 <div class="actived">{{item}}</div>
-              </div> -->
+                </div>-->
+              </div>
+              <div class="item_lrc" v-for="(item,index) in 5"></div>
             </div>
-            <div class="item_lrc" v-for="(item,index) in 5"></div>
           </BScroll>
         </div>
       </van-swipe-item>
@@ -97,8 +104,12 @@ export default {
     },
     currentTime: function() {
       // let bglrc=document.querySelectorAll('.bglrc')
+
       let timer =
         this.currentTime.slice(0, 2) * 60 + this.currentTime.slice(3, 5) * 1;
+      if (timer === 0) {
+        this.$refs.scroll_lrc.scrollTo(0, 0);
+      }
 
       if (Array.from(this.songlrc.arrdatatime).indexOf(timer) !== -1) {
         this.currentlrc = Array.from(this.songlrc.arrdatatime).indexOf(timer);
@@ -106,6 +117,7 @@ export default {
           0,
           Array.from(this.songlrc.arrdatatime).indexOf(timer) * -40
         );
+
         if (
           this.currentlrc === this.songlrc.arrdatatime.length ||
           timer === 0
@@ -163,13 +175,17 @@ export default {
       console.log(this.playrules);
     }
   },
-  mounted() {   
+  mounted() {
     this.api();
   },
   components: {
     BScroll,
     more,
     musictop
+  },
+  created(){
+    console.log(this.singsheet);
+    
   }
 };
 </script>
@@ -207,16 +223,16 @@ export default {
     // position relative
     // bottom 40px
     // .actived
-    //   display inline-block
-      // width 0px
-      // // overflow hidden
-      // animation lrcactiveed 3s linear 
+    // display inline-block
+    // width 0px
+    // // overflow hidden
+    // animation lrcactiveed 3s linear
 .swipe-music
   position relative
   height 80vh
 .swipe-lrc
   height 80vh
-  position relative
+  // position relative
 .wrapper
   display flex
   height 30px

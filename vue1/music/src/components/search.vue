@@ -60,7 +60,9 @@ export default {
   created() {
     fetchGet("/search/hot/detail").then(res => {
       this.hots = res.result.hots;
-    });
+    }).catch(res=>{
+        this.$notify('网络出错或链接过期');
+    })
     this.searchs = this.debounce(() => {
       fetchGet("/search", {
         keywords: this.value

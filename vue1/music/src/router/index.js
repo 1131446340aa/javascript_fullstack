@@ -5,6 +5,17 @@ import search from '@/components/search'
 import searchdetail from '@/components/searchdetail'
 import music from '@/components/music'
 import singsheetdetail from '@/components/singsheetdetail'
+import playlistsquare from '@/components/playlistsquare'
+import rating from '@/components/rating'
+import ratedetail from '@/components/ratedetail'
+import videoplay from '@/components/videoplay'
+import login from '@/components/login'
+import phonelogin from '@/components/phonelogin'
+import phonevalidation from '@/components/phonevalidation'
+import inputpassword from '@/components/inputpassword'
+import historyplay from '@/components/historyplay'
+
+import collectmusic from '@/components/collectmusic'
 Vue.use(Router)
 
 export default new Router({
@@ -19,9 +30,64 @@ export default new Router({
       }
     },
     {
+      path: '/phonelogin',
+      name: 'phonelogin',
+      component: phonelogin,
+    },
+    {
+      path: '/collectmusic',
+      name: 'collectmusic',
+      component: collectmusic,
+    },
+    {
+      path: '/historyplay',
+      name: 'historyplay',
+      component: historyplay,
+    },
+    {
+      path: '/phonevalidation',
+      name: 'phonevalidation',
+      component: phonevalidation,
+    },
+    {
+      path: '/inputpassword',
+      name: 'inputpassword',
+      component: inputpassword,
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: login,
+
+    },
+    {
+      path: '/videoplay',
+      name: 'videoplay',
+      component: videoplay,
+
+    },
+    {
       path: '/search',
       name: 'search',
       component: search,
+
+    },
+    {
+      path: '/ratedetail',
+      name: 'ratedetail',
+      component: ratedetail,
+
+    },
+    {
+      path: '/rating',
+      name: 'rating',
+      component: rating,
+
+    },
+    {
+      path: '/playlistsquare',
+      name: 'playlistsquare',
+      component: playlistsquare,
 
     },
     {

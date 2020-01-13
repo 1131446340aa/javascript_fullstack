@@ -7,6 +7,10 @@
       <div class="song">{{songitem.name}}</div>
       <div class="singer" v-if="songitem.ar">{{songitem.ar[0].name}}</div>
     </div>
+    <div class="slot">
+      <i v-if="!collect" class="iconfont icon-shoucang"></i>
+      <i v-if="collect" class="iconfont icon-favor-active"></i>
+    </div>
   </div>
 </template>
 
@@ -20,6 +24,11 @@ export default {
     goback() {
       this.$router.go(-1);
     }
+  },
+  data(){
+    return{
+      collect:false
+    }
   }
 };
 </script>
@@ -27,11 +36,12 @@ export default {
 .top
   height 49px
   display flex
-  .icon
+  .icon,.slot
     line-height 49px
     margin-right 10px
   .text
     line-height 25px
+    flex 1
 .song
   font-size 14px
   color #ffffff
@@ -40,4 +50,7 @@ export default {
   color #9e9e9e
 .iconfont
   color #ffffff
+.slot
+  .iconfont
+    color red
 </style>

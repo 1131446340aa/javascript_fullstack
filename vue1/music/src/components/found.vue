@@ -1,14 +1,16 @@
 <template>
   <div class="main">
-    <BScroll :bottom="49">
+    <BScroll :bottom="0" :top="0">
       <div class="swiper">
-        <van-swipe :autoplay="3000" indicator-color="white">
-          <van-swipe-item v-for="item in banners" :key="item.index">
-            <div class="img">
-              <img :src="item.imageUrl" />
-            </div>
-          </van-swipe-item>
-        </van-swipe>
+        <div class="van">
+          <van-swipe :autoplay="3000" indicator-color="white">
+            <van-swipe-item v-for="item in banners" :key="item.index">
+              <div class="img">
+                <img :src="item.imageUrl" />
+              </div>
+            </van-swipe-item>
+          </van-swipe>
+        </div>
         <div class="middlebar">
           <div class="item">
             <div class="image">
@@ -16,13 +18,13 @@
             </div>
             <div class="text">每日推荐</div>
           </div>
-          <div class="item">
+          <div class="item" @click="toplaylist">
             <div class="image">
               <img src="../assets/sing.png" />
             </div>
             <div class="text">歌单</div>
           </div>
-          <div class="item">
+          <div class="item" @click="toRating">
             <div class="image">
               <img src="../assets/Ranking.png" />
             </div>
@@ -42,10 +44,10 @@
           </div>
         </div>
         <div class="fz-18">推荐歌单</div>
-        <singsheet></singsheet>
+        <singsheet :personalized="personalized">
+        </singsheet>
       </div>
     </BScroll>
-    <controlbar></controlbar>
   </div>
 </template>
 
@@ -60,23 +62,42 @@ export default {
   created() {
     fetchGet("/banner").then(res => {
       this.banners = res.banners;
-    });
+    }).catch(res=>{
+        this.$notify('网络出错或链接过期');
+    })
+    fetchGet("/personalized").then(res => {
+      this.personalized = res.result.slice(0, 12);
+      console.log(res);
+    }).catch(res=>{
+        this.$notify('网络出错或链接过期');
+    })
   },
   data() {
     return {
       banners: [],
-     
+      personalized: []
     };
   },
   computed: {
     ...mapGetters(["songitem"])
+  },
+  methods: {
+    toplaylist() {
+      this.$router.push({ path: "/playlistsquare" });
+    },
+    toRating() {
+      this.$router.push({ path: "/rating" });
+    }
   }
 };
 </script>
 
 <style lang="stylus" scoped>
+.van
+  margin 0 10px
 .fz-18
   font-size 18px
+  margin-left 10px
 .img
   width 100%
   height 100%
@@ -89,11 +110,12 @@ export default {
 .swiper
   border-radius 5px
   overflow hidden
-  margin 0 10px
+  // margin 0 10px
   font-size 10px
 .middlebar
   display flex
   margin-top 1rem
+  margin-left 10px
   .item
     flex 1
     .image

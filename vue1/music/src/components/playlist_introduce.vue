@@ -32,11 +32,11 @@ export default {
       ...mapActions(['playList']),
     getPlaylist() {
       fetchGet("/playlist/detail", { id: this.$route.query.id }).then(res => {
-        console.log(res.playlist);
+        // console.log(res.playlist);
         this.result = res.playlist;
         this.playList(res.playlist)
-        console.log(this.result.name);
-      });
+        // console.log(this.result.name);
+      })
     }
   },
   data() {

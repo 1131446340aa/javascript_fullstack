@@ -50,21 +50,18 @@ export default {
   methods: {
     send(index) {
       this.$emit("sendfn", index);
-    }
+    },
   },
   components: {
     BScroll
   },
-  mounted(){
-  
-    
-  }
+  mounted() {}
 };
 </script>
 
 <style lang="stylus" scoped>
 .singsheet-wrapper
-  position absolute
+  position fixed
   top 0
   left 0
   right 0
