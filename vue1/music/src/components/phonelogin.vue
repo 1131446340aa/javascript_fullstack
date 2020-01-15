@@ -28,7 +28,7 @@ export default {
   },
   data() {
     return {
-      phone: "",
+      phone: ""
     };
   },
   methods: {
@@ -61,8 +61,8 @@ export default {
           //   });
           this.$router.push({
             path: "./inputpassword",
-            query:{
-              phone:this.phone
+            query: {
+              phone: this.phone
             }
           });
         }
@@ -71,7 +71,6 @@ export default {
   }
 };
 </script>
-
 <style lang="stylus" scoped>
 .text
   font-size 12px

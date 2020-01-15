@@ -35,6 +35,8 @@ export default {
       let icon = document.querySelector(".iconfont");
       icon.style.color = this.color;
       let text = document.querySelector(".text");
+      // console.log(this.color);
+
       text.style.color = this.color;
     });
   },

@@ -38,7 +38,7 @@ export default {
       if (this.ended) {
         this.nextone();        
       }
-      console.log(this.ended);
+      // console.log(this.ended);
       
     }
   },
@@ -72,7 +72,7 @@ export default {
 
       that.started();
       if (that.seek) {
-        console.log(that.value);
+        // console.log(that.value);
         e.target.currentTime = (that.value * e.target.duration) / 100;
         that.ISSeek();
       }

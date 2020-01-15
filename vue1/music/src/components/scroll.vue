@@ -24,13 +24,13 @@ export default {
       type: Number,
       default: 3
     },
-    top:{
-      type:Number,
-      default:49
+    top: {
+      type: Number,
+      default: 49
     },
-    bottom:{
-      type:Number,
-       default:44
+    bottom: {
+      type: Number,
+      default: 44
     },
     /**
      * 点击列表是否派发click事件
@@ -85,10 +85,9 @@ export default {
     }
   },
   mounted() {
-    this.$refs.wrapper.style.top=this.top+"px"
-    this.$refs.wrapper.style.bottom=this.bottom+"px"
-    
-    
+    this.$refs.wrapper.style.top = this.top + "px";
+    this.$refs.wrapper.style.bottom = this.bottom + "px";
+
     setTimeout(() => {
       this._initScroll();
     }, 20);
@@ -113,10 +112,8 @@ export default {
       if (this.pullup) {
         this.scroll.on("scrollEnd", () => {
           if (this.scroll.y <= this.scroll.maxScrollY + 50) {
-              //  console.log(1);
+            //  console.log(1);
             this.$emit("scrollToEnd");
-         
-            
           }
         });
       }

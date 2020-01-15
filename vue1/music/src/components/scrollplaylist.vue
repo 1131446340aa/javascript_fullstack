@@ -6,15 +6,11 @@
           <i class="iconfont icon-bofang"></i>
         </div>
         <div class="text">播放全部</div>
-        <div class="all">(共{{allsong.length}}首)</div>
+        <div class="all">(共{{count}}首)</div>
       </div>
       <div class="wrap">
         <div class="item" v-for="(item,index) in allsong" :key="index" @click="tomusic(index)">
-          <div class="paiming">{{index+1}}</div>
-          <div class="title1">
-            <div class="songname">{{item.songs[0].name}}</div>
-            <div class="allname">{{item.songs[0].ar[0].name}}-{{item.songs[0].name}}</div>
-          </div>
+          <songitem :item="item" :index="index"></songitem>
         </div>
       </div>
     </div>
@@ -25,30 +21,11 @@
 import BScroll from "./scroll";
 import { mapGetters, mapActions } from "vuex";
 import { fetchGet } from "../../network/index";
+import songitem from "./songitem";
 export default {
   components: {
-    BScroll
-  },
-  computed: {
-    ...mapGetters(["playlist", "index", "singsheet"])
-  },
-  data() {
-    return {
-      allsong: []
-    };
-  },
-  mounted() {},
-  watch: {
-    playlist: function() {
-      if (this.playlist) {
-        this.playlist.trackIds.forEach(item => {
-          fetchGet("/song/detail", { ids: item.id }).then(res =>
-            //   console.log(res)
-            this.allsong.push(res)
-          );
-        });
-      }
-    }
+    BScroll,
+    songitem
   },
   methods: {
     ...mapActions(["Index", "saveSingsheet"]),
@@ -56,9 +33,34 @@ export default {
       this.$router.push({
         path: "/music"
       });
+      // console.log(this.allsong);
       this.Index(index);
       this.saveSingsheet(this.allsong);
       // console.log(this.singsheet[this.index].songs[0].id);
+    }
+  },
+  mounted() {
+    //  document.querySelector('.SCROLL').style.height=window.screen.height-93+"px"
+  },
+  // data() {
+  //   return {
+  //     allsong: []
+  //   };
+  // },
+  props: {
+    allsong: {
+      type: Array,
+      default() {
+        return [];
+      }
+    },
+    count: {
+      type: Number,
+      default: 0
+    },
+    type: {
+      type: String,
+      default: ""
     }
   }
 };
@@ -67,32 +69,6 @@ export default {
 <style lang="stylus" scoped>
 .main
   background-color #F2F6FC
-.item
-  display flex
-  height 60px
-  line-height 60px
-  .paiming
-    width 40px
-    height 40px
-    color #606266
-    font-size 14px
-    margin-top 10px
-    line-height 40px
-    text-align center
-  .title1
-    flex 1
-    max-width 80vw
-    height 40px
-    line-height 40px
-    margin-top 10px
-    .songname, .allname
-      overflow hidden
-      text-overflow ellipsis
-      white-space nowrap
-      line-height 20px
-    .allname
-      font-size 10px
-      color #C0C4CC
 .title
   height 49px
   line-height 49px

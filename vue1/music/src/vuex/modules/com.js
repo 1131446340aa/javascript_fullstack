@@ -7,13 +7,14 @@ const state = {
   index: "",
   currentTime: '00:00',
   duration: '00:00',
-  value:0,
-  ended:"false",
-  seek:false,//进度条点击
-  songitem:"",
-  songlrc:"",
-  playlist:"",//虚化背景图
-  id:""
+  value: 0,
+  ended: "false",
+  seek: false,//进度条点击
+  songitem: "",
+  songlrc: "",
+  playlist: "",//虚化背景图
+  id: "",
+  pageindex:1
 }
 //方法
 const mutations = {
@@ -24,6 +25,7 @@ const mutations = {
   playrules(state, rules) {
     state.playrules = rules
   },
+  
   isplay(state, isPLay) {
     state.isplay = isPLay
   },
@@ -35,6 +37,9 @@ const mutations = {
   },
   currentTime(state, currentTime) {
     state.currentTime = currentTime
+  },
+  pageindex(state, pageindex) {
+    state.pageindex = pageindex
   },
   duration(state, duration) {
     state.duration = duration
@@ -56,10 +61,10 @@ const mutations = {
   },
   playlist(state, playlist) {
     state.playlist = playlist
-  }, 
+  },
   id(state, id) {
     state.id = id
-  }, 
+  },
 }
 //异步
 const actions = {
@@ -76,18 +81,18 @@ const actions = {
     commit('isplay', isplay)
   },
   Playing({ commit, state }) {
-    
+
     commit('isplay', true)
   },
-  pause({ commit, state }){
+  pause({ commit, state }) {
     commit('isplay', false)
   },
   Seek({ commit, state }) {
-    
+
     commit('seek', true)
   },
   ISSeek({ commit, state }) {
-    
+
     commit('seek', false)
   },
   songurl({ commit, state }, songurl) {
@@ -96,6 +101,9 @@ const actions = {
   },
   ID({ commit, state }, ID) {
     commit('id', ID)
+  },
+  Pageindex({ commit, state }, Pageindex) {
+    commit('pageindex', Pageindex)
   },
   SongLrc({ commit, state }, SongLrc) {
     commit('songlrc', SongLrc)
@@ -107,25 +115,25 @@ const actions = {
     let Index = index
     commit('index', Index)
   },
-  CurrentTime({ commit, state }, index){
-    commit('currentTime',index)
+  CurrentTime({ commit, state }, index) {
+    commit('currentTime', index)
   },
-  Duration({ commit, state }, Duration){
-    commit('duration',Duration)
+  Duration({ commit, state }, Duration) {
+    commit('duration', Duration)
   },
-  Value({ commit, state }, Value){
-    commit('value',Value)
+  Value({ commit, state }, Value) {
+    commit('value', Value)
   },
   Ended({ commit, state }) {
-    
+
     commit('ended', true)
   },
   started({ commit, state }) {
-    
+
     commit('ended', false)
   },
-  Songitem({ commit, state }, Songitem){
-    commit('songitem',Songitem)
+  Songitem({ commit, state }, Songitem) {
+    commit('songitem', Songitem)
   },
 }
 //计算属性
@@ -135,16 +143,16 @@ const getters = {
   isplay: state => state.isplay,
   Songurl: state => state.songurl,
   index: state => state.index,
-  currentTime:state=>state.currentTime,
-  duration:state=>state.duration,
-  value:state=>state.value,
-  ended:state=>state.ended,
-  seek:state=>state.seek,
-  songitem:state=>state.songitem,
-  songlrc:state=>state.songlrc,
-  playlist:state=>state.playlist,
-  id:state=>state.id
-
+  currentTime: state => state.currentTime,
+  duration: state => state.duration,
+  value: state => state.value,
+  ended: state => state.ended,
+  seek: state => state.seek,
+  songitem: state => state.songitem,
+  songlrc: state => state.songlrc,
+  playlist: state => state.playlist,
+  id: state => state.id,
+  pageindex:state=>state.pageindex
 }
 
 export default {

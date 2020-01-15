@@ -12,7 +12,7 @@
           </van-swipe>
         </div>
         <div class="middlebar">
-          <div class="item">
+          <div class="item" @click="totuijian">
             <div class="image">
               <img src="../assets/Recommend.png" />
             </div>
@@ -36,16 +36,9 @@
             </div>
             <div class="text">电台</div>
           </div>
-          <div class="item">
-            <div class="image">
-              <img src="../assets/Live-broadcast.png" />
-            </div>
-            <div class="text">直播</div>
-          </div>
         </div>
         <div class="fz-18">推荐歌单</div>
-        <singsheet :personalized="personalized">
-        </singsheet>
+        <singsheet :personalized="personalized"></singsheet>
       </div>
     </BScroll>
   </div>
@@ -60,17 +53,21 @@ import controlbar from "./controlbar";
 export default {
   components: { BScroll, singsheet, controlbar },
   created() {
-    fetchGet("/banner").then(res => {
-      this.banners = res.banners;
-    }).catch(res=>{
-        this.$notify('网络出错或链接过期');
-    })
-    fetchGet("/personalized").then(res => {
-      this.personalized = res.result.slice(0, 12);
-      console.log(res);
-    }).catch(res=>{
-        this.$notify('网络出错或链接过期');
-    })
+    fetchGet("/banner")
+      .then(res => {
+        this.banners = res.banners;
+      })
+      .catch(res => {
+        this.$notify("网络出错或链接过期");
+      });
+    fetchGet("/personalized")
+      .then(res => {
+        this.personalized = res.result.slice(0, 12);
+        // console.log(res);
+      })
+      .catch(res => {
+        this.$notify("网络出错或链接过期");
+      });
   },
   data() {
     return {
@@ -87,6 +84,9 @@ export default {
     },
     toRating() {
       this.$router.push({ path: "/rating" });
+    },
+    totuijian() {
+      this.$router.push({ path: "/tuijian" });
     }
   }
 };
@@ -119,13 +119,13 @@ export default {
   .item
     flex 1
     .image
-      width 3rem
-      height 3rem
+      width 3.5rem
+      height 3.5rem
       border-radius 50%
       margin 0 auto
       img
-        width 3rem
-        height 3rem
+        width 3.5rem
+        height 3.5rem
     .text
       font-size 12px
       margin-top 0.4rem

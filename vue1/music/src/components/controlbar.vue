@@ -12,7 +12,8 @@
       <div class="title">
         <div class="songname">{{songitem.name||"暂无歌曲"}}</div>
         <div class="singername" v-if="songitem.ar">{{songitem.ar[0].name}}</div>
-        <div class="singername" v-if="!songitem.ar">暂无歌手</div>
+        <div class="singername" v-if="!songitem.ar&&!songitem.radio">暂无歌手</div>
+        <div class="singername" v-if="songitem.radio">{{songitem.radio.name}}</div>
       </div>
     </div>
     <div class="right">

@@ -15,7 +15,12 @@
       </div>
     </div>
     <BScroll :pullup="true" @scrollToEnd="pullup">
-      <div class="item" v-for="(item,index) in songs" :key="item.index" @click="tomusic(index)">
+      <div
+        class="item"
+        v-for="(item,index) in songs"
+        :key="item.index"
+        @click="tomusic($event,index)"
+      >
         <div class="left">
           <div class="songname">{{item.name}}</div>
           <div class="singername">{{item.artists[0].name}}-{{item.name}}</div>
@@ -50,10 +55,24 @@ export default {
     pullup() {
       this.api();
     },
-    tomusic(index) {
+    tomusic(e, index) {
       this.$router.push({
         path: "/music"
       });
+
+      // localStorage.keys=""
+      if (!localStorage.keys) {
+        localStorage.keys = JSON.stringify([this.songs[index].name]);
+        //  let arr = JSON.parse(localStorage.keys);
+      } else {
+        let arr = JSON.parse(localStorage.keys);
+        arr = [...new Set([this.songs[index].name, ...arr])];
+        localStorage.keys = JSON.stringify(arr);
+
+        // console.log(JSON.parse(localStorage.keys));
+
+        // console.log(JSON.parse(localStorage.keys));
+      }
       this.Index(index);
       this.saveSingsheet(this.songs);
     },
@@ -73,29 +92,30 @@ export default {
       this.$router.go(-1);
     },
     api() {
-      console.log(this.value);
-      
+      // console.log(this.value);
+
       if (this.value) {
         fetchGet("/search", {
           keywords: this.value,
           offset: this.offset * 30
-        }).then(res => {
-          if (this.value === this.newvalue) {
-            this.newvalue = this.value;
-            this.offset = this.offset + 1;
-            console.log(res.result.songs);
-            this.songs = [...this.songs, ...res.result.songs];
-          } else {
-            this.offset = 0;
-            this.songs = [];
-            this.newvalue = this.value;
-            console.log(1);
+        })
+          .then(res => {
+            if (this.value === this.newvalue) {
+              this.newvalue = this.value;
+              this.offset = this.offset + 1;
+              // console.log(res.result.songs);
+              this.songs = [...this.songs, ...res.result.songs];
+            } else {
+              this.offset = 0;
+              this.songs = [];
+              this.newvalue = this.value;
 
-            this.api();
-          }
-        }).catch(res=>{
-        this.$notify('网络出错或链接过期');
-    })
+              this.api();
+            }
+          })
+          .catch(res => {
+            this.$notify("网络出错或链接过期");
+          });
       }
     }
   },

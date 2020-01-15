@@ -5,7 +5,7 @@
     <found v-show="index===1"></found>
     <diantai v-show="index===2"></diantai>
     <Video v-show="index===3"></Video>-->
-    <tabbar @send="currentindex" :index="index"></tabbar>
+    <tabbar @send="currentindex" :index="pageindex"></tabbar>
     <van-swipe
       indicator-color="white"
       @change="change"
@@ -25,12 +25,12 @@
       </van-swipe-item>
       <van-swipe-item>
         <div class="swipe-item">
-          <found></found>
+          <diantai></diantai>
         </div>
       </van-swipe-item>
       <van-swipe-item>
         <div class="swipe-item">
-         <Video></Video>
+          <Video></Video>
         </div>
       </van-swipe-item>
     </van-swipe>
@@ -45,7 +45,7 @@ import diantai from "./diantai";
 import my from "./my";
 import Video from "./video";
 import controlbar from "./controlbar";
-
+import { mapGetters, mapActions } from "vuex";
 export default {
   components: {
     tabbar,
@@ -56,26 +56,26 @@ export default {
     controlbar
   },
   methods: {
+    ...mapActions(['Pageindex']),
     currentindex(index) {
-      this.index = index;
+     this.Pageindex(index)
       this.$refs.swipe.swipeTo(index);
     },
     change(index) {
-      this.index = index;
+      this.Pageindex(index)
     }
-  },
-  data() {
-    return {
-      index: 1
-    };
   },
   mounted() {
     // console.log(document.body.clientHeight);
-    this.$refs.swipe.swipeTo(1);
+   
+    this.$refs.swipe.swipeTo(this.pageindex,{immediate:true});
     let swipe = document.querySelectorAll(".swipe-item");
     swipe.forEach(item => {
       item.style.height = window.screen.height - 93 + "px";
     });
+  },
+  computed:{
+     ...mapGetters(['pageindex']),
   }
 };
 </script>

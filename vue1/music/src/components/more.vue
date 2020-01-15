@@ -50,7 +50,7 @@ export default {
   methods: {
     send(index) {
       this.$emit("sendfn", index);
-    },
+    }
   },
   components: {
     BScroll

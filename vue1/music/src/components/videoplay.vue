@@ -77,9 +77,7 @@ export default {
       id: 0
     };
   },
-  mounted() {
-   
-  },
+  mounted() {},
   watch: {
     similiar: function() {
       if (this.similiar) {
@@ -88,7 +86,7 @@ export default {
           //   setTimeout(function() {
           // let video = window.getComputedStyle(that.$refs.video).height;
           let video = that.$refs.video.offsetHeight;
-          console.log(video);
+          // console.log(video);
           that.height = video;
           // document.querySelector(".detail").style.height =
           //   window.screen.height - that.height + "px";
@@ -101,7 +99,6 @@ export default {
     }
   },
   methods: {
-  
     getmv() {
       let id;
       if (this.id !== 0) {
@@ -122,7 +119,6 @@ export default {
       fetchGet("/simi/mv", {
         mvid: id
       }).then(res => {
-        console.log(res);
         this.similiar = res.mvs;
       });
     },
@@ -160,7 +156,7 @@ export default {
       text-overflow ellipsis
       overflow hidden
       white-space nowrap
-      max-width 65vw
+      max-width 60vw
     .artist
       font-size 10px
       color #606266

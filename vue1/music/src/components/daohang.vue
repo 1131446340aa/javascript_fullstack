@@ -42,12 +42,10 @@ export default {
     ...mapGetters(["playlist"])
   },
   mounted() {
-    console.log(this.color);
-
     let icon = document.querySelector(".iconfont");
     icon.style.color = this.color;
-    let text = document.querySelector(".text");
-    text.style.color = this.color;
+    // let text = document.querySelector(".text");
+    // text.style.color = this.color;
   }
 };
 </script>
@@ -73,11 +71,15 @@ export default {
     line-height 49px
     margin-right 10px
     margin-left 10px
-  .text
-    line-height 49px
-    font-size 14px
-    color #ffffff
-    flex 1
+.text
+  line-height 49px
+  font-size 14px
+  color #ffffff
+  overflow hidden
+  text-overflow ellipsis
+  white-space nowrap
+  max-width 75vw
+  flex 1
 .iconfont
   color #ffffff
 .slot

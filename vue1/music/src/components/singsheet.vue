@@ -65,10 +65,20 @@ export default {
           query: { idx: idx[index] }
         });
       }
+      if (this.type === "dt") {
+        // console.log(this.personalized[index].id);
+        this.$router.push({
+          path: "/dtdetail",
+          query: { rid: this.personalized[index].id }
+        });
+      }
     }
+  },
+  data() {
+    return {};
   }
 };
-</script>
+</script> 
 
 <style lang="stylus" scoped>
 .main

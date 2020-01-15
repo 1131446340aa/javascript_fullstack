@@ -33,7 +33,7 @@ export default {
           // console.log(this.offset);
 
           this.mv = [...this.mv, ...res.data];
-          console.log(this.mv);
+          // console.log(this.mv);
         })
         .catch(res => {
           this.$notify("网络出错或链接过期");

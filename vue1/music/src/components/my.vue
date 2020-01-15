@@ -1,60 +1,63 @@
 <template>
   <div class="main">
-    <div class="wrapper">
-      <div class="item" @click="tohistoryplay">
-        <div class="icon">
-          <i class="iconfont icon-zuijinbofang"></i>
-        </div>
-        <div class="text">最近播放</div>
-      </div>
-      <div class="item" @click="tocollectmusic">
-        <div class="icon">
-          <i class="iconfont icon-wodeshoucang"></i>
-        </div>
-        <div class="text">我的收藏</div>
-      </div>
-      <div class="item">
-        <div class="icon">
-          <i class="iconfont icon-wodediantai"></i>
-        </div>
-        <div class="text">我的电台</div>
-      </div>
-    </div>
-    <van-collapse v-model="activeNames">
-      <van-collapse-item name="1" icon="arrow">
-        <div class="title" slot="title">
-          创建的歌单
+    <BScroll :bottom="0" :top="0">
+      <div>
+        <div class="item" @click="tohistoryplay">
           <div class="icon">
-            <i class="iconfont icon-wode"></i>
+            <i class="iconfont icon-zuijinbofang"></i>
           </div>
+          <div class="text">最近播放</div>
         </div>
-        <div
-          class="items"
-          v-for="(item,index) in createdlist"
-          :key="index"
-          @click="toplaylist(index)"
-        >
-          <lines :item="item"></lines>
+        <div class="item" @click="tocollectmusic">
+          <div class="icon">
+            <i class="iconfont icon-wodeshoucang"></i>
+          </div>
+          <div class="text">我的收藏</div>
         </div>
-      </van-collapse-item>
+        <div class="item">
+          <div class="icon">
+            <i class="iconfont icon-wodediantai"></i>
+          </div>
+          <div class="text">我的电台</div>
+        </div>
+      </div>
+      <van-collapse v-model="activeNames">
+        <van-collapse-item name="1" icon="arrow">
+          <div class="title" slot="title">
+            创建的歌单
+            <div class="icon">
+              <i class="iconfont icon-wode"></i>
+            </div>
+          </div>
+          <div
+            class="items"
+            v-for="(item,index) in createdlist"
+            :key="index"
+            @click="toplaylist(index)"
+          >
+            <lines :item="item"></lines>
+          </div>
+        </van-collapse-item>
 
-      <van-collapse-item title="收藏的歌单" name="2" icon="arrow">
-        <div
-          class="items"
-          v-for="(item,index) in collectplay"
-          :key="index"
-          @click="tosingsheet(index)"
-        >
-          <lines :item="item"></lines>
-        </div>
-      </van-collapse-item>
-    </van-collapse>
+        <van-collapse-item title="收藏的歌单" name="2" icon="arrow">
+          <div
+            class="items"
+            v-for="(item,index) in collectplay"
+            :key="index"
+            @click="tosingsheet(index)"
+          >
+            <lines :item="item"></lines>
+          </div>
+        </van-collapse-item>
+      </van-collapse>
+    </BScroll>
   </div>
 </template>
 
 <script>
 import { fetchGet } from "../../network/index";
 import { mapGetters, mapActions } from "vuex";
+import BScroll from "./scroll";
 import lines from "./line";
 export default {
   data() {
@@ -64,13 +67,17 @@ export default {
       collectplay: []
     };
   },
-  components: { lines },
+  components: { lines, BScroll },
   mounted() {
-    console.log(localStorage.id);
+    // console.log(localStorage.id);
 
     this.$nextTick(function() {
       if (localStorage.id) {
-        fetchGet("/user/playlist", { uid: localStorage.id }).then(res => {
+        let timestamp = Date.parse(new Date());
+        fetchGet("/user/playlist", {
+          uid: localStorage.id,
+          timestamp: timestamp
+        }).then(res => {
           res.playlist.map(item => {
             if (item.userId == localStorage.id) {
               this.createdlist.push(item);
@@ -80,7 +87,7 @@ export default {
               return;
             }
           });
-          console.log(this.collectplay);
+          // console.log(this.createdlist);
         });
       }
     });
@@ -104,7 +111,7 @@ export default {
         path: "/historyplay"
       });
     },
-    tocollectmusic(){
+    tocollectmusic() {
       this.$router.push({
         path: "/collectmusic"
       });

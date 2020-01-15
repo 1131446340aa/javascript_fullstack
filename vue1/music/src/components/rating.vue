@@ -2,7 +2,7 @@
   <div class="main">
     <daohangblack name="排行榜"></daohangblack>
     <BScroll>
-        <div class="title">榜单汇总</div>
+      <div class="title">榜单汇总</div>
       <singsheet :personalized="list" type="rate"></singsheet>
     </BScroll>
     <controlbar></controlbar>
@@ -29,13 +29,15 @@ export default {
     };
   },
   created() {
-    fetchGet("/toplist/detail").then(res => {
-      console.log(res.list);
-      this.list = res.list.slice(0, 25);
-      this.list.splice(11,1)
-    }).catch(res=>{
-        this.$notify('网络出错或链接过期');
-    })
+    fetchGet("/toplist/detail")
+      .then(res => {
+        // console.log(res.list);
+        this.list = res.list.slice(0, 25);
+        this.list.splice(11, 1);
+      })
+      .catch(res => {
+        this.$notify("网络出错或链接过期");
+      });
   }
 };
 </script>
@@ -44,5 +46,4 @@ export default {
   font-size 18px
   font-weight 700
   margin-left 10px
-
 </style>

@@ -3,14 +3,11 @@
     <van-swipe indicator-color="white">
       <van-swipe-item>
         <div class="swipe-music">
-          <musictop></musictop>
+          <musictop :id="songitem.id"></musictop>
           <div class="big-circle">
-            <div
-              class="small-circle"
-              :style="{ animationPlayState :isplay?'running':'paused'}"
-              v-if="songitem.al"
-            >
-              <img :src="songitem.al.picUrl" alt />
+            <div class="small-circle" :style="{ animationPlayState :isplay?'running':'paused'}">
+              <img v-if="songitem.al" :src="songitem.al.picUrl" alt />
+              <img v-if="singsheet[index].radio" :src="singsheet[index].radio.picUrl" alt />
             </div>
           </div>
         </div>
@@ -22,6 +19,7 @@
             <div>
               <div class="item_lrc" v-for="(item,index) in 5"></div>
               <div
+                v-show="songlrc.arrtext"
                 class="item_lrc"
                 :class="{activelrc:currentlrc===index}"
                 v-for="(item,index) in songlrc.arrtext"
@@ -31,6 +29,9 @@
                 <!-- <div :class="{activelrc:currentlrc===index}">
                 <div class="actived">{{item}}</div>
                 </div>-->
+              </div>
+              <div class="item_lrc" v-show="!songlrc.arrtext">
+                <div class="bglrc">暂无歌词</div>
               </div>
               <div class="item_lrc" v-for="(item,index) in 5"></div>
             </div>
@@ -77,8 +78,9 @@
         </div>
       </div>
     </div>
-    <div class="background" v-if="songs.al">
-      <img :src="songs.al.picUrl" alt />
+    <div class="background">
+      <img v-if="songs.al" :src="songs.al.picUrl" alt />
+      <img v-if="singsheet[index].radio" :src="singsheet[index].radio.picUrl" alt />
       <div class="mask"></div>
     </div>
     <div @click="hidden">
@@ -104,20 +106,17 @@ export default {
     },
     currentTime: function() {
       // let bglrc=document.querySelectorAll('.bglrc')
-
       let timer =
         this.currentTime.slice(0, 2) * 60 + this.currentTime.slice(3, 5) * 1;
       if (timer === 0) {
         this.$refs.scroll_lrc.scrollTo(0, 0);
       }
-
       if (Array.from(this.songlrc.arrdatatime).indexOf(timer) !== -1) {
         this.currentlrc = Array.from(this.songlrc.arrdatatime).indexOf(timer);
         this.$refs.scroll_lrc.scrollTo(
           0,
           Array.from(this.songlrc.arrdatatime).indexOf(timer) * -40
         );
-
         if (
           this.currentlrc === this.songlrc.arrdatatime.length ||
           timer === 0
@@ -128,7 +127,6 @@ export default {
       }
     }
   },
-  computed: {},
   data() {
     return {
       currentlrc: 0
@@ -136,12 +134,12 @@ export default {
   },
   methods: {
     moving(value) {
-      console.log(this.values);
+      // console.log(this.values);
       this.Value(this.values);
       this.Seek();
     },
     scroll(e) {
-      console.log(e);
+      // console.log(e);
     },
     movestart() {
       this.touching = true;
@@ -172,7 +170,7 @@ export default {
     },
     rules() {
       this.playRules();
-      console.log(this.playrules);
+      // console.log(this.playrules);
     }
   },
   mounted() {
@@ -182,10 +180,6 @@ export default {
     BScroll,
     more,
     musictop
-  },
-  created(){
-    console.log(this.singsheet);
-    
   }
 };
 </script>

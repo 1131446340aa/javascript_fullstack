@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="wrapper">
-      <div class="image" >
+      <div class="image">
         <img :src="result.coverImgUrl" />
       </div>
       <div class="detail">
@@ -29,14 +29,14 @@ export default {
     this.getPlaylist();
   },
   methods: {
-      ...mapActions(['playList']),
+    ...mapActions(["playList"]),
     getPlaylist() {
       fetchGet("/playlist/detail", { id: this.$route.query.id }).then(res => {
         // console.log(res.playlist);
         this.result = res.playlist;
-        this.playList(res.playlist)
+        this.playList(res.playlist);
         // console.log(this.result.name);
-      })
+      });
     }
   },
   data() {

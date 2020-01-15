@@ -20,10 +20,27 @@
     </div>
     <BSroll>
       <div class="main" v-show="!value">
-        <div class="history" v-show="false">
-          <div class="left">历史记录</div>
-          <div class="right">
-            <i class="iconfont icon-shanchu"></i>
+        <div class="histoty-wrapper" v-show="history">
+          <div class="history">
+            <div class="left">历史记录</div>
+            <div class="right" @click="deletehistory">
+              <i class="iconfont icon-shanchu"></i>
+            </div>
+            <div class="open" @click="open" v-show="isshou">
+              <i class="iconfont icon-shouqi"></i>
+            </div>
+          </div>
+          <div class="history-list" :class="{shou :isshou}">
+            <div
+              class="history-item"
+              @click="tosearchdetail"
+              v-for="(item) in history"
+              :key="item"
+            >{{item}}</div>
+            <div class="shouqi" v-show="!isshou" @click="shou">
+              <i class="iconfont icon-shouqi1"></i>
+            </div>
+            <div class="history-item-line-wrap"></div>
           </div>
         </div>
         <div class="history-wrapper"></div>
@@ -45,36 +62,53 @@
         </div>
       </div>
     </BSroll>
-     <controlbar></controlbar>
+    <controlbar></controlbar>
   </div>
 </template>
 
 <script>
 import { fetchGet } from "../../network/index";
 import BSroll from "./scroll";
-import controlbar from './controlbar'
+import controlbar from "./controlbar";
 export default {
   components: {
-    BSroll,controlbar
+    BSroll,
+    controlbar
   },
   created() {
-    fetchGet("/search/hot/detail").then(res => {
-      this.hots = res.result.hots;
-    }).catch(res=>{
-        this.$notify('网络出错或链接过期');
-    })
+    if (localStorage.keys) {
+      this.history = JSON.parse(localStorage.keys);
+    }
+    fetchGet("/search/hot/detail")
+      .then(res => {
+        this.hots = res.result.hots;
+      })
+      .catch(res => {
+        this.$notify("网络出错或链接过期");
+      });
     this.searchs = this.debounce(() => {
       fetchGet("/search", {
         keywords: this.value
       }).then(res => {
-        console.log(res.result.songs);
+        // console.log(res.result.songs);
         this.songs = res.result.songs.slice(0, 10);
       });
     }, 400);
   },
   methods: {
-    goback(){
-      this.$router.go(-1)
+    shou() {
+      this.isshou = true;
+    },
+    deletehistory() {
+      localStorage.keys = "";
+      this.history = localStorage.keys;
+    },
+    tosearch() {},
+    open() {
+      this.isshou = false;
+    },
+    goback() {
+      this.$router.go(-1);
     },
     debounce(func, wait) {
       let timeout = null;
@@ -89,11 +123,10 @@ export default {
       };
     },
     tosearchdetail(e) {
-     
       if (e.target) {
         this.value = e.target.innerText;
       }
-      
+
       this.$router.push({
         path: "./searchdetail",
         query: { value: this.value }
@@ -108,7 +141,9 @@ export default {
       hots: [],
       value: "",
       searchs: "",
-      songs: []
+      songs: [],
+      history: "",
+      isshou: true
     };
   }
 };
@@ -116,6 +151,41 @@ export default {
 
 
 <style lang="stylus" scoped>
+.open
+  position absolute
+  top 22px
+  right 0
+  height 20px
+  width 20px
+  border-radius 10px
+  background-color rgba(242, 246, 252, 0.5)
+  text-align center
+.history-list
+  width 85vw
+.shou
+  height 20px
+  overflow hidden
+.history-item, .shouqi
+  font-size 12px
+  display inline-block
+  height 20px
+  border-radius 10px
+  background-color rgba(242, 246, 252, 0.5)
+  margin-right 10px
+  margin-top 5px
+  padding 0 10px
+  max-width 75vw
+  overflow hidden
+  text-overflow ellipsis
+  white-space nowrap
+.shouqi
+  width 20px
+  height 20px
+  border-radius 10px
+  padding 0
+  text-align center
+  .iconfont
+    font-size 5px
 .search-item
   display flex
   margin 15px 10px
@@ -164,7 +234,10 @@ export default {
   display flex
   justify-content space-between
   margin-top 20px
+  position relative
   .left
     font-size 14px
     font-weight 700
+    height 20px
+    line-height 20px
 </style>

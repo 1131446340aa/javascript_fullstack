@@ -116,65 +116,75 @@ export default {
         cat: "华语",
         limit: 21,
         offset: this.playlist_huayu_offset * 21
-      }).then(res => {
-        //   console.log(res);
-        this.playlist_huayu_offset++;
-        this.playlist_huayu = [...this.playlist_huayu,...res.playlists];
-      }).catch(res=>{
-        this.$notify('网络出错或链接过期');
-    })
+      })
+        .then(res => {
+          //   console.log(res);
+          this.playlist_huayu_offset++;
+          this.playlist_huayu = [...this.playlist_huayu, ...res.playlists];
+        })
+        .catch(res => {
+          this.$notify("网络出错或链接过期");
+        });
     },
     getgfeng() {
       fetchGet("/top/playlist", {
         cat: "古风",
         limit: 21,
         offset: this.playlist_gufeng_offset * 21
-      }).then(res => {
-        //   console.log(res);
-        this.playlist_gufeng_offset++;
-        this.playlist_gufeng = [...this.playlist_gufeng,...res.playlists]
-      }).catch(res=>{
-        this.$notify('网络出错或链接过期');
-    })
+      })
+        .then(res => {
+          //   console.log(res);
+          this.playlist_gufeng_offset++;
+          this.playlist_gufeng = [...this.playlist_gufeng, ...res.playlists];
+        })
+        .catch(res => {
+          this.$notify("网络出错或链接过期");
+        });
     },
     getliuxing() {
       fetchGet("/top/playlist", {
         cat: "流行",
         limit: 21,
         offset: this.playlist_oumei_offset * 21
-      }).then(res => {
-        // console.log(res);
-        this.playlist_oumei_offset++;
-        this.playlist_liuxing = [...this.playlist_liuxing,...res.playlists]
-      }).catch(res=>{
-        this.$notify('网络出错或链接过期');
-    })
+      })
+        .then(res => {
+          // console.log(res);
+          this.playlist_oumei_offset++;
+          this.playlist_liuxing = [...this.playlist_liuxing, ...res.playlists];
+        })
+        .catch(res => {
+          this.$notify("网络出错或链接过期");
+        });
     },
     getgudian() {
       fetchGet("/top/playlist", {
         cat: "古典",
         limit: 21,
         offset: this.playlist_gudian_offset * 21
-      }).then(res => {
-        // console.log(res);
-        this.playlist_gudian_offset++;
-        this.playlist_gudian = [...this.playlist_gudian,...res.playlists]
-      }).catch(res=>{
-        this.$notify('网络出错或链接过期');
-    })
+      })
+        .then(res => {
+          // console.log(res);
+          this.playlist_gudian_offset++;
+          this.playlist_gudian = [...this.playlist_gudian, ...res.playlists];
+        })
+        .catch(res => {
+          this.$notify("网络出错或链接过期");
+        });
     },
     getoumei() {
       fetchGet("/top/playlist", {
         cat: "欧美",
         limit: 21,
         offset: this.playlist_liuxing_offset * 21
-      }).then(res => {
-        // console.log(res);
-        this.playlist_liuxing_offset++;
-        this.playlist_oumei = [...this.playlist_oumei,...res.playlists]
-      }).catch(res=>{
-        this.$notify('网络出错或链接过期');
-    })
+      })
+        .then(res => {
+          // console.log(res);
+          this.playlist_liuxing_offset++;
+          this.playlist_oumei = [...this.playlist_oumei, ...res.playlists];
+        })
+        .catch(res => {
+          this.$notify("网络出错或链接过期");
+        });
     }
   },
   created() {
@@ -185,7 +195,7 @@ export default {
     this.getoumei();
   },
   mounted() {
-    console.log(document.body.clientHeight);
+    // console.log(document.body.clientHeight);
     let swipe = document.querySelectorAll(".swipe-item");
     swipe.forEach(item => {
       item.style.height = window.screen.height - 126 + "px";

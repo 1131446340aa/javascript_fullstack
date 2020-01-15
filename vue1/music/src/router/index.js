@@ -14,8 +14,10 @@ import phonelogin from '@/components/phonelogin'
 import phonevalidation from '@/components/phonevalidation'
 import inputpassword from '@/components/inputpassword'
 import historyplay from '@/components/historyplay'
-
+import tuijian from '@/components/tuijian'
 import collectmusic from '@/components/collectmusic'
+import dtdetail from '@/components/dtdetail'
+
 Vue.use(Router)
 
 export default new Router({
@@ -24,15 +26,25 @@ export default new Router({
       path: '/',
       name: 'index',
       component: index,
-      meta: {
-        isUseCache: false, // 默认不缓存
-        keepAlive: true,
-      }
+      // meta: {
+      //   isUseCache: false, // 默认不缓存
+      //   keepAlive: true,
+      // }
+    },
+    {
+      path: '/dtdetail',
+      name: 'dtdetail',
+      component: dtdetail,
     },
     {
       path: '/phonelogin',
       name: 'phonelogin',
       component: phonelogin,
+    },
+    {
+      path: '/tuijian',
+      name: 'tuijian',
+      component: tuijian,
     },
     {
       path: '/collectmusic',

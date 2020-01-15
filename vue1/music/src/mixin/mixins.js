@@ -1,4 +1,4 @@
-import { fetchGet } from "../../network/index";
+import { fetchGet, fetchGets } from "../../network/index";
 import { mapGetters, mapActions } from "vuex";
 import split_lrc from '../../config/split_lrc'
 export const mixin = {
@@ -58,52 +58,144 @@ export const mixin = {
                 // console.log(this.seek);
                 // this.run();
                 // console.log(1);
-                
+
             }
         },
+        music() {
+            if (localStorage.songitem) {
+                let arr = JSON.parse(localStorage.songitem)
+                arr.forEach((item, index) => {
+                    if (item.id === this.songitem.id) {
+                        arr.splice(index, 1)
+                        arr = [this.songitem, ...arr]
+                    }
+                    else {
+                        if (index === arr.length - 1) {
+                            arr = [this.songitem, ...arr]
+                        }
+                    }
+                })
+                localStorage.songitem = JSON.stringify(arr)
 
+                //不知何故各种数组对象去重方法都会有问题，手写的对象没问题，不知道为什么传过来的对象不能去重，故此用这种取巧方法
+                //       var obj = {};
+                //      arr = arr.reduce(function(item, next) {
+                //        obj[next.key] ? '' : obj[next.key] = true && item.push(next);
+                //       return item;
+                //     }, []);
+                // console.log(arr);
+
+                // console.log(arr);
+                // let Arr = arr.map(item => JSON.stringify(item))
+                // console.log(Arr.indexOf(JSON.stringify(this.songitem)));
+
+                // if(Arr.indexOf(JSON.stringify(this.songitem))===(-1)){
+                //     console.log(1);
+
+                //     arr=[this.songitem, ...arr]
+                // }
+                // else{
+                //   console.log( JSON.parse([...new Set([JSON.stringify(this.songitem),...Arr])]));
+
+                // }
+
+                // console.log(Arr);
+                // console.log([...new Set(["1","1","2"])]);
+
+                // Arr = [...new Set(Arr)]
+                // console.log(Arr);
+                // let array=Arr.map(item=>JSON.parse(item))
+                // console.log(array);
+
+                // //    console.log(arr);
+
+                // console.log(JSON.parse(localStorage.songitem));
+            }
+            else {
+                localStorage.songitem = JSON.stringify([this.songitem])
+            }
+        },
         api() {
             let id
-           
-            console.log( this.singsheet);
-            console.log(this.index);
-            
-            if( this.singsheet[this.index].songs){
-                id=this.singsheet[this.index].songs[0].id
-                console.log(this.singsheet[this.index].songs[0].id);
+            // fetchGet('/login/status').then(res=>{
+            //     console.log(res);
+
+            // })
+            // console.log( this.singsheet);
+            // console.log(this.index);
+            // console.log(this.singsheet.length);
+
+            if (this.index < 0) {
+                this.Index(this.singsheet.length - 1)
             }
-            else{
-                id=this.singsheet[this.index].id
+            if (this.index === this.singsheet.length) {
+                this.Index(0)
             }
-            fetchGet("/song/detail", {
+            if (this.singsheet[this.index].songs) {
+                id = this.singsheet[this.index].songs[0].id
+                // console.log(this.singsheet[this.index].songs[0].id);
+
+            }
+            else {
+                id = this.singsheet[this.index].id
+            }
+
+            // console.log(id);
+
+            fetchGets("/song/detail", {
                 ids: id
             }).then(res => {
-                console.log(res);
-                this.songs = res.songs[0];
-                this.Songitem(res.songs[0])
-                fetchGet("/song/url", {
-                    id: id
-                }).then(res => {
-                    if(!res.data[0].url){
-                        this.$notify({ type: "danger", message: "付费音乐，播放下一首", duration: 1000 });
-                        setTimeout(this.nextone,1500)
-                    }
-                   else{
-                    this.Playing();
-                    //   this.sonngurl = res.data[0].url;
-                    this.songurl(res.data[0].url);
-                    fetchGet('/lyric',{
-                        id:id
-                    }).then(res=>{
-                       
-                    //    console.log( split_lrc(res.lrc.lyric));
-                       this.SongLrc(split_lrc(res.lrc.lyric))
-                       console.log( this.songlrc);
-                       
-                    })
-                   }
-                   
-                });
+                if (res.songs[0]) {//歌曲
+                    this.songs = res.songs[0];
+                    this.Songitem(res.songs[0])
+                    fetchGet("/song/url", {
+                        id: id
+                    }).then(res => {
+                        if (!res.data[0].url) {
+                            this.$notify({ type: "danger", message: "付费音乐，播放下一首", duration: 1000 });
+                            setTimeout(this.nextone, 1500)
+                        }
+                        else {
+                            this.music()
+                            this.Playing();
+                            this.songurl(res.data[0].url);
+                            fetchGet('/lyric', {
+                                id: id
+                            }).then(res => {
+                                //    console.log( split_lrc(res.lrc.lyric));
+                                if (res.lrc) { this.SongLrc(split_lrc(res.lrc.lyric)) }
+                                else { this.SongLrc(split_lrc("")) }
+                                //    console.log( this.songlrc);
+                            })
+                        }
+
+                    });
+                }
+                else {
+                    // 电台
+                    fetchGet("/song/url", { id: this.singsheet[this.index].mainSong.id }).then(
+                        res => {
+                            this.songs = this.singsheet[this.index]
+                            this.Songitem(this.singsheet[this.index])
+                            // console.log(res.data[0].url);
+                            if (!res.data[0].url) {
+                                this.$notify({ type: "danger", message: "付费音乐，播放下一首", duration: 1000 });
+                                setTimeout(this.nextone, 1500)
+                            }
+                            else {
+                                this.music()
+                                this.Playing();
+                                this.songurl(res.data[0].url);
+                                fetchGet('/lyric', { id: this.singsheet[this.index].mainSong.id }).then(
+                                    res => {
+                                        if (res.lrc) { this.SongLrc(split_lrc(res.lrc.lyric)) }
+                                        else { this.SongLrc(split_lrc("")) }
+                                    }
+                                )
+                            }
+                        }
+                    )
+                }
             });
         },
     },
