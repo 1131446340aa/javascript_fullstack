@@ -184,105 +184,138 @@ function RBT() {//创建红黑树的类
                 return -1
             }
             else {
-                if (!(deleteelement.right instanceof NIL)) {
-                    let subNode = deleteelement.right
-                    while (!(subNode.right instanceof NIL)) {
-                        subNode = subNode.left
+                if (deleteelement.left instanceof NIL && deleteelement.right instanceof NIL) {//如果左右孩子都是NIL节点
+                    if (!deleteelement.parent) {//根节点
+                        this.root = null
                     }
-                    let key = deleteelement.key
-                    let value = deleteelement.value
-                    //将后继节点的值和要删除的值互换，
-                    deleteelement.key = subNode.key
-                    deleteelement.value = subNode.value
-                    subNode.key = key
-                    subNode.value = value
-                    this.remove_BST_TO_RBT(subNode)
+                    else {
+                        if (deleteelement.parent.left == deleteelement) {//如果要删除的元素是左孩子
+                            deleteelement.parent.left = new NIL()//将左孩子设为NIl
+                        }
+                        else {
+                            deleteelement.parent.right = new NIL()//如果要删除的元素是右孩子
+                        }
+                    }
+                }
+                else if (deleteelement.right instanceof NIL) {
+                    if (deleteelement.parent == null) {//如果是根节点
+                        deleteelement.left.parent = null
+                        this.root = deleteelement.left
+                        deleteelement = null
+                    }
+                    else {
+                        if (deleteelement.parent.left == deleteelement) {
+                            deleteelement.parent.left = deleteelement.left
+                            deleteelement.left.parent = deleteelement.parent
+                            deleteelement = null//将deletetelement为null
+                        }
+                        else {
+                            deleteelement.parent.right = deleteelement.left
+                            deleteelement.left.parent = deleteelement.parent
+                            deleteelement = null
+                        }
+                    }
+                }
+                else if (deleteelement.left instanceof NIL) {
+                    if (deleteelement.parent == null) {//如果是根节点
+                        deleteelement.right.parent = null
+                        this.root = deleteelement.right
+                        deleteelement = null
+                    }
+                    else {
+                        if (deleteelement.parent.left == deleteelement) {
+                            deleteelement.parent.left = deleteelement.right
+                            deleteelement.right.parent = deleteelement.parent
+                            deleteelement = null//将deletetelement为null
+                        }
+                        else {
+                            deleteelement.parent.right = deleteelement.right
+                            deleteelement.right.parent = deleteelement.parent
+                            deleteelement = null
+                        }
+                    }
                 }
                 else {
-                    //如果后继为空，不需要互换，自己就为自己的后继
-                    this.remove_BST_TO_RBT(deleteelement)
+                    //如果两个孩子都不为NIl
+                    let precursorNode = deleteelement.left
+                    if (precursorNode.right instanceof NIL) {
+                        if (!deleteelement.parent) {
+                            this.root = precursorNode
+                        }
+                        else {
+                            if (deleteelement.parent.left == deleteelement) {
+                                deleteelement.parent.left = precursorNode
+                            }
+                            else {
+                                deleteelement.parent.right = precursorNode
+                            }
+                        }
+                        precursorNode.parent = deleteelement.parent
+                        precursorNode.right = deleteelement.right
+                        deleteelement.right.parent = precursorNode
+                        deleteelement = null
+                    }
+                    else {
+                        while (!(precursorNode.right instanceof NIL)) {
+                            precursorNode = precursorNode.right
+                        }
+                        if (precursorNode.left) {
+                            precursorNode.parent.right = precursorNode.left
+                            precursorNode.left.parent = precursorNode.parent
+                        }
+                        else {
+                            PrecursorNode.parent.right = new NIL()
+                        }
+                        if (!deleteelement.parent) {
+                            this.root = precursorNode
+                        }
+                        else {
+                            if (deleteelement.parent.left == deleteelement) {
+                                deleteelement.parent.left = precursorNode
+                            }
+                            else {
+                                deleteelement.parent.right = precursorNode
+                            }
+                        }
+                        precursorNode.parent = deleteelement.parent
+                        precursorNode.right = deleteelement.right
+                        precursorNode.left = deleteelement.left
+                        deleteelement.right.parent = precursorNode
+                        deleteelement.left.parent = precursorNode
+                        deleteelement = null
+                    }
                 }
             }
 
             this.length--
         }
     }
-    this.remove_BST_TO_RBT = function (Node) {
-        if (Node.color === 'black') {
-            if (!Node.parent) {
-                this.root = null
-                Node = null
+    this.remove_BST_TO_RBT = function (deleteNode, Node) {
+        if (deleteNode.color === 'black') {
+            if (Node.color === 'red') {
+                Node.color = 'black'
+                //节点为红色，直接设为黑色即可
             }
             else {
-                if (Node.right.color === 'red') {//后继节点如果右孩子存在，必定为红色
-                    Node.right.color === "black"
-                    if (Node.parent.left === Node) {
-                        Node.parent.left = Node.right
-                        Node.right.parent = Node.parent
-                    }
-                    else {
-                        Node.parent.right = Node.right
-                        Node.right.parent = Node.parent
-                    }
+                if (!Node.parent) {
+                    //节点为根，什么都不用做
                 }
-                else {//后继节点没有孩子
-                    if (Node.parent.left === Node) {
-                        if (Node.parent.color === 'red' && Node.parent.right.color === "black" && Node.parent.right.left.color === "black" && Node.parent.right.right.color === "black") {
-                            Node.parent.left = new NIL()
-                            Node.parent.color = "black"
-                            Node.parent.right.color = "red"
-                            Node = null
-                        }
-                        if (Node.parent.right.color === 'black' && Node.parent.right.right === "red") {
-                            Node.parent.right.right.color = "black"
-                            Node.parent.right.color = Node.parent.color
-                            Node.parent.color = "black"
-                            if (Node.parent.parent.left === Node) {
-                                Node.parent.parent.left = Node.parent.right
-                            }
-                            else {
-                                Node.parent.parent.right = Node.parent.right
-                            }
-                            Node.parent.right.parent = Node.parent.parent
-                            Node.parent.right.left = Node.parent
-                            Node.parent.parent = Node.parent.right
-                            Node.parent.left = new NIL()
-                            Node.parent.right = new NIL()
-                        }
-                        if (Node.parent.right.color === 'black' && Node.parent.right.left === "red") {
-                            Node.parent.right.color = 'red'
-                            Node.parent.right.left.color = "black"
-                            Node.parent.right.right.left = Node.parent.right
-                            Node.parent.right.right.parent = Node.parent
-                            Node.parent.right.parent = Node.parent.right.right
-                            Node.parent.right.left = new NIL()
-                            Node.parent.right.right = new NIL()
-                            Node.parent.right = Node.parent.right.parent
-                            this.remove_BST_TO_RBT(Node.parent.right)
-                        }
-                        if (Node.parent.right.color === 'black' && Node.parent.color === "black" && Node.parent.right.right.color === "black" && Node.parent.right.left.color === "black") {
-                            Node.parent.right.color = 'red'
-                            Node.parent.left = new NIL()
-                            this.remove_BST_TO_RBT(Node.parent.right)
-                        }
-                        if (Node.parent.right.color === "red") {
-                            Node.parent.right.color = "black"
+                else {
+                    //是黑色且不为根
+                    if (Node.parent.left == Node) {//左孩子
+                        if (Node.parent.right === 'red') {
+                            Node.parent.right.color = 'black'
                             Node.parent.color = 'red'
+                            
+                        }
+                    }
+                    else {//右孩子
 
-                        }
                     }
-                    else {
-                        if (Node.parent.color === 'red' && Node.parent.left.color === "black" && Node.parent.left.left.color === "black" && Node.parent.left.right.color === "black") {
-                            Node.parent.right = new NIL()
-                            Node.parent.color = "black"
-                            Node.parent.left.color = "red"
-                            Node = null
-                        }
-                    }
+
                 }
             }
         }
-        //红色符合规则，不做变化
     }
     //前序遍历
     this.preorderTraversal = function () {
