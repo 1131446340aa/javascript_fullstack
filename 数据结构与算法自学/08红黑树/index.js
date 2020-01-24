@@ -47,30 +47,26 @@ function RBT() {//创建红黑树的类
         }
     }
     this.BST_TO_RBT = function (Node) {
-        // 搜索二叉树转红黑树
+        // 搜索二叉树转红黑树     
         if (Node.parent) {
-            if (Node.parent.parent) {//根据红黑树的变化规则可以知道，如果不存在爷爷节点，只需要将根节点变为黑色即可
-                if (Node.parent.color === "red" && Node.color === 'red') {//只有父亲和孩子都是红色才要变化
+            if (Node.parent.parent) {//根据红黑树的变化规则可以知道，如果不存在爷爷节点，只需要将根节点变为黑色即可               
+                if (Node.parent.color === "red" && Node.color === 'red') {//只有父亲和孩子都是红色才要变化   
+
                     if (Node.parent == Node.parent.parent.left) {//如果父亲是爷爷的左孩子
                         if (Node.parent.parent.right.color === "red") {
                             // 如果叔叔是红色,进行情况四变换
-
                             Node.parent.color = "black"
                             Node.parent.parent.color = "red"
                             Node.parent.parent.right.color = "black"
                             // console.log(Node.parent.parent);
-
                             this.BST_TO_RBT(Node.parent.parent)//将爷爷当作新的节点进行递归操作
                         }
                         else {
                             // 如果叔叔是黑色
-
                             if (Node == Node.parent.left) { // 如果自己是父亲的左孩子，则进行情况5变化
                                 Node.parent.color = 'black'
                                 Node.parent.parent.color = "red"
                                 if (Node.parent.parent.parent == null) {//如果爷爷是根节点
-
-
                                     Node.parent.right.parent = Node.parent.parent
                                     Node.parent.parent.left = Node.parent.right
                                     Node.parent.right = Node.parent.parent
@@ -81,14 +77,12 @@ function RBT() {//创建红黑树的类
                                 else {
                                     if (Node.parent.parent == Node.parent.parent.parent.left) {
                                         //如果爷爷是曾祖父的左孩子
-
                                         Node.parent.right.parent = Node.parent.parent
                                         Node.parent.parent.left = Node.parent.right
                                         Node.parent.right = Node.parent.parent
                                         Node.parent.parent = Node.parent.parent.parent
                                         Node.parent.parent.left = Node.parent
                                         Node.parent.right.parent = Node.parent
-
                                     }
                                     else {
                                         //如果爷爷是曾祖父的右孩子
@@ -109,13 +103,16 @@ function RBT() {//创建红黑树的类
                                 Node.left = Node.parent
                                 Node.parent = Node.parent.parent
                                 Node.left.parent = Node
-                                this.BST_TO_RBT(Node)
+                                Node.left.right.parent = Node.left
+                                this.BST_TO_RBT(Node.left)
                             }
                         }
                     }
                     else {//如果父亲是爷爷的右孩子
+
                         if (Node.parent.parent.left.color === "red") {
                             // 如果叔叔是红色,进行情况四变换
+
                             Node.parent.color = "black"
                             Node.parent.parent.color = "red"
                             Node.parent.parent.left.color = "black"
@@ -123,6 +120,7 @@ function RBT() {//创建红黑树的类
                         }
                         else {
                             // 如果叔叔是黑色
+
                             if (Node == Node.parent.right) { // 如果自己是父亲的右孩子，则进行情况5变化
                                 Node.parent.color = 'black'
                                 Node.parent.parent.color = "red"
@@ -134,9 +132,11 @@ function RBT() {//创建红黑树的类
                                     Node.parent.left.parent = Node.parent
                                     this.root = Node.parent
                                 }
+
                                 else {
                                     if (Node.parent.parent == Node.parent.parent.parent.left) {
                                         //如果爷爷是曾祖父的左孩子
+
                                         Node.parent.left.parent = Node.parent.parent
                                         Node.parent.parent.right = Node.parent.left
                                         Node.parent.left = Node.parent.parent
@@ -145,7 +145,7 @@ function RBT() {//创建红黑树的类
                                         Node.parent.left.parent = Node.parent
                                     }
                                     else {
-                                        //如果爷爷是曾祖父的右孩子
+                                        //如果爷爷是曾祖父的右孩子                                   
                                         Node.parent.left.parent = Node.parent.parent
                                         Node.parent.parent.right = Node.parent.left
                                         Node.parent.left = Node.parent.parent
@@ -163,6 +163,10 @@ function RBT() {//创建红黑树的类
                                 Node.right = Node.parent
                                 Node.parent = Node.parent.parent
                                 Node.right.parent = Node
+                                Node.right.left.parent = Node.right
+                                // if (this.search(16) !== -1) {
+                                //     console.log(Node.right.left.parent.key);
+                                // }
                                 this.BST_TO_RBT(Node.right)
                             }
                         }
@@ -186,7 +190,7 @@ function RBT() {//创建红黑树的类
             else {
                 if (!(deleteelement.right instanceof NIL)) {
                     let subNode = deleteelement.right
-                    while (!(subNode.right instanceof NIL)) {
+                    while (!(subNode.left instanceof NIL)) {
                         subNode = subNode.left
                     }
                     let key = deleteelement.key
@@ -199,45 +203,106 @@ function RBT() {//创建红黑树的类
                     this.remove_BST_TO_RBT(subNode)
                 }
                 else {
-                    //如果后继为空，不需要互换，自己就为自己的后继
+                    //如果后继为空
                     this.remove_BST_TO_RBT(deleteelement)
                 }
             }
-
             this.length--
         }
     }
     this.remove_BST_TO_RBT = function (Node) {
         if (Node.color === 'black') {
-            if (!Node.parent) {
+            if (!Node.parent) {//根节点。不做变化       
                 this.root = null
                 Node = null
             }
             else {
-                if (Node.right.color === 'red') {//后继节点如果右孩子存在，必定为红色
-                    Node.right.color === "black"
-                    if (Node.parent.left === Node) {
-                        Node.parent.left = Node.right
+                if (Node.parent.right === Node) {//删除(节点是右孩子
+                    if (Node.right.color === 'red') {//有一个右节点，而且肯定为红，直接用孩子代替父亲
+                        Node.right.color = 'black'
                         Node.right.parent = Node.parent
+                        Node.parent.right = Node.right
+                        Node = null
                     }
                     else {
-                        Node.parent.right = Node.right
-                        Node.right.parent = Node.parent
-                    }
-                }
-                else {//后继节点没有孩子
-                    if (Node.parent.left === Node) {
-                        if (Node.parent.color === 'red' && Node.parent.right.color === "black" && Node.parent.right.left.color === "black" && Node.parent.right.right.color === "black") {
+                        //没有孩子                                              
+                        if (Node.parent.left.color === 'red') {
+                            //如果兄弟是红色，兄弟不可能有孩子，父亲必定黑色，兄换色，然后右旋
+                            Node.parent.left.color === 'black'
+                            Node.parent.color = 'red'
+                            if (Node.parent.parent.left === Node.parent) {//判断父亲是左孩子还是右孩子
+                                Node.parent.parent.left = Node.parent.right
+                            }
+                            else {
+                                Node.parent.parent.right = Node.parent.right
+                            }
+                            Node.parent.left.parent = Node.parent.parent
+                            Node.parent.left.right = Node.parent
+                            Node.parent.parent = Node.parent.left
                             Node.parent.left = new NIL()
-                            Node.parent.color = "black"
-                            Node.parent.right.color = "red"
+                            Node.parent.right = new NIL()
                             Node = null
                         }
-                        if (Node.parent.right.color === 'black' && Node.parent.right.right === "red") {
-                            Node.parent.right.right.color = "black"
-                            Node.parent.right.color = Node.parent.color
-                            Node.parent.color = "black"
-                            if (Node.parent.parent.left === Node) {
+                        else {
+                            //如果兄弟是黑色
+                            if (Node.parent.left.right instanceof NIL) {
+                                //如果右节点为空，父节点为黑色，再右旋
+                                // Node.parent.color = "black"
+                                // console.log(Node.key);
+                                if (Node.parent.left.left instanceof NIL) {
+                                    Node.parent.color = "red"
+                                }
+                                if (!Node.parent.parent) {
+                                    this.root = Node.parent.left
+                                }
+                                else {
+                                    if (Node.parent.parent.left === Node.parent) {
+                                        Node.parent.parent.left = Node.parent.left
+                                    }
+                                    else {
+                                        Node.parent.parent.right = Node.parent.left
+                                    }
+                                }
+                                Node.parent.left.parent = Node.parent.parent
+                                Node.parent.left.right = Node.parent
+                                Node.parent.parent = Node.parent.left
+                                Node.parent.left = new NIL()
+                                Node.parent.right = new NIL()
+                                Node = null
+                            }
+                            else {
+                                // console.log(Node.key);                                
+                                //如果兄弟右节点存在，必定红色，先变为黑色，再左旋，就变成了兄黑，兄右孩子黑，再进行递归
+                                Node.parent.left.right.color = 'black'
+                                Node.parent.color = "black"
+                                Node.parent.left.right.parent = Node.parent
+                                Node.parent.left.right.left = Node.parent.left
+                                Node.parent.left.parent = Node.parent.left.right
+                                Node.parent.left = Node.parent.left.right
+                                Node.parent.left.left.right = new NIL()
+                                // console.log(this.search(17).parent.color);
+                                this.remove_BST_TO_RBT(Node)
+                            }
+                        }
+                    }
+                }
+                else {
+                    //删除节点是左孩子
+                    if (Node.right.color === 'red') {//有一个右节点，而且肯定为红，直接用孩子代替父亲
+                        Node.right.color = 'black'
+                        Node.right.parent = Node.parent
+                        Node.parent.left = Node.right
+                        Node = null
+                    }
+                    else {
+                        if (Node.parent.right.color === 'red') {
+                            //如果兄弟是红色，兄弟不可能有孩子，父亲必定黑色，兄换色，然后左旋
+                            Node.parent.right.color = 'black'
+                            Node.parent.color = 'red'
+                            // console.log(Node.key);
+
+
+                            if (Node.parent.parent.left === Node.parent) {//判断父亲是左孩子还是右孩子
                                 Node.parent.parent.left = Node.parent.right
                             }
                             else {
@@ -248,44 +313,65 @@ function RBT() {//创建红黑树的类
                             Node.parent.parent = Node.parent.right
                             Node.parent.left = new NIL()
                             Node.parent.right = new NIL()
-                        }
-                        if (Node.parent.right.color === 'black' && Node.parent.right.left === "red") {
-                            Node.parent.right.color = 'red'
-                            Node.parent.right.left.color = "black"
-                            Node.parent.right.right.left = Node.parent.right
-                            Node.parent.right.right.parent = Node.parent
-                            Node.parent.right.parent = Node.parent.right.right
-                            Node.parent.right.left = new NIL()
-                            Node.parent.right.right = new NIL()
-                            Node.parent.right = Node.parent.right.parent
-                            this.remove_BST_TO_RBT(Node.parent.right)
-                        }
-                        if (Node.parent.right.color === 'black' && Node.parent.color === "black" && Node.parent.right.right.color === "black" && Node.parent.right.left.color === "black") {
-                            Node.parent.right.color = 'red'
-                            Node.parent.left = new NIL()
-                            this.remove_BST_TO_RBT(Node.parent.right)
-                        }
-                        if (Node.parent.right.color === "red") {
-                            Node.parent.right.color = "black"
-                            Node.parent.color = 'red'
-
-                        }
-                    }
-                    else {
-                        if (Node.parent.color === 'red' && Node.parent.left.color === "black" && Node.parent.left.left.color === "black" && Node.parent.left.right.color === "black") {
-                            Node.parent.right = new NIL()
-                            Node.parent.color = "black"
-                            Node.parent.left.color = "red"
                             Node = null
                         }
+                        else {
+                            //如果兄弟是黑色
+                            if (Node.parent.right.left instanceof NIL) {
+                                //如果左节点为空，父节点为黑色，再左旋
+                                // Node.parent.color = 'black'
+                                if (Node.parent.right.right instanceof NIL) {
+                                    Node.parent.color = "red"
+                                }
+                                if (!Node.parent.parent) {
+                                    this.root = Node.parent.parent
+                                }
+                                else {
+                                    if (Node.parent.parent.left === Node.parent) {
+                                        Node.parent.parent.left = Node.parent.right
+                                    }
+                                    else {
+                                        Node.parent.parent.right = Node.parent.right
+                                    }
+                                }
+                                Node.parent.right.parent = Node.parent.parent
+                                Node.parent.right.left = Node.parent
+                                Node.parent.parent = Node.parent.right
+                                Node.parent.left = new NIL()
+                                Node.parent.right = new NIL()
+                                Node = null
+                            }
+                            else {
+                                //如果兄弟左节点存在，必定红色，先变为黑色，再右旋，就变成了兄黑，兄右孩子黑，再进行递归
+                                Node.parent.right.left.color = 'black'
+                                Node.parent.color = "black"
+                                Node.parent.right.left.parent = Node.parent
+                                Node.parent.right.left.right = Node.parent.right
+                                Node.parent.right.parent = Node.parent.right.left
+                                Node.parent.right = Node.parent.right.left
+                                Node.parent.right.right.left = new NIL()
+                                this.remove_BST_TO_RBT(Node)
+                            }
+                        }
                     }
+
                 }
             }
         }
-        //红色符合规则，不做变化
+        else {
+            //红色只有将删除节点设为空
+            if (Node.parent.left === Node) {
+                Node.parent.left = new NIL()
+                Node = null
+            }
+            else {
+                Node.parent.right = new NIL()
+                Node = null
+            }
+        }
     }
     //前序遍历
-    this.preorderTraversal = function () {
+    RBT.prototype.preorderTraversal = function () {
         if (this.length === 0) {
             return -1
         }
@@ -293,7 +379,7 @@ function RBT() {//创建红黑树的类
             this.preorderTraversalNode(this.root)
         }
     }
-    RBT.prototype.preorderTraversalNode = function (Node) {
+    this.preorderTraversalNode = function (Node) {
 
         console.log(Node.key);
         if (!(Node.left instanceof NIL)) {
@@ -379,15 +465,42 @@ function RBT() {//创建红黑树的类
 
 }
 let Rbt = new RBT()
+Rbt.push(12, 10)
+Rbt.push(1, 10)
+Rbt.push(9, 10)
+Rbt.push(2, 10)
+Rbt.push(0, 10)
+Rbt.push(11, 10)
+Rbt.push(7, 10)
+Rbt.push(19, 10)
+Rbt.push(4, 10)
+Rbt.push(15, 10)
+Rbt.push(18, 10)
+Rbt.push(5, 10)
+Rbt.push(14, 10)
+Rbt.push(13, 10)
 Rbt.push(10, 10)
-Rbt.push(9, 9)
-Rbt.push(8, 8)
-Rbt.push(7, 7)
-Rbt.push(6, 6)
-Rbt.push(5, 5)
-Rbt.push(4, 4)
-Rbt.push(3, 3)
-Rbt.push(2, 2)
-Rbt.push(1, 1)
+Rbt.push(16, 10)
+Rbt.push(6, 10)
+Rbt.push(3, 10)
+Rbt.push(8, 10)
+Rbt.push(17, 10)
+Rbt.remove(12)
+Rbt.remove(1)
+Rbt.remove(9)
+Rbt.remove(2)
+Rbt.remove(0)
+Rbt.remove(11)
 Rbt.remove(7)
+Rbt.remove(19)
+Rbt.remove(4)
+Rbt.remove(15)
+Rbt.remove(18)
+Rbt.remove(5)
+Rbt.remove(14)
+Rbt.remove(13)
+// Rbt.remove(10)
+// Rbt.remove(16)
+console.log(Rbt.search(16).color);
 Rbt.preorderTraversal()
+

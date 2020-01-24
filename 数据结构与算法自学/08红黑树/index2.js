@@ -412,15 +412,8 @@ function RBT() {//创建红黑树的类
 
 }
 let Rbt = new RBT()
-Rbt.push(10, 10)
-Rbt.push(9, 9)
-Rbt.push(8, 8)
-Rbt.push(7, 7)
-Rbt.push(6, 6)
-Rbt.push(5, 5)
-Rbt.push(4, 4)
-Rbt.push(3, 3)
-Rbt.push(2, 2)
-Rbt.push(1, 1)
-Rbt.remove(7)
+Rbt.push(12, 10)
+Rbt.push(1, 10)
+Rbt.push(9, 10)
+
 Rbt.preorderTraversal()
