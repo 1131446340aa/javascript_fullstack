@@ -11,14 +11,16 @@
 </template>
 
 <script>
-import amapFile from '../../utils/amap-wx.js'
+import amapFile from "../../utils/amap-wx.js";
+import { mapState, mapMutations } from "vuex";
 export default {
   data() {
     return {
-      cityName: "南昌"
+      // cityName: "南昌"
     };
   },
   methods: {
+    ...mapMutations(["update"]),
     toMappage() {
       wx.getSetting({
         success: result => {
@@ -38,7 +40,7 @@ export default {
             wx.navigateTo({
               url: "/pages/mappage/main"
             });
-             this.getCityName();
+            //  this.getCityName();
           }
           console.log(result);
         },
@@ -49,7 +51,7 @@ export default {
     getCityName() {
       let _this = this;
       var myAmapFun = new amapFile.AMapWX({
-        key: "e9f7e0bd472e6f8a1c6a9932cc54edd8"
+        key: "3e65cb28392b172ded1e0184c20d07f6"
       });
       myAmapFun.getRegeo({
         success: function(data) {
@@ -57,10 +59,13 @@ export default {
         },
         fail: function(err) {
           console.log(err);
-          _this.cityName="北京"
+          _this.cityName = "北京";
         }
       });
     }
+  },
+  computed: {
+    ...mapState(["cityName"])
   }
 };
 </script>
