@@ -1,0 +1,17 @@
+{
+  "name": "mpvue-shop-node",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0"
+  },
+  "devDependencies": {},
+  "description": ""
+}
