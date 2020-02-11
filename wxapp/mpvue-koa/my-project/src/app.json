@@ -5,7 +5,11 @@
     "pages/cart/main",
     "pages/topic/main",
     "pages/category/main",
-    "pages/my/main"
+    "pages/my/main",
+    "pages/brandlist/main",
+    "pages/topicdetail/main",
+    "pages/search/main"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",

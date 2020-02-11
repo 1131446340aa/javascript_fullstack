@@ -3,7 +3,8 @@ const fs = require('fs')
 const path = require('path')
 const mapDir = d => {
     const tree = {}
-    const [dirs, files] = _(fs.readFileSync(d)).partition(p => fs.statSync(path.join(d, p)).isDirectory())
+    const [dirs, files] = _(fs.readdirSync(d)).partition(p => fs.statSync(path.join(d, p)).isDirectory())
+
     dirs.forEach(dir => {
         tree[dir] = mapDir(path.join(d, dir))
     })
@@ -14,4 +15,4 @@ const mapDir = d => {
     })
     return tree
 }
-module.exports=mapDir(path.join(__dirname))
+module.exports = mapDir(path.join(__dirname))

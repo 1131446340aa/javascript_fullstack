@@ -1,9 +1,9 @@
 {
-  "name": "my-project",
+  "name": "mpvue-shop",
   "version": "1.0.0",
   "mpvueTemplateProjectVersion": "0.1.0",
   "description": "A Mpvue project",
-  "author": "1131446340aa <1131446340@qq.com>",
+  "author": "cleversnail <652501825@qq.com>",
   "private": true,
   "scripts": {
     "dev:wx": "node build/dev-server.js wx",
@@ -23,7 +23,10 @@
     "build": "node build/build.js wx"
   },
   "dependencies": {
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
     "mpvue": "^2.0.0",
+    "mpvue-wxparse": "^0.6.5",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
