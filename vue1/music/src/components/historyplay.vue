@@ -23,7 +23,6 @@
 import daohangblack from "./daohang_black";
 import scrollplaylist from "./scrollplaylist";
 import BScroll from "./scroll";
-import { fetchGet } from "../../network/index";
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import controlbar from "./controlbar";
 export default {

@@ -12,7 +12,7 @@
 <script>
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import BScroll from "./scroll";
-import { fetchGet } from "../../network/index";
+import { toplist_detail } from "../../network/index";
 import singsheet from "./singsheet";
 import controlbar from "./controlbar";
 import daohangblack from "./daohang_black";
@@ -29,15 +29,11 @@ export default {
     };
   },
   created() {
-    fetchGet("/toplist/detail")
-      .then(res => {
+    toplist_detail(res => {
         // console.log(res.list);
         this.list = res.list.slice(0, 25);
         this.list.splice(11, 1);
       })
-      .catch(res => {
-        this.$notify("网络出错或链接过期");
-      });
   }
 };
 </script>

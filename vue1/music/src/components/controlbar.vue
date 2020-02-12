@@ -65,7 +65,10 @@ export default {
         this.$notify({ type: "danger", message: "暂未选择播放音乐" });
       } else {
         this.$router.push({
-          path: "/music"
+          path: "/music",
+          query: {
+            isplay: "true"
+          }
         });
       }
     }

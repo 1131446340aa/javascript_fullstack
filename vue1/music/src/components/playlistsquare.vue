@@ -67,7 +67,7 @@
 <script>
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import BScroll from "./scroll";
-import { fetchGet } from "../../network/index";
+import { top_playlist } from "../../network/index";
 import daohangblack from "./daohang_black";
 import controlbar from "./controlbar";
 import singsheet from "./singsheet";
@@ -112,79 +112,39 @@ export default {
       this.getliuxing();
     },
     gethuayu() {
-      fetchGet("/top/playlist", {
-        cat: "华语",
-        limit: 21,
-        offset: this.playlist_huayu_offset * 21
-      })
-        .then(res => {
+     top_playlist("华语", this.playlist_huayu_offset * 21,res => {
           //   console.log(res);
           this.playlist_huayu_offset++;
           this.playlist_huayu = [...this.playlist_huayu, ...res.playlists];
-        })
-        .catch(res => {
-          this.$notify("网络出错或链接过期");
-        });
+        })  
     },
     getgfeng() {
-      fetchGet("/top/playlist", {
-        cat: "古风",
-        limit: 21,
-        offset: this.playlist_gufeng_offset * 21
-      })
-        .then(res => {
+     top_playlist( "古风",this.playlist_gufeng_offset * 21,res => {
           //   console.log(res);
           this.playlist_gufeng_offset++;
           this.playlist_gufeng = [...this.playlist_gufeng, ...res.playlists];
-        })
-        .catch(res => {
-          this.$notify("网络出错或链接过期");
-        });
+        })  
     },
     getliuxing() {
-      fetchGet("/top/playlist", {
-        cat: "流行",
-        limit: 21,
-        offset: this.playlist_oumei_offset * 21
-      })
-        .then(res => {
+      top_playlist( "流行", this.playlist_oumei_offset * 21,res => {
           // console.log(res);
           this.playlist_oumei_offset++;
           this.playlist_liuxing = [...this.playlist_liuxing, ...res.playlists];
         })
-        .catch(res => {
-          this.$notify("网络出错或链接过期");
-        });
     },
     getgudian() {
-      fetchGet("/top/playlist", {
-        cat: "古典",
-        limit: 21,
-        offset: this.playlist_gudian_offset * 21
-      })
-        .then(res => {
+     top_playlist( "古典", this.playlist_gudian_offset * 21,res => {
           // console.log(res);
           this.playlist_gudian_offset++;
           this.playlist_gudian = [...this.playlist_gudian, ...res.playlists];
         })
-        .catch(res => {
-          this.$notify("网络出错或链接过期");
-        });
     },
     getoumei() {
-      fetchGet("/top/playlist", {
-        cat: "欧美",
-        limit: 21,
-        offset: this.playlist_liuxing_offset * 21
-      })
-        .then(res => {
+      top_playlist( "欧美",this.playlist_liuxing_offset * 21,res => {
           // console.log(res);
           this.playlist_liuxing_offset++;
           this.playlist_oumei = [...this.playlist_oumei, ...res.playlists];
-        })
-        .catch(res => {
-          this.$notify("网络出错或链接过期");
-        });
+        })   
     }
   },
   created() {

@@ -16,7 +16,7 @@
 <script>
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import BScroll from "./scroll";
-import { fetchGet, fetchGets } from "../../network/index";
+import { song_detail,top_list } from "../../network/index";
 import controlbar from "./controlbar";
 import daohang from "./daohang";
 import scrollplaylist from "./scrollplaylist";
@@ -28,17 +28,11 @@ export default {
     scrollplaylist
   },
   created() {
-    fetchGet("/top/list", {
-      idx: this.$route.query.idx
-    })
-      .then(res => {
+    top_list( this.$route.query.idx,res => {
         //   console.log(res);
         this.playlists = res.playlist;
         this.playList(this.playlists);
       })
-      .catch(res => {
-        this.$notify("网络出错或链接过期");
-      });
   },
   methods: {
     ...mapActions(["playList"])
@@ -53,7 +47,7 @@ export default {
     playlist: function() {
       if (this.playlist) {
         this.playlist.trackIds.forEach(item => {
-          fetchGets("/song/detail", { ids: item.id }).then(res =>
+          song_detail( item.id,res =>
             //   console.log(res)
             this.allsong.push(res)
           );

@@ -47,27 +47,18 @@
 <script>
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import BScroll from "./scroll";
-import { fetchGet } from "../../network/index";
+import {banner, personalized } from "../../network/index";
 import singsheet from "./singsheet";
 import controlbar from "./controlbar";
 export default {
   components: { BScroll, singsheet, controlbar },
   created() {
-    fetchGet("/banner")
-      .then(res => {
-        this.banners = res.banners;
-      })
-      .catch(res => {
-        this.$notify("网络出错或链接过期");
-      });
-    fetchGet("/personalized")
-      .then(res => {
-        this.personalized = res.result.slice(0, 12);
-        // console.log(res);
-      })
-      .catch(res => {
-        this.$notify("网络出错或链接过期");
-      });
+    banner(res => {
+      this.banners = res.banners;
+    });
+    personalized(res => {
+      this.personalized = res.result.slice(0, 12);
+    });
   },
   data() {
     return {

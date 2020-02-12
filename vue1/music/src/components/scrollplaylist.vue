@@ -20,7 +20,6 @@
 <script>
 import BScroll from "./scroll";
 import { mapGetters, mapActions } from "vuex";
-import { fetchGet } from "../../network/index";
 import songitem from "./songitem";
 export default {
   components: {

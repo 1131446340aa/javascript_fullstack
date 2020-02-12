@@ -11,7 +11,7 @@
 
 <script>
 import daohangblack from "./daohang_black";
-import { fetchGet } from "../../network/index";
+import { login_cellphone } from "../../network/index";
 import { mapGetters, mapActions } from "vuex";
 export default {
   components: { daohangblack },
@@ -26,19 +26,12 @@ export default {
       if (!this.password) {
         this.$toast({ message: "请输入密码", position: "bottom" });
       } else {
-        fetchGet("/login/cellphone", {
-          phone: this.$route.query.phone,
-          password: this.password
+        login_cellphone(this.$route.query.phone, this.password, res => {
+          // console.log(res);
+          this.ID(res.account.id);
+          localStorage.id = res.account.id;
+          this.$router.push({ path: "/" });
         })
-          .then(res => {
-            // console.log(res);
-            this.ID(res.account.id);
-            localStorage.id = res.account.id;
-            this.$router.push({ path: "/" });
-          })
-          .catch(res => {
-            this.$toast({ message: "密码错误", position: "bottom" });
-          });
       }
     }
   }

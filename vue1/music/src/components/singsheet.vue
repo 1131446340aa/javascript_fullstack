@@ -10,7 +10,6 @@
   </div>
 </template>
 <script>
-import { fetchGet } from "../../network/index";
 export default {
   created() {},
   props: {

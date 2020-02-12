@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { fetchGet } from "../../network/index";
+import { search } from "../../network/index";
 import BScroll from "./scroll";
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import bus from "../../config/bus";
@@ -95,12 +95,8 @@ export default {
       // console.log(this.value);
 
       if (this.value) {
-        fetchGet("/search", {
-          keywords: this.value,
-          offset: this.offset * 30
-        })
-          .then(res => {
-            if (this.value === this.newvalue) {
+       search(this.value,res => {
+            if ( this.value,this.value === this.newvalue) {
               this.newvalue = this.value;
               this.offset = this.offset + 1;
               // console.log(res.result.songs);
@@ -109,13 +105,9 @@ export default {
               this.offset = 0;
               this.songs = [];
               this.newvalue = this.value;
-
               this.api();
             }
-          })
-          .catch(res => {
-            this.$notify("网络出错或链接过期");
-          });
+          },this.offset * 30)
       }
     }
   },

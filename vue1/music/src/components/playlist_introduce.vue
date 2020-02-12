@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { fetchGet } from "../../network/index";
+import { playlist_detail } from "../../network/index";
 import { mapGetters, mapActions, mapMutations } from "vuex";
 export default {
   created() {
@@ -31,7 +31,7 @@ export default {
   methods: {
     ...mapActions(["playList"]),
     getPlaylist() {
-      fetchGet("/playlist/detail", { id: this.$route.query.id }).then(res => {
+      playlist_detail(this.$route.query.id,res => {
         // console.log(res.playlist);
         this.result = res.playlist;
         this.playList(res.playlist);

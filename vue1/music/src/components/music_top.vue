@@ -17,7 +17,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import { fetchGet } from "../../network/index";
+import { likelist,like_music } from "../../network/index";
 export default {
   computed: {
     ...mapGetters(["songitem", "singsheet"])
@@ -39,10 +39,7 @@ export default {
       } else {
         this.like = true;
       }
-      fetchGet("/like", {
-        id: this.songitem.id,
-        like: this.like
-      }).then(res => {
+      like_music(this.songitem.id,this.like,res => {
         // console.log(res);
         this.collect = !this.collect;
       });
@@ -50,10 +47,7 @@ export default {
   },
   watch: {
     songitem: function() {
-      fetchGet("/likelist", { uid: localStorage.id }).then(res => {
-        // console.log(res.ids);
-        // console.log(this.songitem.id);
-
+      likelist(res => {
         if (res.ids.indexOf(this.songitem.id) !== -1) {
           // this.like = true;
           this.collect = true;

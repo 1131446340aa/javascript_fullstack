@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import { fetchGet } from "../../network/index";
+import { hot_search, search } from "../../network/index";
 import BSroll from "./scroll";
 import controlbar from "./controlbar";
 export default {
@@ -79,20 +79,16 @@ export default {
     if (localStorage.keys) {
       this.history = JSON.parse(localStorage.keys);
     }
-    fetchGet("/search/hot/detail")
-      .then(res => {
-        this.hots = res.result.hots;
-      })
-      .catch(res => {
-        this.$notify("网络出错或链接过期");
-      });
+    hot_search(res => {
+      this.hots = res.result.hots;
+    });
     this.searchs = this.debounce(() => {
-      fetchGet("/search", {
-        keywords: this.value
-      }).then(res => {
-        // console.log(res.result.songs);
-        this.songs = res.result.songs.slice(0, 10);
-      });
+      if (this.value) {
+        search(this.value, res => {
+          // console.log(res.result.songs);
+          this.songs = res.result.songs.slice(0, 10);
+        });
+      }
     }, 400);
   },
   methods: {
@@ -148,8 +144,6 @@ export default {
   }
 };
 </script>
-
-
 <style lang="stylus" scoped>
 .open
   position absolute
@@ -163,7 +157,7 @@ export default {
 .history-list
   width 85vw
 .shou
-  height 20px
+  height 26px
   overflow hidden
 .history-item, .shouqi
   font-size 12px
@@ -171,8 +165,7 @@ export default {
   height 20px
   border-radius 10px
   background-color rgba(242, 246, 252, 0.5)
-  margin-right 10px
-  margin-top 5px
+  margin 5px 10px 5px 0
   padding 0 10px
   max-width 75vw
   overflow hidden

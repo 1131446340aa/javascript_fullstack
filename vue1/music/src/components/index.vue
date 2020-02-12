@@ -1,10 +1,5 @@
 <template>
   <div class="main">
-    <!-- <tabbar @send="currentindex"></tabbar>
-    <my v-show="index===0"></my>
-    <found v-show="index===1"></found>
-    <diantai v-show="index===2"></diantai>
-    <Video v-show="index===3"></Video>-->
     <tabbar @send="currentindex" :index="pageindex"></tabbar>
     <van-swipe
       indicator-color="white"

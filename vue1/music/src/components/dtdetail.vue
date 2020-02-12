@@ -18,15 +18,13 @@
 <script>
 import daohang from "./daohang";
 import BScroll from "./scroll";
-import { fetchGet } from "../../network/index";
+import { dj_program, dj_detail } from "../../network/index";
 import controlbar from "./controlbar";
 import radioscroll from "./scrollplaylist";
 export default {
   components: { daohang, BScroll, controlbar, radioscroll },
   created() {
-    console.log(this.$route.query.rid);
-
-    fetchGet("/dj/detail", { rid: this.$route.query.rid }).then(res => {
+    dj_detail(this.$route.query.rid, res => {
       this.djRadio = res.djRadio;
     });
     this.getdj();
@@ -42,19 +40,15 @@ export default {
   methods: {
     update() {
       console.log(1);
-      if(this.offset>0&&this.offset*40<this.count){
-          this.getdj()
+      if (this.offset > 0 && this.offset * 40 < this.count) {
+        this.getdj();
       }
     },
     getdj() {
-      fetchGet("/dj/program", {
-        rid: this.$route.query.rid,
-        limit: 40,
-        offset: this.offset * 40
-      }).then(res => {
-        console.log(res);
-        this.offset++
-        this.djitem = [...this.djitem,...res.programs];
+      dj_program(this.$route.query.rid, this.offset * 40, res => {
+        // console.log(res);
+        this.offset++;
+        this.djitem = [...this.djitem, ...res.programs];
         this.count = res.count;
       });
     }

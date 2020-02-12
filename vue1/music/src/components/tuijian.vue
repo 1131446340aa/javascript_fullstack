@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { fetchGet } from "../../network/index";
+import { recommend_songs } from "../../network/index";
 import { mapGetters, mapActions } from "vuex";
 import daohang from "./daohang";
 import BScroll from "./scroll";
@@ -39,7 +39,7 @@ export default {
     var date = new Date();
     (this.month = (date.getMonth() + 1 + "").padStart(2, "0")),
       (this.day = (date.getDate() + "").padStart(2, "0"));
-    fetchGet("/recommend/songs").then(res => {
+    recommend_songs(res => {
       // console.log(res.recommend);
       this.allsong = res.recommend;
       this.count = res.recommend.length;

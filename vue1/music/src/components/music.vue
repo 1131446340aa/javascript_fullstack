@@ -90,7 +90,6 @@
 </template>
 
 <script>
-import { fetchGet } from "../../network/index";
 import { mapGetters, mapActions } from "vuex";
 import BScroll from "./scroll";
 import { mixin } from "../mixin/mixins";
@@ -174,7 +173,9 @@ export default {
     }
   },
   mounted() {
-    this.api();
+    if (!this.$route.query.isplay) { 
+      this.api();
+    }
   },
   components: {
     BScroll,
@@ -182,7 +183,7 @@ export default {
     musictop
   }
 };
-</script>
+</script> 
 
 <style lang="stylus" scoped>
 @keyframes rotate
@@ -213,8 +214,7 @@ export default {
   height 40px
   line-height 40px
   overflow hidden
-  white-space nowrap
-    // position relative
+  white-space nowrapxac // position relative
     // bottom 40px
     // .actived
     // display inline-block

@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import { fetchGet } from "../../network/index";
+import { mv_detail, mv_simi } from "../../network/index";
 import { mapGetters, mapActions } from "vuex";
 import BScroll from "./scroll";
 import daohangblack from "./daohang_black";
@@ -106,19 +106,11 @@ export default {
       } else {
         id = this.$route.query.mvid;
       }
-      fetchGet("/mv/detail", {
-        mvid: id
+      mv_detail(id, res => {
+        // console.log(res);
+        this.videodetail = res.data;
       })
-        .then(res => {
-          // console.log(res);
-          this.videodetail = res.data;
-        })
-        .catch(res => {
-          this.$notify("网络出错或链接过期");
-        });
-      fetchGet("/simi/mv", {
-        mvid: id
-      }).then(res => {
+      mv_simi(id, res => {
         this.similiar = res.mvs;
       });
     },
@@ -134,7 +126,6 @@ export default {
   }
 };
 </script>
-
 <style lang="stylus" scoped>
 .detail
   margin 0 10px

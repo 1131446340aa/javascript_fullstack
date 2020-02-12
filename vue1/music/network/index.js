@@ -6,9 +6,9 @@ const vue = new Vue
 Vue.config.devtools = true
 axios.defaults.timeout = 5000; // 默认5s超时
 // axios.defaults.baseURL = 'http://localhost:3000';
-let urls="http://localhost:3000"
-let othurl='http://musicapi.leanapp.cn'
-axios.defaults.withCredentials=true;// 请求带上cookie
+let urls = "http://localhost:3000"
+let othurl = 'http://musicapi.leanapp.cn'
+axios.defaults.withCredentials = true;// 请求带上cookie
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 axios.interceptors.request.use(function (config) { // 这里的config包含每次请求的内容
   if (config.params && config.params.auth && !logined) {
@@ -40,7 +40,7 @@ Vue.prototype.$http = axios
 Vue.config.productionTip = false
 export function fetchGet(url, param) {
   return new Promise((resolve, reject) => {
-    axios.get(urls+url, {
+    axios.get(urls + url, {
       params: param
     })
       .then(response => {
@@ -53,9 +53,200 @@ export function fetchGet(url, param) {
       }))
   })
 }
+
+
+/*接口地址 */
+// 轮播图
+export function banner(fn) {
+  return fetchGet("/banner").then(fn).catch(res => {
+    this.$notify("网络出错或链接过期");
+  });
+}
+//推荐歌单
+export function personalized(fn) {
+  return fetchGet("/personalized").then(fn).catch(res => {
+    this.$notify("网络出错或链接过期");
+  });
+}
+//用户歌单
+export function user_playlist(fn) {
+  let timestamp = Date.parse(new Date());
+  return fetchGet("/user/playlist", {
+    uid: localStorage.id,
+    timestamp: timestamp
+  }).then(fn).catch(res => {
+    this.$notify("网络出错或链接过期");
+  });
+}
+//电台推荐
+export function dj_recommend(fn) {
+  return fetchGet("/dj/recommend").then(fn).catch(res => {
+    this.$notify("网络出错或链接过期");
+  });
+}
+//电台今日优选
+export function today_perfered(fn) {
+  return fetchGet("/dj/today/perfered").then(fn).catch(res => {
+    this.$notify("网络出错或链接过期");
+  });
+}
+//视频
+export function mv_all(offset, fn) {
+  return fetchGet("/mv/all", { limit: 300, offset: offset }).then(fn).catch(res => {
+    this.$notify("网络出错或链接过期");
+  });
+}
+//热门搜索
+export function hot_search(fn) {
+  return fetchGet("/search/hot/detail").then(fn).catch(res => {
+    this.$notify("网络出错或链接过期");
+  });
+}
+//搜索
+export function search(keywords, fn, offset) {
+  return fetchGet("/search", {
+    keywords: keywords,
+    offset: offset 
+  }).then(fn).catch(res => {
+    this.$notify("网络出错或链接过期");
+  });
+}
+//歌曲详情
+export function song_detail(ids, fn) {
+  return fetchGet("/song/detail", {
+    ids: ids
+  }).then(fn).catch(res => {
+    this.$notify("网络出错或链接过期");
+  });
+}
+//歌曲地址
+export function song_url(id, fn) {
+  return fetchGet("/song/url", {
+    id: id
+  }).then(fn).catch(res => {
+    this.$notify("网络出错或链接过期");
+  });
+}
+//歌曲歌词
+export function song_lrc(id, fn) {
+  return fetchGet("/lyric", {
+    id: id
+  }).then(fn).catch(res => {
+    this.$notify("网络出错或链接过期");
+  });
+}
+//喜欢歌单
+export function likelist(fn) {
+  return fetchGet("/likelist", { uid: parseFloat(localStorage.id) })
+    .then(fn).catch(res => {
+      this.$notify("网络出错或链接过期");
+    });
+}
+//电台详情
+export function dj_detail(rid, fn) {
+  return fetchGet("/dj/detail", { rid: rid })
+    .then(fn).catch(res => {
+      this.$notify("网络出错或链接过期");
+    });
+}
+//电台详情列表
+export function dj_program(rid, offset, fn) {
+  return fetchGet("/dj/program", {
+    rid: rid,
+    limit: 40,
+    offset: offset
+  })
+    .then(fn).catch(res => {
+      this.$notify("网络出错或链接过期");
+    });
+}
+//手机号登录
+export function login_cellphone(phone, password, fn) {
+  return fetchGet("/login/cellphone", {
+    phone: phone,
+    password: password
+  })
+    .then(fn).catch(res => {
+      this.$toast({ message: "密码错误", position: "bottom" });
+    });
+}
+//喜欢音乐
+export function like_music(id, like, fn) {
+  return fetchGet("/like", {
+    id: id,
+    like: like
+  })
+    .then(fn).catch(res => {
+      this.$toast({ message: "您还未登录", position: "bottom" });
+    });
+}
+//榜单列表
+export function top_list(idx, fn) {
+  return fetchGet("/top/list", {
+    idx: idx
+  }).then(fn).catch(res => {
+    this.$notify("网络出错或链接过期");
+  });
+}
+// 榜单列表详情
+export function toplist_detail(fn) {
+  return fetchGet("/toplist/detail").then(fn).catch(res => {
+    this.$notify("网络出错或链接过期");
+  });
+}
+//歌单详情
+export function playlist_detail(id, fn) {
+  return fetchGet("/playlist/detail", {
+    id: id,
+    // timestamp: timestamp
+  }).then(fn).catch(res => {
+    this.$notify("网络出错或链接过期");
+  });
+}
+//收藏歌单 
+export function playlist_subscribe(id,t, fn) {
+  return fetchGet("/playlist/subscribe", {
+    id: id,
+    t:t
+  }).then(fn).catch(res => {
+    this.$notify("网络出错或链接过期");
+  });
+}
+// 推荐歌曲
+export function recommend_songs(fn) {
+  return  fetchGet("/recommend/songs").then(fn).catch(res => {
+    this.$notify("网络出错或链接过期");
+  });
+}
+//mv详情
+export function mv_detail(mvid, fn) {
+  return fetchGet("/mv/detail", {
+    mvid: mvid
+  }).then(fn).catch(res => {
+    this.$notify("网络出错或链接过期");
+  });
+}
+//相似mv
+export function mv_simi(mvid, fn) {
+  return fetchGet("/simi/mv", {
+    mvid: mvid
+  }).then(fn).catch(res => {
+    this.$notify("网络出错或链接过期");
+  });
+}
+//歌单类别
+export function top_playlist(cat,offset, fn) {
+  return fetchGet("/top/playlist", {
+    cat: cat,
+    limit: 21,
+    offset: offset
+  }).then(fn).catch(res => {
+    this.$notify("网络出错或链接过期");
+  });
+}
 export function fetchGets(url, param) {
   return new Promise((resolve, reject) => {
-    axios.get(othurl+url, {
+    axios.get(othurl + url, {
       params: param
     })
       .then(response => {

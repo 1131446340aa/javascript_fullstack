@@ -49,7 +49,7 @@
 <script>
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import BScroll from "./scroll";
-import { fetchGet } from "../../network/index";
+import { today_perfered, dj_recommend } from "../../network/index";
 import singsheet from "./singsheet";
 import controlbar from "./controlbar";
 export default {
@@ -68,11 +68,11 @@ export default {
       "http://p1.music.126.net/RJYfuwyifdNDupGH8MR4YA==/109951164624421533.jpg",
       "http://p1.music.126.net/lrgQjU7jKxyHccVDCSsaUg==/109951164623870101.jpg"
     ];
-    fetchGet("/dj/recommend").then(res => {
+    dj_recommend(res => {
       // console.log(res.djRadios);
       this.djRadios = res.djRadios.slice(0, 9);
     });
-    fetchGet("/dj/today/perfered").then(res => {
+    today_perfered(res => {
       // console.log(res);
       this.perfered = res.data;
     });

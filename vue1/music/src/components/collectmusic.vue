@@ -13,7 +13,7 @@
 import daohangblack from "./daohang_black";
 import scrollplaylist from "./scrollplaylist";
 import BScroll from "./scroll";
-import { fetchGet } from "../../network/index";
+import { song_detail, likelist } from "../../network/index";
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import controlbar from "./controlbar";
 export default {
@@ -29,20 +29,16 @@ export default {
     };
   },
   created() {
-    fetchGet("/likelist", { uid: parseFloat(localStorage.id) })
-      .then(res => {
-        // console.log(res.ids);
-        res.ids.forEach(item => {
-          fetchGet("/song/detail", { ids: item }).then(res => {
-            // console.log(res.songs);
-            this.allsong.push(res);
-          });
+    likelist(res => {
+      // console.log(res.ids);
+      res.ids.forEach(item => {
+        song_detail(item, res => {
+          // console.log(res.songs);
+          this.allsong.push(res);
         });
-        // console.log(res);
-      })
-      .catch(res => {
-        this.$notify("网络出错或链接过期");
       });
+      // console.log(res);
+    })
   }
 };
 </script>

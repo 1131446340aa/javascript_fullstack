@@ -1,4 +1,4 @@
-import { fetchGet, fetchGets } from "../../network/index";
+import {song_detail, song_url, song_lrc } from "../../network/index";
 import { mapGetters, mapActions } from "vuex";
 import split_lrc from '../../config/split_lrc'
 export const mixin = {
@@ -117,14 +117,6 @@ export const mixin = {
         },
         api() {
             let id
-            // fetchGet('/login/status').then(res=>{
-            //     console.log(res);
-
-            // })
-            // console.log( this.singsheet);
-            // console.log(this.index);
-            // console.log(this.singsheet.length);
-
             if (this.index < 0) {
                 this.Index(this.singsheet.length - 1)
             }
@@ -142,15 +134,11 @@ export const mixin = {
 
             // console.log(id);
 
-            fetchGets("/song/detail", {
-                ids: id
-            }).then(res => {
+            song_detail(id, res => {
                 if (res.songs[0]) {//歌曲
                     this.songs = res.songs[0];
                     this.Songitem(res.songs[0])
-                    fetchGet("/song/url", {
-                        id: id
-                    }).then(res => {
+                    song_url(id, res => {
                         if (!res.data[0].url) {
                             this.$notify({ type: "danger", message: "付费音乐，播放下一首", duration: 1000 });
                             setTimeout(this.nextone, 1500)
@@ -159,34 +147,34 @@ export const mixin = {
                             this.music()
                             this.Playing();
                             this.songurl(res.data[0].url);
-                            fetchGet('/lyric', {
-                                id: id
-                            }).then(res => {
+                            song_lrc(id, res => {
                                 //    console.log( split_lrc(res.lrc.lyric));
                                 if (res.lrc) { this.SongLrc(split_lrc(res.lrc.lyric)) }
                                 else { this.SongLrc(split_lrc("")) }
                                 //    console.log( this.songlrc);
                             })
                         }
-
                     });
                 }
                 else {
                     // 电台
-                    fetchGet("/song/url", { id: this.singsheet[this.index].mainSong.id }).then(
+
+                    song_url(
+                        this.singsheet[this.index].mainSong.id,
                         res => {
                             this.songs = this.singsheet[this.index]
                             this.Songitem(this.singsheet[this.index])
                             // console.log(res.data[0].url);
                             if (!res.data[0].url) {
-                                this.$notify({ type: "danger", message: "付费音乐，播放下一首", duration: 1000 });
+                                this.$notify({ type: "danger", message: "付费电台，播放下一首", duration: 1000 });
                                 setTimeout(this.nextone, 1500)
                             }
                             else {
                                 this.music()
                                 this.Playing();
                                 this.songurl(res.data[0].url);
-                                fetchGet('/lyric', { id: this.singsheet[this.index].mainSong.id }).then(
+                                song_lrc(
+                                    this.singsheet[this.index].mainSong.id,
                                     res => {
                                         if (res.lrc) { this.SongLrc(split_lrc(res.lrc.lyric)) }
                                         else { this.SongLrc(split_lrc("")) }

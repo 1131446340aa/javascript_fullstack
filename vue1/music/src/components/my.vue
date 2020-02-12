@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { fetchGet } from "../../network/index";
+import { user_playlist } from "../../network/index";
 import { mapGetters, mapActions } from "vuex";
 import BScroll from "./scroll";
 import lines from "./line";
@@ -73,11 +73,7 @@ export default {
 
     this.$nextTick(function() {
       if (localStorage.id) {
-        let timestamp = Date.parse(new Date());
-        fetchGet("/user/playlist", {
-          uid: localStorage.id,
-          timestamp: timestamp
-        }).then(res => {
+        user_playlist(res => {
           res.playlist.map(item => {
             if (item.userId == localStorage.id) {
               this.createdlist.push(item);
@@ -88,6 +84,10 @@ export default {
             }
           });
           // console.log(this.createdlist);
+        });
+      } else {
+        this.$router.push({
+          path: "/login"
         });
       }
     });

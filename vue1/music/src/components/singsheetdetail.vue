@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { fetchGet, fetchGets } from "../../network/index";
+import { playlist_detail, playlist_subscribe,song_detail,user_playlist } from "../../network/index";
 import { mapGetters, mapActions } from "vuex";
 import daohang from "./daohang";
 import BScroll from "./scroll";
@@ -43,10 +43,7 @@ export default {
   },
   created() {
     let timestamp = Date.parse(new Date());
-    fetchGet("/playlist/detail", {
-      id: this.$route.query.id,
-      // timestamp: timestamp
-    }).then(res => {
+    playlist_detail(this.$route.query.id,res => {
       //   console.log(res);
       this.playlists = res.privileges;
       this.playList(this.playlists);
@@ -66,10 +63,7 @@ export default {
       } else {
         this.like = 1;
       }
-      fetchGet("/playlist/subscribe", {
-        id: this.$route.query.id,
-        t: this.like
-      }).then(res => {
+     playlist_subscribe(this.$route.query.id,this.like,res => {
         this.collect = !this.collect;
       });
     }
@@ -78,13 +72,13 @@ export default {
     playlist: function() {
       if (this.playlist) {
         Array.from(this.playlist).forEach(item => {
-          fetchGets("/song/detail", { ids: item.id }).then(res =>
+          song_detail(item.id,res =>
             //   console.log(res)
             this.allsong.push(res)
           );
         });
       }
-      fetchGet("/user/playlist", { uid: localStorage.id }).then(res => {
+      user_playlist(res => {
         let collectplay = [];
         res.playlist.map(item => {
           if (item.userId == localStorage.id) {
@@ -97,7 +91,6 @@ export default {
             } else {
               this.collect = true;
             }
-
             return;
           }
         });
