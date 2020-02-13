@@ -12,7 +12,8 @@
           </div>
           <div class="username" v-if="result.creator">{{result.creator.nickname}}</div>
         </div>
-        <div class="introduce">{{result.description}}</div>
+        <div class="van-multi-ellipsis--l2 introduce">{{result.description}}</div>
+        <!-- <div class="introduce"></div> -->
       </div>
     </div>
     <div class="bg">
@@ -103,13 +104,8 @@ export default {
         font-size 12px
         color #E4E7ED
     .introduce
-      margin-top 5vw
-      height 10vw
+      margin-top 8vw
       font-size 10px
       color #C0C4CC
-      overflow hidden
-      text-overflow ellipsis
-      display -webkit-box
-      -webkit-line-clamp 2 /* 设置行数 */
-      -webkit-box-orient vertical
+      
 </style>

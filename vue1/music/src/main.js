@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import Navigation from 'vue-navigation'
 import { Icon } from 'vant';
 import { Grid, GridItem } from 'vant';
 import { Search } from 'vant';
@@ -15,7 +16,7 @@ import { Button } from 'vant';
 import { Field } from 'vant';
 import { Toast } from 'vant';
 import { Collapse, CollapseItem } from 'vant';
-
+Vue.use(Navigation,{router});
 Vue.use(Collapse).use(CollapseItem);
 Vue.use(Toast);
 Vue.use(Field);

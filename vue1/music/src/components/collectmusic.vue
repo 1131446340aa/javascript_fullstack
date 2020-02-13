@@ -18,7 +18,7 @@ import { mapGetters, mapActions, mapMutations } from "vuex";
 import controlbar from "./controlbar";
 export default {
   components: {
-    daohangblack,
+    daohangblack, 
     BScroll,
     scrollplaylist,
     controlbar
@@ -34,7 +34,7 @@ export default {
       res.ids.forEach(item => {
         song_detail(item, res => {
           // console.log(res.songs);
-          this.allsong.push(res);
+          this.allsong.push(res);      
         });
       });
       // console.log(res);

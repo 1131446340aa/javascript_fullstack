@@ -6,7 +6,7 @@
           <i class="iconfont icon-bofang"></i>
         </div>
         <div class="text">播放全部</div>
-        <div class="all">(共{{count}}首)</div>
+        <div class="all">(共{{allsong.length}}首)</div>
       </div>
       <div class="wrap">
         <div class="item" v-for="(item,index) in allsong" :key="index" @click="tomusic(index)">
@@ -38,14 +38,7 @@ export default {
       // console.log(this.singsheet[this.index].songs[0].id);
     }
   },
-  mounted() {
-    //  document.querySelector('.SCROLL').style.height=window.screen.height-93+"px"
-  },
-  // data() {
-  //   return {
-  //     allsong: []
-  //   };
-  // },
+
   props: {
     allsong: {
       type: Array,
@@ -53,10 +46,7 @@ export default {
         return [];
       }
     },
-    count: {
-      type: Number,
-      default: 0
-    },
+ 
     type: {
       type: String,
       default: ""

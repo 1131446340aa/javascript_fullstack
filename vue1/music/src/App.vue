@@ -1,10 +1,13 @@
 <template>
   <div id="app">
     <audio v-show="Songurl&&isplay" :src="Songurl" autoplay="true" :loop="playrules===2"></audio>
-    <keep-alive>
+    <!-- <keep-alive>
       <router-view v-if="$route.meta.keepAlive" />
     </keep-alive>
-    <router-view v-if="!$route.meta.keepAlive" />
+    <router-view v-if="!$route.meta.keepAlive" /> -->
+    <navigation>
+      <router-view></router-view>
+    </navigation>
   </div>
 </template>
 

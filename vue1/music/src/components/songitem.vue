@@ -18,8 +18,9 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   props: {
     item: {
-      type: Object,
-      default: {}
+      default: () => {
+        return {};
+      }
     },
     index: {
       type: Number,

@@ -4,7 +4,8 @@
       <i class="iconfont icon-left-arrow"></i>
     </div>
     <div class="text">
-      <div class="song">{{songitem.name}}</div>
+      <div class="van-ellipsis song">{{songitem.name}}</div>
+      <!-- <div class=""></div> -->
       <div class="singer" v-if="songitem.ar">{{songitem.ar[0].name}}</div>
       <div class="singer" v-if="songitem.radio">{{songitem.radio.name}}</div>
     </div>
@@ -81,7 +82,7 @@ export default {
   color #ffffff
 .singer
   font-size 10px
-  color #9e9e9e
+  color pink
 .iconfont
   color #ffffff
 .slot

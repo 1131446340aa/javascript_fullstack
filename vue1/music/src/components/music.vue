@@ -1,9 +1,9 @@
 <template>
   <div class="main">
-    <van-swipe indicator-color="white">
+    <musictop :id="songitem.id"></musictop>
+    <van-swipe :show-indicators="false">
       <van-swipe-item>
         <div class="swipe-music">
-          <musictop :id="songitem.id"></musictop>
           <div class="big-circle">
             <div class="small-circle" :style="{ animationPlayState :isplay?'running':'paused'}">
               <img v-if="songitem.al" :src="songitem.al.picUrl" alt />
@@ -14,8 +14,8 @@
       </van-swipe-item>
       <van-swipe-item>
         <div class="swipe-lrc">
-          <musictop></musictop>
-          <BScroll :listenScroll="true" ref="scroll_lrc">
+          <!-- <musictop></musictop> -->
+          <BScroll :listenScroll="true" ref="scroll_lrc" :top="0">
             <div>
               <div class="item_lrc" v-for="(item,index) in 5"></div>
               <div
@@ -124,11 +124,13 @@ export default {
         }
         // console.log(bglrc[this.currentlrc].style);
       }
+      
     }
   },
   data() {
     return {
-      currentlrc: 0
+      currentlrc: 0,
+      activelrc: ""
     };
   },
   methods: {
@@ -173,7 +175,7 @@ export default {
     }
   },
   mounted() {
-    if (!this.$route.query.isplay) { 
+    if (!this.$route.query.isplay) {
       this.api();
     }
   },

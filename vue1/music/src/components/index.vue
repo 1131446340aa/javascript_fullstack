@@ -51,26 +51,28 @@ export default {
     controlbar
   },
   methods: {
-    ...mapActions(['Pageindex']),
+    ...mapActions(["Pageindex"]),
     currentindex(index) {
-     this.Pageindex(index)
+      this.Pageindex(index);
       this.$refs.swipe.swipeTo(index);
     },
     change(index) {
-      this.Pageindex(index)
+      this.Pageindex(index);
     }
   },
   mounted() {
     // console.log(document.body.clientHeight);
-   
-    this.$refs.swipe.swipeTo(this.pageindex,{immediate:true});
+
     let swipe = document.querySelectorAll(".swipe-item");
     swipe.forEach(item => {
       item.style.height = window.screen.height - 93 + "px";
     });
   },
-  computed:{
-     ...mapGetters(['pageindex']),
+  computed: {
+    ...mapGetters(["pageindex"])
+  },
+  activated() {
+    this.$refs.swipe.swipeTo(this.pageindex, { immediate: true });
   }
 };
 </script>
