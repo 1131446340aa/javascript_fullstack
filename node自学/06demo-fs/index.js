@@ -43,4 +43,11 @@ async function test(){
    await fsWrite('test.txt',"css")
 }
 test()
+fs.unlink('test.js',()=>{
+    console.log('成功');
+    
+})
+module.exports={
+    fsRead,fsWrite
+}
 // console.log(context + "")

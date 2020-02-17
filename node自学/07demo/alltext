@@ -1,0 +1,277 @@
+123hello3// Buffer 解决数组不能进行二进制操作,js数组操作效率太低
+// buffer 会在内存空间开辟固定大小内存空间
+let str = "hello world"
+let buffer = Buffer.from(str)
+// console.log(buffer);
+
+// 开辟一个空的buffer
+var buf1 = Buffer.alloc(10)
+buf1[0] = 257
+// console.log(buf1);
+
+let buf2=Buffer.allocUnsafe(10)
+buf1[2] = 257 
+console.log(buf2);const fs = require('fs')
+// var fd = fs.openSync('hello.txt', 'r')
+// let context = fs.readFileSync('hello.txt')
+
+function fsRead(fd) {
+    return new Promise((reslove, reject) => {
+        fs.readFile(fd, function (err, data) {
+            if (err) {
+                // console.log(err);
+                reject(err)
+            }
+            else {
+                reslove(data + "")
+                // console.log(data + "");
+            }
+        })
+    })
+}
+async function run() {
+    const txt = await fsRead('hello.txt')
+    // await console.log(txt);
+    const txt2 = await fsRead(txt + '.txt')
+    const txt3 = await fsRead(txt2 + '.txt')
+    console.log(txt3)
+}
+// run()
+
+function fsWrite(path,ctx) { 
+    return new Promise((reslove,reject)=>{
+        fs.appendFile(path, ctx, err => {
+            if (!err) {
+                // console.log("成功")
+                reslove('成功')
+            }
+            else{
+                reject(err)
+            }
+        })
+    })
+}
+async function test(){
+   await fsWrite('test.txt',"js\n")
+   await fsWrite('test.txt',"css")
+}
+test()
+fs.unlink('test.js',()=>{
+    console.log('成功');
+    
+})
+module.exports={
+    fsRead,fsWrite
+}
+// console.log(context + "")
+吃吃js/ncssjs
+cssjs
+js
+csshello2123// Buffer 解决数组不能进行二进制操作,js数组操作效率太低
+// buffer 会在内存空间开辟固定大小内存空间
+let str = "hello world"
+let buffer = Buffer.from(str)
+// console.log(buffer);
+
+// 开辟一个空的buffer
+var buf1 = Buffer.alloc(10)
+buf1[0] = 257
+// console.log(buf1);
+
+let buf2=Buffer.allocUnsafe(10)
+buf1[2] = 257 
+console.log(buf2);hello2hello3吃吃js/ncssjs
+cssjs
+js
+cssconst fs = require('fs')
+// var fd = fs.openSync('hello.txt', 'r')
+// let context = fs.readFileSync('hello.txt')
+
+function fsRead(fd) {
+    return new Promise((reslove, reject) => {
+        fs.readFile(fd, function (err, data) {
+            if (err) {
+                // console.log(err);
+                reject(err)
+            }
+            else {
+                reslove(data + "")
+                // console.log(data + "");
+            }
+        })
+    })
+}
+async function run() {
+    const txt = await fsRead('hello.txt')
+    // await console.log(txt);
+    const txt2 = await fsRead(txt + '.txt')
+    const txt3 = await fsRead(txt2 + '.txt')
+    console.log(txt3)
+}
+// run()
+
+function fsWrite(path,ctx) { 
+    return new Promise((reslove,reject)=>{
+        fs.appendFile(path, ctx, err => {
+            if (!err) {
+                // console.log("成功")
+                reslove('成功')
+            }
+            else{
+                reject(err)
+            }
+        })
+    })
+}
+async function test(){
+   await fsWrite('test.txt',"js\n")
+   await fsWrite('test.txt',"css")
+}
+test()
+fs.unlink('test.js',()=>{
+    console.log('成功');
+    
+})
+module.exports={
+    fsRead,fsWrite
+}
+// console.log(context + "")
+123// Buffer 解决数组不能进行二进制操作,js数组操作效率太低
+// buffer 会在内存空间开辟固定大小内存空间
+let str = "hello world"
+let buffer = Buffer.from(str)
+// console.log(buffer);
+
+// 开辟一个空的buffer
+var buf1 = Buffer.alloc(10)
+buf1[0] = 257
+// console.log(buf1);
+
+let buf2=Buffer.allocUnsafe(10)
+buf1[2] = 257 
+console.log(buf2);const fs = require('fs')
+// var fd = fs.openSync('hello.txt', 'r')
+// let context = fs.readFileSync('hello.txt')
+
+function fsRead(fd) {
+    return new Promise((reslove, reject) => {
+        fs.readFile(fd, function (err, data) {
+            if (err) {
+                // console.log(err);
+                reject(err)
+            }
+            else {
+                reslove(data + "")
+                // console.log(data + "");
+            }
+        })
+    })
+}
+async function run() {
+    const txt = await fsRead('hello.txt')
+    // await console.log(txt);
+    const txt2 = await fsRead(txt + '.txt')
+    const txt3 = await fsRead(txt2 + '.txt')
+    console.log(txt3)
+}
+// run()
+
+function fsWrite(path,ctx) { 
+    return new Promise((reslove,reject)=>{
+        fs.appendFile(path, ctx, err => {
+            if (!err) {
+                // console.log("成功")
+                reslove('成功')
+            }
+            else{
+                reject(err)
+            }
+        })
+    })
+}
+async function test(){
+   await fsWrite('test.txt',"js\n")
+   await fsWrite('test.txt',"css")
+}
+test()
+fs.unlink('test.js',()=>{
+    console.log('成功');
+    
+})
+module.exports={
+    fsRead,fsWrite
+}
+// console.log(context + "")
+hello2hello3吃吃js/ncssjs
+cssjs
+js
+css// Buffer 解决数组不能进行二进制操作,js数组操作效率太低
+// buffer 会在内存空间开辟固定大小内存空间
+let str = "hello world"
+let buffer = Buffer.from(str)
+// console.log(buffer);
+
+// 开辟一个空的buffer
+var buf1 = Buffer.alloc(10)
+buf1[0] = 257
+// console.log(buf1);
+
+let buf2=Buffer.allocUnsafe(10)
+buf1[2] = 257 
+console.log(buf2);const fs = require('fs')
+// var fd = fs.openSync('hello.txt', 'r')
+// let context = fs.readFileSync('hello.txt')
+
+function fsRead(fd) {
+    return new Promise((reslove, reject) => {
+        fs.readFile(fd, function (err, data) {
+            if (err) {
+                // console.log(err);
+                reject(err)
+            }
+            else {
+                reslove(data + "")
+                // console.log(data + "");
+            }
+        })
+    })
+}
+async function run() {
+    const txt = await fsRead('hello.txt')
+    // await console.log(txt);
+    const txt2 = await fsRead(txt + '.txt')
+    const txt3 = await fsRead(txt2 + '.txt')
+    console.log(txt3)
+}
+// run()
+
+function fsWrite(path,ctx) { 
+    return new Promise((reslove,reject)=>{
+        fs.appendFile(path, ctx, err => {
+            if (!err) {
+                // console.log("成功")
+                reslove('成功')
+            }
+            else{
+                reject(err)
+            }
+        })
+    })
+}
+async function test(){
+   await fsWrite('test.txt',"js\n")
+   await fsWrite('test.txt',"css")
+}
+test()
+fs.unlink('test.js',()=>{
+    console.log('成功');
+    
+})
+module.exports={
+    fsRead,fsWrite
+}
+// console.log(context + "")
+123hello3hello2吃吃js/ncssjs
+cssjs
+js
+css
