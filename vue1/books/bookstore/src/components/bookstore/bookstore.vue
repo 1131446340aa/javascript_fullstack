@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="search">
-      <van-search placeholder="请输入搜索关键词" shape="round" />
+      <van-search placeholder="请输入搜索关键词" shape="round" @click="tosearch"/>
     </div>
     <!-- <div class="loading" >
       <van-loading />
@@ -28,15 +28,13 @@
         </div>
       </div>
     </scroll>
-    <navbar></navbar>
+   
   </div>
 </template>
 
 <script>
 import { booksrore } from "../../network/index";
 import scroll from "../common/scroll";
-import navbar from '../common/navbar'
-
 export default {
   data() {
     return {
@@ -66,6 +64,9 @@ export default {
         this.getBook();
        
       }, 1000);
+    },
+    tosearch(){
+      this.$router.push({path:"/search"})
     },
     getBook() {
       booksrore(res => {
@@ -97,7 +98,7 @@ export default {
     }
   },
   components: {
-    scroll,navbar
+    scroll
   }
 };
 </script>

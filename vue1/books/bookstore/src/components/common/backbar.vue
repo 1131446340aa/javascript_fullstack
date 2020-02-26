@@ -4,7 +4,7 @@
       <div class="left">
         <i class="iconfont icon-fanhui-copy-copy-copy-copy ftcolor"></i>
       </div>
-      <div class="right">{{ right}}</div>
+      <div class="right" @click="send">{{ right}}</div>
     </div>
     <div class="bg">
       <img v-if="Image" :src="Image" />
@@ -17,6 +17,11 @@ export default {
   props: {
     right: { type: String, default: "" },
     Image:{type:String,default:""}
+  },
+  methods:{
+    send(){
+      this.$emit('send')
+    }
   }
 };
 </script>
@@ -34,16 +39,17 @@ export default {
     height 25px
     filter blur(30px)
 .ftcolor
-  color #fff
+  // color #fff
 .top
   display flex
   justify-content space-between
   height 50px
   line-height 50px
+  color red
   .left
     margin-left 10px
   .right
     margin-right 10px
     font-size 14px
-    color #fff
+    // color #fff
 </style>

@@ -85,6 +85,27 @@ export function booksrore(fn) {
 export function getBookInfo(fn,parma){
   return fetchPost('/bookinfo',parma).then(fn)
 }
+export function hot_search(fn) {
+ 
+  // console.log(this);
+  
+  return fetchGet("/search").then(fn)
+}
+export function search_book(fn,parma){
+  return fetchPost('/sBook',parma).then(fn)
+}
+export function zhuche(fn,parma){
+  return fetchPost('/zhuche',parma).then(fn)
+}
+export function user(fn,parma){
+  return fetchPost('/user',parma).then(fn)
+}
+export function updateinfo(fn,parma){
+  return fetchPost('/updateuserinfo',parma).then(fn)
+}
+export function login(fn,parma){
+  return fetchPost('/login',parma).then(fn)
+}
 //推荐歌单
 
 

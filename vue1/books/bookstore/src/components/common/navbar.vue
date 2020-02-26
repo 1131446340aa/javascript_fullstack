@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <van-tabbar v-model="active" @change="onChange" active-color="deeppink">
-      <van-tabbar-item>
+      <van-tabbar-item to="/">
         <div class="icon">
           <i class="iconfont icon-shucheng fontcolor" :class="{fontcoloractive:tabbarindex===0}"></i>
         </div>
@@ -22,7 +22,7 @@
         </div>
         <div>书架</div>
       </van-tabbar-item>
-      <van-tabbar-item>
+      <van-tabbar-item to="/my">
         <div class="icon">
           <i class="iconfont icon-sself fontcolor" :class="{fontcoloractive:tabbarindex===3}"></i>
         </div>
@@ -40,6 +40,8 @@ export default {
     onChange(index) {
       //   this.data.active = index;
       //   console.log(this.data.active);
+      console.log(this.$router.history.current);
+      this.active=index
       this.tabbarindex = index;
     }
   },

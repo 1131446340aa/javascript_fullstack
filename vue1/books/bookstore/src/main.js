@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import Navigation from 'vue-navigation'
 import { Tabbar, TabbarItem } from 'vant';
 import { Search } from 'vant';
 import { Lazyload } from 'vant';
@@ -13,7 +14,13 @@ import { Rate } from 'vant';
 import { Tab, Tabs } from 'vant';
 Vue.prototype.HOST = '/api'
 import { Popup } from 'vant';
-
+import { Field } from 'vant';
+import { Button } from 'vant';
+import { Picker } from 'vant';
+Vue.use(Navigation,{router});
+Vue.use(Picker);
+Vue.use(Button);
+Vue.use(Field);
 Vue.use(Popup);
 Vue.use(Tab);
 Vue.use(Tabs);
