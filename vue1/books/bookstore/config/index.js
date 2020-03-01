@@ -2,7 +2,6 @@
 // Template version: 1.3.1
 // see http://vuejs-templates.github.io/webpack for documentation.
 
-
 const path = require('path')
 
 module.exports = {
@@ -11,16 +10,7 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {
-      '/api': {
-        target: 'http://14804066.ch1.unicom.data.tv002.com',
-        ws: true,
-        changeOrigin: true,
-        pathRewrite: {
-          '^/api': ''
-        }
-      },
-    },
+    proxyTable: {},
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
@@ -30,7 +20,7 @@ module.exports = {
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
-
+    
     /**
      * Source Maps
      */
@@ -45,6 +35,7 @@ module.exports = {
 
     cssSourceMap: true
   },
+
   build: {
     // Template for index.html
     index: path.resolve(__dirname, '../dist/index.html'),

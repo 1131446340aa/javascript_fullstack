@@ -4,6 +4,7 @@
       <div class="left" @click="goback">
         <i class="iconfont icon-fanhui-copy-copy-copy-copy ftcolor"></i>
       </div>
+      <div class="middle">{{ middle}}</div>
       <div class="right" @click="send">{{ right}}</div>
     </div>
     <div class="bg">
@@ -16,6 +17,7 @@
 export default {
   props: {
     right: { type: String, default: "" },
+    middle: { type: String, default: "" },
     Image:{type:String,default:""}
   },
   methods:{
@@ -45,14 +47,20 @@ export default {
   // color #fff
 .top
   display flex
-  justify-content space-between
   height 50px
   line-height 50px
   color red
   .left
     margin-left 10px
+    flex:2
+  .middle
+    flex:8
+    font-size 14px
+    text-align center
   .right
+    flex:2
     margin-right 10px
     font-size 14px
+    text-align right
     // color #fff
 </style>

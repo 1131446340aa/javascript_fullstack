@@ -9,9 +9,11 @@
 </template>
 
 <script>
+
 export default {
   methods: {
     toread() {
+      this.$emit('readHis')
       this.$router.push({path:'/reader',query:{title:this.title}});
     }
   },

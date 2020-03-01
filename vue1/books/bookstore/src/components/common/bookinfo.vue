@@ -70,7 +70,7 @@
       </div>
     </scroll>
     <!-- <Epub></Epub> -->
-    <navbar></navbar>
+    <navbar @readHis="readHis"></navbar>
   </div>
 </template>
 
@@ -83,7 +83,8 @@ import {
   sqlCll,
   delCll,
   download,
-  test
+  readHis,
+  sqlreadHis
 } from "../../network/index";
 import scroll from "../common/scroll";
 import navbar from "../common/bookinfonavbar";
@@ -128,7 +129,7 @@ export default {
           );
           this.getmulu();
           console.log(this.finsh);
-          
+
           if (!this.finsh) {
             console.log(123516);
 
@@ -151,10 +152,27 @@ export default {
               }
             );
           }
-
           // console.log(this.Bookinfo[0]);
         },
         { bookid: this.$route.query.bookid }
+      );
+    },
+    readHis() {
+      sqlreadHis(
+        res => {
+          if ((res.status == "200")) {
+            readHis(
+              res => {
+                console.log(res);
+              },
+              {
+                user: localStorage.book_user,
+                bookinfo: this.Bookinfo[0]
+              }
+            );
+          }
+        },
+        { user: localStorage.book_user, bookid: this.Bookinfo[0].book_ids }
       );
     },
     addbook() {
@@ -190,24 +208,21 @@ export default {
       }
     },
     mulu(href) {
+      this.readHis();
       this.$router.push({
         path: "/reader",
         query: { title: this.novel_title, href: href }
       });
     },
     getmulu() {
-      console.log("../../../static/四世同堂（完整版）.epub");
-//  "../../../static/" + this.Bookinfo[0].title + ".epub"
-      this.book = new Epub(
-        "../../../static/四世同堂（完整版）.epub"
-      );
+      this.book = new Epub("../../../static/四世同堂（完整版）.epub");
       this.book.ready
         .then(() => {
           // 生成目录
-         this.finsh=true
+          this.finsh = true;
 
           this.navigation = this.book.navigation;
-          console.log(this.navigation);
+          // console.log(this.navigation);
 
           // 生成Locations对象
           return this.book.locations.generate();
@@ -232,7 +247,7 @@ export default {
       novel_title: "33场革命",
       finsh: false,
       book: "",
-      navigation:""
+      navigation: ""
     };
   }
 };

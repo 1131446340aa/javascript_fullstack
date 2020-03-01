@@ -6,7 +6,7 @@
         <div class="search" @click="tosearch">
           <i class="iconfont icon-sousuo1 fontsize"></i>
         </div>
-        <div class="history">
+        <div class="history" @click="tohistory">
           <i class="iconfont icon-lishi fontsize"></i>
         </div>
       </div>
@@ -42,7 +42,7 @@
 import { sqlcollection, delCll } from "../../network/index";
 import scroll from "../common/scroll";
 export default {
-  created() {},
+  name: "book",
   components: {
     scroll
   },
@@ -65,12 +65,15 @@ export default {
       sqlcollection(
         res => {
           this.book = res.data;
-          console.log(res.data);
+          // console.log(res.data);
         },
         {
           user: localStorage.book_user
         }
       );
+    },
+    tohistory() {
+      this.$router.push({ path: "/readerHis" });
     }
   },
   mounted() {

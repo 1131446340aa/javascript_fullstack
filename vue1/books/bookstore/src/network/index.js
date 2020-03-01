@@ -109,8 +109,14 @@ export function delsqlHS(fn,parma){
 export function download(fn,parma) {
   return fetchPost("/download",parma).then(fn)
 }
-export function test(fn,parma) {
-  return fetchGet("/test",parma).then(fn)
+export function readHis(fn,parma) {
+  return fetchPost("/readHis",parma).then(fn)
+}
+export function sqlreadHis(fn,parma) {
+  return fetchPost("/sqlreadHis",parma).then(fn)
+}
+export function sqlALLreadHis(fn,parma) {
+  return fetchPost("/sqlAllreadHis",parma).then(fn)
 }
 // axios.get( "/api/down/6247d336028c4c667c03a1b8db4ae398/SoBooKs.cc%20-%20%E6%92%92%E9%87%8E.epub?cts=wt-f-D112A224A19A34F9a519&ctp=112A224A19A34&ctt=1582799042&limit=1&spd=54000&ctk=6247d336028c4c667c03a1b8db4ae398&chk=2216b0cca9796afbf57ace826c744f50-1336682", { responseType: "stream" })
 //     .then(function (res) {

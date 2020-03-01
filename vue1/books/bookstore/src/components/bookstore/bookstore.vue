@@ -10,7 +10,7 @@
       <div class="content" v-for="(item,keys) in catagory" :key="item">
         <div class="title">
           <div class="left">{{item}}</div>
-          <div class="right">更多></div>
+          <div class="right" @click="tomore(item)">更多></div>
         </div>
         <div class="allbook">
           <div class="book_item" v-for="(bookitem,key) in noval[keys]" :key="bookitem.index" @click="tobookinfo(bookitem.book_ids)">
@@ -36,6 +36,8 @@
 import { booksrore} from "../../network/index";
 import scroll from "../common/scroll";
 export default {
+  name:"bookstore",
+
   data() {
     return {
       catagory: [
@@ -51,6 +53,11 @@ export default {
     this.getBook();
   },
   methods: {
+    tomore(item){
+      console.log(item);
+      
+      this.$router.push({path:"morebook",query:{catogry:item}})
+    },
     refreshbook() {
      
       this.$toast({
@@ -91,7 +98,7 @@ export default {
       });
     },
     tobookinfo(bookid){
-      console.log(bookid);
+      // console.log(bookid);
       
       this.$router.push({path:'/bookinfo',query:{bookid:bookid}})
     }
