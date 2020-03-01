@@ -9,18 +9,17 @@
 </template>
 
 <script>
-
 export default {
   methods: {
     toread() {
-      this.$emit('readHis')
-      this.$router.push({path:'/reader',query:{title:this.title}});
+      this.$emit("readHis");
+      this.$router.push({ path: "/reader", query: { title: this.title } });
     }
   },
-  props:{
-    title:{
-      default:"123",
-      type:String
+  props: {
+    title: {
+      default: "123",
+      type: String
     }
   }
 };

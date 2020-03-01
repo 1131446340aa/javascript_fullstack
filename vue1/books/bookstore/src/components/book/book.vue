@@ -12,7 +12,15 @@
       </div>
     </div>
     <scroll :top="40">
-      <div class="book_item" v-for="(item,index) in book" :key="index">
+      <div class="no_book" v-if="!book.length">
+        <img src="../../assets/kong.jpg" alt />
+      </div>
+      <div
+        class="book_item"
+        v-for="(item,index) in book"
+        :key="index"
+        @click="tobookinfo(item.book_ids)"
+      >
         <van-swipe-cell>
           <div class="content">
             <div class="img">
@@ -41,6 +49,7 @@
 <script>
 import { sqlcollection, delCll } from "../../network/index";
 import scroll from "../common/scroll";
+import { Dialog } from "vant";
 export default {
   name: "book",
   components: {
@@ -50,18 +59,42 @@ export default {
     tosearch() {
       this.$router.push({ path: "/search" });
     },
+    tobookinfo(bookid) {
+      this.$router.push({ path: "/bookinfo", query: { bookid: bookid } });
+    },
     del(id) {
-      delCll(
-        res => {
-          this.showcollect();
-        },
-        {
-          user: localStorage.book_user,
-          bookid: id
-        }
-      );
+      if (localStorage.book_user) {
+        Dialog.confirm({
+          title: "是否确认删除"
+        })
+          .then(() => {
+            delCll(
+              res => {
+                this.showcollect();
+              },
+              {
+                user: localStorage.book_user,
+                bookid: id
+              }
+            );
+          })
+          .catch(() => {
+            // on cancel
+          });
+      }
     },
     showcollect() {
+      if (localStorage.book_user) {
+        sqlcollection(
+          res => {
+            this.book = res.data;
+            // console.log(res.data);
+          },
+          {
+            user: localStorage.book_user
+          }
+        );
+      }
       sqlcollection(
         res => {
           this.book = res.data;
@@ -73,7 +106,18 @@ export default {
       );
     },
     tohistory() {
-      this.$router.push({ path: "/readerHis" });
+      if (localStorage.book_user) this.$router.push({ path: "/readerHis" });
+      else {
+        Dialog.confirm({
+          title: "是否前往登录登录"
+        })
+          .then(() => {
+            this.$router.push({ path: "/login" });
+          })
+          .catch(() => {
+            // on cancel
+          });
+      }
     }
   },
   mounted() {
@@ -88,6 +132,15 @@ export default {
 </script> 
 
 <style lang="stylus" scoped>
+.no_book
+  position absolute
+  top 0
+  left 0
+  right 0
+  bottom 0
+  img
+    width 100vw
+    height 100vh
 .content
   display flex
   margin-bottom 20px

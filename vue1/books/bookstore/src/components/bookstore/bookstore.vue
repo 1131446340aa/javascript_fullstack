@@ -1,11 +1,11 @@
 <template>
   <div class="main">
     <div class="search">
-      <van-search placeholder="请输入搜索关键词" shape="round" @click="tosearch"/>
+      <van-search placeholder="请输入搜索关键词" shape="round" @click="tosearch" />
     </div>
     <!-- <div class="loading" >
       <van-loading />
-    </div> -->
+    </div>-->
     <scroll :pullup="true" @pulldown="refreshbook" :top="60">
       <div class="content" v-for="(item,keys) in catagory" :key="item">
         <div class="title">
@@ -13,7 +13,12 @@
           <div class="right" @click="tomore(item)">更多></div>
         </div>
         <div class="allbook">
-          <div class="book_item" v-for="(bookitem,key) in noval[keys]" :key="bookitem.index" @click="tobookinfo(bookitem.book_ids)">
+          <div
+            class="book_item"
+            v-for="(bookitem,key) in noval[keys]"
+            :key="bookitem.index"
+            @click="tobookinfo(bookitem.book_ids)"
+          >
             <div class="image">
               <img v-lazy="bookitem.img" />
             </div>
@@ -28,15 +33,14 @@
         </div>
       </div>
     </scroll>
-   
   </div>
 </template>
 
 <script>
-import { booksrore} from "../../network/index";
+import { booksrore } from "../../network/index";
 import scroll from "../common/scroll";
 export default {
-  name:"bookstore",
+  name: "bookstore",
 
   data() {
     return {
@@ -53,13 +57,12 @@ export default {
     this.getBook();
   },
   methods: {
-    tomore(item){
-      console.log(item);
-      
-      this.$router.push({path:"morebook",query:{catogry:item}})
+    tomore(item) {
+      // console.log(item);
+
+      this.$router.push({ path: "morebook", query: { catogry: item } });
     },
     refreshbook() {
-     
       this.$toast({
         message: "刷新中...",
         loadingType: "circular",
@@ -68,11 +71,10 @@ export default {
 
       setTimeout(() => {
         this.getBook();
-       
       }, 1000);
     },
-    tosearch(){
-      this.$router.push({path:"/search"})
+    tosearch() {
+      this.$router.push({ path: "/search" });
     },
     getBook() {
       booksrore(res => {
@@ -85,7 +87,7 @@ export default {
           return Math.random() - 0.5;
         });
         let history = res.history.slice(0, 6);
-         res.cglz = res.cglz.sort(() => {
+        res.cglz = res.cglz.sort(() => {
           return Math.random() - 0.5;
         });
         let cglz = res.cglz.slice(0, 6);
@@ -93,14 +95,14 @@ export default {
           return Math.random() - 0.5;
         });
         let hightStar_select = res.hightStar_select.slice(0, 6);
-        this.noval=[xiaoshuowenxue,history,cglz,hightStar_select]
+        this.noval = [xiaoshuowenxue, history, cglz, hightStar_select];
         // this.data.xiaoshuowenxue = res.content.slice(0,6);
       });
     },
-    tobookinfo(bookid){
+    tobookinfo(bookid) {
       // console.log(bookid);
-      
-      this.$router.push({path:'/bookinfo',query:{bookid:bookid}})
+
+      this.$router.push({ path: "/bookinfo", query: { bookid: bookid } });
     }
   },
   components: {

@@ -1,9 +1,10 @@
 <template>
   <div class="main">
     <navbar></navbar>
-    <keep-alive>
-      <Router-view></Router-view>
+    <keep-alive exclude="book">
+      <router-view v-if="$route.meta.keepAlive"></router-view>
     </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive"></router-view>
   </div>
 </template>
 
@@ -14,8 +15,9 @@ import my from "./my/my";
 import book from "./book/book";
 export default {
   components: { navbar, bookstore, my },
-  destroyed() {
-    console.log(112321);
+  beforeRouteLeave(to, from, next) {
+    to.meta.keepAlive = false;
+    next();
   }
 };
 </script>

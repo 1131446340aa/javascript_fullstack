@@ -2,7 +2,15 @@
   <div class="main">
     <backbar right="清空" middle="最近阅读"></backbar>
     <scroll>
-      <div class="book_item" v-for="(item,index) in book" :key="index">
+      <div class="no_book" v-if="!book.length">
+        <img src="../../assets/kong.jpg" alt />
+      </div>
+      <div
+        class="book_item"
+        v-for="(item,index) in book"
+        :key="index"
+        @click="tobookinfo(item.book_ids)"
+      >
         <div class="content">
           <div class="img">
             <img :src="item.img" />
@@ -22,25 +30,42 @@
 <script>
 import backbar from "../common/backbar";
 import scroll from "../common/scroll";
-import {sqlALLreadHis} from '../../network/index'
+import { sqlALLreadHis } from "../../network/index";
+
 export default {
   components: {
     backbar,
     scroll
   },
-  data(){
-    return {book:[]};
+  data() {
+    return { book: [] };
   },
-  mounted(){
-    sqlALLreadHis(res=>{
-      this.book=res.data
-      console.log(res);
-      
-    },{user:localStorage.book_user})
+  mounted() {
+    sqlALLreadHis(
+      res => {
+        this.book = res.data;
+        // console.log(res);
+      },
+      { user: localStorage.book_user }
+    );
+  },
+  methods: {
+    tobookinfo(bookid) {
+      this.$router.push({ path: "/bookinfo", query: { bookid: bookid } });
+    }
   }
 };
 </script>
 <style lang="stylus" scoped>
+.no_book
+  position absolute
+  top 0
+  left 0
+  right 0
+  bottom 0
+  img
+    width 100vw
+    height 100vh
 .content
   display flex
   margin-bottom 20px

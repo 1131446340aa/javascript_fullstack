@@ -120,13 +120,12 @@ export default {
       //下拉更新
       if (this.pulldown) {
         this.scroll.on("scroll", pos => {
-         
           if (pos.y > 50) {
             this.$emit("pulldown");
           }
         });
       }
-     
+
       //是否派发列表滚动开始事件
       if (this.beforeScroll) {
         this.scroll.on("beforeScrollStart", () => {

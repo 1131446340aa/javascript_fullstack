@@ -24,15 +24,14 @@ export default {
     login() {
       login(
         res => {
-         if(res.status=="200"){
-            this.$toast(res.msg)
-            localStorage.book_user=parseInt(this.user)
-            this.$router.push({path:'/my'})
-         }
-         if(res.status=="500"){
-            this.$toast(res.msg)
-            
-         }
+          if (res.status == "200") {
+            this.$toast(res.msg);
+            localStorage.book_user = parseInt(this.user);
+            this.$router.push({ path: "/my" });
+          }
+          if (res.status == "500") {
+            this.$toast(res.msg);
+          }
         },
         { user: this.user, password: this.password }
       );
@@ -43,6 +42,10 @@ export default {
       user: "",
       password: ""
     };
+  },
+  beforeRouteLeave(to, from, next) {
+    to.meta.keepAlive = false;
+    next();
   }
 };
 </script>

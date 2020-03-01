@@ -2,7 +2,7 @@
   <div>
     <div class="search">
       <div class="left" @click="goback">
-        <i class="iconfont icon-left-arrow"></i>
+        <i class="iconfont icon-fanhui-copy-copy-copy-copy"></i>
       </div>
       <div class="middle">
         <van-search
@@ -13,9 +13,6 @@
           placeholder="请输入搜索关键词"
           @input="search"
         />
-      </div>
-      <div class="right">
-        <i class="iconfont icon-lianxiren"></i>
       </div>
     </div>
     <BSroll>
@@ -146,7 +143,7 @@ export default {
         if (this.value) {
           sqlHS(
             res => {
-              console.log(res);
+              // console.log(res);
               if (res.status === "500") {
                 insertHS(
                   res => {
@@ -158,11 +155,10 @@ export default {
               if (res.status === "200") {
                 delsqlHS(
                   res => {
-                    insertHS(
-                      res => {
-                      },
-                      { user: localStorage.book_user, text: this.value }
-                    );
+                    insertHS(res => {}, {
+                      user: localStorage.book_user,
+                      text: this.value
+                    });
                   },
                   {
                     user: localStorage.book_user,
@@ -279,13 +275,9 @@ export default {
   .left
     flex 1
     text-align center
-    line-height 49px
+    line-height 54px
   .middle
     flex 8
-  .right
-    flex 1
-    text-align center
-    line-height 49px
     .iconfont
       font-size 25px
 .history

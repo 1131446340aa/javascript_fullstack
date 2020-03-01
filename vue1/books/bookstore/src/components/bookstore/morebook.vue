@@ -1,19 +1,25 @@
 <template>
   <div class="main">
     <backbar :middle="title"></backbar>
-    <scroll>
-      <div class="bookitem" v-for="(item,index) in book" :key="index">
+    <scroll :bottom="0" :probeType="2" :pullup="true" @scrollToEnd="getmorebook()">
+      <div
+        class="bookitem"
+        v-for="(item,index) in book"
+        :key="index"
+        @click="tobookinfo(item.book_ids)"
+      >
         <div class="img">
           <img v-lazy="item.img" />
         </div>
         <div class="content">
           <div class="titleandscore">
-            <div class="title">{{item.title}}</div>
-            <div class="score">{{item.star}}</div>
+            <div class="title van-ellipsis" >{{item.title}}</div>
+            <div class="score">{{item.star}}分</div>
           </div>
-          <div class="introduce">
-            <div class="van-ellipsis" v-if="item.novel_content[1]">{{(item.novel_content[1])}}</div>
-          </div>
+          <div
+            class="introduce van-ellipsis"
+            v-if="item.novel_content[1]"
+          >{{(item.novel_content[1])}}</div>
           <div class="others">
             <span>{{item.tag}}</span>
             <span>{{item.saw/10}}万人已看</span>
@@ -33,7 +39,7 @@ export default {
     backbar,
     scroll
   },
-  name:"morebook",
+  name: "morebook",
   data() {
     return {
       title: "",
@@ -47,10 +53,8 @@ export default {
   },
   methods: {
     getbook() {
-       
-        
       booksrore(res => {
-           console.log(res);
+        // console.log(res);
         if (this.$route.query.catogry == "小说文学  精选好书") {
           if (20 * this.page < res.content.length)
             this.book = res.content.slice(0, 20 * this.page);
@@ -76,7 +80,7 @@ export default {
             item.novel_content = JSON.parse(item.novel_content);
           });
         }
-        if (this.$route.query.catogry ==  "高分佳作  精选好书") {
+        if (this.$route.query.catogry == "高分佳作  精选好书") {
           if (20 * this.page < res.hightStar_select.length)
             this.book = res.hightStar_select.slice(0, 20 * this.page);
           else this.book = res.hightStar_select;
@@ -85,12 +89,51 @@ export default {
           });
         }
         this.page++;
-        console.log(this.book);
+        // console.log(this.book);
       });
+    },
+    getmorebook() {
+      this.getbook();
+    },
+    tobookinfo(bookid) {
+      this.$router.push({ path: "/bookinfo", query: { bookid: bookid } });
     }
+  },
+  beforeRouteLeave(to, from, next) {
+    to.meta.keepAlive = true;
+    next();
   }
 };
 </script>
 
-<style>
+<style lang="stylus" scoped>
+.bookitem
+  display flex
+  margin-bottom 20px
+  .img
+    margin-left 20px
+    width 15vw
+    height 20vw
+    img
+      width 15vw
+      height 20vw
+  .content
+    margin-left 10px
+    flex 1
+    min-width 70vw
+    .titleandscore
+      display flex
+      justify-content space-between
+      height 5vw
+      line-height 5vw
+      .title
+        font-size 14px
+        max-width 60vw
+      .score
+        font-size 12px
+        color red
+        margin-right 10px
+    .introduce
+      line-height 10vw
+      height 10vw
 </style>

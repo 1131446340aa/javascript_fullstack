@@ -89,29 +89,34 @@ import {
 import scroll from "../common/scroll";
 import navbar from "../common/bookinfonavbar";
 import Epub from "epubjs";
+import { Dialog } from "vant";
 export default {
   components: {
     back,
     scroll,
     navbar
   },
+  name: "bookinfo",
   mounted() {
-    sqlCll(
-      res => {
-        console.log(res);
+    if (localStorage.book_user) {
+      sqlCll(
+        res => {
+          // console.log(res);
 
-        if (res.status === "200") {
-          this.right = "已加入书架";
+          if (res.status === "200") {
+            this.right = "已加入书架";
+          }
+          if (res.status === "500") {
+            this.right = "加入书架";
+          }
+        },
+        {
+          user: localStorage.book_user,
+          bookid: this.$route.query.bookid
         }
-        if (res.status === "500") {
-          this.right = "加入书架";
-        }
-      },
-      {
-        user: localStorage.book_user,
-        bookid: this.$route.query.bookid
-      }
-    );
+      );
+    }
+
     //  this.getmulu();
     this.bookinfo();
   },
@@ -128,29 +133,25 @@ export default {
             this.Bookinfo[0].auther_content
           );
           this.getmulu();
-          console.log(this.finsh);
 
           if (!this.finsh) {
-            console.log(123516);
-
-            download(
-              res => {
-                let timer = setInterval(() => {
-                  test(res => {
-                    if (res.status == "500") {
-                      this.finsh = true;
-
-                      clearInterval(timer);
-                    }
-                  });
-                }, 3000);
-              },
-              {
-                url:
-                  "http://14804066.ch1.ctc.data.tv002.com/down/6e904eaa00098afa8ed2b655952b6e65/SoBooKs.cc%20-%20%E6%97%A5%E7%93%A6%E6%88%88%E5%8C%BB%E7%94%9F.epub?cts=dx-f-D111A76A96A191F9a519&ctp=111A76A96A191&ctt=1582842570&limit=1&spd=46000&ctk=6e904eaa00098afa8ed2b655952b6e65&chk=be48113d26f48d483678e3bc5e3b7867-648436",
-                title: this.Bookinfo[0].title
-              }
-            );
+            // download(
+            //   res => {
+            //     let timer = setInterval(() => {
+            //       test(res => {
+            //         if (res.status == "500") {
+            //           this.finsh = true;
+            //           clearInterval(timer);
+            //         }
+            //       });
+            //     }, 3000);
+            //   },
+            //   {
+            //     url:
+            //       "http://14804066.ch1.ctc.data.tv002.com/down/6e904eaa00098afa8ed2b655952b6e65/SoBooKs.cc%20-%20%E6%97%A5%E7%93%A6%E6%88%88%E5%8C%BB%E7%94%9F.epub?cts=dx-f-D111A76A96A191F9a519&ctp=111A76A96A191&ctt=1582842570&limit=1&spd=46000&ctk=6e904eaa00098afa8ed2b655952b6e65&chk=be48113d26f48d483678e3bc5e3b7867-648436",
+            //     title: this.Bookinfo[0].title
+            //   }
+            // );
           }
           // console.log(this.Bookinfo[0]);
         },
@@ -158,44 +159,66 @@ export default {
       );
     },
     readHis() {
-      sqlreadHis(
-        res => {
-          if ((res.status == "200")) {
-            readHis(
-              res => {
-                console.log(res);
-              },
-              {
-                user: localStorage.book_user,
-                bookinfo: this.Bookinfo[0]
-              }
-            );
-          }
-        },
-        { user: localStorage.book_user, bookid: this.Bookinfo[0].book_ids }
-      );
+      if (localStorage.book_user) {
+        sqlreadHis(
+          res => {
+            if (res.status == "200") {
+              readHis(
+                res => {
+                  console.log(res);
+                },
+                {
+                  user: localStorage.book_user,
+                  bookinfo: this.Bookinfo[0]
+                }
+              );
+            }
+          },
+          { user: localStorage.book_user, bookid: this.Bookinfo[0].book_ids }
+        );
+      }
     },
     addbook() {
-      if (this.right == "加入书架") {
-        collection(
-          res => {
-            this.right = "已加入书架";
-          },
-          {
-            user: localStorage.book_user,
-            bookinfo: this.Bookinfo
-          }
-        );
+      if (localStorage.book_user) {
+        if (this.right == "加入书架") {
+          collection(
+            res => {
+              this.right = "已加入书架";
+            },
+            {
+              user: localStorage.book_user,
+              bookinfo: this.Bookinfo
+            }
+          );
+        } else {
+          Dialog.confirm({
+            title: "是否确认删除"
+          })
+            .then(() => {
+              delCll(
+                res => {
+                  this.right = "加入书架";
+                },
+                {
+                  user: localStorage.book_user,
+                  bookid: this.$route.query.bookid
+                }
+              );
+            })
+            .catch(() => {
+              // on cancel
+            });
+        }
       } else {
-        delCll(
-          res => {
-            this.right = "加入书架";
-          },
-          {
-            user: localStorage.book_user,
-            bookid: this.$route.query.bookid
-          }
-        );
+        Dialog.confirm({
+          title: "是否前往登录登录"
+        })
+          .then(() => {
+            this.$router.push({ path: "/login" });
+          })
+          .catch(() => {
+            // on cancel
+          });
       }
     },
     open() {
@@ -235,6 +258,10 @@ export default {
         });
     }
   },
+  beforeRouteLeave(to, from, next) {
+    to.meta.keepAlive = true;
+    next();
+  },
   data() {
     return {
       Bookinfo: [],
@@ -242,7 +269,7 @@ export default {
       active: 0,
       title: ["简介", "目录"],
       close: true,
-      right: "",
+      right: "加入书架",
       navigation: {},
       novel_title: "33场革命",
       finsh: false,

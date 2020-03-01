@@ -19,7 +19,9 @@ import { Button } from 'vant';
 import { Picker } from 'vant';
 import { Col, Row } from 'vant';
 import { SwipeCell } from 'vant';
+import { Notify } from 'vant';
 
+Vue.use(Notify);
 Vue.use(SwipeCell);
 Vue.use(Col);
 Vue.use(Row);

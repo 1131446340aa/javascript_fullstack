@@ -84,7 +84,12 @@
     >
       <div class="content">
         <div class="title-noval">33场革命</div>
-        <div class="muluitem" v-for="(item,index) in navigation.toc" :key="index" @click="mulu(item.href)">
+        <div
+          class="muluitem"
+          v-for="(item,index) in navigation.toc"
+          :key="index"
+          @click="mulu(item.href)"
+        >
           <div class="zhang">第{{index+1}}章</div>
           <div class="title">{{item.label}}</div>
         </div>
@@ -97,12 +102,11 @@
 import Epub from "epubjs";
 export default {
   mounted() {
-    console.log(this.$route.query.href);
-   
-    
+    // console.log(this.$route.query.href);
+
     this.getbook();
-     if(this.$route.query.href){
-      this.rendition.display(this.$route.query.href)
+    if (this.$route.query.href) {
+      this.rendition.display(this.$route.query.href);
     }
   },
   methods: {
@@ -121,7 +125,7 @@ export default {
         .then(() => {
           // 生成目录
           this.navigation = this.book.navigation;
-          console.log(this.navigation);
+          // console.log(this.navigation);
 
           // 生成Locations对象
           return this.book.locations.generate();
@@ -134,9 +138,9 @@ export default {
         });
       // this.rendition.display();
     },
-    mulu(href){
-      this.rendition.display(href)
-      this.left_show=false
+    mulu(href) {
+      this.rendition.display(href);
+      this.left_show = false;
     },
     shownulu() {
       this.left_show = true;
@@ -144,13 +148,13 @@ export default {
     topre() {
       if (this.rendition) {
         this.rendition.prev();
-        this.isShow=false
+        this.isShow = false;
       }
     },
     tolast() {
       if (this.rendition) {
         this.rendition.next();
-        this.isShow=false
+        this.isShow = false;
       }
     },
     tabAndNavIsshow() {
@@ -260,7 +264,7 @@ export default {
       ],
       bgc: "#FFFFF0",
       left_show: false,
-      navigation:{}
+      navigation: {}
     };
   }
 };

@@ -18,7 +18,13 @@
       <div class="text">欢迎使用力豪书屋</div>
       <div class="login" @click="tologin">马上登录</div>
     </div>
-    <div class="my_item" v-for="(item,key) in my_item" :key="key" @click="my_iten(key)">
+    <div
+      class="my_item"
+      v-for="(item,key) in my_item"
+      :key="key"
+      @click="my_iten(key)"
+      v-show="key!=3||book_user"
+    >
       <div class="text">{{item}}</div>
       <div class="more">></div>
     </div>
@@ -58,7 +64,8 @@ export default {
       nickname: "",
       qianming: "",
       sex_show: false,
-      columns: ["男", "女", "取消"]
+      columns: ["男", "女", "取消"],
+      book_user: ""
     };
   },
   methods: {
@@ -73,17 +80,31 @@ export default {
           .then(() => {
             localStorage.book_user = "";
             this.login = false;
+            this.book_user = "";
           })
           .catch(() => {
             // on cancel
           });
       }
-      if(key==0){}
-      if(key==1){
-        this.$toast('请联系微信15079482413');
+      if (key == 0) {
+        if (localStorage.book_user) this.$router.push({ path: "/readerHis" });
+        else {
+          Dialog.confirm({
+            title: "是否前往登录登录"
+          })
+            .then(() => {
+              this.$router.push({ path: "/login" });
+            })
+            .catch(() => {
+              // on cancel
+            });
+        }
       }
-       if(key==2){
-        this.$toast('作者:黄力豪');
+      if (key == 1) {
+        this.$toast("请联系微信15079482413");
+      }
+      if (key == 2) {
+        this.$toast("作者:黄力豪");
       }
     },
     saveinfo() {
@@ -109,6 +130,7 @@ export default {
     }
   },
   mounted() {
+    this.book_user = localStorage.book_user;
     if (localStorage.book_user) {
       this.login = true;
       user(

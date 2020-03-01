@@ -20,27 +20,52 @@ export default new Router({
     {
       path: '/readerHis',
       name: 'readerHis',
-      component: readerHis
+      component: readerHis,
+      meta:{
+        requireAuth:true,
+        keepAlive:true,
+        isBack:true
+      }
     },
     {
       path: '/login',
       name: 'login',
-      component: login
+      component: login,
+      meta:{
+        requireAuth:true,
+        keepAlive:true,
+        isBack:true
+      }
     },
     {
       path: '/zhuche',
       name: 'zhuche',
-      component: zhuche
+      component: zhuche,
+      meta:{
+        requireAuth:true,
+        keepAlive:true,
+        isBack:true
+      }
     },
     {
       path: '/search',
       name: 'search',
-      component: search
+      component: search,
+      meta:{
+        requireAuth:true,
+        keepAlive:true,
+        isBack:true
+      }
     },
     {
       path: '/morebook',
       name: 'morebook',
-      component: morebook
+      component: morebook,
+      meta:{
+        requireAuth:true,
+        keepAlive:true,
+        isBack:true
+      }
     },
     {
       path: '/',
@@ -54,31 +79,61 @@ export default new Router({
         {
           path: 'bookstore',
           name: 'bookstore',
-          component: bookstore
+          component: bookstore,
+          meta:{
+            requireAuth:true,
+            keepAlive:true,
+            isBack:true
+          }
         },
         {
           path: 'my',
           name: 'my',
-          component: my
+          component: my,
+          meta:{
+            requireAuth:true,
+            keepAlive:true,
+            isBack:true
+          }
         },
         {
           path: 'book',
           name: 'book',
-          component: book
+          component: book,
+          meta:{
+            requireAuth:true,
+            keepAlive:true,
+            isBack:true
+          }
         },
-      ]
+      ],
+      meta:{
+        requireAuth:true,
+        keepAlive:true,
+        isBack:true
+      }
      
     },
     {
       path: '/bookinfo',
       name: 'bookinfo',
-      component: bookinfo
+      component: bookinfo,
+      meta:{
+        requireAuth:true,
+        keepAlive:true,
+        isBack:true
+      }
     },
    
     {
       path: '/reader',
       name: 'reader',
-      component: reader
+      component: reader,
+      meta:{
+        requireAuth:true,
+        keepAlive:true,
+        isBack:true
+      }
     }
   ]
 })

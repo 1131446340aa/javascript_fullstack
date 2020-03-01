@@ -58,7 +58,7 @@ export default {
     font-size 14px
     text-align center
   .right
-    flex:2
+    flex:3
     margin-right 10px
     font-size 14px
     text-align right
