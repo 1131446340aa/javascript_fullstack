@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "axios": "^0.19.2",
+    "cheerio": "^1.0.0-rc.3",
+    "epubjs": "^0.3.85",
+    "puppeteer": "^2.1.1"
+  }
+}

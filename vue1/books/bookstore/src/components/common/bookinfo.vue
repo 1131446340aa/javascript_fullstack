@@ -70,7 +70,7 @@
       </div>
     </scroll>
     <!-- <Epub></Epub> -->
-    <navbar @readHis="readHis"></navbar>
+    <navbar @readHis="readHis" :bookid="bookid"></navbar>
   </div>
 </template>
 
@@ -98,6 +98,7 @@ export default {
   },
   name: "bookinfo",
   mounted() {
+    this.bookid=this.$route.query.bookid
     if (localStorage.book_user) {
       sqlCll(
         res => {
@@ -234,11 +235,14 @@ export default {
       this.readHis();
       this.$router.push({
         path: "/reader",
-        query: { title: this.novel_title, href: href }
+        query: { bookid: this.bookid, href: href }
       });
     },
     getmulu() {
-      this.book = new Epub("../../../static/四世同堂（完整版）.epub");
+      // let title = this.Bookinfo[0].title;
+      // let url = "../../../static/" + title + ".epub";
+      // this.book = new Epub(url);
+      this.book = new Epub("../../../static/巴别塔之犬.epub");
       this.book.ready
         .then(() => {
           // 生成目录
@@ -246,7 +250,6 @@ export default {
 
           this.navigation = this.book.navigation;
           // console.log(this.navigation);
-
           // 生成Locations对象
           return this.book.locations.generate();
         })
@@ -259,7 +262,10 @@ export default {
     }
   },
   beforeRouteLeave(to, from, next) {
-    to.meta.keepAlive = true;
+    console.log(to.path);
+    if(to.path=="/reader") {to.meta.keepAlive = false;
+    }
+    else{to.meta.keepAlive = true;}
     next();
   },
   data() {
@@ -274,7 +280,8 @@ export default {
       novel_title: "33场革命",
       finsh: false,
       book: "",
-      navigation: ""
+      navigation: "",
+      bookid:""
     };
   }
 };
@@ -365,6 +372,8 @@ export default {
       margin-left 10px
   .img
     margin-right 15px
+    width 22vw
+    background-image url('../../assets/book.jpg')
     img
       width 22vw
 </style>

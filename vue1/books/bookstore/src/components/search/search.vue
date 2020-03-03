@@ -63,7 +63,10 @@
           </div>
           <div class="text">{{item.title}}</div>
         </div>
-        <div class="nobook" v-show="!books.length">暂无此书籍</div>
+        <div class="loading" v-show="loading">
+          <van-loading size="24px" vertical>加载中...</van-loading>
+        </div>
+        <div class="nobook" v-show="!books.length&&!loading">暂无此书籍</div>
       </div>
     </BSroll>
   </div>
@@ -77,9 +80,7 @@ import {
   search_book,
   insertHS,
   HS,
-  delHS,
-  sqlHS,
-  delsqlHS
+  delHS
 } from "../../network/index";
 export default {
   components: {
@@ -90,17 +91,22 @@ export default {
       this.hots = res.hot_search;
     });
     this.searchs = this.debounce(() => {
-      if (this.value) {
-        search_book(res => {
-          this.books = res.search_book;
-        }, this.value);
-      }
+      this.searching();
     }, 400);
   },
   methods: {
     searchquery(e) {
       this.value = e.target.innerHTML;
-      this.search();
+      this.searching();
+    },
+    searching() {
+      this.loading = true;
+      if (this.value) {
+        search_book(res => {
+          this.books = res.search_book;
+          this.loading = false;
+        }, this.value);
+      }
     },
     shou() {
       this.isshou = true;
@@ -141,34 +147,14 @@ export default {
     tobookdetail(bookid) {
       if (bookid) {
         if (this.value) {
-          sqlHS(
-            res => {
-              // console.log(res);
-              if (res.status === "500") {
-                insertHS(
-                  res => {
-                    // console.log(res);
-                  },
-                  { user: localStorage.book_user, text: this.value }
-                );
-              }
-              if (res.status === "200") {
-                delsqlHS(
-                  res => {
-                    insertHS(res => {}, {
-                      user: localStorage.book_user,
-                      text: this.value
-                    });
-                  },
-                  {
-                    user: localStorage.book_user,
-                    text: this.value
-                  }
-                );
-              }
-            },
-            { user: localStorage.book_user, text: this.value }
-          );
+          if (localStorage.book_user) {
+            insertHS(
+              res => {
+                console.log(res);
+              },
+              { text: this.value, user: localStorage.book_user }
+            );
+          }
         }
         this.$router.push({
           path: "/bookinfo",
@@ -186,8 +172,9 @@ export default {
       value: "",
       searchs: "",
       books: [],
-      history: "",
-      isshou: true
+      history: [],
+      isshou: true,
+      loading: false
     };
   },
   mounted() {
@@ -198,6 +185,15 @@ export default {
       },
       { user: localStorage.book_user }
     );
+  },
+  beforeRouteLeave(to, from, next) {
+    if (to.path == "/bookstore") {
+      to.meta.keepAlive = true;
+    } else {
+      to.meta.keepAlive = false;
+    }
+
+    next();
   }
 };
 </script>

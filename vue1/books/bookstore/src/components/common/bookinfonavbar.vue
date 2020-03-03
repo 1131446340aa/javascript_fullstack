@@ -13,11 +13,11 @@ export default {
   methods: {
     toread() {
       this.$emit("readHis");
-      this.$router.push({ path: "/reader", query: { title: this.title } });
+      this.$router.push({ path: "/reader", query: { bookid: this.bookid } });
     }
   },
   props: {
-    title: {
+    bookid: {
       default: "123",
       type: String
     }

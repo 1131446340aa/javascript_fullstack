@@ -1,29 +1,35 @@
 <template>
   <div class="main">
-    <van-tabbar v-model="active" @change="onChange" active-color="deeppink">
+    <van-tabbar active-color="#000">
       <van-tabbar-item to="/bookstore">
         <div class="icon">
-          <i class="iconfont icon-shucheng fontcolor" :class="{fontcoloractive:tabbarindex===0}"></i>
+          <i
+            class="iconfont icon-shucheng fontcolor"
+            :class="{fontcoloractive:Route==='bookstore'}"
+          ></i>
         </div>
-        <div>书城</div>
+        <div :class="{fontcoloractive:Route==='bookstore'}">书城</div>
       </van-tabbar-item>
-      <van-tabbar-item>
+      <van-tabbar-item to="/recommed">
         <div class="icon">
-          <i class="iconfont icon-classify2-o fontcolor" :class="{fontcoloractive:tabbarindex===1}"></i>
+          <i
+            class="iconfont icon-classify2-o fontcolor"
+            :class="{fontcoloractive:Route==='recommed'}"
+          ></i>
         </div>
-        <div>分类</div>
+        <div :class="{fontcoloractive:Route==='recommed'}">精选</div>
       </van-tabbar-item>
       <van-tabbar-item to="/book">
         <div class="icon">
-          <i class="iconfont icon-shujia fontcolor" :class="{fontcoloractive:tabbarindex===2}"></i>
+          <i class="iconfont icon-shujia fontcolor" :class="{fontcoloractive:Route==='book'}"></i>
         </div>
-        <div>书架</div>
+        <div :class="{fontcoloractive:Route==='book'}">书架</div>
       </van-tabbar-item>
       <van-tabbar-item to="/my">
         <div class="icon">
-          <i class="iconfont icon-sself fontcolor" :class="{fontcoloractive:tabbarindex===3}"></i>
+          <i class="iconfont icon-sself fontcolor" :class="{fontcoloractive:Route==='my'}"></i>
         </div>
-        <div>我的</div>
+        <div :class="{fontcoloractive:Route==='my'}">我的</div>
       </van-tabbar-item>
     </van-tabbar>
   </div>
@@ -32,17 +38,26 @@
 <script>
 export default {
   name: "navbar",
-  methods: {
-    onChange(index) {
-      this.active = index;
-      this.tabbarindex = index;
-    }
-  },
+  // methods: {
+  //   onChange(index) {
+  //     this.active = index;
+  //     // this.Route = this.$route.name;
+  //   }
+  // },
   data() {
     return {
-      active: 0,
-      tabbarindex: 0
+      Route: ""
     };
+  },
+  mounted() {
+    // console.log(this.$route);
+    this.Route = this.$route.name;
+  },
+  watch: {
+    $route(route) {
+      this.Route = route.name;
+      console.log(this.Route);
+    }
   }
 };
 </script>

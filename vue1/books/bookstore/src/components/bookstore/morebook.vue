@@ -2,30 +2,7 @@
   <div class="main">
     <backbar :middle="title"></backbar>
     <scroll :bottom="0" :probeType="2" :pullup="true" @scrollToEnd="getmorebook()">
-      <div
-        class="bookitem"
-        v-for="(item,index) in book"
-        :key="index"
-        @click="tobookinfo(item.book_ids)"
-      >
-        <div class="img">
-          <img v-lazy="item.img" />
-        </div>
-        <div class="content">
-          <div class="titleandscore">
-            <div class="title van-ellipsis" >{{item.title}}</div>
-            <div class="score">{{item.star}}分</div>
-          </div>
-          <div
-            class="introduce van-ellipsis"
-            v-if="item.novel_content[1]"
-          >{{(item.novel_content[1])}}</div>
-          <div class="others">
-            <span>{{item.tag}}</span>
-            <span>{{item.saw/10}}万人已看</span>
-          </div>
-        </div>
-      </div>
+      <bookitem :book="book"></bookitem>
     </scroll>
   </div>
 </template>
@@ -34,10 +11,12 @@
 import backbar from "../common/backbar";
 import scroll from "../common/scroll";
 import { booksrore } from "../../network/index";
+import bookitem from '../book/bookitem'
 export default {
   components: {
     backbar,
-    scroll
+    scroll,
+    bookitem
   },
   name: "morebook",
   data() {
@@ -72,7 +51,7 @@ export default {
             item.novel_content = JSON.parse(item.novel_content);
           });
         }
-        if (this.$route.query.catogry == "人文社科  精选好书") {
+        if (this.$route.query.catogry == "励志成功  精选好书") {
           if (20 * this.page < res.cglz.length)
             this.book = res.cglz.slice(0, 20 * this.page);
           else this.book = res.cglz;
@@ -88,6 +67,22 @@ export default {
             item.novel_content = JSON.parse(item.novel_content);
           });
         }
+        if (this.$route.query.catogry == "人文社科  精选好书") {
+          if (20 * this.page < res.renwen.length)
+            this.book = res.renwen.slice(0, 20 * this.page);
+          else this.book = res.renwen;
+          this.book.forEach(item => {
+            item.novel_content = JSON.parse(item.novel_content);
+          });
+        }
+        if (this.$route.query.catogry == "社会生活  精选好书") {
+          if (20 * this.page < res.shenghuo.length)
+            this.book = res.shenghuo.slice(0, 20 * this.page);
+          else this.book = res.shenghuo;
+          this.book.forEach(item => {
+            item.novel_content = JSON.parse(item.novel_content);
+          });
+        }
         this.page++;
         // console.log(this.book);
       });
@@ -95,9 +90,7 @@ export default {
     getmorebook() {
       this.getbook();
     },
-    tobookinfo(bookid) {
-      this.$router.push({ path: "/bookinfo", query: { bookid: bookid } });
-    }
+    
   },
   beforeRouteLeave(to, from, next) {
     to.meta.keepAlive = true;
@@ -107,33 +100,5 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.bookitem
-  display flex
-  margin-bottom 20px
-  .img
-    margin-left 20px
-    width 15vw
-    height 20vw
-    img
-      width 15vw
-      height 20vw
-  .content
-    margin-left 10px
-    flex 1
-    min-width 70vw
-    .titleandscore
-      display flex
-      justify-content space-between
-      height 5vw
-      line-height 5vw
-      .title
-        font-size 14px
-        max-width 60vw
-      .score
-        font-size 12px
-        color red
-        margin-right 10px
-    .introduce
-      line-height 10vw
-      height 10vw
+
 </style>

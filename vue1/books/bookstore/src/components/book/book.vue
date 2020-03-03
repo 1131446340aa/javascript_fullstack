@@ -121,7 +121,9 @@ export default {
     }
   },
   mounted() {
-    this.showcollect();
+   if(localStorage.book_user){
+      this.showcollect();
+   }
   },
   data() {
     return {
@@ -149,6 +151,7 @@ export default {
     width 20vw
     height 27vw
     margin-right 10px
+    background-image url('../../assets/book.jpg')
     img
       width 20vw
       height 27vw

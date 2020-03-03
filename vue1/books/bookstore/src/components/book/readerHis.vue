@@ -1,7 +1,7 @@
 <template>
   <div class="main">
-    <backbar right="清空" middle="最近阅读"></backbar>
-    <scroll>
+    <backbar right="清空" middle="最近阅读" @send="delread"></backbar>
+    <scroll :bottom="0">
       <div class="no_book" v-if="!book.length">
         <img src="../../assets/kong.jpg" alt />
       </div>
@@ -30,8 +30,8 @@
 <script>
 import backbar from "../common/backbar";
 import scroll from "../common/scroll";
-import { sqlALLreadHis } from "../../network/index";
-
+import { sqlALLreadHis, delreader } from "../../network/index";
+import { Dialog } from "vant";
 export default {
   components: {
     backbar,
@@ -52,6 +52,15 @@ export default {
   methods: {
     tobookinfo(bookid) {
       this.$router.push({ path: "/bookinfo", query: { bookid: bookid } });
+    },
+    delread() {
+      Dialog.confirm({
+        title: "是否清空阅读记录"
+      }).then(() => {
+        delreader(res => {
+          this.book = [];
+        });
+      });
     }
   }
 };
@@ -74,6 +83,7 @@ export default {
     width 20vw
     height 27vw
     margin-right 10px
+    background-image url('../../assets/book.jpg')
     img
       width 20vw
       height 27vw

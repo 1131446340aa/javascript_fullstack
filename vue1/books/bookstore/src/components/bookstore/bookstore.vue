@@ -47,7 +47,7 @@ export default {
       catagory: [
         "小说文学  精选好书",
         "历史传记  精选好书",
-        "人文社科  精选好书",
+        "励志成功  精选好书",
         "高分佳作  精选好书"
       ],
       noval: []
@@ -132,6 +132,7 @@ export default {
   .image
     width 15vw
     height 23vw
+    background-image url('../../assets/book.jpg')
     img
       width 15vw
       height 23vw

@@ -171,7 +171,7 @@ export default {
     margin-left 10px
     width 120px
     text-align center
-    background-color #F56C6C
+    background-color #fa8072
     padding 10px 0
 .icon
   font-size 12px

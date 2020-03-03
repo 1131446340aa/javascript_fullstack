@@ -11,6 +11,7 @@ import book from '@/components/book/book'
 import bookstore from '@/components/bookstore/bookstore'
 import readerHis from '@/components/book/readerHis'
 import morebook from '@/components/bookstore/morebook'
+import recommed from '@/components/recommed/recommed'
 Vue.use(Router)
 
 export default new Router({
@@ -80,6 +81,16 @@ export default new Router({
           path: 'bookstore',
           name: 'bookstore',
           component: bookstore,
+          meta:{
+            requireAuth:true,
+            keepAlive:true,
+            isBack:true
+          }
+        },
+        {
+          path: '/recommed',
+          name: 'recommed',
+          component: recommed,
           meta:{
             requireAuth:true,
             keepAlive:true,

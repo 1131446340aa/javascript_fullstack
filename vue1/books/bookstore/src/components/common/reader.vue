@@ -1,18 +1,19 @@
 <template>
-  <div class="main">
+  <div class="main" ref="main">
+    <div class="loading" v-show="!bookAvailable">
+      <van-loading size="24px" vertical>正在缓存中...</van-loading>
+    </div>
     <div class="tabbar" v-show="isShow" :style="{background:bgc}">
-      <div class="left">
+      <div class="left" @click="goback">
         <i class="iconfont icon-fanhui-copy-copy-copy-copy"></i>
       </div>
       <div class="right">
         <span download>下载</span>
-        <span>加入书架</span>
+        <span @click="addbook">{{right}}</span>
       </div>
     </div>
     <div class="readwrapper">
-      <div id="read">
-        <div class="titles" :style="{background:bgc}" v-show="!isShow">失落的文明</div>
-      </div>
+      <div id="read"></div>
       <div class="mask">
         <div class="left" @click="topre"></div>
         <div class="center" @click="tabAndNavIsshow"></div>
@@ -30,7 +31,7 @@
         <div class="icon">
           <i class="iconfont icon-yejian iconfz"></i>
         </div>
-        <div class="text">夜间</div>
+        <div class="text" @click="toblack">{{dayState}}</div>
       </div>
       <div class="right">
         <div class="icon">
@@ -100,27 +101,127 @@
 
 <script>
 import Epub from "epubjs";
+import {
+  getBookInfo,
+  collection,
+  sqlcollection,
+  sqlCll,
+  delCll,
+  download,
+  readHis,
+  sqlreadHis,
+  setUP,
+  sqlset,
+  Progress,
+  sqlprogress
+} from "../../network/index";
+import { Dialog } from "vant";
 export default {
+  name: "reader",
   mounted() {
     // console.log(this.$route.query.href);
+    if (localStorage.book_user) {
+      sqlCll(
+        res => {
+          // console.log(res);
+          console.log(res);
 
-    this.getbook();
-    if (this.$route.query.href) {
-      this.rendition.display(this.$route.query.href);
+          if (res.status === "200") {
+            this.right = "已加入书架";
+          }
+          if (res.status === "500") {
+            this.right = "加入书架";
+          }
+        },
+        {
+          user: localStorage.book_user,
+          bookid: this.$route.query.bookid
+        }
+      );
+      sqlprogress(
+        res => {
+          if (res.status == "200") {
+            this.progress = res.data[0].progress;
+          }
+        },
+        {
+          user: localStorage.book_user,
+          bookid: this.$route.query.bookid
+        }
+      );
+      getBookInfo(
+      res => {
+        this.Bookinfo = res.bookinfo;
+      },
+      { bookid: this.$route.query.bookid }
+    );
     }
+
+    this.bookid = this.$route.query.bookid;
+    
+    this.getbook();
   },
   methods: {
     getbook() {
-      this.book = new Epub("../../../static/33场革命.epub");
+      // let title = this.Bookinfo[0].title;
+      // let url = "../../../static/" + title + ".epub";
+      // this.book = new Epub(url);
+      this.book = new Epub("../../../static/巴别塔之犬.epub");
       this.rendition = this.book.renderTo("read", {
         width: window.innerWidth,
         height: window.innerHeight,
         method: "default"
       });
-      this.rendition.display();
+      // this.rendition.display();
       this.theme = this.rendition.themes;
       this.registerTheme();
-      this.theme.select("yello");
+      this.rendition.hooks.content.register(function(contents, view) {
+        var elements = contents.document.querySelector("body");
+        elements.style.lineHeight = "40px";
+      });
+      if(localStorage.book_user){sqlset(
+        res => {
+          if (localStorage.book_user) {
+            if (res.status == "200") {
+              this.bgc = res.data[0].bgcolor;
+              let color = "";
+              if (this.bgc == "#fff") {
+                color = "white";
+                this.actived = 0;
+                this.$refs.main.style.color = "black";
+              }
+              if (this.bgc == "#FFFFF0") {
+                color = "yello";
+                this.actived = 1;
+                this.$refs.main.style.color = "black";
+              }
+              if (this.bgc == "#E0FFFF") {
+                color = "blue";
+                this.actived = 3;
+                this.$refs.main.style.color = "black";
+              }
+              if (this.bgc == "#000") {
+                color = "black";
+                this.actived = 4;
+                this.$refs.main.style.color = "white";
+              }
+              if (this.bgc == "rgba(152, 251, 152, 0.8)") {
+                color = "green";
+                this.actived = 2;
+                this.$refs.main.style.color = "black";
+              }
+              this.fontsize = res.data[0].fontsize;
+
+              this.theme.select(color);
+              this.theme.fontSize(this.fontsize + "px");
+            }
+          } else {
+            this.actived = 1;
+            this.theme.select("yello");
+          }
+        },
+        { user: localStorage.book_user }
+      );}
       this.book.ready
         .then(() => {
           // 生成目录
@@ -134,12 +235,76 @@ export default {
           // 保存locations对象
           this.locations = this.book.locations;
           // 标记电子书为解析完毕状态
+          console.log(this.locations);
+
           this.bookAvailable = true;
+          if (this.$route.query.href) {
+            this.rendition.display(this.$route.query.href);
+          } else {
+            this.rendition.display(
+              this.locations.cfiFromPercentage(this.progress)
+            );
+          }
         });
       // this.rendition.display();
     },
+    goback() {
+      this.$router.go(-1);
+    },
+    addbook() {
+      if (localStorage.book_user) {
+        if (this.right == "加入书架") {
+          collection(
+            res => {
+              this.right = "已加入书架";
+            },
+            {
+              user: localStorage.book_user,
+              bookinfo: this.Bookinfo
+            }
+          );
+        } else {
+          Dialog.confirm({
+            title: "是否确认删除"
+          })
+            .then(() => {
+              delCll(
+                res => {
+                  this.right = "加入书架";
+                },
+                {
+                  user: localStorage.book_user,
+                  bookid: this.$route.query.bookid
+                }
+              );
+            })
+            .catch(() => {
+              // on cancel
+            });
+        }
+      } else {
+        Dialog.confirm({
+          title: "是否前往登录登录"
+        })
+          .then(() => {
+            this.$router.push({ path: "/login" });
+          })
+          .catch(() => {
+            // on cancel
+          });
+      }
+    },
     mulu(href) {
       this.rendition.display(href);
+      var currentLocation = this.rendition.currentLocation();
+
+      var progress =
+        Math.floor(
+          this.locations
+            .percentageFromCfi(currentLocation.start.cfi)
+            .toFixed(5) * 10000
+        ) / 10000;
+
       this.left_show = false;
     },
     shownulu() {
@@ -148,11 +313,33 @@ export default {
     topre() {
       if (this.rendition) {
         this.rendition.prev();
+        if (localStorage.book_user) this.saveprogress();
         this.isShow = false;
       }
     },
+    saveprogress() {
+      var currentLocation = this.rendition.currentLocation();
+      var progress =
+        Math.floor(
+          this.locations
+            .percentageFromCfi(currentLocation.start.cfi)
+            .toFixed(5) * 10000
+        ) / 10000;
+      this.progress = progress;
+      Progress(
+        res => {
+          console.log(res);
+        },
+        {
+          user: localStorage.book_user,
+          bookid: this.$route.query.bookid,
+          progress: progress
+        }
+      );
+    },
     tolast() {
       if (this.rendition) {
+        if (localStorage.book_user) this.saveprogress();
         this.rendition.next();
         this.isShow = false;
       }
@@ -171,6 +358,7 @@ export default {
         if (this.fontsize < 24) {
           this.fontsize = this.fontsize + 2;
           this.theme.fontSize(this.fontsize + "px");
+          this.saveset();
         }
       }
     },
@@ -179,6 +367,7 @@ export default {
         if (this.fontsize > 12) {
           this.fontsize = this.fontsize - 2;
           this.theme.fontSize(this.fontsize + "px");
+          this.saveset();
         }
       }
     },
@@ -192,29 +381,67 @@ export default {
       this.theme.select(color);
       if (color == "yello") {
         this.bgc = "#FFFFF0";
+        this.$refs.main.style.color = "black";
       }
       if (color == "white") {
         this.bgc = "#fff";
+        this.$refs.main.style.color = "black";
       }
       if (color == "black") {
+        this.$refs.main.style.color = "white";
+
         this.bgc = "#000";
       }
       if (color == "green") {
         this.bgc = "rgba(152, 251, 152, 0.8)";
+        this.$refs.main.style.color = "black";
       }
       if (color == "blue") {
         this.bgc = "#E0FFFF";
+        this.$refs.main.style.color = "black";
       }
+      this.saveset();
       this.show = false;
       this.isShow = false;
+    },
+    toblack() {
+      if (this.dayState == "夜间") {
+        this.actived = 0;
+        this.theme.select("white");
+        this.bgc = "#fff";
+        this.$refs.main.style.color = "black";
+
+        this.dayState = "日间";
+      } else {
+        this.actived = 4;
+        this.theme.select("black");
+        this.bgc = "#000";
+        this.$refs.main.style.color = "white";
+        this.dayState = "夜间";
+      }
+      this.saveset();
+    },
+    saveset() {
+      setUP(
+        res => {
+          console.log(res);
+        },
+        {
+          user: localStorage.book_user,
+          bgcolor: this.bgc,
+          fontsize: this.fontsize
+        }
+      );
     }
   },
+
   data() {
     return {
       isShow: false,
       show: false,
       actived: 1,
       fontsize: 16,
+      dayState: "夜间",
       themeList: [
         {
           name: "white",
@@ -262,16 +489,30 @@ export default {
           }
         }
       ],
-      bgc: "#FFFFF0",
+      right: "加入书架",
+      bgc: "#fff",
       left_show: false,
-      navigation: {}
+      navigation: {},
+      bookid: "",
+      Bookinfo: [],
+      bookAvailable: false,
+      progress: 0
     };
+  },
+  beforeRouteLeave(to, from, next) {
+    to.meta.keepAlive = true;
+    next();
   }
 };
 </script>
 
 <style lang="stylus" scoped>
-.title-noval
+.loading
+  position absolute
+  top 50%
+  left 50%
+  transform translate(-50%, -50%)
+.bodycontent-text, .title-noval
   text-overflow ellipsis
   overflow hidden
   white-space nowrap
@@ -341,7 +582,7 @@ export default {
       .green
         background-color rgba(152, 251, 152, 0.8)
       .actived
-        border 2px solid #000
+        border 2px solid purple
 .navbar
   position fixed
   left 0
@@ -352,6 +593,7 @@ export default {
   .left, .center, .right
     flex 1
     text-align center
+    margin-top 10px
     .text
       font-size 12px
     .iconfz
