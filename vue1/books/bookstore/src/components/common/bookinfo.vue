@@ -98,7 +98,7 @@ export default {
   },
   name: "bookinfo",
   mounted() {
-    this.bookid=this.$route.query.bookid
+    this.bookid = this.$route.query.bookid;
     if (localStorage.book_user) {
       sqlCll(
         res => {
@@ -160,24 +160,15 @@ export default {
       );
     },
     readHis() {
-      if (localStorage.book_user) {
-        sqlreadHis(
-          res => {
-            if (res.status == "200") {
-              readHis(
-                res => {
-                  console.log(res);
-                },
-                {
-                  user: localStorage.book_user,
-                  bookinfo: this.Bookinfo[0]
-                }
-              );
-            }
-          },
-          { user: localStorage.book_user, bookid: this.Bookinfo[0].book_ids }
-        );
-      }
+      readHis(
+        res => {
+          console.log(res);
+        },
+        {
+          user: localStorage.book_user,
+          bookinfo: this.Bookinfo[0]
+        }
+      );
     },
     addbook() {
       if (localStorage.book_user) {
@@ -243,29 +234,24 @@ export default {
       // let url = "../../../static/" + title + ".epub";
       // this.book = new Epub(url);
       this.book = new Epub("../../../static/巴别塔之犬.epub");
-      this.book.ready
-        .then(() => {
-          // 生成目录
-          this.finsh = true;
+      this.book.ready.then(() => {
+        // 生成目录
+        this.finsh = true;
 
-          this.navigation = this.book.navigation;
-          // console.log(this.navigation);
-          // 生成Locations对象
-          return this.book.locations.generate();
-        })
-        .then(result => {
-          // 保存locations对象
-          this.locations = this.book.locations;
-          // 标记电子书为解析完毕状态
-          this.bookAvailable = true;
-        });
+        this.navigation = this.book.navigation;
+        // console.log(this.navigation);
+        // 生成Locations对象
+        return this.book.locations.generate();
+      });
     }
   },
   beforeRouteLeave(to, from, next) {
     console.log(to.path);
-    if(to.path=="/reader") {to.meta.keepAlive = false;
+    if (to.path == "/reader") {
+      to.meta.keepAlive = false;
+    } else {
+      to.meta.keepAlive = true;
     }
-    else{to.meta.keepAlive = true;}
     next();
   },
   data() {
@@ -281,7 +267,7 @@ export default {
       finsh: false,
       book: "",
       navigation: "",
-      bookid:""
+      bookid: ""
     };
   }
 };

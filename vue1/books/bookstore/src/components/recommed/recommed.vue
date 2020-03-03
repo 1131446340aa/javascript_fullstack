@@ -151,7 +151,6 @@ export default {
         xiaoshuowenxue.forEach(item => {
           item.novel_content = JSON.parse(item.novel_content);
         });
-
         let history = res.history.slice(0, 3);
         history.forEach(item => {
           item.novel_content = JSON.parse(item.novel_content);
@@ -169,8 +168,6 @@ export default {
           item.novel_content = JSON.parse(item.novel_content);
         });
         this.noval = [xiaoshuowenxue, history, cglz, renwen, shenghuo];
-        console.log(this.noval[0]);
-
         // this.data.xiaoshuowenxue = res.content.slice(0,6);
       });
     },

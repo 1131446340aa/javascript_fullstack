@@ -58,8 +58,6 @@ export default {
   },
   methods: {
     tomore(item) {
-      // console.log(item);
-
       this.$router.push({ path: "morebook", query: { catogry: item } });
     },
     refreshbook() {
@@ -100,8 +98,6 @@ export default {
       });
     },
     tobookinfo(bookid) {
-      // console.log(bookid);
-
       this.$router.push({ path: "/bookinfo", query: { bookid: bookid } });
     }
   },

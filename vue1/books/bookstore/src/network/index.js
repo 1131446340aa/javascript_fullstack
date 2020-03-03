@@ -9,9 +9,9 @@ let urls = "http://localhost:3001/books"
 
 Vue.prototype.$http = axios
 // Vue.config.productionTip = false
-export function fetchGet(url, param) {
+function fetch(methods,url, param) {
   return new Promise((resolve, reject) => {
-    axios.get(urls + url, {
+    axios[methods](urls + url, {
       params: param
     })
       .then(response => {
@@ -27,31 +27,34 @@ export function fetchGet(url, param) {
       }))
   })
 }
-export function fetchPost(url, param) {
-  return new Promise((resolve, reject) => {
-    axios.post(urls + url, {
-      params: param
-    })
-      .then(response => {
-        resolve(response.data)
-      }, err => {
-        vue.$notify("网络出错或链接过期");
-        reject(err)
-      })
-      .catch((error => {
-        // console.log(this);
-
-        reject(error)
-      }))
-  })
+export function fetchGet(url,param){
+return fetch('get',url,param)
 }
+export function fetchPost(url,param){
+  return fetch('post',url,param)
+  }
+// export function fetchPost(url, param) {
+//   return new Promise((resolve, reject) => {
+//     axios.post(urls + url, {
+//       params: param
+//     })
+//       .then(response => {
+//         resolve(response.data)
+//       }, err => {
+//         vue.$notify("网络出错或链接过期");
+//         reject(err)
+//       })
+//       .catch((error => {
+//         // console.log(this);
+
+//         reject(error)
+//       }))
+//   })
+// }
 
 /*接口地址 */
-// 轮播图
+
 export function booksrore(fn) {
-
-  // console.log(this);
-
   return fetchGet("/bookstore").then(fn)
 }
 export function recommed(fn) {

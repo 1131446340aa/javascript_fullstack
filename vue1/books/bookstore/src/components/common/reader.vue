@@ -108,8 +108,6 @@ import {
   sqlCll,
   delCll,
   download,
-  readHis,
-  sqlreadHis,
   setUP,
   sqlset,
   Progress,
@@ -150,15 +148,15 @@ export default {
         }
       );
       getBookInfo(
-      res => {
-        this.Bookinfo = res.bookinfo;
-      },
-      { bookid: this.$route.query.bookid }
-    );
+        res => {
+          this.Bookinfo = res.bookinfo;
+        },
+        { bookid: this.$route.query.bookid }
+      );
     }
 
     this.bookid = this.$route.query.bookid;
-    
+
     this.getbook();
   },
   methods: {
@@ -179,49 +177,51 @@ export default {
         var elements = contents.document.querySelector("body");
         elements.style.lineHeight = "40px";
       });
-      if(localStorage.book_user){sqlset(
-        res => {
-          if (localStorage.book_user) {
-            if (res.status == "200") {
-              this.bgc = res.data[0].bgcolor;
-              let color = "";
-              if (this.bgc == "#fff") {
-                color = "white";
-                this.actived = 0;
-                this.$refs.main.style.color = "black";
-              }
-              if (this.bgc == "#FFFFF0") {
-                color = "yello";
-                this.actived = 1;
-                this.$refs.main.style.color = "black";
-              }
-              if (this.bgc == "#E0FFFF") {
-                color = "blue";
-                this.actived = 3;
-                this.$refs.main.style.color = "black";
-              }
-              if (this.bgc == "#000") {
-                color = "black";
-                this.actived = 4;
-                this.$refs.main.style.color = "white";
-              }
-              if (this.bgc == "rgba(152, 251, 152, 0.8)") {
-                color = "green";
-                this.actived = 2;
-                this.$refs.main.style.color = "black";
-              }
-              this.fontsize = res.data[0].fontsize;
+      if (localStorage.book_user) {
+        sqlset(
+          res => {
+            if (localStorage.book_user) {
+              if (res.status == "200") {
+                this.bgc = res.data[0].bgcolor;
+                let color = "";
+                if (this.bgc == "#fff") {
+                  color = "white";
+                  this.actived = 0;
+                  this.$refs.main.style.color = "black";
+                }
+                if (this.bgc == "#FFFFF0") {
+                  color = "yello";
+                  this.actived = 1;
+                  this.$refs.main.style.color = "black";
+                }
+                if (this.bgc == "#E0FFFF") {
+                  color = "blue";
+                  this.actived = 3;
+                  this.$refs.main.style.color = "black";
+                }
+                if (this.bgc == "#000") {
+                  color = "black";
+                  this.actived = 4;
+                  this.$refs.main.style.color = "white";
+                }
+                if (this.bgc == "rgba(152, 251, 152, 0.8)") {
+                  color = "green";
+                  this.actived = 2;
+                  this.$refs.main.style.color = "black";
+                }
+                this.fontsize = res.data[0].fontsize;
 
-              this.theme.select(color);
-              this.theme.fontSize(this.fontsize + "px");
+                this.theme.select(color);
+                this.theme.fontSize(this.fontsize + "px");
+              }
+            } else {
+              this.actived = 1;
+              this.theme.select("yello");
             }
-          } else {
-            this.actived = 1;
-            this.theme.select("yello");
-          }
-        },
-        { user: localStorage.book_user }
-      );}
+          },
+          { user: localStorage.book_user }
+        );
+      }
       this.book.ready
         .then(() => {
           // 生成目录
@@ -297,15 +297,7 @@ export default {
     mulu(href) {
       this.rendition.display(href);
       var currentLocation = this.rendition.currentLocation();
-
-      var progress =
-        Math.floor(
-          this.locations
-            .percentageFromCfi(currentLocation.start.cfi)
-            .toFixed(5) * 10000
-        ) / 10000;
-
-      this.left_show = false;
+      this.saveprogress();
     },
     shownulu() {
       this.left_show = true;
@@ -389,7 +381,6 @@ export default {
       }
       if (color == "black") {
         this.$refs.main.style.color = "white";
-
         this.bgc = "#000";
       }
       if (color == "green") {

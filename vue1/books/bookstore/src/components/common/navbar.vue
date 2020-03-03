@@ -38,19 +38,12 @@
 <script>
 export default {
   name: "navbar",
-  // methods: {
-  //   onChange(index) {
-  //     this.active = index;
-  //     // this.Route = this.$route.name;
-  //   }
-  // },
   data() {
     return {
       Route: ""
     };
   },
   mounted() {
-    // console.log(this.$route);
     this.Route = this.$route.name;
   },
   watch: {
