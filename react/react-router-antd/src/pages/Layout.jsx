@@ -42,6 +42,12 @@ class Page extends React.Component {
                                 <Menu.Item>子菜单项</Menu.Item>
                                 <Menu.Item>子菜单项</Menu.Item>
                             </Menu.SubMenu>
+                            <Menu.SubMenu key="sub1" title={<span><SmileOutlined />ui</span>}>
+                                <Menu.Item>子菜单项</Menu.Item>
+                                <Menu.Item>子菜单项</Menu.Item>
+                                <Menu.Item>子菜单项</Menu.Item>
+                                <Menu.Item>子菜单项</Menu.Item>
+                            </Menu.SubMenu>
                         </Menu>
                     </Sider>
                 </Layout>
