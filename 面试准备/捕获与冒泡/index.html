@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="div">
+        <div class="div1">
+            <div class="div2">
+                <div class="div3">
+                    23
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        //默认冒泡,,如有捕获优先执行捕获
+
+       let div= document.querySelector('.div')
+       let div1= document.querySelector('.div1')
+       let div2= document.querySelector('.div2')
+       let div3= document.querySelector('.div3')
+       div.addEventListener('click',function(){
+           console.log(1);
+           
+       },false)
+       div.addEventListener('click',function(){
+         setTimeout(()=>{
+            console.log(5);
+         },0)
+           
+       },true)
+     
+      
+       div1.addEventListener('click',function(){
+           console.log(2);
+           
+       })
+       div2.addEventListener('click',function(){
+           console.log(3);
+           
+       },true)
+       div3.addEventListener('click',function(){
+           console.log(4);
+           
+       })
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p class="p"></p>
+    <script>
+        class Vue {
+            constructor(opts) {
+                this.data = opts.data
+                for (let key in opts.data) {
+                    this.setDate(key, opts.data[key])
+                }
+            }
+            render(value) {
+                let p = document.querySelector('.p')
+                p.innerHTML =value
+            }
+            setDate(key, value) {
+                // Object.defineProperty(this, key, {
+                //     get() {
+                //         this.render(value)
+                //         return value
+                //     },
+                //     set(newval){
+                //         console.log(123);
+                        
+                //         // if(newval===value) return value
+                //         // value=newval
+                //         // this.render(newval)                        
+                //     }
+                // })
+                let proxy=new Proxy(this,{
+                    get:function(obj,key,receiver){
+                        console.log(123);
+                        
+                        this.render(value)
+                        return new Reflect.get(obj,key,receiver)
+                    }
+                })
+            }
+        }
+
+        let vm = new Vue({
+            data: {
+                a: {m:5},
+                b: 4,
+                c: 5
+            }
+        })
+        vm.b
+        setTimeout(() => {
+           
+         
+        }, 1000);
+        
+        
+    </script>
+</body>
+
+</html>
