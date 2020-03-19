@@ -10,20 +10,20 @@
         </div>
         <div :class="{fontcoloractive:Route==='buy'}">二手淘</div>
       </van-tabbar-item>
-      <van-tabbar-item to="/recommed">
+      <van-tabbar-item to="/school">
         <div class="icon">
           <i
             class="iconfont icon-shenghuo-copy fontcolor"
-            :class="{fontcoloractive:Route==='recommed'}"
+            :class="{fontcoloractive:Route==='school'}"
           ></i>
         </div>
-        <div :class="{fontcoloractive:Route==='recommed'}">校园</div>
+        <div :class="{fontcoloractive:Route==='school'}">校园</div>
       </van-tabbar-item>
-      <van-tabbar-item to="/book">
+      <van-tabbar-item to="/life">
         <div class="icon">
-          <i class="iconfont icon-gonglve fontcolor" :class="{fontcoloractive:Route==='book'}"></i>
+          <i class="iconfont icon-quanzi fontcolor" :class="{fontcoloractive:Route==='life'}"></i>
         </div>
-        <div :class="{fontcoloractive:Route==='book'}">悬赏帮</div>
+        <div :class="{fontcoloractive:Route==='life'}">生活</div>
       </van-tabbar-item>
       <van-tabbar-item to="/my">
         <div class="icon">

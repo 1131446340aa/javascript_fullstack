@@ -1,11 +1,9 @@
 <template>
-  <div class="aaa">
-    <div class="wrapper" ref="wrapper">
+  <div class="wrapper" ref="wrapper">
       <div>
         <slot></slot>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -25,12 +23,12 @@ export default {
       default: 1
     },
     top: {
-      type: Number,
-      default: 54
+      type: String,
+      default:"0px"
     },
     bottom: {
-      type: Number,
-      default: 50
+      type: String,
+      default: "0px"
     },
     /**
      * 点击列表是否派发click事件
@@ -85,8 +83,8 @@ export default {
     }
   },
   mounted() {
-    this.$refs.wrapper.style.top = this.top + "px";
-    this.$refs.wrapper.style.bottom = this.bottom + "px";
+    this.$refs.wrapper.style.top = this.top 
+    this.$refs.wrapper.style.bottom = this.bottom 
 
     setTimeout(() => {
       this._initScroll();

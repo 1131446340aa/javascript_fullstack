@@ -5,10 +5,10 @@
     </div>
     <div class="user-wrapper">
       <div class="avater">
-        <img src="http://b-ssl.duitang.com/uploads/item/201410/09/20141009224754_AswrQ.jpeg" />
+        <img src="https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=129409579,2920083752&fm=111&gp=0.jpg" />
       </div>
       <div class="text">
-        <div class="nickname">朝暮</div>
+        <div class="nickname">是黄小天才啊</div>
         <div class="schoolid">学号: 201720180735</div>
       </div>
       <div class="moreInfo">
@@ -31,9 +31,9 @@
       <van-divider style="margin:0" />
     </div>
     <div class="line"></div>
-    <div class="block-flex">
+    <div class="block-flex"  @click="tosetting">
       <div class="icon">  <i class="iconfont icon-shezhi color" style="color:purple"></i></div>
-      <div class="main">
+      <div class="main" >
         <div class="text">设置</div>
       </div>
       <div class="more">
@@ -59,6 +59,13 @@ export default {
         '<i class="iconfont icon-guanzhu color-fz" style="color:red"></i>'
       ]
     };
+  },
+  methods:{
+    tosetting(){
+      console.log(12);
+      
+      this.$router.push('/setting')
+    }
   }
 };
 </script>
@@ -103,7 +110,6 @@ export default {
     height 3.5rem
     line-height 3.5rem
     font-size 2.2rem
-    font-weight 600
   .schoolid
     font-size 1.6rem
     height 3rem
