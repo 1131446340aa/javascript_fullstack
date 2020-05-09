@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "sequelize": "^5.21.7"
+  }
+}
