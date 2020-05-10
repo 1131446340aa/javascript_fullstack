@@ -1,0 +1,37 @@
+{
+  "pages": [
+    "pages/main/main",
+    "pages/mine/mine",
+    "pages/lesson/lesson"
+  ],
+  "window": {
+    "enablePullDownRefresh": true,
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#48A6FD",
+    "navigationBarTitleText": "黄力豪",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/main/main",
+        "text": "首页",
+        "iconPath": "images/shouye.png",
+        "selectedIconPath": "images/shouye.png"
+      },
+      {
+        "pagePath": "pages/lesson/lesson",
+        "text": "课程",
+        "iconPath": "images/class.png",
+        "selectedIconPath": "images/hover-class.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "images/mine.png",
+        "selectedIconPath": "images/hover-mine.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

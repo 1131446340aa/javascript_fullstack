@@ -1,0 +1,278 @@
+.background {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+.music-index {
+    width: 100vw;
+    height: 100vh;
+}
+
+.mask {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    background-color: #000;
+    opacity: .4;
+}
+
+.background image {
+    width: 100vw;
+    height: 100%;
+    filter: blur(30px);
+}
+
+.music {
+    /* background-color: #292A40; */
+    width: 100vw;
+    height: 100vh;
+}
+
+.music-name {
+    text-align: center;
+    color: #fff;
+    font-size: 32rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+}
+
+slider {
+    position: relative;
+    top: -18rpx;
+}
+
+.music-author {
+    font-size: 26rpx;
+    color: rgb(15, 163, 221);
+    text-align: center;
+}
+
+.big-circle {
+    width: 540rpx;
+    height: 540rpx;
+    border-radius: 270rpx;
+    background-color: #1E1E20;
+    border: 8rpx solid #34394C;
+    position: fixed;
+    top: 200rpx;
+    left: 14%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* transform: translate(-50%, -50%); */
+}
+
+.contral {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 10rpx;
+    display: flex;
+    margin: 40rpx 30rpx;
+}
+
+.contral-left image,
+.last-music image,
+.next-one image,
+.playlist image {
+    width: 50rpx;
+    height: 50rpx;
+}
+
+.play-music image {
+    width: 70rpx;
+    height: 70rpx;
+}
+
+.contral-left,
+.last-music,
+.next-one,
+.playlist {
+    flex: 1;
+    width: 70rpx;
+    height: 70rpx;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.play-music {
+    flex: 1;
+    width: 70rpx;
+    height: 70rpx;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.small-circle image {
+    width: 375rpx;
+    height: 375rpx;
+}
+
+.small-circle {
+    width: 375rpx;
+    height: 375rpx;
+    border-radius: 50%;
+    position: fixed;
+    top: 293rpx;
+    left: 26%;
+    /* transform: translate(-50%, -50%); */
+    overflow: hidden;
+}
+
+.rotate {
+    animation: rotate 27s linear infinite;
+    /* animation-fill-mode: forwards; */
+}
+
+.circle {
+    /* position: relative; */
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading {
+    position: fixed;
+    bottom: 0;
+}
+
+.progress {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 86%;
+    display: flex;
+    height: 30rpx;
+    /* bottom: 130rpx; */
+    /* margin: 40rpx 30rpx; */
+}
+
+.start-time,
+.end-time {
+    width: 80rpx;
+    margin: 0 20rpx;
+    height: 30rpx;
+    line-height: 30rpx;
+    text-align: center;
+    color: #fff;
+    font-size: 24rpx;
+}
+
+.block {
+    height: 360rpx;
+    width: 100%;
+}
+
+.progress-bar {
+    width: 100%;
+    flex: 1;
+    /* padding-top: 12rpx;
+    box-sizing: border-box; */
+    width: 30rpx;
+}
+
+.bg {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    background-color: rgba(101, 103, 109, 0.2);
+}
+
+.wrapper {
+    height: 40vh;
+    width: 100%;
+    background-color: #fff;
+    border-top-left-radius: 30rpx;
+    border-top-right-radius: 30rpx;
+    margin-top: 60vh;
+    position: fixed;
+}
+
+.scrollHeight {
+    height: 40vh;
+}
+
+.songList-item {
+    font-size: 28rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 70rpx;
+    line-height: 70rpx;
+    margin: 0 50rpx;
+}
+
+.song-title {
+    margin-top: 30rpx;
+    margin: 50rpx;
+    font-size: 40rpx;
+    font-weight: bold;
+}
+
+.line {
+    color: whitesmoke;
+    font-size: 28rpx;
+    text-align: center;
+    line-height: 60rpx;
+    height: 60rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.line-active {
+    color: #a5faa5;
+}
+
+.lrc {
+    position: absolute;
+    top: 60rpx;
+    bottom: 200rpx;
+    left: 0;
+    right: 0;
+    /* overflow: scroll; */
+    /* background-color: red; */
+}
+
+.music-scroll {
+    height: 960rpx;
+}
+
+.lrc-scroll {
+    /* margin-top: 60rpx; */
+    /* margin-top: 60rpx; */
+    height: 840rpx;
+    width: 100vw;
+}
+
+.music-name1 {
+    margin-bottom: 60rpx;
+}
+
+.bigline {
+    height: 840rpx;
+    width: 100vw;
+    line-height: 840rpx;
+    text-align: center;
+    color: #a5faa5;
+}

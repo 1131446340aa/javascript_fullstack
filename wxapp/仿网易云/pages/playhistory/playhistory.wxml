@@ -1,0 +1,15 @@
+<view class="search-box">
+    <scroll-view class="scroll" scroll-x="false" scroll-y="true" bindscrolltolower="bindscrolltolower">
+        <view class="title">最近播放</view>
+        <view class="song-item" wx:for="{{songItem}}" wx:key="index" bindtap="playmusic" data-id="{{index}}">
+            <view class="song-list">
+                <view class="song-name">{{item.songname}}</view>
+                <view class="author">{{item.authorname}}</view>
+            </view>
+            <view class="icon">
+                <image class="" src="../index/images/icon-test.png" />
+            </view>
+        </view>
+    </scroll-view>
+   
+</view> 

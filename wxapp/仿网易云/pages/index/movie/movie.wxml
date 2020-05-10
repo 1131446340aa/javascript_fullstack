@@ -1,0 +1,4 @@
+  <video src="{{movie}}" autoplay="{{true}}" enable-progress-gesture="true"></video>
+<view class="movie">
+  
+</view>

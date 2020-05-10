@@ -1,0 +1,18 @@
+<view class="search-box">
+    <scroll-view class="scroll" scroll-x="false" scroll-y="true" bindscrolltolower="bindscrolltolower">
+        <view class="title">歌曲</view>
+        <view class="song-item" wx:for="{{songItem}}" wx:key="index" bindtap="playmusic" data-id="{{index}}">
+            <view class="song-list">
+                <view class="song-name">{{item.name}}</view>
+                <view class="author">{{item.ar[0].name}}</view>
+            </view>
+            <view class="icon">
+                <image class="" src="../../images/icon-test.png" />
+            </view>
+        </view>
+         <view class="loading" hidden="{{loading}}">
+            <van-loading size="24px" type="spinner" color="#1989fa" vertical>加载中...</van-loading>
+        </view>
+    </scroll-view>
+   
+</view> 

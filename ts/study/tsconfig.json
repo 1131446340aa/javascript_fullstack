@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "es5", //指定版本
+    "module": "commonjs", //
+    "moduleResolution": "node", //选择模块解析
+    "experimentalDecorators": true, //开启js装饰器
+    "allowSyntheticDefaultImports": true, //允许从没有默认导出的模块中默认导入
+    "sourceMap": true, //
+    "strict": true,
+    "noImplicitAny": true,
+    "alwaysStrict": true,
+    "declaration": true, //生成对应的.d.ts文件（声明文件）
+    "removeComments": true, //删除注释
+    "noImplicitReturns": true, //如果函数没有返回值就报错
+    "importHelpers": true,
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "outDir": "./dist",
+    "rootDir": "./src"
+  },
+  "include": [
+    "./src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}

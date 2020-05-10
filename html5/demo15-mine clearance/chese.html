@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 560px;
+            height: 630px;
+            top: 50%;
+            left: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%)
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .x-wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 560px;
+            height: 630px;
+
+        }
+
+        .line {
+            width: 100%;
+            height: 70px;
+            border-top: 1px solid goldenrod;
+        }
+
+        .line:nth-child(9) {
+            border-bottom: 1px solid goldenrod;
+        }
+
+        .top {
+            width: 560px;
+            height: 280px;
+            display: flex;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -315px);
+        }
+
+        .y-line {
+            width: 70px;
+            height: 284px;
+            border-left: 1px solid goldenrod;
+            flex: 1;
+        }
+
+        .y-line:nth-child(8) {
+            border-right: 1px solid goldenrod;
+        }
+
+        .low {
+            width: 560px;
+            height: 280px;
+            display: flex;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, 40px);
+        }
+
+        .middle {
+            width: 558px;
+            height: 70px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border-left: 1px solid goldenrod;
+            transform: translate(-50%, -30px);
+            border-right: 1px solid goldenrod;
+            text-align: center;
+            display: flex;
+
+        }
+
+        .text {
+            flex: 1;
+            box-sizing: border-box;
+            line-height: 70px;
+            font-size: 40px;
+
+        }
+
+        .xie {
+            width: 197px;
+            height: 197px;
+            display: inline-block;
+            transform: rotate(45deg);
+            transform-origin: left top;
+            position: relative;
+            left: 210px;
+
+        }
+
+        .one {
+            left: 210px;
+            border-top: 1px solid goldenrod;
+        }
+
+        .two {
+            height: 199px;
+            border-left: 1px solid goldenrod;
+            position: absolute;
+            left: 350px;
+
+        }
+
+        .three {
+            border-top: 1px solid goldenrod;
+            display: inline-block;
+            position: absolute;
+            top: 497px;
+
+        }
+
+        .four {
+
+            display: inline-block;
+            position: absolute;
+            top: 497px;
+            left: 350px;
+            border-left: 1px solid goldenrod;
+        }
+
+        .che {
+            width: 60px;
+            height: 60px;
+            border-radius: 30px;
+            border: 1px solid goldenrod;
+            position: absolute;
+            top: 610px;
+            transform: translate(-50%);
+            color: goldenrod;
+            text-align: center;
+            line-height: 60px;
+            z-index: 2;
+            background-color: #fff;
+            text-shadow: 0 -1px 0 rgba(218, 165, 32, .3);
+            box-shadow: 0 3px 20px rgba(218, 165, 32, 0.3)
+                /* 0 4px 0 rgb(14, 230, 197);   */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="x-wrapper">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+
+        </div>
+        <div class="xie one"></div>
+        <div class="xie two"></div>
+        <div class="xie three"></div>
+        <div class="xie four"></div>
+        <div class="y-wrapper">
+            <div class="top">
+                <div class="y-line"></div>
+                <div class="y-line"></div>
+                <div class="y-line"></div>
+                <div class="y-line"></div>
+                <div class="y-line"></div>
+                <div class="y-line"></div>
+                <div class="y-line"></div>
+                <div class="y-line"></div>
+            </div>
+            <div class="low">
+                <div class="y-line"></div>
+                <div class="y-line"></div>
+                <div class="y-line"></div>
+                <div class="y-line"></div>
+                <div class="y-line"></div>
+                <div class="y-line"></div>
+                <div class="y-line"></div>
+                <div class="y-line"></div>
+            </div>
+            <div class="middle">
+                <div class="text">楚汉</div>
+                <div class="text">河界</div>
+            </div>
+            <div class="main">
+                <div class="main-c">
+                    <div class="che">车
+                        <div class="esp"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

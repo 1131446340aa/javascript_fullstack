@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button>byn</button>
+    <button>qq</button>
+    <script>
+   var that;
+    class star{
+        constructor(name){
+            that=this
+            this.name=name
+            this.btn=document.querySelectorAll('button')
+            this.sing()
+            //  console.log(that)
+            // this.btn.onclick=this.sing
+        }
+        sing(){
+            for(var i=0;i<this.btn.length;i++)
+            { this.btn[i].index=i
+           this.btn[i].onclick=function(){
+            console.log(this.index)
+           }}
+           
+        }
+    }
+    var ldh=new star("刘德华")
+   
+    
+    </script>
+</body>
+</html>

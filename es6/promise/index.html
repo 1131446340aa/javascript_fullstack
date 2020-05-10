@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        function test() { 
+            return new Promise((reslove, reject) => {
+                setTimeout(() => {
+                    var name = "蜗牛"
+                    reslove('ok')
+                    // reject('error')
+
+                }, 500)
+            })
+        }
+        function test2() {
+            console.log(name);
+            
+            return new Promise((reslove, reject) => {
+               
+                setTimeout(() => { console.log(name + '相亲')
+                reslove('ok') }, 1000)
+              
+            })
+
+
+        }
+        function test3() {
+            console.log(name + '结婚了')
+
+        }
+        function test4() {
+            console.log(1);
+            
+            console.log(name + '结婚了')
+
+        }
+        test()
+            .then(test2)
+            .then(test3)
+        test4()
+
+    // .catch((err)=>{
+    //     console.log(err)
+
+    // })
+
+    </script>
+</body>
+
+</html>

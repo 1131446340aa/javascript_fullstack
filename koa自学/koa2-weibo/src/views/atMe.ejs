@@ -1,0 +1,42 @@
+<%- include('layout/header', { title: '微博 - @ 提到我的', isNav: true, list: true, isInputBlog: true  })%>
+
+<div class="container margin-top-20">
+    <div class="row">
+        <!-- 左侧 -->
+        <div class="col-8">
+            <h4 class="padding-bottom-10">
+                @ 提到我的 (<%= atCount%> 未读)
+            </h4>
+
+            <!-- 输入框 -->
+            <%- include('widgets/input')%>
+
+            <% if (blogData.isEmpty) { %>
+                <div>
+                    <center>暂无数据</center>
+                </div>
+            <% } else { %>
+                <!-- 微博列表 -->
+                <div id="container-weibo-list" class="weibo-list">
+                    <%- include('widgets/blog-list', {
+                        blogList: blogData.blogList,
+                        canReply: true
+                    })%>
+                </div> <!-- 微博列表 结束 -->
+                <!-- 加载更多 -->
+                <% if (blogData.count > blogData.blogList.length) { %>
+                    <%- include('widgets/load-more', {
+                        pageSize: blogData.pageSize,
+                        pageIndex: blogData.pageIndex,
+                        count: blogData.count,
+                        containerSelector: '#container-weibo-list',
+                        api: '/api/atMe/loadMore',
+                    })%>
+                <% } %> <!-- 加载更多 结束 -->
+            <% } %>
+
+        </div> <!-- 左侧结束 -->
+    </div>
+</div>
+
+<%- include('layout/footer')%>

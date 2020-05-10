@@ -1,0 +1,13 @@
+.singSheet-catory{
+   
+    display: flex;
+    border-bottom: 1rpx solid #C8C7C0;
+    margin-top: 84rpx;
+}
+.singSheet-catory-item{
+    flex: 1;
+    font-size: 28rpx;   
+    text-align: center;
+    line-height: 60rpx;
+    height: 60rpx;
+}

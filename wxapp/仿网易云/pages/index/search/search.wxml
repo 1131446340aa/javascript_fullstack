@@ -1,0 +1,50 @@
+<view class="search">
+    <view class="input">
+        <van-search value="{{query}}" shape="round" show-action="true" placeholder="请输入搜索关键词" bind:change="debounce" autofocus="autofocus" />
+    </view>
+    <view class="search-wrapper" wx:if="{{query}}">
+        <view class="title">搜索 "{{query}}"</view>
+        <view class="search-item" bindtap="itemClick" data-query="{{query}}">
+            <view class="left-icon">
+                <van-icon name="search" />
+            </view>
+            <view class="item-name">{{query}}</view>
+        </view>
+        <view class="search-item" wx:for="{{songItem}}" wx:key="index" bindtap="itemClick" data-query="{{item.name}}-{{item.artists[0].name}}">
+            <view class="left-icon">
+                <van-icon name="search" />
+            </view>
+            <view class="name">
+                <view class="item-name">{{item.name}}</view>
+                <view class="artist-name">-{{item.artists[0].name}}</view>
+            </view>
+        </view>
+        <view class="loading" hidden="{{loading}}">
+            <van-loading size="24px" type="spinner" color="#1989fa" vertical>加载中...</van-loading>
+        </view>
+    </view>
+    <view class="detail" wx:if="{{!query}}">
+        <view class="hotsearch">
+            <view class="text">热搜榜</view>
+            <view class="hotsearch-item" wx:for="{{hotkeys}}" wx:key="index" bindtap="hotsearch" data-query="{{item.first}}">
+                {{item.first}}
+            </view>
+        </view>
+        <view class="history">
+            <view class="history-title">
+                <view class="text">历史记录</view>
+                <view class="delete" bindtap="delete"><image class="" src="../images/delete.png"  />
+                  </view>
+            </view>
+            <scroll-view class="history-scroll" scroll-x="false" scroll-y="true" >
+                <view class="history-item" wx:for="{{histiryItem}}" wx:key="index" bindtap="historyItem" data-query="{{item.historySearch}}">
+                {{item.historySearch}}
+            </view>
+            </scroll-view>
+              
+        </view>
+    </view>
+   <view hidden="{{query}}">
+        <musicplay id="music"></musicplay>
+   </view>
+</view>

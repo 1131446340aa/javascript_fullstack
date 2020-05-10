@@ -1,0 +1,12 @@
+<!--pages/carDetail/index.wxml-->
+<view>
+  <view class="cover">
+    <image class="" src="{{ car.image }}" mode="aspectFill"/>
+    <view class="content">
+      <view class="header">{{ car.header }}</view>
+      <view class="meta">{{ car.meta.price }}</view>
+    </view>
+  </view>
+  <view class="spec"></view>
+  <view class="action"></view>
+</view>

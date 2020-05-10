@@ -1,0 +1,7 @@
+.test{
+    font-size: 25px;
+    color: red;
+}
+.active{
+    display: none;
+}

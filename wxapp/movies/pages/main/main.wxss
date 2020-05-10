@@ -1,0 +1,115 @@
+.header{
+    width: 100%;
+    height: 45px;
+    display: flex;
+    background-color: #fff;
+  }
+  .header_hd{
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    color: #b9b9b9;
+    font-size: 12px;
+    padding-left: 12px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+  }
+  .header_hd text{
+    float: left;
+    font-size: 14px;
+    color: #666666;
+  }
+  .downtips{
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #000;
+    float: left;
+    margin-left: 1px;
+  }
+  .header_bd{
+    flex: 1;
+    position: relative;
+    text-align: center;
+  }
+  .header_bd-btn{
+    width: 70px;
+    height: 45px;
+    display: inline-block;
+    line-height: 45px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: #666666;
+  }
+  .header_ft{
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    line-height: 45px;
+    color: #ef4238;
+    border-left: 1px solid #d8d8d8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .header_ft image{
+    width: 23px;
+    height: 23px;
+  }
+  .slide-image {
+    width: 100%;
+  }
+  .item {
+    padding: 10px;
+    background-color: #fff;
+    color: #787878;
+    border-top: 1px solid #eaeaea;
+    overflow: auto;
+    position: relative;
+  }
+  .item_left {
+    float: left;
+    width: 65px;
+    height: 95px;
+  }
+  .item_left image {
+    width: 100%;
+    height: 100%;
+  }
+  .item_middle {
+    width: 60%;
+    padding-left: 10px;
+    padding-top: 5px;
+    overflow: hidden;
+  }
+  .item_middle .title {
+    display: inline-block;
+    font-size: 16px;
+    color: #000;
+    max-width: 140px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+ 
+  .item_right {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .item_right .buy {
+    display: block;
+    width: 46px;
+    height: 28px;
+    font-size: 12px;
+    border-radius: 4px;
+    text-align: center;
+    line-height: 28px;
+    color: #fff;
+  
+  }
+  

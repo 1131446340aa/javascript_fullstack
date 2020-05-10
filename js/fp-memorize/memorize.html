@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let mapAdd = new Map()
+        function add(a) {
+            //先看缓存里面有没有
+            if (mapAdd.has(a)) {
+                return mapAdd.get(a)
+            }
+            let res = a + 30
+            mapAdd.set(a, res)
+            return res
+        }
+        let mapReduce = new map()
+        function reduce(c, d) {
+            let key = JSON.stringify([...arguments])
+            if (mapReduce.has(key)) {
+                return mapReduce.get(key)
+            }
+            let res = c - d
+            mapReduce.set(key, res)
+            return res
+        }
+        function sum(a, b, c) {
+            return a + b + c
+        }
+        reduce(10, 2)
+        function memorize(fn) {
+            //过程抽象
+            let cache=new Map()
+            //具有缓存功能的函数
+            return (...args)=>{
+                let key = JSON.stringify(args)
+                if(cache.has(key)){
+                    return cache.get(key)
+                }
+                let res=fn(...args)
+                cache.set(key,res)
+                return res
+            }
+        }
+        const mSun=memorize(sum)
+        mSun(1,2,3)
+    </script>
+</body>
+
+</html>

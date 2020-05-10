@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <title>Document</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: rgb(54, 207, 200);
+    }
+    table th, table td {
+      border: 1px solid #ebeef5;
+      text-align: center;
+      font-size: 19px;
+      height: 2em;
+    }
+  </style>
+</head>
+<body>
+  <a href="">aaaa</a>
+  <div class="container">
+    <span>类型:</span>
+    <ul class="canDrog">
+      <li draggable="true">optimal</li>
+      <li draggable="true">good</li>
+      <li draggable="true">medium</li>
+      <li draggable="true">badly</li>
+    </ul>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>weeks</th>
+          <th>Mon</th>
+          <th>Tus</th>
+        </tr>
+      </thead>
+      <tbody>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tbody>
+    </table>
+  </div>
+  <script>
+    // window.onload = function () {}
+    // window.addEventListener('domcontentloaded', () => {})
+    $(function() {
+      $('.canDrog li').bind('dragstart', function(event) {
+        event = event.originalEvent
+        event.target.style.opacity = .5
+        event.dataTransfer.setData('text', $(event.target).html())
+      })
+      $('.canDrog li').bind('dragend', function(event) {
+        event = event.originalEvent
+        event.target.style.opacity = 1
+      })
+
+      $('table td').bind('dragenter', function(event) {
+        event = event.originalEvent
+        event.target.style.backgroundColor = '#fdfdfd'
+      })
+      $('table td').bind('dragleave', function(event) {
+        event = event.originalEvent
+        event.target.style.backgroundColor = 'rgb(54, 207, 200)'
+      })
+      $('table td').bind('dragover', function(event) {
+       event.originalEvent.preventDefault()
+      })
+      $('table td').bind('drop', function(event) {
+        event = event.originalEvent
+        const text = event.dataTransfer.getData('text')
+        $(event.target).html(text)
+        event.target.style.backgroundColor = 'rgb(54, 207, 200)'
+      })
+    })
+  </script>
+</body>
+</html>

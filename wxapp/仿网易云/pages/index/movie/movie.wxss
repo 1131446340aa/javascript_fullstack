@@ -1,0 +1,6 @@
+video{
+    width: 100%;
+}
+.movie{
+    margin: 0 20rpx;
+}

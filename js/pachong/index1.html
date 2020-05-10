@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text">
+    <button>更新</button>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+<script>
+ fetch('http://localhost:3001')
+ .then(res=>{
+    res.json()
+    console.log(res);
+    
+ })
+ .then(data=>{
+     const ulNode=document.querySelector('ul')
+     let html=data.map(movies=>{
+         return`<li>
+            <img src="${movies.picUrl}"/>
+            <spna>${movies.star}/${movies.title}/${movies.inq}</span>
+            </li>
+         `
+     }).join('')
+     ulNode.innerHTML=html;
+
+ })
+
+</script>
+</body>
+</html>

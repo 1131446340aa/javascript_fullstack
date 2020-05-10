@@ -1,0 +1,48 @@
+<view class="singList">
+    <view class="background">
+        <image class="" src="{{playlistDetail.coverImgUrl}}" mode="scaleToFill" />
+        <view class="mask"></view>
+    </view>
+    <view class="header">
+        <view class="header-title">
+            <view class="title">歌单</view>
+            <view class="collect" bindtap="collectsheet"> 
+                <image hidden="{{iscollection}}" class="" src="../index/images/shoucang4.png"></image>
+                 <image hidden="{{!iscollection}}" class="" src="../index/images/favor-active.png"></image>
+            </view>
+        </view>
+        <view class="container">
+            <view class="img">
+                <image class="" src="{{playlistDetail.coverImgUrl}}" />
+            </view>
+            <view class="text">
+                <view class="big-title">{{playlistDetail.name}}</view>
+                <view class="user">
+                    <view class="avatar">
+                        <image class="" src="{{playlistDetail.creator.avatarUrl}}" />
+                    </view>
+                    <view class="nickname">{{playlistDetail.creator.nickname}}</view>
+                </view>
+                <view class="introduce">{{playlistDetail.description||""}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="search-box">
+        <scroll-view class="scroll" scroll-x="false" scroll-y="true" bindscrolltolower="bindscrolltolower">
+            <view class="song-item" wx:for="{{playlistDetail.tracks}}" wx:key="index" bindtap="playmusic" data-id="{{index}}">
+                <view class="song-list">
+                    <view class="song-name">{{item.name}}</view>
+                    <view class="author">{{item.ar[0].name}}</view>
+                </view>
+                <view class="icon">
+                    <image class="" src="../index/images/icon-test.png" />
+                </view>
+            </view>
+            <view class="loading" hidden="{{isloading}}">
+                <van-loading size="24px" type="spinner" color="#1989fa" vertical>
+                    加载中...
+                </van-loading>
+            </view>
+        </scroll-view>
+    </view>
+</view>

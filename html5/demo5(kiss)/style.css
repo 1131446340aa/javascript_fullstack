@@ -1,0 +1,253 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: #78e08f;
+}
+.container{
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 238px;
+}
+.ball{
+    width: 100px;
+    height: 100px;
+    border: 8px solid #000;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: top; 
+}
+#l-body{
+    background-color: #fff;
+    position: relative;
+    z-index: 50;
+    animation: close 4s ease infinite;
+}
+@keyframes close{
+    0%{
+        transform: translate(0);
+
+    }
+    20%{
+        transform: translate(20px);
+
+    }
+    35%{
+        transform: translate(20px);
+
+    }
+    55%{
+        transform: translate(0);
+
+    }
+
+    100%{
+        transform: translate(0);
+
+    }
+}
+    .face{
+        width: 70px;
+        height: 30px;
+        position: absolute;
+        right: 0;
+        top: 30px;
+        border-top-right-radius: 0px;
+    
+    }
+    .eye{
+        width: 15px;
+        height: 14px;
+        border-radius: 50%;
+        border-bottom: 5px solid #000;
+        position: absolute;
+    }
+    .eye-l{
+        left: 10px;
+
+    }
+    .eye-r{
+        right: 5px;
+    }
+    .mouth{
+        width: 30px;
+        height: 14px;
+        border-radius: 50%;
+        border-bottom: 5px solid #000;
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        right: 0;
+        transform: translate(3px);
+        margin: auto;
+      
+    }
+    .mouth-r
+    { 
+         animation: mouth 4s ease infinite;}
+
+    .face:after{
+        content:'';
+        width: 18px;
+        height: 8px;
+        background-color: #badc58;
+        position: absolute;
+        left: -5px;
+        top: 20px;
+        border-radius: 50%;
+
+    }
+    .face:before{
+        content:'';
+        width: 18px;
+        height: 8px;
+        background-color: #badc58;
+        position: absolute;
+        border-radius: 50%;
+        right: -8px;
+        top: 20px;
+
+    }
+    #r-ball{
+        background-color: #FFF;
+        position: relative;
+        z-index: 40;
+        animation: close1 4s ease infinite;
+    }
+    .face-r{
+     left:0 ;   
+     top: 30px;
+    }
+    .face-r:after{
+        width: 10px;
+        height: 10px;
+        left: 10px;
+    }
+    .face-r:before{
+        width: 10px;
+        height: 10px;
+        right: -4px;
+
+    }
+    .eye-r-p{
+        border-top: 5px solid #000;
+        border-bottom: 0 solid;
+    }
+    .kiss-m{
+        position: absolute;
+        left: 20px;
+    top: 22px;
+    opacity: 0;
+    animation: kiss-m 4s ease infinite;
+
+    }
+   
+        @keyframes kiss-m {
+            0% {
+                opacity: 0;
+      
+              }
+              55% {
+                opacity: 0;
+  
+              }
+              55.1% {
+                opacity: 1;
+         
+              }
+              66% {
+                opacity: 1;
+              }
+              66.1% {
+                  opacity: 0;
+                }
+              100% {
+                opacity: 0;
+              }
+            }
+            @keyframes close1{
+              0%{
+                  transform: translate(0);
+          
+              }
+              20%{
+                  transform: translate(-20px);
+          
+              }
+              35%{
+                  transform: translate(-20px);
+          
+              }
+              55%{
+                  transform: translate(0);
+          
+              }
+          
+              100%{
+                  transform: translate(0);
+          
+              }
+          }
+          @keyframes mouth {
+            0% {
+              opacity: 1;
+    
+            }
+            55% {
+              opacity: 1;
+
+            }
+            55.1% {
+              opacity: 0;
+       
+            }
+            66% {
+              opacity: 0;
+            }
+            66.1% {
+                opacity: 1;
+              }
+            100% {
+              opacity: 1;
+            }
+          }
+          @keyframes close1{
+            0%{
+                transform: translate(0);
+        
+            }
+            40%{
+                transform: translate(0);
+        
+            }
+            50%{
+                transform: translate(-30px) rotate(20px);
+        
+            }
+            60%{
+                transform: translate(-33px);
+        
+            }
+        
+            67%{
+                transform: translate(-33px);
+        
+            }
+            77%{
+                transform:translate(0) ;
+            }
+        }
+    
+    .kiss{
+        width: 13px;
+        height: 10px;
+        background-color: #fff;
+        border-radius: 50%;
+        border-left: 5px solid #000;
+
+    }
+    

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./css/index.css">
+  <title>Document</title>
+</head>
+<body>
+  <div class="wrapBg">
+    <div class="headTitle">
+      <img src="img/bird0.png" alt="" id="headBird">
+    </div>
+    <button id="startBtn"></button>
+    <div id="grassLand1"></div>
+    <div id="grassLand2"></div>
+  </div>
+  <script src="./js/bird.js"></script>
+  <script src="./js/baseObj.js"></script>
+  <script src="./js/block.js"></script>
+  <script>
+    var jsWrapBg = document.querySelector('.wrapBg')
+    var jsHeadTitle = document.querySelector('.headTitle')
+    var jsHeadBird = document.getElementById('headBird')
+    var blocksArr = []
+    var blockDistance = baseObj.randomNum(120, 350)
+    var Y = 3
+    var index = 0
+    var imgArr = ["img/bird0.png", "img/bird1.png"]
+
+    var headWaveTimer = setInterval(headWave, 200)
+
+    function headWave() {
+      Y *= -1 // Y = Y * -1
+      jsHeadTitle.style.top = jsHeadTitle.offsetTop + Y + "px"
+      jsHeadBird.src = imgArr[index++]
+      if (index === 2) {
+        index = 0
+      }
+    }
+
+    var jsGrassLand1 = document.getElementById("grassLand1")
+    var jsGrassLand2 = document.getElementById("grassLand2")
+
+    var landTimer = setInterval(landRun, 30)
+
+    function landRun () {
+      if (jsGrassLand1.offsetLeft <= -343) {
+        jsGrassLand1.style.left = "343px"
+      }
+      if (jsGrassLand2.offsetLeft <= -343) {
+        jsGrassLand2.style.left = "343px"
+      }
+      jsGrassLand1.style.left = jsGrassLand1.offsetLeft - 3 + "px"
+      jsGrassLand2.style.left = jsGrassLand2.offsetLeft - 3 + "px"
+
+      if (blocksArr.length) {
+        for (var i = 0; i < blocksArr.length; i++) {
+          blocksArr[i].moveBlock()
+          var x = baseObj.rectangleCrashExamine(blocksArr[i].downDivWrap, bird.div)
+          var y = baseObj.rectangleCrashExamine(blocksArr[i].upDivWrap, bird.div)
+          var z = bird.div.offsetTop >= 390
+          if (x || y || z) {
+            bird.fallSpeed = 0
+            clearInterval(landTimer)
+            jsWrapBg.onclick = null
+          }
+        }
+        if (blocksArr[blocksArr.length -1].downDivWrap.offsetLeft < (450 - blockDistance)) {
+          blockDistance = baseObj.randomNum(130, 250)
+          var newBlock = new Block()
+          newBlock.createBlock()
+          blocksArr.push(newBlock)
+        }
+        if (blocksArr[0].downDivWrap.offsetLeft < -50) {
+          jsWrapBg.removeChild(blocksArr[0].downDivWrap)
+          jsWrapBg.removeChild(blocksArr[0].upDivWrap)
+          blocksArr.shift(blocksArr[0])
+        }
+      }
+    }
+
+    var jsStartBtn = document.getElementById('startBtn')
+    jsStartBtn.onclick = function() {
+      jsHeadTitle.style.display = "none"
+      clearInterval(headWaveTimer)
+      jsStartBtn.style.display = "none"
+      // 出现小鸟
+      bird.showBird(jsWrapBg)
+      bird.flyBird()
+      bird.wingWave() //煽动翅膀
+      
+      var b = new Block()
+      b.createBlock()
+      // b.moveBlock()
+      blocksArr.push(b)
+    }
+
+    jsWrapBg.onclick = function() {
+      bird.fallSpeed = -8
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <test :q="b" @test1="test1"></test>
+    </div>
+    <template id="temp">
+        <div>
+         
+            <h1>{{q}}</h1>
+            <input type="text" :value="db" @input="input">
+        </div>
+    </template>
+    <script src="../vue.js"></script>
+    <script>
+        Vue.component('test', {
+            template: '#temp',
+              props: ['q'],
+            data() {
+                return {
+                db:this.b
+                }
+            },
+            methods:{
+                input(event){
+                    this.db=event.target.value
+                    this.$emit('test1',this.db)
+                }
+            }   
+        })
+        const app = new Vue({
+            el: '#app',
+            data: {
+                b: '2222',
+            },
+            methods: {
+                test1(value){
+                    this.b=value
+                }
+            },
+            
+        })
+    </script>
+</body>
+
+</html>

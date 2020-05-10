@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/underscore.js/1.9.1/underscore.js"></script>
+
+</head>
+
+<body>
+    <script>
+        function req(success, err) {
+            setTimeout(() => {
+                let rmd = Math.random()
+                if (rmd < 0.5) {
+                    success({
+                        code: 200
+                    })
+                }
+                else {
+                    err(
+                        {
+                            code: 500
+                        }
+                    )
+                }
+            })
+
+        }
+        req((res) => {
+            console.log(res);
+        }, (res) => {
+            console.log(res);
+        })
+        function setRedColor(btn) {
+            btn.style.color = 'red'
+            return btn
+        }
+        function serInnerhtml(btn) {
+            btn.innerHTML = 'buy'
+            return btn
+        }
+        function app(btn) {
+            document.body.appendChild(btn)
+            return btn
+        }
+        // let btn=document.createElement('button')
+        // let btn1=document.createElement('button')
+        // setRedColor(btn)
+        // serInnerhtml(btn)
+        // app(btn)
+        let fn1=str=>str+='123'
+        let fn1=str=>str+='456'
+        ._compose(fn1,fn2)
+        let nfn = _.compose(app, setRedColor, serInnerhtml)
+        nfn(btn1)
+        //自定义 compose 函数
+        function compose1(fn1,fn2,fn3) {
+return function(parmas){
+    fn1(fn2(fn3(parmas)))
+    //var c=fn2(fn3(parmas))
+    fn1(c)
+}
+        }
+        function myCompose(...fns){
+return function(arg){
+    // let res=fns.pop()(arg)
+    // while(fns.length){
+    //     let fn=fns.pop()
+    //     res=fn(res)
+    // }
+    // return(res)
+    var res
+   for(let i=0;i<fns.length;i++){
+       arg=fns[i](fn(i+1)(arg))
+       
+   }
+}
+        }
+    </script>
+</body>
+
+</html>

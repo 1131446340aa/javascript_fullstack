@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      border: 0;
+      font: inherit;
+      vertical-align: baseline;
+      box-sizing: border-box;
+    }
+    html{
+      height: 100%;
+    }
+    body{
+      height: 100%;
+      overflow: hidden;
+      font: 100%/1.25 Helvetica, Arial;
+      color: #ffffff;
+      perspective: 1000px;
+      background-color: #444;
+      background-image: -webkit-gradient(linear, left top, left bottom, from(#444), to(#999));
+      background-image: -webkit-linear-gradient(top, #444, #999);
+      background-image: linear-gradient(top bottom, #444, #999);
+    }
+    .book{
+      width: 300px;
+      height: 300px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-top: -150px;
+      user-select: none;
+      transform: rotateX(60deg);
+    }
+    .page{
+      width: 300px;
+      height: 300px;
+      padding: 1em;
+      position: absolute;
+      left: 0;
+      top: 0;
+      text-indent: 2em;
+    }
+    .front{
+      background-color: #d93e2b;
+    }
+    .back{
+      background-color: #fff;
+    }
+    .front-cover{
+      cursor: move;
+      transform-origin: 0 50%;
+      transform: rotateY(0deg);
+    }
+    .front-cover .back{
+      background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553581220215&di=91943b3c087faf6b86e0670ce7c0eb3d&imgtype=0&src=http%3A%2F%2Fimg.25pp.com%2Fuploadfile%2Fsoft%2Fimages%2F2015%2F0301%2F20150301021016689.jpg);
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+      transform: translateZ(3px);
+    }
+    .back-cover .back{
+      transform: translateZ(-3px);
+    }
+    .p3d{
+      transform-style: preserve-3d;
+    }
+    .flip{
+      transform: rotateY(180deg);
+    }
+    .dino,.shadow{
+      width: 196px;
+      height: 132px;
+      position: absolute;
+      left: 60px;
+      top: 60px;
+      transform-origin: 0 100%;
+    }
+    .dino{
+      background: url(http://cdn.duitang.com/uploads/item/201406/17/20140617131104_hcJft.jpeg) no-repeat;
+      background-size: cover;
+    }
+    .shadow{
+      background-color: rgba(0,0,0,0.5);
+    }
+  </style>
+</head>
+<body>
+  <div class="book p3d">
+    <div class="back-cover p3d">
+      <div class="page back flip"></div>
+      <div class="page front p3d">
+        <div class="shadow"></div>
+        <div class="dino"></div>
+      </div>
+    </div>
+    <div class="front-cover p3d">
+      <div class="page front flip p3d">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fermentum nisl quis nulla eleifend dignissim.
+          Curabitur varius lobortis tincidunt. Maecenas gravida, nulla quis luctus imperdiet, ipsum nibh consectetur
+          ante, in sodales massa tortor eget neque. Donec porta ligula massa, id sagittis est. Ut nisl tellus, faucibus
+          nec feugiat ut, laoreet iaculis felis. Suspendisse ultrices mauris vel tellus suscipit commodo. Integer vitae
+          tortor erat. Pellentesque non tempor nisi.</p>
+      </div>
+      <div class="page back"></div>
+    </div>
+  </div>
+  <script>
+    (function(window, document) {
+      var prefixes = ['Webkit', 'Moz', 'ms', 'o'],
+          book = document.querySelectorAll('.book')[0],
+          page = document.querySelectorAll('.front-cover')[0],
+          dino = document.querySelectorAll('.dino')[0],
+          shadow = document.querySelectorAll('.shadow')[0],
+          hold = false,
+          centerPoint = window.innerWidth / 2,
+          pageSize = 300,
+          clamp = function (val, min, max) {
+            return Math.max(min, Math.min(val, max))
+          }
+
+      // 按下鼠标时候的执行事件
+      page.onmousedown = function () {
+        hold = true
+      }
+      // 鼠标放开的时候执行的事件
+      window.onmouseup = function () {
+        if (hold) {
+          hold = false
+        }
+      }
+      // 在窗口被调整大小的时候执行的事件
+      window.onresize = function () {
+        // console.log(123)
+        centerPoint = window.innerWidth / 2
+      }
+      window.onmousemove = function (evt) {
+        if (!hold) {
+          return
+        }
+        // console.log(evt)
+        var angle = clamp((centerPoint - evt.pageX + pageSize) / pageSize * -90, -180, 0), i, j;
+        for (i = 0; i < prefixes.length; i++) {
+          page.style[prefixes[i] + 'Transform'] = 'rotateY('+ angle +'deg)';    
+        }
+      }
+    })(window, document)
+  </script>
+
+</body>
+</html>
+

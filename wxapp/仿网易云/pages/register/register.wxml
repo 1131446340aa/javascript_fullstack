@@ -1,0 +1,65 @@
+<view class="wrapper">
+    <view class="login_text">注册</view>
+    <view class="wrap-input">
+        <view class="text">用户名</view>
+        <view class="input">
+            <view class="input-icon">
+                <image class="image" src="./images/yonghuming.png" hidden="{{isactiveUser}}"></image>
+                <image class="image" src="./images/yonghumingAcyive.png" hidden="{{!isactiveUser}}"></image>
+            </view>
+            <input type="text" placeholder="请输入用户名" bindblur="blur" bindfocus="focus" value="{{uservalue}}" bindchange="userinput" />
+            <view class="warning" hidden="{{isuserwarning}}">
+                <view class="warning-text">请输入用户名</view>
+            </view>
+        </view>
+        <view class="line"></view>
+        <view class="line1" id="input1"></view>
+    </view>
+    <view class="wrap-password">
+        <view class="wran-wrap">
+            <view class="user-warn">我的小可爱，用户名必须为6-16位数字或字母组合</view>
+        </view>
+        <view class="text pwd">密码</view>
+        <view class="input">
+            <view class="input-icon">
+                <image class="image" src="./images/mima.png" hidden="{{isactivePwd}}"></image>
+                <image class="image" src="./images/mimaActive.png" hidden="{{!isactivePwd}}"></image>
+            </view>
+            <input type="text" placeholder="请输入密码" bindblur="blurpwd" bindfocus="focuspwd" value="{{pwdvalue}}" />
+            <view class="warning" hidden="{{ispwdwarning}}">
+                <view class="warning-text">请输入密码</view>
+            </view>
+            <view class="warning" hidden="{{isSame}}">
+                <view class="warning-text">两次密码不一致</view>
+            </view>
+        </view>
+        <view class="line2"></view>
+        <view class="line3" id="input"></view>
+    </view>
+    <view class="wrap-password">
+        <view class="wran-wrap">
+            <view class="pwd-warn">我的小天才，密码必须为6-16位数字或字母组合</view>
+        </view>
+        <view class="text pwd">密码</view>
+        <view class="input">
+            <view class="input-icon">
+                <image class="image" src="./images/mima.png" hidden="{{isactivePwd2}}"></image>
+                <image class="image" src="./images/mimaActive.png" hidden="{{!isactivePwd2}}"></image>
+            </view>
+            <input type="text" placeholder="再次输入密码" bindblur="blurpwd2" bindfocus="focuspwd2" value="{{pwdvalue2}}" />
+            <view class="warning" hidden="{{ispwdwarning2}}">
+                <view class="warning-text">请输入密码</view>
+            </view>
+            <view class="warning" hidden="{{isSame}}">
+                <view class="warning-text">两次密码不一致</view>
+            </view>
+        </view>
+        <view class="line4"></view>
+        <view class="line5" id="input2"></view>
+    </view>
+    <view class="right">
+        <view class="text-right"></view>
+    </view>
+    <view class="login" bindtap="login_in">注册</view>
+    <view class="login-in-text" bindtap="tologin">已有账号？立即登录</view>
+</view>

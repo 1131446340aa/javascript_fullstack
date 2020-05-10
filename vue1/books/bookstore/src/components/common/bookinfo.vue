@@ -1,0 +1,365 @@
+<template>
+  <div class="main">
+    <back v-if="Bookinfo[0]" :right="right" :Image="Bookinfo[0].img" @send="addbook"></back>
+    <scroll :top="50">
+      <div>
+        <div class="introduce">
+          <div class="text">
+            <div class="title">
+              <div class="van-ellipsis" v-if="Bookinfo[0]">{{Bookinfo[0].title}}</div>
+            </div>
+            <div class="author">
+              <div class="van-ellipsis" v-if="Bookinfo[0]">{{Bookinfo[0].author}}</div>
+            </div>
+            <div class="tag">
+              <div class="van-ellipsis" v-if="Bookinfo[0]">{{Bookinfo[0].tag}}</div>
+            </div>
+            <span class="star" v-if="Bookinfo[0]">
+              {{Bookinfo[0].star}}
+              <van-rate v-model="value" :size="5" color="#fff" />
+            </span>
+            <span class="saw" v-if="Bookinfo[0]">{{Bookinfo[0].saw/10}}万人已看</span>
+          </div>
+          <div v-if="Bookinfo[0]" class="img">
+            <img :src="Bookinfo[0].img" />
+          </div>
+        </div>
+        <div class="bg">
+          <img v-if="Bookinfo[0]" :src="Bookinfo[0].img" />
+        </div>
+      </div>
+      <div id="id">
+        <van-tabs v-model="active" animated>
+          <van-tab :title="title[0]">
+            <div class="content">
+              <div
+                class="novel_content"
+                :class="{close:close==true}"
+                v-if="Bookinfo[0]"
+                @click="closed"
+              >
+                <div v-if="Bookinfo[0].novel_content.length>1">
+                  <p v-for="(item,index) in Bookinfo[0].novel_content" :key="index">{{item}}</p>
+                </div>
+                <div class="no_novel_content" v-if="Bookinfo[0].novel_content.length<=1">暂无简介</div>
+              </div>
+
+              <div class="open" @click="open" v-show="close">
+                <i class="iconfont icon-zhankai fontcolor"></i>
+              </div>
+              <div class="line"></div>
+              <div class="author_content" v-if="Bookinfo[0]">
+                <p>作者简介</p>
+                <p v-for="(item,index) in Bookinfo[0].auther_content" :key="index">{{item}}</p>
+                <div class="no_author_content" v-if="Bookinfo[0].auther_content.length==0">暂无简介</div>
+              </div>
+            </div>
+          </van-tab>
+          <van-tab :title="title[1]">
+            <div
+              class="muluitem"
+              v-for="(item,index) in navigation.toc"
+              :key="index"
+              @click="mulu(item.href)"
+            >
+              <div class="zhang">第{{index+1}}章</div>
+              <div class="title">{{item.label}}</div>
+            </div>
+          </van-tab>
+        </van-tabs>
+      </div>
+    </scroll>
+    <!-- <Epub></Epub> -->
+    <navbar @readHis="readHis" :bookid="bookid"></navbar>
+  </div>
+</template>
+
+<script>
+import back from "../common/backbar";
+import {
+  getBookInfo,
+  collection,
+  sqlcollection,
+  sqlCll,
+  delCll,
+  download,
+  readHis,
+  sqlreadHis
+} from "../../network/index";
+import scroll from "../common/scroll";
+import navbar from "../common/bookinfonavbar";
+import Epub from "epubjs";
+import { Dialog } from "vant";
+export default {
+  components: {
+    back,
+    scroll,
+    navbar
+  },
+  name: "bookinfo",
+  mounted() {
+    this.bookid = this.$route.query.bookid;
+    if (localStorage.book_user) {
+      sqlCll(
+        res => {
+          // console.log(res);
+
+          if (res.status === "200") {
+            this.right = "已加入书架";
+          }
+          if (res.status === "500") {
+            this.right = "加入书架";
+          }
+        },
+        {
+          user: localStorage.book_user,
+          bookid: this.$route.query.bookid
+        }
+      );
+    }
+
+    //  this.getmulu();
+    this.bookinfo();
+  },
+  methods: {
+    bookinfo() {
+      getBookInfo(
+        res => {
+          this.Bookinfo = res.bookinfo;
+          this.value = Math.round(res.bookinfo[0].star);
+          this.Bookinfo[0].novel_content = JSON.parse(
+            this.Bookinfo[0].novel_content
+          );
+          this.Bookinfo[0].auther_content = JSON.parse(
+            this.Bookinfo[0].auther_content
+          );
+          this.getmulu();
+
+          if (!this.finsh) {
+            // download(
+            //   res => {
+            //     let timer = setInterval(() => {
+            //       test(res => {
+            //         if (res.status == "500") {
+            //           this.finsh = true;
+            //           clearInterval(timer);
+            //         }
+            //       });
+            //     }, 3000);
+            //   },
+            //   {
+            //     url:
+            //       "http://14804066.ch1.ctc.data.tv002.com/down/6e904eaa00098afa8ed2b655952b6e65/SoBooKs.cc%20-%20%E6%97%A5%E7%93%A6%E6%88%88%E5%8C%BB%E7%94%9F.epub?cts=dx-f-D111A76A96A191F9a519&ctp=111A76A96A191&ctt=1582842570&limit=1&spd=46000&ctk=6e904eaa00098afa8ed2b655952b6e65&chk=be48113d26f48d483678e3bc5e3b7867-648436",
+            //     title: this.Bookinfo[0].title
+            //   }
+            // );
+          }
+          // console.log(this.Bookinfo[0]);
+        },
+        { bookid: this.$route.query.bookid }
+      );
+    },
+    readHis() {
+      readHis(
+        res => {
+          console.log(res);
+        },
+        {
+          user: localStorage.book_user,
+          bookinfo: this.Bookinfo[0]
+        }
+      );
+    },
+    addbook() {
+      if (localStorage.book_user) {
+        if (this.right == "加入书架") {
+          collection(
+            res => {
+              this.right = "已加入书架";
+            },
+            {
+              user: localStorage.book_user,
+              bookinfo: this.Bookinfo
+            }
+          );
+        } else {
+          Dialog.confirm({
+            title: "是否确认删除"
+          })
+            .then(() => {
+              delCll(
+                res => {
+                  this.right = "加入书架";
+                },
+                {
+                  user: localStorage.book_user,
+                  bookid: this.$route.query.bookid
+                }
+              );
+            })
+            .catch(() => {
+              // on cancel
+            });
+        }
+      } else {
+        Dialog.confirm({
+          title: "是否前往登录登录"
+        })
+          .then(() => {
+            this.$router.push({ path: "/login" });
+          })
+          .catch(() => {
+            // on cancel
+          });
+      }
+    },
+    open() {
+      // this.mounted()
+      this.close = false;
+    },
+    closed() {
+      if (this.close == false) {
+        this.close = true;
+      }
+    },
+    mulu(href) {
+      this.readHis();
+      this.$router.push({
+        path: "/reader",
+        query: { bookid: this.bookid, href: href }
+      });
+    },
+    getmulu() {
+      // let title = this.Bookinfo[0].title;
+      // let url = "../../../static/" + title + ".epub";
+      // this.book = new Epub(url);
+      this.book = new Epub("../../../static/巴别塔之犬.epub");
+      this.book.ready.then(() => {
+        // 生成目录
+        this.finsh = true;
+
+        this.navigation = this.book.navigation;
+        // console.log(this.navigation);
+        // 生成Locations对象
+        return this.book.locations.generate();
+      });
+    }
+  },
+  beforeRouteLeave(to, from, next) {
+    console.log(to.path);
+    if (to.path == "/reader") {
+      to.meta.keepAlive = false;
+    } else {
+      to.meta.keepAlive = true;
+    }
+    next();
+  },
+  data() {
+    return {
+      Bookinfo: [],
+      value: 0,
+      active: 0,
+      title: ["简介", "目录"],
+      close: true,
+      right: "加入书架",
+      navigation: {},
+      novel_title: "33场革命",
+      finsh: false,
+      book: "",
+      navigation: "",
+      bookid: ""
+    };
+  }
+};
+</script>
+
+<style lang="stylus" scoped>
+.muluitem
+  margin-left 15px
+  font-size 14px
+  display flex
+  margin-right 15px
+  .zhang
+    width 50px
+    height 40px
+    line-height 40px
+  .title
+    flex 1
+    max-width 70vw
+    overflow hidden
+    text-overflow ellipsis
+    white-space nowrap
+    height 40px
+    line-height 40px
+.no_author_content
+  text-align center
+  height 140px
+  line-height 140px
+.no_novel_content
+  line-height 175px
+  text-align center
+.line
+  height 8px
+  background-color #F2F6FC
+  margin 20px 0
+.open
+  padding-left 20px
+  position absolute
+  top 165px
+  right 15px
+  z-index 10
+  background-color #fff
+.fontcolor
+  color #C0C4CC
+  font-size 12px
+.novel_content, .author_content
+  margin 10px
+  font-size 14px
+  color #303133
+  p
+    line-height 25px
+    margin 0
+.close
+  height 175px
+  overflow hidden
+.bg
+  position absolute
+  left 0
+  right 0
+  height 30vw
+  z-index -1
+  top 49px
+  img
+    width 100vw
+    height 15vw
+    filter blur(30px)
+.introduce
+  display flex
+  justify-content space-between
+  margin 0 15px
+  .text
+    max-width 55vw
+    .title
+      font-size 18px
+      color #fff
+    .author, .tag
+      font-size 10px
+      line-height 4vw
+      height 4vw
+      margin-top 15px
+      color #fff
+    .tag
+      margin-top 0
+      color #C0C4CC
+    .star, .saw
+      font-size 12px
+      color #fff
+    .saw
+      margin-left 10px
+  .img
+    margin-right 15px
+    width 22vw
+    background-image url('../../assets/book.jpg')
+    img
+      width 22vw
+</style>

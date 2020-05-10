@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function obj(){
+        //创建一个空对象
+ const obj1={}
+        //执行prototype连接
+         const constructor=[].shift.call(arguments)
+         obj1.__proto__=constructor.prototype
+        //让this指向新对象
+const ret=constructor.apply(obj,arguments)
+return typeof ret==='object'?ret:obj1
+
+    }
+    function prople(name,age){
+        this.name=name
+        this.age=age
+
+    }
+    new person('woniu')</script>
+</body>
+</html>

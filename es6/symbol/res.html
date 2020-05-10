@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // ...
+    // 扩展运算符
+    var obj = {
+      a: 1,
+      b: 2
+    }
+    // 浅复制
+    function copy (obj) {
+      let newObj = {}
+      for(let key in obj) {
+        newObj[key] = obj[key]
+      }
+      return newObj
+    }
+    var obj1 = copy(obj)
+    obj1.c = 3
+    //
+    var obj2 = {
+      ...obj
+    }
+    console.log(obj2)
+    // rest 参数，发生在函数上面
+    function foo(...args) {
+      console.log(args)
+      return Math.max(...args)
+    }
+    foo (1, 2, 3, 4, 5)
+  </script>
+</body>
+</html>

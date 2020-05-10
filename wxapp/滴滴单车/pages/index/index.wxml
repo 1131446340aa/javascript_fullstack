@@ -1,0 +1,23 @@
+<view class="map-box">
+<!-- lbs业务 -->
+    <map name="" id="myMap"
+    longitude="{{longitude}}"
+    scale="{{scale}}"
+    markers="{{markers}}"
+    show-location="true"
+    bindmarkertap="toVisit"
+     latitude="{{latitude}}">
+     <cover-image class="map-icon map-icon_msg" bindtap="toMsg" src="/images/icon-msg.png" bindload="" binderror="">
+         <!-- 可以在地图之上 -->
+     </cover-image>
+     <cover-image class="map-icon map-icon_user" bindtap="toUser" src="/images/icon-user.png"></cover-image>
+     <cover-image class="map-icon map-icon_reset" src="/images/reset.png" bindtap="toReset">
+         
+     </cover-image>
+     
+     </map>
+</view>
+<view class="main-btn" bindtap="toScan">
+    <text class="main-text">扫码解锁</text>
+</view>
+  

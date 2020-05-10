@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .out{
+        width: 200px;
+        height: 200px;
+        background-color: red;
+    }
+    .in{
+        width: 100px;
+        height: 100px;
+        background-color: pink;}
+        </style>
+</head>
+
+<body>
+    <a href="../Link-list/cycle.html" id="md">1111</a>
+    <div class="out">
+        <div class="in"></div>
+    </div>
+    <script>
+        const inNode = document.querySelector('.in')
+        const out=document.querySelector('.out')
+        out.addEventListener('click',function(){
+      console.log(2);
+      
+            
+        },true)
+        inNode.addEventListener('click', function (event) {
+            event.stopPropagation()
+        
+         console.log(1);
+         
+            
+        },true)
+        
+        let add=document.querySelector('a')
+        add.addEventListener('click',function(e){
+           
+           e.preventDefault()
+
+        })
+        </script>
+</body>
+
+</html>

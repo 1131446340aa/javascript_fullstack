@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>1</div>
+    <script>
+//       <!--   'use strict'//严格模式
+//         function Person(name,age){//构造函数
+//             //指向实例
+//             console.log(arguments);
+// this.name=name;
+//         }
+//         Person.prototype.sing=function(){
+//             console.log('遥远的她,来自'+this.name)
+//         }
+//         var woniu=new Person('蜗牛',18);
+//         woniu.sing(); -->
+//         <!-- 动物->人类->蜗牛 继承关系 -->
+        function Animal(planet){
+            this.planet=planet;
+        }
+        Animal.prototype.getPlanet=function(){
+            return this.planet
+        }
+        function Person(name){
+            this.name=name;
+        }
+        Person.prototype=new Animal('earth');
+        var woniu=new Person('蜗牛');
+        Person.prototype.getName=function(){
+            console.log(this.name)
+        }
+        </script>
+</body>
+</html>

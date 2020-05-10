@@ -1,0 +1,22 @@
+content方面:
+减少http请求
+减少dom元素数量
+减少dsn查询
+server方面:
+配置Etag
+使用CDN
+使用Gzip压缩组件
+css方面
+尽量不使用css样式
+将css放在页面头部
+尽量外部引入css
+不使用@import 而是link
+图片方面:
+使用懒加载
+对图片进行压缩.
+不拉伸图片
+js方面:
+对js压缩
+外部引入js
+js放在页面底部
+减少dom操作

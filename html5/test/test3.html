@@ -1,0 +1,63 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let s="aaabbbbb"
+        console.log(s.slice(2,4).split("").join("")===("ba").split("").reverse().join(""));
+        console.log();
+        a=[1,2,3]
+        console.log(a.slice(2,3));
+        
+    </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+var longestPalindrome = function(s) {
+    let child=""
+    let len=0
+if(s.length<2){
+    child=s
+}
+else{
+        for(let i=0;i<s.length;i++){
+        for(let j=s.length-1;j>i;j--){
+            if(s[i]===s[j]){
+                let child1=s.slice(i,Math.floor((i+j)/2+1)).split("")
+                let child2=s.slice((i+j)-Math.floor((i+j)/2),j+1).split("")
+                if(child1.reverse().join("")===child2.join("")){
+                    if(j-i+1>len){
+                        len=j-i+1
+                        child=s.slice(i,j+1)
+                    }
+
+                }
+               
+            }
+        }
+    }
+    if(len===0){
+        child=s[0]
+    }
+}
+    return child
+};
+console.log(longestPalindrome("abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababa"));
+
+    </script>
+</body>
+</html>

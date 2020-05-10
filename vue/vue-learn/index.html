@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-model="test">
+    <div class="msg">{{ test }}</div>
+
+    <div class="wrap">
+      <div class="wrap1" v-show="deng">登登好帅</div>
+      <div class="wrap2" @click="handle">登登帅吗</div>
+    </div>
+
+    <div class="wrap">
+      <ul>
+        <li v-for="list in newsList">{{ list.title }}--{{ list.date }}</li>
+      </ul>
+    </div>
+
+    <div class="wrap">
+      <div class="content" v-text="content"></div>
+    </div>
+
+    <div class="wrap">
+      <div class="className" :class="isActive ? 'active' : ''">v-bind</div>
+      <div class="wn" :class="[classA, classB]">蜗牛</div>
+    </div>
+  </div>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          msg: 'hello world',
+          test: '',
+          deng: true,
+          newsList: [
+            {title: '全国各地的梯子遭到我国长城防火墙的禁用', date:'2019/5/31'},
+            {title: '韩国瑜：准备承担2020年重担，让鬼混的民进党下台', date:'2019/6/1'},
+            {title: '冠心病“救命药”单片涨价近11倍 药企：换了包装', date:'2019/6/2'},
+            {title: '长春一天集齐雷电冰雹暴雨：有路段积水漂车，部分航班取消', date:'2019/6/3'}
+          ],
+          content: '<p>我爱你中国</p>',
+          isActive: true,
+          className: 'true',
+          classA: 'wnnnnn',
+          classB: 'wfdwww'
+        }
+      },
+      methods: {
+        handle() {
+          alert('帅')
+        }
+      },
+      created() {
+        console.log('created')
+      },
+      beforeCreate() {
+        console.log('beforeCreate')
+      },
+      mounted() {
+        console.log('mounted')
+      },
+      beforeMount() {
+        console.log('beforeMount')
+      },
+      updated() {
+        console.log('updated')
+      },
+      beforeUpdate() {
+        console.log('beforeUpdate')
+      },
+      destroyed() {
+        console.log('destroyed')
+      },
+      beforeDestroy() {
+        console.log('beforeDestroy')
+      },
+    })
+  </script>
+</body>
+</html>

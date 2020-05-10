@@ -1,0 +1,72 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Button {
+            constructor(color) {
+                this.color = color
+
+            }
+
+        }
+        class buynow extends Button {
+            constructor(color) {
+                super(color)
+                this.innerHtml = "buy"
+                let button = document.createElement('button')
+                button.innerHTML = this.innerHtml
+                button.style.color = this.color
+                document.body.appendChild(button)
+
+            }
+            click() { }
+        }
+        new buynow('green')
+        new buynow('pink')
+    </script>
+</body>
+
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/underscore.js/1.9.1/underscore.js"></script>
+
+</head>
+
+<body>
+    <script>
+        function Button(color) {
+            this.color = color
+        }
+        console.log(Button.prototype);
+        
+        Button.prototype.click=function(){
+
+        }
+        //把父类的prototype对象一个一个复制给bin
+        function Bin(color){
+          Button.call(this,color)
+          this.innerHtml='buy'
+        }
+        Bin.prototype=Object.create(Button.prototype)
+            var b1=new Bin('red')
+            //修正constructor
+            Bin.prototype.constructor=Bin
+    </script>
+</body>
+
+</html>

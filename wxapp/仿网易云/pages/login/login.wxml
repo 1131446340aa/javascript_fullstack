@@ -1,0 +1,40 @@
+<view class="wrapper">
+    <view class="login_text">登录</view>
+    <view class="wrap-input">
+        <view class="text">用户名</view>
+        <view class="input">
+            <view class="input-icon">
+                <image class="image" src="./images/yonghuming.png" hidden="{{isactiveUser}}"></image>
+                <image class="image" src="./images/yonghumingAcyive.png" hidden="{{!isactiveUser}}"></image>
+            </view>
+            <input type="text" placeholder="请输入用户名" bindblur="blur" bindfocus="focus" value="{{uservalue}}" bindchange="userinput" />
+            <view class="warning" hidden="{{isuserwarning}}">
+                <view class="warning-text">请输入用户名</view>
+            
+            </view>
+        </view>
+        <view class="line"></view>
+        <view class="line1" id="input1"></view>
+    </view>
+    <view class="wrap-password">
+        <view class="text">密码</view>
+        <view class="input">
+            <view class="input-icon">
+                <image class="image" src="./images/mima.png" hidden="{{isactivePwd}}"></image>
+                <image class="image" src="./images/mimaActive.png" hidden="{{!isactivePwd}}"></image>
+            </view>
+            <input type="password" placeholder="请输入密码" bindblur="blurpwd" bindfocus="focuspwd" value="{{pwdvalue}}"/>
+            <view class="warning" hidden="{{ispwdwarning}}">
+                <view class="warning-text">请输入密码</view>
+               
+            </view>
+        </view>
+        <view class="line2"></view>
+        <view class="line3" id="input"></view>
+    </view>
+    <view class="right">
+        <view class="text-right">忘记密码？</view>
+    </view>
+    <view class="login" bindtap="login_in">登录</view>
+    <view class="login-in-text" bindtap="toregister">立即注册</view>
+</view>

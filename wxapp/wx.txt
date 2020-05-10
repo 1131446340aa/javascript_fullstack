@@ -1,0 +1,98 @@
+ "tabBar": {
+    "list": [{
+      "pagePath": "pages/main/main",
+      "text": "首页",
+      "iconPath": "images/shouye.png",
+  "selectedIconPath":"images/shouye.png"
+    
+    }]
+    tabBar 属性。微信小程序底部导航栏,建立一个list数组，pagePath属性，地址，text文字，iconPath属性，图片，selectedIconPath"当前被点击的显示图片
+      data: {
+city:'北京',
+imgurls:['https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640',
+'https://images.unsplash.com/photo-1551214012-84f95e060dee?w=640',
+'https://images.unsplash.com/photo-1551446591-142875a901a1?w=640'
+]}
+date属性，用{{'city'}}用两个大引号获取名称
+ wx.request({
+   url:'https://www.easy-mock.com/mock/5da30c8f7ab42e4fa1407547/example/movielist',
+   success:(res)=>{
+     this.setData({
+       items:res.data.data.movielist
+     })
+   }
+ })
+ wx.request函数获取数据
+ <swiper indicator-dots="true" indicator-color="#fff" indicator-active-color="red" autoplay="true" interval="2000" circular="true">
+      <block wx:for="{{imgurls}}" wx:key="{{index}}">
+        <swiper-item>
+          <image class="slide-image" src="{{item}}" />
+        </swiper-item>
+      </block>
+    </swiper>
+    图片轮播效果
+    for循环实现{
+      使用wx:for="{{name}} wx:key="{{index}}"
+      {{item}}
+    }
+    "enablePullDownRefresh":true,下拉更新
+    10.14
+    为什么会出现小程序？
+    微信成为移动web的一个重要入口，
+    以前用户打开一个url，慢，
+    现在，用户打开一个小程序快，且有微信更多的支持（扫一扫，地图，视频，音频）。】
+    bind绑定事件 tap 鼠标触摸后离开响应
+    data-id="{{item.id}}"获取名字为id的数据 data-语法
+    bind:tap="gotoDetail"去执行gotoDetail事件
+    const db=require('../../assets/db.js');获取一个js里面的文件
+    page({
+       slides:db.slides
+    })
+    声明一个变量，slides 同时读取获得的js里面的数据
+    module.exports={
+      slides：[{}]
+    }
+    在js文件中输出slides数组
+    事件执行函数
+     gotoDetail(event){
+    const id =event.target.dataset.id    获取当前按钮点击的数据值，同时跳转页面
+    wx.navigateTo({
+      url:'/pages/carDetail/index'+'?id='+id
+    })
+       wx.navigateTo函数，跳转到某一个页面
+  }
+  const id=options.id; 获取上一个页面传过来的id值
+this.setData({
+  id
+})
+setData() 更新值
+let car=cars.find(function(item){
+  return item.id==id
+
+})
+查询数据库中的id，直到找到和上一个页面传过来的id，同时返回。
+
+
+  let carts=this.data.carts
+    let selected=carts[index].selected
+   selected=!selected
+    carts[index].selected=selected
+    this.setData({
+      carts:carts
+    })
+    修改对象中的某个值
+wx.scanCode（{}）调用扫码函数
+wx.showModal({})调用对话框函数
+wx.getLocation  获取当前GPS位置
+  this.mapCtx= wx.createMapContext('myMap');
+  this.mapCtx.moveToLocation();获取当前位置
+  wx.navigateBack()返回
+  wx.setStorage key本地缓存中指定的 key data需要存储的内容。只支持原生类型、Date、及能够通过JSON.stringify序列化的对象。
+wx.getStorage  读取本地存储库
+
+wx.showLoading    显示 loading 提示框。需主动调用 wx.hideLoading 才能关闭提示框
+map标签调用地图。cover-image让图片覆盖在盒子上
+  <open-data class="thumb" type="userAvatarUrl" open-gid=""></open-data>
+        <open-data class="nickname" type="userNickName" lang="zh_CN" open-gid=""></open-data> 获取微信头像和昵称
+
+

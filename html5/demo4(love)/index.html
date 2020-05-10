@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title>别跑，让爱一点点去钓你</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .content{position: absolute;
+        width: 400px;
+        left: 45%;
+        top: 48%;}
+    div{
+        display: inline-block;
+        font-size: 28px;
+        
+    }
+    .i{
+       margin-right: 40px;
+
+    }
+    .you{
+        margin-left: 40px;
+        animation: base 4s ease infinite;
+    }
+    .i::after{
+    
+      
+      content: "";
+         position: absolute;
+        
+           width: 5px;
+      height: 5px;
+      left: 0.6%;
+      top: 17%;
+        background-color: #fff;
+    }
+    .i::before{
+    
+      
+    content: "";
+       position: absolute;
+      
+         width: 3px;
+    height: 3px;
+    left: 1%;
+    top: 17%;
+      background-color: #000;
+      border-radius: 50%;
+      animation: ea 4s ease infinite;
+ 
+  }
+  p{
+position: absolute;
+left: 50%;
+top: 19%;
+font-size: 40px;
+
+  }
+  .span{
+    animation: b 4s ease infinite;
+  }
+  @keyframes base{
+      50%{
+      transform: translate(300px);
+      
+  }
+  75%{
+          transform: translate3d(60px,100px,0);
+      }
+      100%{
+          transform: translate3d(-180px,0px,0);
+      }
+  }
+  @keyframes b {0%,100%{
+      transform: translate3d(0,0,0);
+  }
+  50%{
+      transform:rotate(180deg);
+  }
+      25%{
+          transform: translate3d(100px,-10px,0) scale(1.8);
+      }
+      75%{
+          transform: translate3d(55px,10px,0) scale(1.8);
+      }
+  }
+  @keyframes ea {
+      0%,100%{
+          transform: translate(0);
+      }
+      50%{ transform: translate3d(480px,0,0);}
+      25%{
+          transform: translate3d(240px,-100px,0);
+      }
+      75%{
+          transform: translate3d(240px,100px,0);
+      }
+      
+  }
+    </style>
+</head>
+<body>
+    
+    <div class="content">
+  
+        <div class="i">i</div>
+        <span >
+        <div class="span">l</div>
+        <div class="span">o</div>
+        <div class="span">v</div>
+        <div class="span">e</div>
+    </span>
+        <div class="you">y</div>
+        <div class="you">o</div>
+        <div class="you">u</div>
+    </div>
+ 
+</body>
+
+</html>
+
+

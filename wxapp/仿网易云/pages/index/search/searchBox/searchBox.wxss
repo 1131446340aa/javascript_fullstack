@@ -1,0 +1,55 @@
+.search-box{
+    margin: 0 20rpx;
+    border-color: rgb(250, 250, 250);
+}
+.song-name{
+    font-size: 32rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.author{
+    font-size: 24rpx;
+    margin-bottom: 50rpx;
+    color: #9B9B9B;
+    margin-top: 10rpx;
+}
+.title{
+    width: 100%;
+    text-align: center;
+    font-size: 32rpx;
+    height: 46rpx;
+    line-height: 46rpx;
+    color: #58DDB4;
+    position: fixed;
+    top: 0;
+}
+.scroll{
+    position: absolute;
+    top: 46rpx;
+    bottom: 0;
+}
+.song-item{
+    display: flex;
+    justify-content: space-between;
+}
+.icon image{
+    height: 50rpx;
+    width: 50rpx;
+}
+.icon{
+    width: 100rpx;
+    height: 100rpx;
+}
+.song-list{
+    width: 70vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.loading{
+    width: 60rpx;
+    margin: 0 auto;
+}

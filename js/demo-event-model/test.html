@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <script>
+        //事件委托，事件委托
+        var ul = document.querySelector('ul')
+        var ul = ul.addEventListener('click', function (event) {
+
+            console.log(
+                event.target.innerHTML)
+
+        })
+    </script>
+</body>
+
+</html>
