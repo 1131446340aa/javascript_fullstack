@@ -1,0 +1,44 @@
+{
+  "data": [
+    {
+      "id": 0,
+      "img": "https://dss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=2079060218,2535026378&fm=85&app=92&f=JPEG?w=121&h=75&s=5CA7D85E42B2A5DA4E1BDBBA0300A01E",
+      "title": "仿网易云web端",
+      "detail": "7天半130个小时完成的一款网易云音乐webapp版，实现了对音乐的控制，如单曲循环，顺序播放，随机播放，音乐搜索，歌词展示，登录，歌单，历史播放，音乐分类，电台等，详情可看简历上的github，主要是使用vue+vuex。",
+      "date": "2020-1-15 14:11",
+      "catagry": "个人项目"
+    },
+    {
+      "id": 1,
+      "img": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1589543478395&di=46b379018256d79ff3ed888b6695c1ba&imgtype=0&src=http%3A%2F%2F2e.zol-img.com.cn%2Fproduct%2F76_500x2000%2F184%2FcekOkVoXIFQY.jpg",
+      "title": "epub电子书城",
+      "detail": "可以对小说进行翻页，进入小说自动读取上次浏览记录，小说字体及阅读背景的修改。小说的简介，收藏，搜索，阅读历史，注册登录等。所有数据全部由爬虫爬取，小说只用了一部小说做为展示(意思就是所有小说看简介是不同的，打开阅读是同一本，我不可能用爬虫下载成千上万部小说)，另外写了一篇掘金作为简介。      ",
+      "date": "2020-2-20 16:55",
+      "catagry": "个人项目"
+    },
+    {
+      "id": 2,
+      "img": "https://dss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=481687845,1275127528&fm=173&app=49&f=JPEG?w=312&h=208&s=5C1107D17E122FDA7690F9000300D0F2",
+      "title": "ECUT校园微生活",
+      "detail": "1，本意为学校打造一款交流圈，二手市场，查成绩，课表，图书馆等功能的软件，同时当作学校4.10号的参赛作品。2，这是第一次和同学合作的产品，后端由两个同学完成。交流圈，二手市场由同学a完成 ，成绩，课表，图书馆，由同学b完成。前端我一个人负责。3，目前完成了二手市场，交流圈，用户管理，成绩相关，图书馆相关，课表相关。主要包括注册与登录，修改用户信息，如头像，个签等。物品点赞，物品评论，发表物品，收藏物品，搜索物品，展示物品，关注用户，收藏物品，用户发表历史显示，交流圈的言论点赞，言论评论，言论收藏，言论展示，言论发布。成绩按学期查询，图书馆书籍搜索，图书馆书籍详情。课表按周查询以及添加课表，后续功能，如饭卡查询等日后上线。4，后端使用技术应该是Java技术栈和MySQL，前端是vantui+vue+stylus，使用rem响应式布局。5,适配了我自己的手机，不知道其他人的手机有木有适配。",
+      "date": "2020-3-10 9:22",
+      "catagry": "个人项目"
+    },
+    {
+      "id": 3,
+      "img": "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2878748088,486483209&fm=26&gp=0.jpg",
+      "title": "ES6之promise源码分享",
+      "detail": "promise 源码分享",
+      "date": "2020-2-27 16:11",
+      "catagry": "技术分享"
+    },
+    {
+      "id": 4,
+      "img": "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=876480091,3921107738&fm=26&gp=0.jpg",
+      "title": "我的vue仓库不一定要再是vuex",
+      "detail": "自己写了一份vuex源码,主要完成了state,modules,actions,getters,mutations五大模块",
+      "date": "2020-5-06 13:27",
+      "catagry": "技术分享"
+    }
+  ]
+}

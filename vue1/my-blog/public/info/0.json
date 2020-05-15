@@ -1,0 +1,36 @@
+{
+    "title": "仿网易云web端",
+    "date": "2020-1-15 14:11",
+    "id": 0,
+    "author": "黄力豪",
+    "connect": [
+        "自去年十月份开始学习前端以来,已经三月有余,又因寒假在家无事,因此写此项目打发时间.",
+        "这是笔者第一款自创小项目,些许瑕疵,还望海涵.",
+        "github地址:https://github.com/1131446340aa/javascript_fullstack/tree/master/vue/music",
+        "技术栈:vue+vantUI+vuex",
+        "后端:网易云音乐Api提供 ",
+        "花费时间:130小时",
+        "主要完成功能:首页有我的,电台,发现,视频四大模块,其中我的模块包含收藏歌单,最近播放,历史播放等,电台则有电台推荐模块,点进去调转到电台列表,可以播放电台节目,视频模块主要是可以播放一些video发现模块为主模块,有每日推荐,歌单推荐,排行榜等功能,点进去又分别对应着其他功能.另外还有搜索功能,可以根据关键词搜索歌曲,同时将搜索到的歌曲添加到播放队列中.播放界面又一些对音乐的控制按钮和歌词展示,主要完成了顺序播放,乱序播放,随机播放,自动播放下一首,上一首,下一首功能",
+        "主要难点:",
+        "一:  一开始并不知道有ui框架,手写了一个进度条,但是因为随着时间变动,进度条的激活颜色也随着边长,又因为音乐播放进度的api一秒钟执行7-8次,导致进度条激活状态长度改变过于频繁,严重损耗性能,导致有时候拖动进度条快进或者快退偶尔卡顿,影响体验.",
+        "二 : 歌词颜色只会一行一行的随时间变成激活状态,我想一个字一个字的变成激活状态,首先想法是用激活的歌词覆盖掉未激活的歌词,然后根据时间做动画显示激活歌词的长度,但是由于歌词居中显示,做动画时由于激活歌词长度随时间变化,居中对齐第一个字就出现在最中央,本意是激活歌词的第一个和未激活歌词应当在一侧",
+        "难点一主要解决方案:后来发现ui框架并发现ui框架自带进度条功能,ui框架内部写了激活状态和非激活状态的功能",
+        "难点二暂未解决.由于没有准确的歌词时间,对歌词算平均时间也会存在误差,另外如果歌词是左对齐而非居住对齐,用激活状态的歌词覆盖非激活状态应当可以",
+        "图片展示:"
+    ],
+    "imgs": [
+        "http://a1.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJWeKTbUG.WiwHVqKVbTui2u6j.omh8tA8mohztnGX*4FMHj35m.h2QAKV5BHKMjdag!!/m&ek=1&kp=1&pt=0&bo=vwEaAwAAAAADF5U!&tl=1&vuin=1360580950&tm=1589544000&sce=60-4-3&rf=0-0",
+        "http://a1.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJesmNvbrql10iOClLXSLOsnSsKEkEMsqxzmBPuY.5nXW.i06JlsVu7nJQFw2dPFXDQ!!/m&ek=1&kp=1&pt=0&bo=vAEbAwAAAAARF4U!&tl=1&vuin=1360580950&tm=1589544000&sce=60-4-3&rf=0-0",
+        "http://a1.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJeFd4Un*BnxczrIsmxgTAI8hz*26jQjCBWVrc.U6WqsaEohpPfe4HOX*FRz.XrhQ.w!!/m&ek=1&kp=1&pt=0&bo=wQEUAwAAAAADF.U!&tl=1&vuin=1360580950&tm=1589544000&sce=60-4-3&rf=0-0",
+        "http://a1.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJXpkE8qQImWooj9tNWs5yMfD4cWnSDH6nWcFCAJOq8ZNEbATx110Y.sb4G9cR5RAwQ!!/m&ek=1&kp=1&pt=0&bo=wQEfAwAAAAADF.4!&tl=1&vuin=1360580950&tm=1589544000&sce=60-4-3&rf=0-0",
+        "http://a1.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJXpkE8qQImWooj9tNWs5yMfD4cWnSDH6nWcFCAJOq8ZNEbATx110Y.sb4G9cR5RAwQ!!/m&ek=1&kp=1&pt=0&bo=wQEfAwAAAAADF.4!&tl=1&vuin=1360580950&tm=1589551200&sce=60-4-3&rf=0-0",
+        "http://a1.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJdzSSxvUjRgZ.FMjFuBWPN5V5Qo*EfU*orAH2q*m3GEOoZNPGipbLr*WRBwiIvdw7Q!!/m&ek=1&kp=1&pt=0&bo=vQEXAwAAAAARF4g!&tl=3&vuin=1360580950&tm=1589551200&sce=60-4-3&rf=0-0",
+        "http://a1.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJXift3Ve8o*fTQTVXEdqI3akRsJ82OqUIZa5aoT09d4zGOiui3gl6PeAxaHY2D*Gkw!!/m&ek=1&kp=1&pt=0&bo=wAEcAwAAAAARF*4!&tl=3&vuin=1360580950&tm=1589551200&sce=60-4-3&rf=0-0",
+        "http://a1.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJZqApqIS.mfG8dZ6MwYXmX5P17S4V25Y82uqLnv*eUks0zjr9HaZ8HMW1R4JGpaPhw!!/m&ek=1&kp=1&pt=0&bo=vwEdAwAAAAARF4A!&tl=3&vuin=1360580950&tm=1589551200&sce=60-4-3&rf=0-0",
+        "http://m.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJW1yp7JaXanoWP2tTBu4cQtPjRIdcHfCh9rT1YV00Jagae0nveoE8zgiZ*RctWLMwQ!!/mnull&bo=ugEYAwAAAAARB5A!&rf=photolist&t=5",
+        "http://m.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJSQyygjj6ZyS9BNUjTbJxvT3fv*dSJDNcRpR0khfHqcSbxBYqJt5ojwuJbnMYqVACw!!/mnull&bo=vgEZAwAAAAADB4c!&rf=photolist&t=5",
+        "http://m.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJUHTq3I*6QaPgY8tcq06lvG3gFLgqIdIWz8HE6dcqq1JHZrltk3IHod3E6YD0.zPEQ!!/mnull&bo=vAEXAwAAAAADB4s!&rf=photolist&t=5",
+        "http://m.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJRwDFH8j8pBqt0ohdu16TEE6DG94P1SHa09bCJY.SZtOeaevj9hHejGMeNYfq9Yt3Q!!/mnull&bo=wQEfAwAAAAADB*4!&rf=photolist&t=5",
+        "http://m.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJT1obO2IEaXJ58y10ubwzKnz8AN7VpVKxPtobKNyxrCHsU0BLrC7dRpJrfBLTHtp7Q!!/mnull&bo=wAEbAwAAAAARB.k!&rf=photolist&t=5"
+    ]
+}

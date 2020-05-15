@@ -1,0 +1,21 @@
+{
+    "title": "仿网易云web端",
+    "date": "22020-3-10 9:22",
+    "id": 2,
+    "author": "黄力豪",
+    "connect": [
+        "1，本意为学校打造一款交流圈，二手市场，查成绩，课表，图书馆等功能的软件，同时当作学校4.10号的参赛作品。\n2，这是第一次和同学合作的产品，后端由两个同学完成。交流圈，二手市场由同学a完成 ，成绩，课表，图书馆，由同学b完成。前端我一个人负责。\n3，目前完成了二手市场，交流圈，用户管理，成绩相关，图书馆相关，课表相关。主要包括注册与登录，修改用户信息，如头像，个签等。物品点赞，物品评论，发表物品，收藏物品，搜索物品，展示物品，关注用户，收藏物品，用户发表历史显示，交流圈的言论点赞，言论评论，言论收藏，言论展示，言论发布。成绩按学期查询，图书馆书籍搜索，图书馆书籍详情。课表按周查询以及添加课表，后续功能，如饭卡查询等日后上线。\n4，后端使用技术应该是Java技术栈和MySQL，前端是vantui+vue+stylus，使用rem响应式布局。\n5,适配了我自己的手机，不知道其他人的手机有木有适配。\n6, github地址:https://github.com/1131446340aa/javascript_fullstack/tree/master/vue/Ecut/ecut\n7, 已经转为app\n8,图片如下"
+    ],
+    "imgs": [
+        "http://m.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJQvVS4Ebfao6gHYsLx3JGHwzvI4BWW*bVh7rkSY2*enLyzUgxhpzkqD0QTrSD*Rllw!!/mnull&bo=OARgCQAAAAARB2U!&rf=photolist&t=5","http://m.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJfwXsFRkmX4Xqfuho7LrPKGOX7EoFzN2OqkjYPo8UKjHbvERwrFfCbeZVnjAR7DUgA!!/mnull&bo=OARgCQAAAAARB2U!&rf=photolist&t=5",
+        "http://m.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJbNpIrbWh6B.PFfuw06Wb0H4FDDgA3zfXS6vw*IG1gqGyjK3FP3apF9.t3LoIgv1Lg!!/mnull&bo=OARgCQAAAAARB2U!&rf=photolist&t=5","http://m.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJY0UPmS2iqvEE9AIeAVfk6kuHliGhDoSwZpIgo2lDPltFQ0.Z5ioyvQlDebuJLMMFQ!!/mnull&bo=OARgCQAAAAARB2U!&rf=photolist&t=5",
+        "http://m.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJS3ZsRxEDW4h2ups9wfwqWqnRwEwjBibdMXvE9pSyHAi60Azw4VVgY*aOCeiCmjh9Q!!/mnull&bo=OARgCQAAAAARB2U!&rf=photolist&t=5","http://m.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJTuGzGx9RZrf397bKWxf0WUMGfEuy6b8WzesKqlJRkgQVilEDNncI9RJhkI48hI9zg!!/mnull&bo=OARgCQAAAAARB2U!&rf=photolist&t=5",
+        "http://m.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJTuGzGx9RZrf397bKWxf0WUMGfEuy6b8WzesKqlJRkgQVilEDNncI9RJhkI48hI9zg!!/mnull&bo=OARgCQAAAAARB2U!&rf=photolist&t=5","http://m.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJQeQCHWqRmjvUYxZ.aW0SRQmSm4pI5epl0EkgMpsIg*joe734JfIC*yi6PjFmISgiQ!!/mnull&bo=OARgCQAAAAARB2U!&rf=photolist&t=5",
+        "http://m.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJSdTIn9uur8w9gEgmivCKGWoFCCBL.t.mFv33S4.3ojLw3nBBiV88kyqAxFlIHkzqA!!/mnull&bo=OARgCQAAAAARB2U!&rf=photolist&t=5","http://m.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJczR.NQi*aVxiXoVl2fX7TSgap1HEoxxO.vlyI.vnFerfPl2WSHE*R2feE4oq7LiFQ!!/mnull&bo=OARgCQAAAAARB2U!&rf=photolist&t=5",
+        "http://m.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJXsnfpR1tGB1dcPbVWH4RpU1ofBO89E0sUdmMab.j9iaQGpP9kmipL5yYk9IJHB34g!!/mnull&bo=OARgCQAAAAARB2U!&rf=photolist&t=5","http://m.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJWGw091TiFh.mn83oECSjygbpCRtkDsTus135yaYSRBr2PCt4NH4qwHjpd0t1VPjPQ!!/mnull&bo=OARgCQAAAAARB2U!&rf=photolist&t=5",
+        "http://m.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJUT*MIQWCRBeByXuRIebT*0I*JuSy.4wNhpOhwWrgPDUZlBAn2Qp0Bru8GswOnjHSg!!/mnull&bo=OARgCQAAAAARB2U!&rf=photolist&t=5","http://m.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJQyWqPA6lAbzaXwzhne1oR6xDq6dxDM2QjkZxGIwyUPrCOsfr3o.kxedVLXIKoAl4g!!/mnull&bo=OARgCQAAAAARB2U!&rf=photolist&t=5",
+        "http://m.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJQyWqPA6lAbzaXwzhne1oR6xDq6dxDM2QjkZxGIwyUPrCOsfr3o.kxedVLXIKoAl4g!!/mnull&bo=OARgCQAAAAARB2U!&rf=photolist&t=5","http://m.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJbV1Z4rfVP998r1ZTsAu0q46y2oqwE1clbAwa7epPJ4JHW5wSpo477oGCdQ3Qns3Jg!!/mnull&bo=OARgCQAAAAARB2U!&rf=photolist&t=5",
+        "http://m.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJTB5OcVyhQAJpDpe0uBg*p.pwSQwf8gQCfflIHf79D.q3ImbaNPqNGFqFSTiYM7b*Q!!/mnull&bo=OARgCQAAAAARB2U!&rf=photolist&t=5","http://m.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJR1odkMPsoWOuQ.qbUbqhAexO2eNjSU4uSiGxtPgdeSe4NpQtoIuBdRSojRLUjXvXA!!/mnull&bo=OARgCQAAAAARB2U!&rf=photolist&t=5",
+        "http://m.qpic.cn/psc?/V10IM9gw1R6709/PBfbIKZtAJlvfOqE04IdJXsnfpR1tGB1dcPbVWH4RpU1ofBO89E0sUdmMab.j9iaQGpP9kmipL5yYk9IJHB34g!!/mnull&bo=OARgCQAAAAARB2U!&rf=photolist&t=5"
+    ]
+}
