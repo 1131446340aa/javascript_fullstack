@@ -1,0 +1,30 @@
+<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"><title>euct</title><link href=./static/css/app.306da6185cda2199bf8ed7f93f7ed6a3.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=./static/js/manifest.3ad1d5771e9b13dbdad2.js></script><script type=text/javascript src=./static/js/vendor.2c651a89e94f3607b0fc.js></script><script type=text/javascript src=./static/js/app.af6ba8f51e8a511f292d.js></script></body><script>function getRem() {
+    var html = document.getElementsByTagName("html")[0]; /*获取标签元素<html>*/
+    var oWidth = document.body.clientWidth || document.documentElement.clientWidth; /*获取设备的宽度  ||后为兼容IE低版本写法*/
+    html.style.fontSize = oWidth / 37.5 + "px"; /*设置根元素<html>字体大小   计算出的值 就相当于1rem;为什么？ 这就是rem单位的规定 1rem就等于根元素<html>字体大小*/
+  }
+  window.onload = function () {
+    /*初始化*/
+    getRem();
+    /*getRem绑定监听*/
+    window.addEventListener("resize", getRem, false);
+  };
+  window.eventDefault = function (e) {
+    e.preventDefault()
+  }
+  document.documentElement.addEventListener('touchstart', function (event) {
+    if (event.touches.length > 1) {
+      event.preventDefault();
+    }
+  }, false);
+  var lastTouchEnd = 0;
+  document.documentElement.addEventListener('touchend', function (event) {
+    var now = Date.now();
+    if (now - lastTouchEnd <= 300) {
+      event.preventDefault();
+    }
+    lastTouchEnd = now;
+  }, false);
+document.addEventListener('touchmove',(e)=>{
+  e.preventDefault()
+})</script></html>
